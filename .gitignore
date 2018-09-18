@@ -1,2 +1,6 @@
 requirement.txt
 /venv/*
+*/__pycache__/*
+*.pyc
+*.pyo
+settings.json
