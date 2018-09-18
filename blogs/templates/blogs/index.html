@@ -1,9 +1,40 @@
-{% if latest_post_list %}
-    <ul>
-    {% for post in latest_post_list %}
-        <li><a href="/blogs/{{ post.id }}/">{{ post.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<div style="background-color: rgba(0,0,0,0.1);max-width: 1000px;margin: auto">
+    <h1 style="text-align:center">Pinboard</h1>
+    <div style="display:flex;justify-content:space-around">
+        <div>Create Post</div>
+        <div>About</div>
+        <div>Log In</div>
+        <div>Register</div>
+    </div>
+    <hr>
+    <div style="min-height: 1000px">
+        <div style="border-radius: 12px; margin:10px;display:inline-block;width: 28%;height: 200px;padding: 15px;text-align:center;background-color: rgba(0,0,0,0.1)">
+            Post 1
+        </div>
+        <div style="border-radius: 12px; margin:10px;display:inline-block;width: 28%;height: 200px;padding: 15px;text-align:center;background-color: rgba(0,0,0,0.1)">
+            Post 2
+        </div>
+        <div style="border-radius: 12px; margin:10px;;display:inline-block;width: 28%;height: 200px;padding: 15px;text-align:center;background-color: rgba(0,0,0,0.1)">
+            Post 3
+        </div>
+        <div style="border-radius: 12px; margin:10px;;display:inline-block;width: 28%;height: 200px;padding: 15px;text-align:center;background-color: rgba(0,0,0,0.1)">
+            Post 4
+        </div>
+        <div style="border-radius: 12px; margin:10px;;display:inline-block;width: 28%;height: 200px;padding: 15px;text-align:center;background-color: rgba(0,0,0,0.1)">
+            Post 5
+        </div>
+        <div style="border-radius: 12px; margin:10px;;display:inline-block;width: 28%;height: 200px;padding: 15px;text-align:center;background-color: rgba(0,0,0,0.1)">
+            Post 6
+        </div>
+        <iframe width="560" height="315" src=" post.videourl " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        {% if latest_post_list %}
+            <ul>
+            {% for post in latest_post_list %}
+                <li><a href="/blogs/{{ post.id }}/">{{ post.title }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No polls are available.</p>
+        {% endif %}
+    </div>
+</div>
