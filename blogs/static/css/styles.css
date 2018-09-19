@@ -1,16 +1,9 @@
 body {
   font-family: 'Roboto';
+  background  : #f5f2ee;
 }
 
-.cont {
-  background: rgba(245,245,245,1);
-}
-
-.card {
-  border-radius: 12px;
-  height: 250px;
+.card-action.single {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
+  justify-content: flex-end;
 }
