@@ -3,9 +3,44 @@ body {
   background  : #f5f2ee;
 }
 
+body .background {
+  height: 100%;
+  background: #F2994A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, rgba(242, 200, 76, 0.753), rgba(242, 152, 74, 0.753));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, rgba(242, 200, 76, 0.774), rgba(242, 152, 74, 0.712)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .card-action.single {
   display: flex;
   justify-content: flex-end;
+}
+
+.card-action.voting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.score-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-open,
+.btn-flat {
+  margin-right: 0 !important;
+}
+
+span.score {
+  color: #ffab40;
+  pointer-events: none;
 }
 
 a.brand-logo.pinboard {
@@ -16,4 +51,16 @@ a.brand-logo.pinboard {
 
 nav.nav-container.pinboard {
   background: #546e7a !important;
+}
+
+@media(max-width: 1660px) {
+  .container.pinboard {
+    width: 100%;
+  }
+}
+
+.card-description {
+  max-height: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
