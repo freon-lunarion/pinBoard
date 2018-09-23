@@ -9,12 +9,14 @@ class Content(models.Model):
     detail = models.TextField()
     author = models.ForeignKey(
         'auth.User',
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE
+    )
     create_time = models.DateTimeField(default=timezone.now)
     update_time = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(
         blank=True,
-        null=True)
+        null=True
+    )
 
     @property
     def score(self):
@@ -48,6 +50,10 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
+class ContentTag(models.Model):
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
+
 class Vote(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     author = models.ForeignKey(
@@ -55,7 +61,3 @@ class Vote(models.Model):
         on_delete=models.CASCADE)
     value = models.IntegerField(default=1)
     timestamp = models.DateTimeField(default=timezone.now)
-
-class ContentTag(models.Model):
-    content = models.ForeignKey(Content, on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag,on_delete=models.CASCADE)

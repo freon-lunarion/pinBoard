@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your tests here.
 
 class PostTestCase(TestCase):
+
     def setUp(self):
         user = User.objects.create_user(username='admin', password='admin')
         p1 = Post.objects.create(title="liontitle", detail="lion", author=user)
