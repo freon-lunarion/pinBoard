@@ -6,12 +6,10 @@ from django.utils import timezone
 class Post(models.Model):
     title = models.CharField(max_length=150)
     detail = models.TextField()
-    score = models.IntegerField(default=0)
+    
     author = models.ForeignKey(
         'auth.User', 
-        on_delete=models.CASCADE,
-        blank=True, 
-        null=True)
+        on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=timezone.now)
     update_time = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(
@@ -25,24 +23,32 @@ class Post(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
+    @property
+    def get_score(self):
+        return PostVote.objects.filter(post=self).aggregate(total=Sum("value"))["total"]
     
     def was_published_recently(self):
         return self.create_time >= timezone.now() - datetime.timedelta(days=1)
 
 class Comment(models.Model):
     detail = models.TextField()
-    score = models.IntegerField()
+    
     create_time = models.DateTimeField(default=timezone.now)
     update_time = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(
         'auth.User', 
-        on_delete=models.CASCADE,
-        blank=True, 
-        null=True)
-
+        on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post, 
+        on_delete=models.CASCADE)
 
     def __str__(self):
         return self.detail
+    
+    @property
+    def get_score(self):
+        return PostVote.objects.filter(post=self).aggregate(total=Sum("value"))["total"]
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
@@ -52,3 +58,19 @@ class Tag(models.Model):
 class PostTag(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
+
+class PostVote(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)   
+    author = models.ForeignKey(
+        'auth.User', 
+        on_delete=models.CASCADE)
+    value = models.IntegerField(default=1)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+class CommentVote(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)   
+    author = models.ForeignKey(
+        'auth.User', 
+        on_delete=models.CASCADE)
+    value = models.IntegerField(default=1)
+    timestamp = models.DateTimeField(default=timezone.now)

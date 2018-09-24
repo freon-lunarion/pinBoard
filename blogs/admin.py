@@ -5,7 +5,7 @@ from .models import Post
 # admin.site.register(Post)
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title','score','is_pinned', 'create_time')
+    list_display = ('id', 'title','is_pinned', 'create_time')
     list_link = ('id','title')
     search_fields = ('title','create_time')
     list_per_page = 25
