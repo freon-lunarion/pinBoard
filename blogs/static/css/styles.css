@@ -19,12 +19,37 @@ body .background {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.card-action.voting,
+.card-action.state {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.card-action.state {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-content.with-comments {
+  padding-bottom: 12px;
+}
+
+.card-comments {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 13px;
+  color: #9f9f9f;
+  text-decoration: underline;
+  margin-top: 6px;
 }
 
 .score-container {
