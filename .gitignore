@@ -5,6 +5,7 @@ requirement.txt
 *.pyo
 settings.json
 blogs/migrations/
+.DS_Store
 
 *.sqlite3
 
