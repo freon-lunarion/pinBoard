@@ -4,7 +4,7 @@
     <div class="row" style="padding: 30px 0;">
 
         {% for post in latest_post_list %}
-            {% if post.title == "Howdy" %}
+            {% if post.title != "Howdy" %}
                 <!-- Blog post card -->
                 <div class="col s12 m6 l3">
                     <div class="card blue-grey darken-1">
