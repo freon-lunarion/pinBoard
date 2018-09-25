@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blogs.apps.BlogsConfig',
     'shared.apps.SharedConfig',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,3 +127,7 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'shared.User'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'shared/static/'),
+]
