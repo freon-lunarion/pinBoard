@@ -1,21 +1,18 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from django.db.models import Sum
+from shared.models import *
+from django.shortcuts import get_object_or_404
 
 # Create your models here.
-class Post(models.Model):
+
+
+class Post(Content):
     title = models.CharField(max_length=150)
-    detail = models.TextField()
-    
-    author = models.ForeignKey(
-        'auth.User', 
-        on_delete=models.CASCADE)
-    create_time = models.DateTimeField(default=timezone.now)
-    update_time = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(
-        blank=True, 
-        null=True)
     is_pinned = models.BooleanField(default=False)
+    pin_board = models.ForeignKey(PinBoard, on_delete=models.CASCADE, default=None)
+    operator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -24,53 +21,75 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    @property
-    def get_score(self):
-        return PostVote.objects.filter(post=self).aggregate(total=Sum("value"))["total"]
-    
-    def was_published_recently(self):
-        return self.create_time >= timezone.now() - datetime.timedelta(days=1)
+    def pinned(self, moderator, is_pinned=True):
+        if moderator.is_superuser:
+            self.is_pinned = is_pinned
+            self.operator = moderator
+            self.save()
 
-class Comment(models.Model):
-    detail = models.TextField()
-    
-    create_time = models.DateTimeField(default=timezone.now)
-    update_time = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(
-        'auth.User', 
-        on_delete=models.CASCADE)
-    post = models.ForeignKey(
-        Post, 
-        on_delete=models.CASCADE)
+    def is_favorite_of(self, user):
+        is_favorite = UserFavorite.objects.filter(user=user, post=self)
+        return True if is_favorite else False
+
+
+class Comment(Content):
+    parent = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.detail
-    
-    @property
-    def get_score(self):
-        return PostVote.objects.filter(post=self).aggregate(total=Sum("value"))["total"]
 
-class Tag(models.Model):
-    title = models.CharField(max_length=50)
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+
+# class LiveQuestionSession(Content):
+#     title = models.CharField(max_length=150)
+#     begin_time = models.DateTimeField()
+#     end_time = models.DateTimeField()
+#
+#     def __str__(self):
+#         return self.title
+#
+#     def publish(self):
+#         self.published_date = timezone.now()
+#         self.save()
+
+
+class QnaQuestion(Content):
+    title = models.CharField(max_length=150)
+    # is_live_question = models.BooleanField(default=False)
+    # parent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
+
     def __str__(self):
         return self.title
 
-class PostTag(models.Model):
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+
+class QnaAnswer(Content):
+    is_correct = models.BooleanField(default=False)
+    parent = models.ForeignKey(QnaQuestion, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.detail
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+
+class UserFavorite(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 
-class PostVote(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)   
-    author = models.ForeignKey(
-        'auth.User', 
-        on_delete=models.CASCADE)
-    value = models.IntegerField(default=1)
-    timestamp = models.DateTimeField(default=timezone.now)
+    class Meta:
+        unique_together = ("post", "user")
 
-class CommentVote(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)   
-    author = models.ForeignKey(
-        'auth.User', 
-        on_delete=models.CASCADE)
-    value = models.IntegerField(default=1)
-    timestamp = models.DateTimeField(default=timezone.now)
+    @staticmethod
+    def create(post_id, user_id):
+        post = get_object_or_404(Post, id=post_id)
+        user = get_object_or_404(User, id=user_id)
+        return UserFavorite.objects.create(post=post, user=user)
