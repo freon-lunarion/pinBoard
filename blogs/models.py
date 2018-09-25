@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404
 
 # Create your models here.
 
-
 class Post(Content):
     title = models.CharField(max_length=150)
     is_pinned = models.BooleanField(default=False)

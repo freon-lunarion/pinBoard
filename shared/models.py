@@ -9,7 +9,6 @@ from tinymce import models as tinymce_models
 
 # Create your models here.
 
-
 class User(AbstractUser):
 
     def __str__(self):
