@@ -58,8 +58,8 @@ class Comment(Content):
 
 class QnaQuestion(Content):
     title = models.CharField(max_length=150)
-    is_live_question = models.BooleanField(default=False)
-    # perent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
+    # is_live_question = models.BooleanField(default=False)
+    # parent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title
