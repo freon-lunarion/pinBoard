@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 class Post(Content):
     title = models.CharField(max_length=150)
     is_pinned = models.BooleanField(default=False)
-    pin_board = models.ForeignKey(CoursePinBoard, on_delete=models.CASCADE, default=None)
+    pin_board = models.ForeignKey(PinBoard, on_delete=models.CASCADE, default=None)
     operator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -27,6 +27,10 @@ class Post(Content):
             self.operator = moderator
             self.save()
 
+    def is_favorite_of(self, user):
+        is_favorite = UserFavorite.objects.filter(user=user, post=self)
+        return True if is_favorite else False
+
 
 class Comment(Content):
     parent = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -39,23 +43,23 @@ class Comment(Content):
         self.save()
 
 
-class LiveQuestionSession(Content):
-    title = models.CharField(max_length=150)
-    begin_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-
-    def __str__(self):
-        return self.title
-
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+# class LiveQuestionSession(Content):
+#     title = models.CharField(max_length=150)
+#     begin_time = models.DateTimeField()
+#     end_time = models.DateTimeField()
+#
+#     def __str__(self):
+#         return self.title
+#
+#     def publish(self):
+#         self.published_date = timezone.now()
+#         self.save()
 
 
 class QnaQuestion(Content):
     title = models.CharField(max_length=150)
     is_live_question = models.BooleanField(default=False)
-    perent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
+    # perent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title
