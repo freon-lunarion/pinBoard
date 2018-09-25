@@ -10,6 +10,7 @@ body .background {
   background: linear-gradient(to right, rgba(242, 200, 76, 0.774), rgba(242, 152, 74, 0.712)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+
 .card-action.single {
   display: flex;
   justify-content: flex-end;
@@ -19,6 +20,7 @@ body .background {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 4px 24px;
 }
 
 .card-action.voting,
@@ -40,6 +42,18 @@ body .background {
 
 .card-content.with-comments {
   padding-bottom: 12px;
+}
+
+.card-image.post {
+  max-height: 201px;
+  overflow: hidden;
+}
+
+.card-title.image-post {
+  padding: 5px !important;
+  margin: 19px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
 }
 
 .card-comments {
