@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from django.http import HttpResponse
 
 from .models import Post, Comment
 from shared.models import *
@@ -30,4 +31,4 @@ def vote(request, content_id):
     if (request.method == 'POST'):
         user_id = request.POST.get('user_id', None)
         value = request.POST.get('value', 1)
-        Vote.create(content_id, user_id, value)
+        return HttpResponse(str(Vote.vote(content_id, user_id, value)))

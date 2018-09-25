@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.shortcuts import get_object_or_404
+from tinymce import models as tinymce_models
 
 # Create your models here.
 
@@ -36,7 +37,7 @@ class PinBoard(models.Model):
 
 
 class Content(models.Model):
-    detail = models.TextField()
+    detail = tinymce_models.HTMLField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=timezone.now)
     update_time = models.DateTimeField(default=timezone.now)
