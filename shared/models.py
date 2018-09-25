@@ -9,6 +9,7 @@ from tinymce import models as tinymce_models
 
 # Create your models here.
 
+
 class User(AbstractUser):
 
     def __str__(self):
@@ -23,7 +24,7 @@ class User(AbstractUser):
         return User.objects.create_superuser(username, email, password)
 
 
-class CoursePinBoard(models.Model):
+class PinBoard(models.Model):
     title = models.CharField(max_length=50)
     detail = models.TextField()
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -33,7 +34,7 @@ class CoursePinBoard(models.Model):
 
     @staticmethod
     def create(title, creator, detail=''):
-        return CoursePinBoard.objects.create(title=title, detail=detail, creator=creator)
+        return PinBoard.objects.create(title=title, detail=detail, creator=creator)
 
 
 class Content(models.Model):
@@ -88,7 +89,8 @@ class Vote(models.Model):
         unique_together = ("content", "user")
 
     @staticmethod
-    def create(content_id, user_id, value):
+    def vote(content_id, user_id, value):
         content = get_object_or_404(Content, id=content_id)
         user = get_object_or_404(User, id=user_id)
-        return Vote.objects.create(content=content, user=user, value=value)
+        Vote.objects.create(content=content, user=user, value=value)
+        return content.score

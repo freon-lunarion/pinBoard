@@ -27,6 +27,10 @@ class Post(Content):
             self.operator = moderator
             self.save()
 
+    def is_favorite_of(self, user):
+        is_favorite = UserFavorite.objects.filter(user=user, post=self)
+        return True if is_favorite else False
+
 
 class Comment(Content):
     parent = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -39,17 +43,17 @@ class Comment(Content):
         self.save()
 
 
-class LiveQuestionSession(Content):
-    title = models.CharField(max_length=150)
-    begin_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-
-    def __str__(self):
-        return self.title
-
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+# class LiveQuestionSession(Content):
+#     title = models.CharField(max_length=150)
+#     begin_time = models.DateTimeField()
+#     end_time = models.DateTimeField()
+#
+#     def __str__(self):
+#         return self.title
+#
+#     def publish(self):
+#         self.published_date = timezone.now()
+#         self.save()
 
 
 class QnaQuestion(Content):
