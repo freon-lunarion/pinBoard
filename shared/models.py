@@ -22,7 +22,7 @@ class User(AbstractUser):
         return User.objects.create_superuser(username, email, password)
 
 
-class PinBoard(models.Model):
+class CoursePinBoard(models.Model):
     title = models.CharField(max_length=50)
     detail = models.TextField()
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -32,7 +32,7 @@ class PinBoard(models.Model):
 
     @staticmethod
     def create(title, creator, detail=''):
-        return PinBoard.objects.create(title=title, detail=detail, creator=creator)
+        return CoursePinBoard.objects.create(title=title, detail=detail, creator=creator)
 
 
 class Content(models.Model):
@@ -87,8 +87,7 @@ class Vote(models.Model):
         unique_together = ("content", "user")
 
     @staticmethod
-    def vote(content_id, user_id, value):
+    def create(content_id, user_id, value):
         content = get_object_or_404(Content, id=content_id)
         user = get_object_or_404(User, id=user_id)
-        Vote.objects.create(content=content, user=user, value=value)
-        return content.score
+        return Vote.objects.create(content=content, user=user, value=value)
