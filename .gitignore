@@ -4,3 +4,8 @@ requirement.txt
 *.pyc
 *.pyo
 settings.json
+blogs/migrations/
+
+*.sqlite3
+
+shared/migrations/
