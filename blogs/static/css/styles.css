@@ -1,10 +1,14 @@
+html{
+  height: 100%;
+}
 body {
   font-family: 'Roboto';
   background  : #f5f2ee;
+  height: 100%;
 }
 
 body .background {
-  height: 100%;
+  /*height: 100%;*/
   background: #F2994A;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, rgba(242, 200, 76, 0.753), rgba(242, 152, 74, 0.753));  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, rgba(242, 200, 76, 0.774), rgba(242, 152, 74, 0.712)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -116,3 +120,66 @@ i.material-icons.title {
   font-size: 35px;
   color: rgba(172,255,72,0.9);
 }
+
+.content{
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.time{
+  display: flex;
+  /*color: #8E8E8E;*/
+}
+
+.main-content{
+  padding-left: 59px;
+  padding-right: 59px;
+}
+
+.icon-size{
+  /*width: 21px;*/
+  margin-right: 10px;
+}
+
+.icon{
+  margin-left: 63%;
+  margin-top: -1%;
+  display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
