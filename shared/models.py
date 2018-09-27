@@ -42,6 +42,7 @@ class Content(models.Model):
     create_time = models.DateTimeField(default=timezone.now)
     update_time = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
+    content_type = models.CharField(max_length=10,default="") # ref : https://stackoverflow.com/questions/4904230/django-change-default-value-for-an-extended-model-class
 
     @property
     def score(self):
