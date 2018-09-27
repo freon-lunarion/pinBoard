@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'blogs.apps.BlogsConfig',
+    'quiz.apps.QuizConfig',
     'shared.apps.SharedConfig',
     'django.contrib.admin',
     'django.contrib.auth',
