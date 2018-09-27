@@ -2,8 +2,8 @@ body {
   font-family: 'Roboto';
 }
 
-body .background {
-  /*height: 100%;*/
+#loginpage{
+  background: rgb(73, 74, 95);
 }
 
 html {
@@ -193,6 +193,73 @@ img {
   display: flex;
 }
 
+.login{
+  text-align: center;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 36%;
+  height: 45%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.line{
+  border: 1px groove gray;
+}
+
+#username{
+  width: 71%;
+}
+
+#password{
+  width: 71%;
+}
+
+.user{
+  margin-top: 23px;
+}
+
+#submit{
+  width: 100px;
+  height: 50px;
+  font-size: 23px;
+  border-radius: 11px;
+  color: #00c0ff;
+  border: 1px groove lightgray;
+  outline:none;
+  cursor:pointer;
+}
+
+#register{
+  font-size: 21px;
+  border-radius: 11px;
+  color: #00c0ff;
+  border: 1px groove lightgray;
+  outline: none;
+  cursor: pointer;
+  margin-right: 47%;
+  float: left;
+  margin-left: 9%;
+  width: 89px;
+  margin-top: 10px;
+}
+
+#forget{
+  font-size: 21px;
+  border-radius: 11px;
+  color: #00c0ff;
+  border: 1px groove lightgray;
+  outline: none;
+  cursor: pointer;
+  float: right;
+  margin-right: 9%;
+  width: 82px;
+  margin-top: 10px;
+}
 
 
 
