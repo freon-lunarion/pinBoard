@@ -4,3 +4,6 @@ requirement.txt
 *.pyc
 *.pyo
 settings.json
+.DS_Store
+*.sqlite3
+.idea

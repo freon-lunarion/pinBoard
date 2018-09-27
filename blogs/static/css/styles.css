@@ -1,17 +1,38 @@
-html{
-  height: 100%;
-}
 body {
   font-family: 'Roboto';
-  background  : #f5f2ee;
-  height: 100%;
 }
 
 body .background {
   /*height: 100%;*/
+}
+
+html {
+  height: 100%;
   background: #F2994A;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, rgba(242, 200, 76, 0.753), rgba(242, 152, 74, 0.753));  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, rgba(242, 200, 76, 0.774), rgba(242, 152, 74, 0.712)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h2.content-separator {
+  font-size: 24px;
+  text-transform: uppercase;
+  color:  white;
+  font-style: italic;
+  margin: 15px 0;
+  font-weight: 700;
+  opacity: 0.5;
+}
+
+h2.content-separator.middle {
+  margin-top: 30px;
+}
+
+.row.pinned-posts {
+  margin-bottom: 0;
+  background: transparent;
+  border: 1px solid wheat;
+  padding: 0;
+  border-radius: 12px;
 }
 
 .card-action.single {
@@ -23,6 +44,7 @@ body .background {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 4px 24px;
 }
 
 .card-action.voting,
@@ -44,6 +66,25 @@ body .background {
 
 .card-content.with-comments {
   padding-bottom: 12px;
+}
+
+.card-image.post {
+  max-height: 201px;
+  overflow: hidden;
+}
+
+.card-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: nowrap;
+}
+
+.card-title.image-post {
+  padding: 5px !important;
+  margin: 19px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
 }
 
 .card-comments {
@@ -89,6 +130,7 @@ nav.nav-container.pinboard {
 
 .card-description {
   max-height: 100px;
+  min-height: 100px;
   text-overflow: ellipsis;
   overflow: hidden;
 }
