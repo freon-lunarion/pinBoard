@@ -26,23 +26,23 @@ class QuizBank(models.Model):
 
 
     def is_submit_time(self):
-        if (submit_beginTime <= timezone.now and timezone.now <= submit_endTime) {
+        if (submit_beginTime <= timezone.now and timezone.now <= submit_endTime):
             return True
-        } else {
+        else:
             return False
-        }
+        
     
     def is_tryout_time(self):
-        if (tryout_beginTime <= timezone.now and timezone.now <= tryout_endTime) {
+        if (tryout_beginTime <= timezone.now and timezone.now <= tryout_endTime):
             return True
-        } else {
+        else:
             return False
-        }
+        
 
 class Question(Content):
-    quizBank = models.ForeignKeyField(QuizBank, on_delete=models.CASCADE)
+    quizBank = models.ForeignKey(QuizBank, on_delete=models.CASCADE)
     
 class Options(models.Model):
-    question = models.ForeignKeyField(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     detail = models.TextField()
     isCorrect = models.BooleanField(default=False)
