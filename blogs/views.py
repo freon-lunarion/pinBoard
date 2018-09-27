@@ -26,6 +26,9 @@ class ResultsView(generic.DetailView):
     model = Post
     template_name = 'blogs/results.html'
 
+class PostView(generic.DetailView):
+    model = Post
+    template_name = 'blogs/post.html'
 
 def vote(request, content_id):
     if (request.method == 'POST'):

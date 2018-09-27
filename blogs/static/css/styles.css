@@ -2,6 +2,10 @@ body {
   font-family: 'Roboto';
 }
 
+body .background {
+  /*height: 100%;*/
+}
+
 html {
   height: 100%;
   background: #F2994A;  /* fallback for old browsers */
@@ -158,3 +162,66 @@ i.material-icons.title {
   font-size: 35px;
   color: rgba(172,255,72,0.9);
 }
+
+.content{
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.time{
+  display: flex;
+  /*color: #8E8E8E;*/
+}
+
+.main-content{
+  padding-left: 59px;
+  padding-right: 59px;
+}
+
+.icon-size{
+  /*width: 21px;*/
+  margin-right: 10px;
+}
+
+.icon{
+  margin-left: 63%;
+  margin-top: -1%;
+  display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
