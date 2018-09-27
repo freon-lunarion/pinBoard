@@ -4,9 +4,5 @@ requirement.txt
 *.pyc
 *.pyo
 settings.json
-blogs/migrations/
 .DS_Store
-
 *.sqlite3
-
-shared/migrations/
