@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import datetime
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.shortcuts import get_object_or_404
@@ -47,6 +47,11 @@ class Content(models.Model):
     def score(self):
         score = Vote.objects.filter(content=self).aggregate(total=Sum("value"))["total"]
         return score if score else 0
+    
+    @property
+    def num_voter(self):
+        num_voter = Vote.objects.filter(content=self).aggregate(total=Count("value"))["total"]
+        return num_voter if num_voter else 0
 
     @property
     def is_published_recently(self):
