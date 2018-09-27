@@ -6,3 +6,4 @@ requirement.txt
 settings.json
 .DS_Store
 *.sqlite3
+.idea
