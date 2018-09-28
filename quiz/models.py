@@ -37,6 +37,11 @@ class QuizBank(models.Model):
             return True
         else:
             return False
+
+
+    def __str__(self):
+        """String for representing the QuizBank object."""
+        return f'{self.title}, created by {self.creator}'
         
 
 class Question(Content):

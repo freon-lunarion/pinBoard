@@ -30,12 +30,16 @@ class Post(Content):
         is_favorite = UserFavorite.objects.filter(user=user, post=self)
         return True if is_favorite else False
 
+    def __str__(self):
+        """String for representing the Post object."""
+        return f'{self.title}'
+
 
 class Comment(Content):
     parent = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.detail
+        return f'{self.detail}'
 
     def publish(self):
         self.published_date = timezone.now()
@@ -61,7 +65,7 @@ class QnaQuestion(Content):
     # parent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return f'{self.title}'
 
     def publish(self):
         self.published_date = timezone.now()
@@ -73,7 +77,7 @@ class QnaAnswer(Content):
     parent = models.ForeignKey(QnaQuestion, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.detail
+        return f'{self.detail}'
 
     def publish(self):
         self.published_date = timezone.now()
