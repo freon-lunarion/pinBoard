@@ -211,13 +211,17 @@ img {
   border: 1px groove gray;
 }
 
-#username{
+#username, #firstname, #Lastname, #Email, #password, #repassword{
   width: 71%;
 }
 
-#password{
-  width: 71%;
-}
+/*#password{*/
+  /*width: 71%;*/
+/*}*/
+
+/*#Email{*/
+  /*width: 71%;*/
+/*}*/
 
 .user{
   margin-top: 23px;
@@ -261,6 +265,20 @@ img {
   margin-top: 10px;
 }
 
+
+.register{
+  text-align: center;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 36%;
+  height: 63%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
 
 
