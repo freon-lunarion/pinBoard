@@ -9,4 +9,4 @@ from shared.models import *
 
 # Create your views here.
 class IndexView(generic.ListView):
-    pass
+    model = QuizBank

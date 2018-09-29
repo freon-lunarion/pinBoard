@@ -4,72 +4,74 @@
     <div style="margin-top:15px;display:flex;align-items: center;color: rgba(255,255,255,0.5);"><i class="material-icons">person_pin</i>&nbsp;<h2 class="content-separator">Pinned Posts</h2></div>
     <div class="row pinned-posts">
         {% for post in latest_post_list %}
+            {% if post.is_pinned %}
 
-            {% if "Post" in post.title %}
-                <!-- Blog post card -->
-                <div class="col s12 m6 l3">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content with-comments white-text">
-                            <span class="card-title">{{ post.title }}</span>
-                            <div class="card-description">
-                                <p>Cream, chicory in extraction sugar that half and half sugar flavour milk mazagran. Sit bar white aftertaste chicory cinnamon whipped chicory.</p>
+                {% if "Post" in post.kind %}
+                    <!-- Blog post card -->
+                    <div class="col s12 m6 l3">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content with-comments white-text">
+                                <span class="card-title">{{ post.title }}</span>
+                                <div class="card-description">
+                                    <p>{{ post.detail }}</p>
+                                </div>
+                                <div class="card-comments">12 Comments</div>
                             </div>
-                            <div class="card-comments">12 Comments</div>
-                        </div>
-                        <div class="card-action voting">
-                            <div class="score-container">
-                                <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                <span id="score-{{ post.id }}" class="score">21</span>
-                                <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                            <div class="card-action voting">
+                                <div class="score-container">
+                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                                    <span id="score-{{ post.id }}" class="score">21</span>
+                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                                </div>
+                                <a class="card-open" href="#">Open</a>
                             </div>
-                            <a class="card-open" href="#">Open</a>
-                        </div>
-                    </div>
-                </div>
-            {% elif "Question" in post.title %}
-                <!-- Question card -->
-                <div class="col s12 m6 l3">
-                    <div class="card blue-grey darken-1 question">
-                        <div class="card-state question"></div>
-                        <div class="card-content with-comments white-text">
-                            <span class="card-title" style="display:flex;align-items: center;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
-                            <div class="card-description question">
-                                <p>Cream, chicory in extraction sugar that half and half sugar flavour milk mazagran. Sit bar white aftertaste chicory cinnamon whipped chicory.</p>
-                            </div>
-                            <div class="card-comments">12 Comments</div>
-                        </div>
-                        <div class="card-action voting">
-                            <div class="score-container">
-                                <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                <span id="score-{{ post.id }}" class="score">21</span>
-                                <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                            </div>
-                            <a class="card-open" href="#">Open</a>
                         </div>
                     </div>
-                </div>
-            {% elif "Image" in post.title %}
+                {% elif "Question" in post.kind %}
+                    <!-- Question card -->
+                    <div class="col s12 m6 l3">
+                        <div class="card blue-grey darken-1 question">
+                            <div class="card-state question"></div>
+                            <div class="card-content with-comments white-text">
+                                <span class="card-title" style="display:flex;align-items: center;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
+                                <div class="card-description question">
+                                    <p>{{ post.detail }}</p>
+                                </div>
+                                <div class="card-comments">12 Comments</div>
+                            </div>
+                            <div class="card-action voting">
+                                <div class="score-container">
+                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                                    <span id="score-{{ post.id }}" class="score">21</span>
+                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                                </div>
+                                <a class="card-open" href="#">Open</a>
+                            </div>
+                        </div>
+                    </div>
+                {% elif "Image" in post.kind %}
 
-                <!-- Blog post card -->
-                <div class="col s12 m6 l3">
-                    <div class="card blue-grey darken-1">
-                        <!-- <div class="card-content white-text">
-                            <span class="card-title">{{ post.title }}</span>
-                        </div> -->
-                        <div class="card-image post">
-                            <img src="https://i.imgur.com/cwmSMC2.png" style="min-height: 205px">
-                            <div class="card-title image-post">{{ post.title }}</div>
-                        </div>
-                        <div class="card-action voting">
-                            <div class="score-container">
-                                <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                <span id="score-{{ post.id }}" class="score">21</span>
-                                <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                    <!-- Blog post card -->
+                    <div class="col s12 m6 l3">
+                        <div class="card blue-grey darken-1">
+                            <!-- <div class="card-content white-text">
+                                <span class="card-title">{{ post.title }}</span>
+                            </div> -->
+                            <div class="card-image post">
+                                <img src="https://i.imgur.com/cwmSMC2.png" style="min-height: 205px">
+                                <div class="card-title image-post">{{ post.title }}</div>
                             </div>
-                            <a class="card-open" href="#">Open</a>
+                            <div class="card-action voting">
+                                <div class="score-container">
+                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                                    <span id="score-{{ post.id }}" class="score">21</span>
+                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                                </div>
+                                <a class="card-open" href="#">Open</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endif %}
 
         {% endfor %}
@@ -81,14 +83,14 @@
 
         {% for post in latest_post_list %}
 
-            {% if "Post" in post.title %}
+            {% if "Post" in post.kind %}
                 <!-- Blog post card -->
                 <div class="col s12 m6 l3">
                     <div class="card blue-grey darken-1">
                         <div class="card-content with-comments white-text">
                             <span class="card-title">{{ post.title }}</span>
                             <div class="card-description">
-                                <p>Cream, chicory in extraction sugar that half and half sugar flavour milk mazagran. Sit bar white aftertaste chicory cinnamon whipped chicory.</p>
+                                <p>{{ post.detail }}</p>
                             </div>
                             <div class="card-comments">12 Comments</div>
                         </div>
@@ -102,7 +104,7 @@
                         </div>
                     </div>
                 </div>
-            {% elif "Question" in post.title %}
+            {% elif "Question" in post.kind %}
                 <!-- Question card -->
                 <div class="col s12 m6 l3">
                     <div class="card blue-grey darken-1 question">
@@ -110,7 +112,7 @@
                         <div class="card-content with-comments white-text">
                             <span class="card-title" style="display:flex;align-items: center;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
                             <div class="card-description question">
-                                <p>Cream, chicory in extraction sugar that half and half sugar flavour milk mazagran. Sit bar white aftertaste chicory cinnamon whipped chicory.</p>
+                                <p>{{ post.detail }}</p>
                             </div>
                             <div class="card-comments">12 Comments</div>
                         </div>
@@ -124,78 +126,7 @@
                         </div>
                     </div>
                 </div>
-            {% elif "Image" in post.title %}
-
-                <!-- Blog post card -->
-                <div class="col s12 m6 l3">
-                    <div class="card blue-grey darken-1">
-                        <!-- <div class="card-content white-text">
-                            <span class="card-title">{{ post.title }}</span>
-                        </div> -->
-                        <div class="card-image post">
-                            <img src="https://i.imgur.com/cwmSMC2.png" style="min-height: 205px">
-                            <div class="card-title image-post">{{ post.title }}</div>
-                        </div>
-                        <div class="card-action voting">
-                            <div class="score-container">
-                                <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                <span id="score-{{ post.id }}" class="score">21</span>
-                                <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                            </div>
-                            <a class="card-open" href="#">Open</a>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-
-        {% endfor %}
-
-        {% for post in latest_post_list %}
-
-            {% if "Post" in post.title %}
-                <!-- Blog post card -->
-                <div class="col s12 m6 l3">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content with-comments white-text">
-                            <span class="card-title">{{ post.title }}</span>
-                            <div class="card-description">
-                                <p>Cream, chicory in extraction sugar that half and half sugar flavour milk mazagran. Sit bar white aftertaste chicory cinnamon whipped chicory.</p>
-                            </div>
-                            <div class="card-comments">12 Comments</div>
-                        </div>
-                        <div class="card-action voting">
-                            <div class="score-container">
-                                <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                <span id="score-{{ post.id }}" class="score">21</span>
-                                <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                            </div>
-                            <a class="card-open" href="#">Open</a>
-                        </div>
-                    </div>
-                </div>
-            {% elif "Question" in post.title %}
-                <!-- Question card -->
-                <div class="col s12 m6 l3">
-                    <div class="card blue-grey darken-1 question">
-                        <div class="card-state question"></div>
-                        <div class="card-content with-comments white-text">
-                            <span class="card-title" style="display:flex;align-items: center;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
-                            <div class="card-description question">
-                                <p>Cream, chicory in extraction sugar that half and half sugar flavour milk mazagran. Sit bar white aftertaste chicory cinnamon whipped chicory.</p>
-                            </div>
-                            <div class="card-comments">12 Comments</div>
-                        </div>
-                        <div class="card-action voting">
-                            <div class="score-container">
-                                <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                <span id="score-{{ post.id }}" class="score">21</span>
-                                <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                            </div>
-                            <a class="card-open" href="#">Open</a>
-                        </div>
-                    </div>
-                </div>
-            {% elif "Image" in post.title %}
+            {% elif "Image" in post.kind %}
 
                 <!-- Blog post card -->
                 <div class="col s12 m6 l3">

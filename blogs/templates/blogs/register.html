@@ -1,0 +1,66 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<div class="register">
+
+    <h3>User Sign Up</h3>
+
+    <div class="line"></div>
+
+    <div class="user">
+        <input type="text" name="First name" placeholder="First name" id="firstname">
+    </div>
+
+    <div class="userr">
+        <input type="text" name="Last name" placeholder="Last name" id="Lastname">
+    </div>
+
+    <div class="userr">
+        <input type="email" name="password" placeholder="Email" id="Email" oninput="OnInput (event)">
+    </div>
+    <div style="display: none; color: red" class="email-error">
+        Enter right email format
+    </div>
+
+    <div class="userr">
+        <input type="password" name="password" placeholder="password" id="password">
+    </div>
+
+    <div class="userr">
+        <input type="password" name="password" placeholder="Confirm password" id="repassword">
+    </div>
+
+    <div style="display: none; color: red" class="password-error">
+        Please enter the same passwrod
+    </div>
+
+    <div>
+        <input type="submit" id="submit">
+    </div>
+
+</div>
+
+<script>
+    $(function(){
+        $("#Email").bind('input porpertychange',function(){
+            var regEmail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+            if (regEmail.test($(this).val()) == false){
+                $('.email-error').css("display","block");
+            }
+            if (regEmail.test($(this).val())){
+                $('.email-error').css("display","none");
+            }
+        });
+
+        $("#repassword").bind('input porpertychange',function(){
+            if($('#repassword').val() != $('#password').val() ){
+                $('.password-error').css("display","block");
+            }
+
+            if($('#repassword').val() == $('#password').val() ){
+                $('.password-error').css("display","none");
+            }
+        });
+    });
+</script>
+{% endblock %}

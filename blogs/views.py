@@ -8,6 +8,16 @@ from .models import Post, Comment
 from shared.models import *
 
 # Create your views here.
+def index(request):
+    latest_post_list = Post.objects.order_by('-create_time')[:5]
+    # latest_post_list = Post.objects.all()
+    context = {
+        'latest_post_list': latest_post_list,
+    }
+
+    return render(request, 'blogs/index.html', context=context)
+
+
 class IndexView(generic.ListView):
     template_name = 'blogs/index.html'
     context_object_name = 'latest_post_list'
