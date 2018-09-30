@@ -154,29 +154,28 @@
 
     </div>
 
+<!--<script>-->
+    <!--$(function(){-->
+        <!--$("#Email").bind('input porpertychange',function(){-->
+            <!--var regEmail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/-->
+            <!--if (regEmail.test($(this).val()) == false){-->
+                <!--$('.email-error').css("display","block");-->
+            <!--}-->
+            <!--if (regEmail.test($(this).val())){-->
+                <!--$('.email-error').css("display","none");-->
+            <!--}-->
+        <!--});-->
 
-<script>
-    $(function(){
-        $("#Email").bind('input porpertychange',function(){
-            var regEmail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-            if (regEmail.test($(this).val()) == false){
-                $('.email-error').css("display","block");
-            }
-            if (regEmail.test($(this).val())){
-                $('.email-error').css("display","none");
-            }
-        });
 
+        <!--$("#repassword").bind('input porpertychange',function(){-->
+            <!--if($('#repassword').val() != $('#password').val() ){-->
+                <!--$('.password-error').css("display","block");-->
+            <!--}-->
 
-        $("#repassword").bind('input porpertychange',function(){
-            if($('#repassword').val() != $('#password').val() ){
-                $('.password-error').css("display","block");
-            }
-
-            if($('#repassword').val() == $('#password').val() ){
-                $('.password-error').css("display","none");
-            }
-        });
-    });
-</script>
+            <!--if($('#repassword').val() == $('#password').val() ){-->
+                <!--$('.password-error').css("display","none");-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
 {% endblock %}
