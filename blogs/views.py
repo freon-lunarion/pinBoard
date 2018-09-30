@@ -9,6 +9,7 @@ from shared.models import *
 from django.contrib import auth
 from django.shortcuts import render,render_to_response
 
+from .models import RegisterForm
 
 # Create your views here.
 def index(request):
@@ -71,6 +72,7 @@ def login(request):
             return render_to_response('index.html', RequestContext(req))
         else:
             return render_to_response('login.html', RequestContext(req, {'password_is_wrong': True}))
+    return render(request, 'blogs/login.html', locals())
 
 
 def register(request):
@@ -81,7 +83,7 @@ def register(request):
             username = register_form.cleaned_data['username']
             email = register_form.cleaned_data['email']
             password = register_form.cleaned_data['password']
-            # repassword = register_form.cleaned_data['repassword']
+            repassword = register_form.cleaned_data['repassword']
 
             same_name_user = models.User.objects.filter(name=username)
             if same_name_user:
@@ -101,7 +103,7 @@ def register(request):
             return redirect('/login/')
 
     register_form = RegisterForm()
-    return render(request, 'register.html', locals())
+    return render(request, 'blogs/register.html', locals())
 
 
 
