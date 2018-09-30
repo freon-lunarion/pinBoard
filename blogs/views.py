@@ -47,6 +47,10 @@ class LoginView(generic.DetailView):
     model = Post
     template_name = 'blogs/login.html'
 
+class RegisterView(generic.DetailView):
+    model = Post
+    template_name = 'blogs/register.html'
+
 
 
 def vote(request, content_id):
@@ -67,6 +71,37 @@ def login(request):
             return render_to_response('index.html', RequestContext(req))
         else:
             return render_to_response('login.html', RequestContext(req, {'password_is_wrong': True}))
+
+
+def register(request):
+    if (request.method == 'POST'):
+        register_form = RegisterForm(request.POST)
+        # message = "Please check the information"
+        if register_form.is_valid():
+            username = register_form.cleaned_data['username']
+            email = register_form.cleaned_data['email']
+            password = register_form.cleaned_data['password']
+            # repassword = register_form.cleaned_data['repassword']
+
+            same_name_user = models.User.objects.filter(name=username)
+            if same_name_user:
+                message = 'the username has been in existence'
+                return render(request, 'register.html', locals())
+            same_email_user = models.User.objects.filter(email=email)
+            if same_email_user:
+                message = 'the email has been in existence'
+                return render(request, 'login/register.html', locals())
+
+            new_user = models.User.objects.create()
+            new_user.username = username
+            new_user.email = email
+            new_user.password = password
+            new_user.save()
+
+            return redirect('/login/')
+
+    register_form = RegisterForm()
+    return render(request, 'register.html', locals())
 
 
 

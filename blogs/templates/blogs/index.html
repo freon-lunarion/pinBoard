@@ -1,55 +1,6 @@
 {% extends "./base.html" %}
 
 {% block content %}
-
-<form action="/login/" method="post">
-
-    <div class="login">
-
-        <h3>User Login</h3>
-
-        <div class="line"></div>
-
-        <div class="user">
-            <!--<span>usrername</span>-->
-            <input type="text" name="username" placeholder="username" id="username">
-        </div>
-
-        <div class="userr">
-            <!--<span>password</span>-->
-            <input type="password" name="password" placeholder="password" id="password">
-        </div>
-
-        {% if password_is_wrong %}
-            <div style="color: red">
-                Username is not right or password is not right
-            </div>
-        {% endif %}
-
-        <div>
-            <input type="submit" id="submit">
-        </div>
-
-        <div>
-            <div id="register">register</div>
-            <div id="forget">forget</div>
-        </div>
-
-    </div>
-</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div style="margin-top:15px;display:flex;align-items: center;color: rgba(255,255,255,0.5);"><i class="material-icons">person_pin</i>&nbsp;<h2 class="content-separator">Pinned Posts</h2></div>
     <div class="row pinned-posts">
         {% for post in latest_post_list %}
@@ -202,4 +153,30 @@
         {% endfor %}
 
     </div>
+
+
+<script>
+    $(function(){
+        $("#Email").bind('input porpertychange',function(){
+            var regEmail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+            if (regEmail.test($(this).val()) == false){
+                $('.email-error').css("display","block");
+            }
+            if (regEmail.test($(this).val())){
+                $('.email-error').css("display","none");
+            }
+        });
+
+
+        $("#repassword").bind('input porpertychange',function(){
+            if($('#repassword').val() != $('#password').val() ){
+                $('.password-error').css("display","block");
+            }
+
+            if($('#repassword').val() == $('#password').val() ){
+                $('.password-error').css("display","none");
+            }
+        });
+    });
+</script>
 {% endblock %}
