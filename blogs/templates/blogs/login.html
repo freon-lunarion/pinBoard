@@ -1,6 +1,9 @@
 {% extends "./base.html" %}
 
 {% block content %}
+
+<form action="/login/" method="post">
+
     <div class="login">
 
         <h3>User Login</h3>
@@ -17,6 +20,12 @@
             <input type="password" name="password" placeholder="password" id="password">
         </div>
 
+        {% if password_is_wrong %}
+        <div style="color: red">
+            Username is not right or password is not right
+        </div>
+        {% endif %}
+
         <div>
             <input type="submit" id="submit">
         </div>
@@ -27,4 +36,6 @@
         </div>
 
     </div>
+</form>
+
 {% endblock %}

@@ -97,3 +97,8 @@ class UserFavorite(models.Model):
         post = get_object_or_404(Post, id=post_id)
         user = get_object_or_404(User, id=user_id)
         return UserFavorite.objects.create(post=post, user=user)
+
+
+class User():
+    username = models.CharField(max_length=150)
+    password = models.CharField(max_length=150)
