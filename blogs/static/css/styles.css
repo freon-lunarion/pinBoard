@@ -269,7 +269,6 @@ img {
   margin-top: 10px;
 }
 
-
 .register{
   text-align: center;
   background-color: #fff;
@@ -282,6 +281,36 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.comment{
+  height: 100px;
+  width: 100%;
+  border-top: 1px groove lightgray;
+  border-bottom: 1px groove lightgray;
+  overflow: scroll;
+}
+
+.portrait{
+  height: 90px;
+  width: 90px;
+  float: left;
+  margin-top: 19px;
+}
+
+.comment-user{
+  margin-top: 10px;
+  margin-left: 122px;
+}
+
+.comment-content{
+  margin-top: 4px;
+  margin-left: 122px;
+}
+
+.user-name{
+  color: rgba(0,0,0,.87);
+  font-size: 24px;
 }
 
 
