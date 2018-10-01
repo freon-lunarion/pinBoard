@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.db.models import Sum
 from shared.models import *
 from django.shortcuts import get_object_or_404
+from django import forms
 
 # Create your models here.
 
@@ -97,3 +98,17 @@ class UserFavorite(models.Model):
         post = get_object_or_404(Post, id=post_id)
         user = get_object_or_404(User, id=user_id)
         return UserFavorite.objects.create(post=post, user=user)
+
+
+class User():
+    username = models.CharField(max_length=150)
+    password = models.CharField(max_length=150)
+
+
+
+class RegisterForm(forms.Form):
+    username = forms.CharField(label="username", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label="password", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label="repassword", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label="email", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    # captcha = CaptchaField(label='capcha')

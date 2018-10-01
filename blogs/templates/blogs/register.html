@@ -1,44 +1,46 @@
 {% extends "./base.html" %}
 
 {% block content %}
-<div class="register">
 
-    <h3>User Sign Up</h3>
+<form action="/register/" method="post">
 
-    <div class="line"></div>
+    <div class="register">
 
-    <div class="user">
-        <input type="text" name="First name" placeholder="First name" id="firstname">
+        <h3>User Sign Up</h3>
+
+        <div class="line"></div>
+
+        <div class="userr">
+            <input type="text" name="username" placeholder="Username" id="Lastname">
+        </div>
+
+        <div class="userr">
+            <input type="email" name="email" placeholder="Email" id="Email" oninput="OnInput (event)">
+        </div>
+        <div style="display: none; color: red" class="email-error">
+            Enter right email format
+        </div>
+
+        <div class="userr">
+            <input type="password" name="password" placeholder="Password" id="password">
+        </div>
+
+        <div class="userr">
+            <input type="password" name="repassword" placeholder="Confirm password" id="repassword">
+        </div>
+
+        <div style="display: none; color: red" class="password-error">
+            Please enter the same passwrod
+        </div>
+
+        <div>
+            <input type="submit" id="submit">
+        </div>
+
     </div>
 
-    <div class="userr">
-        <input type="text" name="Last name" placeholder="Last name" id="Lastname">
-    </div>
+</form>
 
-    <div class="userr">
-        <input type="email" name="password" placeholder="Email" id="Email" oninput="OnInput (event)">
-    </div>
-    <div style="display: none; color: red" class="email-error">
-        Enter right email format
-    </div>
-
-    <div class="userr">
-        <input type="password" name="password" placeholder="password" id="password">
-    </div>
-
-    <div class="userr">
-        <input type="password" name="password" placeholder="Confirm password" id="repassword">
-    </div>
-
-    <div style="display: none; color: red" class="password-error">
-        Please enter the same passwrod
-    </div>
-
-    <div>
-        <input type="submit" id="submit">
-    </div>
-
-</div>
 
 <script>
     $(function(){
@@ -51,6 +53,7 @@
                 $('.email-error').css("display","none");
             }
         });
+
 
         $("#repassword").bind('input porpertychange',function(){
             if($('#repassword').val() != $('#password').val() ){
