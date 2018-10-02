@@ -52,6 +52,8 @@ class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
 
+def post(request):
+    return render(request, 'blogs/post.html', locals())
 
 
 def vote(request, content_id):

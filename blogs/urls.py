@@ -14,4 +14,5 @@ urlpatterns = [
     path('<int:post_id>/vote/', views.vote, name='vote'),
     url(r'^login/$',views.login),
     url(r'^register/$',views.register),
+    url(r'^post/$',views.post),
 ]
