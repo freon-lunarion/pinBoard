@@ -13,6 +13,8 @@ html {
   background: linear-gradient(to right, rgba(242, 200, 76, 0.774), rgba(242, 152, 74, 0.712)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+/* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
+
 h2.content-separator {
   font-size: 24px;
   text-transform: uppercase;
@@ -57,6 +59,11 @@ h2.content-separator.middle {
   user-select: none;
 }
 
+.card-action.voting.sidebar {
+  justify-content: center;
+  border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+}
+
 .card-action.state {
   padding-top: 0;
   padding-bottom: 0;
@@ -66,6 +73,10 @@ h2.content-separator.middle {
 
 .card-content.with-comments {
   padding-bottom: 12px;
+}
+
+.card-content.sidebar {
+  padding: 12px 24px;
 }
 
 .card-image.post {
@@ -135,8 +146,8 @@ nav.nav-container.pinboard {
   overflow: hidden;
 }
 
-.card-description.question {
-
+.card-description.sidebar {
+  min-height: 0;
 }
 
 .card-state {
@@ -162,6 +173,37 @@ i.material-icons.title {
   font-size: 35px;
   color: rgba(172,255,72,0.9);
 }
+
+/* ------------------------------------------ POST PAGE - Gino ------------------------------------------ */
+
+.post-container {
+  max-width: 1000px;
+  margin: 75px auto;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+h1.post-title {
+  font-size: 42px;
+  font-weight: 100;
+  margin: 0 0 15px 0;
+}
+
+h3.img-caption {
+  font-size: 18px;
+  font-style: italic;
+  text-align: center;
+  margin: 8px 0;
+}
+
+
+/* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
+
+
 
 .content{
   text-align: center;
@@ -189,8 +231,9 @@ img {
 
 .icon{
   margin-left: 63%;
-  margin-top: -1%;
   display: flex;
+  margin-top: 75px;
+  max-width: 200px;
 }
 
 .login{
