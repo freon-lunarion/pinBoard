@@ -52,9 +52,6 @@ class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
 
-def post(request):
-    return render(request, 'blogs/post.html', locals())
-
 
 def vote(request, content_id):
     if (request.method == 'POST'):
@@ -106,6 +103,13 @@ def register(request):
 
     register_form = RegisterForm()
     return render(request, 'blogs/register.html', locals())
+
+
+def post(request):
+    return render(request, 'blogs/post.html', locals())
+
+def comment(request):
+    return render(request, 'blogs/comment.html', locals())
 
 
 

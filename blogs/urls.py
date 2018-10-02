@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^login/$',views.login),
     url(r'^register/$',views.register),
     url(r'^post/$',views.post),
+    url(r'^comment/$',views.comment),
 ]
