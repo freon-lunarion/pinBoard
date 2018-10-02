@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="post-container">
-    <div class="col s4">
-        <div class="card blue-grey darken-1">
+    <div class="col s12 m4 sidebar" style="height: 100%">
+        <div class="card blue-grey darken-1" style="position:sticky;top:20px">
             <div class="card-action voting sidebar">
                 <div class="score-container">
                     <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="col s8">
+    <div class="col s12 m8">
         <div class="card-panel">
             <h1 class="post-title">{{ post.title }}</h1>
             <img src="/static/images/post.jpeg" alt="">
