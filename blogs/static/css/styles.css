@@ -200,8 +200,26 @@ h3.img-caption {
   margin: 8px 0;
 }
 
+.image-post {
+  text-align: center;
+}
 
-/* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
+.card.image-post {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+img.content {
+  max-width: 100%;
+  max-height: 450px;
+}
+
+#toolbox {
+  margin-top: 15px;
+}
+
+
+/* ------------------------------------------ POST PAGE ------------------------------------------ */
 
 
 
