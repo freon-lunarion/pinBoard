@@ -8,8 +8,11 @@ from .models import Post, Comment
 from shared.models import *
 from django.contrib import auth
 from django.shortcuts import render,render_to_response
+from django.template import RequestContext
 
-from .models import RegisterForm
+from .forms import RegisterForm
+from .forms import LoginForm
+
 
 # Create your views here.
 def index(request):
@@ -63,14 +66,20 @@ def vote(request, content_id):
 
 def login(request):
     if (request.method == 'POST'):
-        name = request.POST.get['username']
-        password = request.POST.get['password']
-        user = auth.authenticate(username = username,password = password)
-        if user is not None:
-            auth.login(req,user)
-            return render_to_response('index.html', RequestContext(req))
-        else:
-            return render_to_response('login.html', RequestContext(req, {'password_is_wrong': True}))
+        login_form = LoginForm(request.POST)
+        # name = request.POST.get['username']
+        # password = request.POST.get['password']
+
+        if login_form.is_valid():
+            username = register_form.cleaned_data['username']
+            password = register_form.cleaned_data['password']
+
+            user = auth.authenticate(username = username,password = password)
+            if user is not None:
+                auth.login(req,user)
+                return render_to_response('index.html', RequestContext(req))
+            else:
+                return render_to_response('login.html', RequestContext(req, {'password_is_wrong': True}))
     return render(request, 'blogs/login.html', locals())
 
 
@@ -99,10 +108,16 @@ def register(request):
             new_user.password = password
             new_user.save()
 
-            return redirect('/login/')
+            register_form = RegisterForm()
+
+            # return redirect('/login/')
+            return render_to_response("login.html")
+
 
     register_form = RegisterForm()
     return render(request, 'blogs/register.html', locals())
+
+
 
 
 def post(request):
