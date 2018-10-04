@@ -50,7 +50,7 @@
             <div class="col s12 m12">
                 <div class="card image-post">
                     <div class="image-post">
-                        <img class="content" src="https://i.imgur.com/oCUKS9p.jpg" alt="">
+                        <img class="content materialboxed" src="https://i.imgur.com/oCUKS9p.jpg" alt="">
                     </div>
                     <div class="card-action voting">
                         <h3 class="img-caption">{{ post.title }}</h3>
@@ -89,8 +89,12 @@
       // initialize dropdown
       $('#dropdown-trigger').dropdown();
 
-      // on load, apply margin to toolbox component
       $(document).ready(() => {
+
+          // initialize image expand handler
+          $('.materialboxed').materialbox();
+
+          // on load, apply margin to toolbox component
           const imageMarginLeft = $('.card.image-post').css('margin-left');
           $('#toolbox').css('margin-left', imageMarginLeft);
       })
