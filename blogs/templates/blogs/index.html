@@ -23,7 +23,7 @@
                                     <span id="score-{{ post.id }}" class="score">21</span>
                                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                                 </div>
-                                <a class="card-open" href="#">Open</a>
+                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                                     <span id="score-{{ post.id }}" class="score">21</span>
                                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                                 </div>
-                                <a class="card-open" href="#">Open</a>
+                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                                     <span id="score-{{ post.id }}" class="score">21</span>
                                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                                 </div>
-                                <a class="card-open" href="#">Open</a>
+                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                             </div>
                         </div>
                     </div>
@@ -100,10 +100,11 @@
                                 <span id="score-{{ post.id }}" class="score">21</span>
                                 <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                             </div>
-                            <a class="card-open" href="#">Open</a>
+                            <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                         </div>
                     </div>
                 </div>
+                
             {% elif "Question" in post.kind %}
                 <!-- Question card -->
                 <div class="col s12 m6 l3">
@@ -122,7 +123,7 @@
                                 <span id="score-{{ post.id }}" class="score">21</span>
                                 <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                             </div>
-                            <a class="card-open" href="#">Open</a>
+                            <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +145,7 @@
                                 <span id="score-{{ post.id }}" class="score">21</span>
                                 <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                             </div>
-                            <a class="card-open" href="#">Open</a>
+                            <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                         </div>
                     </div>
                 </div>
