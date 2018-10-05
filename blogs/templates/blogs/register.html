@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<form action="/register/" method="post">
+<form action="/blogs/login/" method="post">
+    {% csrf_token %}
 
     <div class="register">
 
@@ -65,5 +66,7 @@
             }
         });
     });
+
+    alert('{{ message }}');
 </script>
 {% endblock %}
