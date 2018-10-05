@@ -70,16 +70,24 @@ def login(request):
         # name = request.POST.get['username']
         # password = request.POST.get['password']
 
+
+        print("fdsfdsfdsfdsfdsfsdfads")
+
         if login_form.is_valid():
             username = register_form.cleaned_data['username']
             password = register_form.cleaned_data['password']
 
+
             user = auth.authenticate(username = username,password = password)
+            print(user)
+            print("fdsfdsfdsfdsfdsfsdfads")
             if user is not None:
                 auth.login(req,user)
                 return render_to_response('index.html', RequestContext(req))
-            else:
-                return render_to_response('login.html', RequestContext(req, {'password_is_wrong': True}))
+            #else:
+               # return render_to_response('login.html', RequestContext(req, {'password_is_wrong': True}))
+                return render(request,'blogs/login.html', {'error': 'username or password error!'})
+
     return render(request, 'blogs/login.html', locals())
 
 
@@ -92,6 +100,7 @@ def register(request):
             email = register_form.cleaned_data['email']
             password = register_form.cleaned_data['password']
             repassword = register_form.cleaned_data['repassword']
+
 
             same_name_user = models.User.objects.filter(name=username)
             if same_name_user:
