@@ -83,12 +83,24 @@ def login(request):
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
 
+
+            #userinfo = User.objects.get(username=username)  #get all info of user
+
+            #current_user = request.user admin user
+            #print(userinfo.email)
+
+
             user = User.objects.filter(username__exact = username,password__exact = password)
             print(user)
             if user:
                 response = HttpResponseRedirect('/blogs/')
                 response.set_cookie('username',username,3600)
                 return response
+
+                #request.session['username'] = user
+                #request.session.set_expiry(600)
+                #return render(request, '/blogs/',{
+                #'welcome':"欢迎你"})
             else:
                 error = 'Username is not right or password is not right!'
                 return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
