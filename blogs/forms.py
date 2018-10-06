@@ -5,6 +5,7 @@ from django.db.models import Sum
 from shared.models import *
 from django.shortcuts import get_object_or_404
 from django import forms
+from tinymce.widgets import TinyMCE
 
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length=128,
@@ -48,3 +49,11 @@ class LoginForm(forms.Form):
                                     'id': 'password'
                                 }))
     # captcha = CaptchaField(label='capcha')
+
+
+class AddPostForm(forms.Form):
+    title = forms.CharField()
+    detail = forms.CharField(widget=forms.Textarea)
+    # pin_board =
+    create_time = forms.DateTimeField()
+    update_time = forms.DateTimeField()

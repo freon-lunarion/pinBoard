@@ -10,9 +10,7 @@ from django.contrib import auth
 from django.shortcuts import render,render_to_response
 from django.template import RequestContext
 
-from .forms import RegisterForm
-from .forms import LoginForm
-
+from .forms import *
 
 # Create your views here.
 def index(request):
@@ -24,6 +22,10 @@ def index(request):
 
     return render(request, 'blogs/index.html', context=context)
 
+def create_post(request):
+    if (request.method == 'POST'):
+        pass
+    return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
 class IndexView(generic.ListView):
     template_name = 'blogs/index.html'
