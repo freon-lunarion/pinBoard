@@ -68,28 +68,25 @@ def vote(request, content_id):
 def login(request):
     if (request.method == 'POST'):
         login_form = LoginForm(request.POST)
-        # name = request.POST.get['username']
-        # password = request.POST.get['password']
-
-
-        print("fdsfdsfdsfdsfdsfsdfads")
 
         if login_form.is_valid():
-            username = register_form.cleaned_data['username']
-            password = register_form.cleaned_data['password']
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
 
-
-            user = auth.authenticate(username = username,password = password)
+            user = User.objects.filter(username__exact = username,password__exact = password)
             print(user)
-            print("fdsfdsfdsfdsfdsfsdfads")
-            if user is not None:
-                auth.login(req,user)
-                return render_to_response('index.html', RequestContext(req))
-            #else:
-               # return render_to_response('login.html', RequestContext(req, {'password_is_wrong': True}))
-                return render(request,'blogs/login.html', {'error': 'username or password error!'})
+            if user:
+                response = HttpResponseRedirect('/blogs/')
+                response.set_cookie('username',username,3600)
+                return response
+            else:
+                error = 'Username is not right or password is not right!'
+                return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
 
-    return render(request, 'blogs/login.html', locals())
+    #return render(request, 'blogs/login.html', locals())
+
+    login_form = LoginForm()
+    return render(request, 'blogs/login.html', {'form': login_form, 'message': ''})
 
 
 def register(request):

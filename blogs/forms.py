@@ -10,30 +10,41 @@ class RegisterForm(forms.Form):
     username = forms.CharField(max_length=128,
                                widget=forms.TextInput(attrs={
                                    # 'class': 'form-control',
-                                   'placeholder': 'Username',
+                                   'placeholder': 'username',
                                    'id': 'Lastname'
                                }))
     email = forms.EmailField(widget=forms.TextInput(attrs={
                                  # 'class': 'form-control',
-                                 'placeholder': 'Email',
+                                 'placeholder': 'email',
                                  'oninput': 'OnInput (event)',
                                  'id': 'Email'
                              }))
     password = forms.CharField(max_length=256,
                                 widget=forms.PasswordInput(attrs={
                                     # 'class': 'form-control',
-                                    'placeholder': 'Password',
+                                    'placeholder': 'password',
                                     'id': 'password'
                                 }))
     repassword = forms.CharField(max_length=256,
                                 widget=forms.PasswordInput(attrs={
                                     # 'class': 'form-control',
-                                    'placeholder': 'Confirm password',
+                                    'placeholder': 'confirm password',
                                     'id': 'repassword'
                                 }))
     # captcha = CaptchaField(label='capcha')
 
+
 class LoginForm(forms.Form):
-    username = forms.CharField(label="username", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password1 = forms.CharField(label="password", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(max_length=128,
+                               widget=forms.TextInput(attrs={
+                                   # 'class': 'form-control',
+                                   'placeholder': 'username',
+                                   'id': 'username'
+                               }))
+    password = forms.CharField(max_length=256,
+                                widget=forms.PasswordInput(attrs={
+                                    # 'class': 'form-control',
+                                    'placeholder': 'password',
+                                    'id': 'password'
+                                }))
     # captcha = CaptchaField(label='capcha')
