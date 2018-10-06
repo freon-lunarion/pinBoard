@@ -18,6 +18,7 @@
         <div class="userr">
             {{ form.email }}
         </div>
+
         <div style="display: none; color: red" class="email-error">
             Enter right email format
         </div>
@@ -67,6 +68,10 @@
         });
     });
 
-    <!--alert('{{ message }}');-->
+    let message = '{{ message }}';
+    if (! (message.length === 0) ) {
+        alert(message);
+    }
+
 </script>
 {% endblock %}

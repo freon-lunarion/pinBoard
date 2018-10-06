@@ -100,16 +100,15 @@ def register(request):
             username = register_form.cleaned_data['username']
             email = register_form.cleaned_data['email']
             password = register_form.cleaned_data['password']
-            repassword = register_form.cleaned_data['repassword']
 
             same_name_user = User.objects.filter(username=username)
             if same_name_user:
-                message = 'the username has been in existence'
-                return render(request, 'blogs/register.html', locals())
+                message = 'Username already exists!'
+                return render(request, 'blogs/register.html', {'form': RegisterForm(), 'message': message})
             same_email_user = User.objects.filter(email=email)
             if same_email_user:
-                message = 'the email has been in existence'
-                return render(request, 'blogs/register.html', RegisterForm())
+                message = 'Email already exists!'
+                return render(request, 'blogs/register.html', {'form': RegisterForm(), 'message': message})
 
             new_user = User.objects.create()
             new_user.username = username
@@ -117,14 +116,17 @@ def register(request):
             new_user.password = password
             new_user.save()
 
-            register_form = RegisterForm()
+            message = 'Registered Successfully!'
 
             # return redirect('/login/')
-            return render_to_response("blogs/login.html")
+            return render_to_response("blogs/login.html", {'message': message})
+        else:
+            message = 'Invalid input!'
+            return render_to_response("blogs/login.html", {'message': message})
 
 
     register_form = RegisterForm()
-    return render(request, 'blogs/register.html', {'form': register_form})
+    return render(request, 'blogs/register.html', {'form': register_form, 'message': ''})
 
 
 
