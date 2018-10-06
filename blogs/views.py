@@ -16,7 +16,7 @@ from .forms import LoginForm
 
 # Create your views here.
 def index(request):
-    latest_post_list = Post.objects.order_by('-create_time')[:5]
+    latest_post_list = sorted(Post.objects.all(), key=lambda p: p.score)
     # latest_post_list = Post.objects.all()
     context = {
         'latest_post_list': latest_post_list,
@@ -46,6 +46,19 @@ class ResultsView(generic.DetailView):
 class PostView(generic.DetailView):
     model = Post
     template_name = 'blogs/post.html'
+
+class CommentView(generic.ListView):
+    template_name = 'blogs/comment.html'
+    context_object_name = 'comment_list'
+
+    # dispatch is called when the class instance loads
+    def dispatch(self, request, *args, **kwargs):
+        self.pk = kwargs.get('pk', "-1")
+        return super(generic.ListView, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        """Return the comments of the certain post ordered by score."""
+        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: c.score)
 
 class LoginView(generic.DetailView):
     model = Post
