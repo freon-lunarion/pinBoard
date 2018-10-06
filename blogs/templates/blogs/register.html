@@ -15,6 +15,10 @@
             {{ form.username }}
         </div>
 
+        <div style="display: block; color: red" class="email-error">
+            {{ user_name_message }}
+        </div>
+
         <div class="userr">
             {{ form.email }}
         </div>
@@ -23,12 +27,20 @@
             Enter right email format
         </div>
 
+        <div style="display: block; color: red" class="email-error">
+            {{ email_message }}
+        </div>
+
         <div class="userr">
             {{ form.password }}
         </div>
 
         <div class="userr">
             {{ form.repassword }}
+        </div>
+
+        <div style="display: block; color: red" class="email-error">
+            {{ password_message }}
         </div>
 
         <div style="display: none; color: red" class="password-error">
@@ -68,10 +80,10 @@
         });
     });
 
-    let message = '{{ message }}';
-    if (! (message.length === 0) ) {
-        alert(message);
-    }
+//    let message = '{{ message }}';
+//    if (! (message.length === 0) ) {
+//        alert(message);
+//    }
 
 </script>
 {% endblock %}

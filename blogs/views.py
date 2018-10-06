@@ -100,15 +100,20 @@ def register(request):
             username = register_form.cleaned_data['username']
             email = register_form.cleaned_data['email']
             password = register_form.cleaned_data['password']
+            repassword = register_form.cleaned_data['repassword']
+
+            if password != repassword:
+                password_message = 'password does not match!'
+                return render(request, 'blogs/register.html', {'form': RegisterForm(), 'password_message': password_message})
 
             same_name_user = User.objects.filter(username=username)
             if same_name_user:
-                message = 'Username already exists!'
-                return render(request, 'blogs/register.html', {'form': RegisterForm(), 'message': message})
+                user_name_message = 'Username already exists!'
+                return render(request, 'blogs/register.html', {'form': RegisterForm(), 'user_name_message': user_name_message})
             same_email_user = User.objects.filter(email=email)
             if same_email_user:
-                message = 'Email already exists!'
-                return render(request, 'blogs/register.html', {'form': RegisterForm(), 'message': message})
+                email_message = 'Email already exists!'
+                return render(request, 'blogs/register.html', {'form': RegisterForm(), 'email_message': email_message})
 
             new_user = User.objects.create()
             new_user.username = username
@@ -116,13 +121,13 @@ def register(request):
             new_user.password = password
             new_user.save()
 
-            message = 'Registered Successfully!'
+            # message = 'Registered Successfully!'
 
             # return redirect('/login/')
-            return render_to_response("blogs/login.html", {'message': message})
+            return render_to_response("blogs/login.html")
         else:
             message = 'Invalid input!'
-            return render_to_response("blogs/login.html", {'message': message})
+            return render_to_response("blogs/login.html")
 
 
     register_form = RegisterForm()
