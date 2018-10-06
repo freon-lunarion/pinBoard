@@ -33,7 +33,6 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Post.objects.order_by('-create_time')[:5]
 
-
 class DetailView(generic.DetailView):
     model = Post
     template_name = 'blogs/detail.html'
@@ -68,15 +67,11 @@ class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
 
-
-
 def vote(request, content_id):
     if (request.method == 'POST'):
         user_id = request.POST.get('user_id', None)
         value = request.POST.get('value', 1)
         return HttpResponse(str(Vote.vote(content_id, user_id, value)))
-
-
 
 def login(request):
     if (request.method == 'POST'):
@@ -142,9 +137,6 @@ def register(request):
 
     register_form = RegisterForm()
     return render(request, 'blogs/register.html', {'form': register_form, 'message': ''})
-
-
-
 
 def post(request):
     return render(request, 'blogs/post.html', locals())
