@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="card-action voting sidebar">
-                        <a class="card-open" href="/blogs/{{ post.id }}">View Comments</a>
+                        <a class="card-open" href="{% url 'blogs:comments' pk=post.id %}">View Comments</a>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="card-action voting sidebar">
-                        <a class="card-open" href="/blogs/{{ post.id }}">View Comments</a>
+                        <a class="card-open" href="{% url 'blogs:comments' pk=post.id %}">View Comments</a>
                     </div>
                 </div>
             </div>

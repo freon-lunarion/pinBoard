@@ -2,7 +2,10 @@
 
 {% block content %}
 
-<form action="/login/" method="post">
+<form  method="post">
+    {% csrf_token %}
+
+    <!--{{error}}-->
 
     <div class="login">
 
@@ -11,31 +14,44 @@
         <div class="line"></div>
 
         <div class="user">
-            <!--<span>usrername</span>-->
-            <input type="text" name="username" placeholder="username" id="username">
+            <!--<input type="text" name="username" placeholder="username" id="username">-->
+            {{ form.username }}
         </div>
 
         <div class="user">
-            <!--<span>password</span>-->
-            <input type="password" name="password" placeholder="password" id="password">
+            <!--<input type="password" name="password" placeholder="password" id="password">-->
+            {{ form.password }}
         </div>
 
-        {% if password_is_wrong %}
-        <div style="color: red">
-            Username is not right or password is not right
+        <div style="display: block; color: red">
+            {{ error }}
         </div>
-        {% endif %}
+
+        <!--{% if error %}-->
+        <!--<div style="color: red; display: block;">-->
+            <!--&lt;!&ndash;Username is not right or password is not right&ndash;&gt;-->
+            <!--fdsfds-->
+            <!--{{ error }}-->
+        <!--</div>-->
+        <!--{% endif %}-->
 
         <div>
             <input type="submit" id="submit">
         </div>
 
         <div>
-            <div id="register">register</div>
+            <a href="/blogs/register/" id="register">register</a>
             <div id="forget">forget</div>
         </div>
 
     </div>
 </form>
+
+<script>
+    let message = '{{ message }}';
+    if (! (message.length === 0) ) {
+        alert(message);
+    }
+</script>
 
 {% endblock %}
