@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="/blogs/login/" method="post">
+<form action="/blogs/register/" method="post">
     {% csrf_token %}
 
     <div class="register">
@@ -12,22 +12,22 @@
         <div class="line"></div>
 
         <div class="userr">
-            <input type="text" name="username" placeholder="Username" id="Lastname">
+            {{ form.username }}
         </div>
 
         <div class="userr">
-            <input type="email" name="email" placeholder="Email" id="Email" oninput="OnInput (event)">
+            {{ form.email }}
         </div>
         <div style="display: none; color: red" class="email-error">
             Enter right email format
         </div>
 
         <div class="userr">
-            <input type="password" name="password" placeholder="Password" id="password">
+            {{ form.password }}
         </div>
 
         <div class="userr">
-            <input type="password" name="repassword" placeholder="Confirm password" id="repassword">
+            {{ form.repassword }}
         </div>
 
         <div style="display: none; color: red" class="password-error">
@@ -67,6 +67,6 @@
         });
     });
 
-    alert('{{ message }}');
+    <!--alert('{{ message }}');-->
 </script>
 {% endblock %}

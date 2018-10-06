@@ -56,6 +56,7 @@ class RegisterView(generic.DetailView):
     template_name = 'blogs/register.html'
 
 
+
 def vote(request, content_id):
     if (request.method == 'POST'):
         user_id = request.POST.get('user_id', None)
@@ -101,17 +102,16 @@ def register(request):
             password = register_form.cleaned_data['password']
             repassword = register_form.cleaned_data['repassword']
 
-
-            same_name_user = models.User.objects.filter(name=username)
+            same_name_user = User.objects.filter(username=username)
             if same_name_user:
                 message = 'the username has been in existence'
-                return render(request, 'register.html', locals())
-            same_email_user = models.User.objects.filter(email=email)
+                return render(request, 'blogs/register.html', locals())
+            same_email_user = User.objects.filter(email=email)
             if same_email_user:
                 message = 'the email has been in existence'
-                return render(request, 'login/register.html', locals())
+                return render(request, 'blogs/register.html', RegisterForm())
 
-            new_user = models.User.objects.create()
+            new_user = User.objects.create()
             new_user.username = username
             new_user.email = email
             new_user.password = password
@@ -120,11 +120,11 @@ def register(request):
             register_form = RegisterForm()
 
             # return redirect('/login/')
-            return render_to_response("login.html")
+            return render_to_response("blogs/login.html")
 
 
     register_form = RegisterForm()
-    return render(request, 'blogs/register.html', locals())
+    return render(request, 'blogs/register.html', {'form': register_form})
 
 
 
