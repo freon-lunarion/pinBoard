@@ -16,7 +16,7 @@ from .forms import LoginForm
 
 # Create your views here.
 def index(request):
-    latest_post_list = Post.objects.order_by('-create_time')[:5]
+    latest_post_list = sorted(Post.objects.all(), key=lambda p: p.score)
     # latest_post_list = Post.objects.all()
     context = {
         'latest_post_list': latest_post_list,
@@ -33,7 +33,6 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Post.objects.order_by('-create_time')[:5]
 
-
 class DetailView(generic.DetailView):
     model = Post
     template_name = 'blogs/detail.html'
@@ -47,6 +46,19 @@ class PostView(generic.DetailView):
     model = Post
     template_name = 'blogs/post.html'
 
+class CommentView(generic.ListView):
+    template_name = 'blogs/comment.html'
+    context_object_name = 'comment_list'
+
+    # dispatch is called when the class instance loads
+    def dispatch(self, request, *args, **kwargs):
+        self.pk = kwargs.get('pk', "-1")
+        return super(generic.ListView, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        """Return the comments of the certain post ordered by score."""
+        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: c.score)
+
 class LoginView(generic.DetailView):
     model = Post
     template_name = 'blogs/login.html'
@@ -55,15 +67,11 @@ class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
 
-
-
 def vote(request, content_id):
     if (request.method == 'POST'):
         user_id = request.POST.get('user_id', None)
         value = request.POST.get('value', 1)
         return HttpResponse(str(Vote.vote(content_id, user_id, value)))
-
-
 
 def login(request):
     if (request.method == 'POST'):
@@ -141,9 +149,6 @@ def register(request):
 
     register_form = RegisterForm()
     return render(request, 'blogs/register.html', {'form': register_form, 'message': ''})
-
-
-
 
 def post(request):
     return render(request, 'blogs/post.html', locals())
