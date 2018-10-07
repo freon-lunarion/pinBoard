@@ -37,6 +37,7 @@
   <body>
     <div class="background">
 
+      {% if request.session.username %}
       <ul id="slide-out" class="sidenav">
         <li><div class="user-view">
           <div class="background">
@@ -44,16 +45,18 @@
           </div>
           <a href="#user"><img class="circle" src="https://i.imgur.com/8P2xzAg.jpg"></a>
           <div class="profile-details-panel" style="background: rgba(255,255,255,0.6);border-radius: 8px;">
-              <a href="#name"><span class="black-text name">Gino</span></a>
-              <a href="#email"><span class="black-text email">example@gmail.com</span></a>
+              <a href="#name"><span class="black-text name">{{ request.session.username }}</span></a>
+              <!--<a href="#email"><span class="black-text email">example@gmail.com</span></a>-->
+            <a href="#email"><span class="black-text email">{{ request.session.useremail }}</span></a>
           </div>
 
         </div></li>
         <li><a class="waves-effect" href="#!"><i class="material-icons">add_box</i>Create Post</a></li>
         <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
         <li><div class="divider"></div></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">exit_to_app</i>Logout</a></li>
+        <li><a class="waves-effect" href="/blogs/logout/"><i class="material-icons">exit_to_app</i>Logout</a></li>
       </ul>
+      {% endif %}
       
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
