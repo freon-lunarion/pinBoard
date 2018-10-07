@@ -218,6 +218,9 @@ img.content {
   margin-top: 15px;
 }
 
+.card-panel.post-type {
+  cursor: pointer;
+}
 
 /* ------------------------------------------ POST PAGE ------------------------------------------ */
 
