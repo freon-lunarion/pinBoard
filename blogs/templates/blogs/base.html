@@ -60,7 +60,9 @@
       
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
+          {% if request.session.username %}
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
+          {% endif %}
           <ul class="right hide-on-med-and-down">
             <!-- <li><a href="#"><i class="material-icons">search</i></a></li> -->
             <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display:block !important"><i class="material-icons">menu</i></a></li>

@@ -158,4 +158,12 @@ def comment(request):
     return render(request, 'blogs/comment.html', locals())
 
 
+def logout(request):
+    try:
+        del request.session['username']
+    except KeyError:
+        pass
+    return HttpResponseRedirect('/blogs/login/')
+
+
 
