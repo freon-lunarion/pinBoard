@@ -4,7 +4,6 @@
     <div style="margin-top:15px;display:flex;align-items: center;color: rgba(255,255,255,0.5);"><i class="material-icons">person_pin</i>&nbsp;<h2 class="content-separator">Pinned Posts</h2></div>
     <div class="row pinned-posts">
         {% for post in latest_post_list %}
-            {% if post.is_pinned %}
 
                 {% if "Post" in post.kind %}
                     <!-- Blog post card -->
@@ -72,7 +71,6 @@
                         </div>
                     </div>
                 {% endif %}
-            {% endif %}
 
         {% endfor %}
 

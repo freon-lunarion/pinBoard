@@ -24,20 +24,14 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
-
     {% load static %} 
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-    <!--<link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %}">-->
-
-    <!--<link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css' %}">-->
 
   </head>
   <body>
     <div class="background">
 
-      {% if request.session.username %}
+      <!-- side nav -->
       <ul id="slide-out" class="sidenav">
         <li><div class="user-view">
           <div class="background">
@@ -51,24 +45,48 @@
           </div>
 
         </div></li>
-        <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
+        <li><a class="waves-effect modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons">add_box</i>Create Post</a></li>
         <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
         <li><div class="divider"></div></li>
         <li><a class="waves-effect" href="/blogs/logout/"><i class="material-icons">exit_to_app</i>Logout</a></li>
       </ul>
       {% endif %}
       
+      <!-- nav bar -->
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
           {% if request.session.username %}
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
           {% endif %}
           <ul class="right hide-on-med-and-down">
-            <!-- <li><a href="#"><i class="material-icons">search</i></a></li> -->
+            <!-- <li><a class="waves-effect modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons">add_box</i>Create Post</a></li> -->
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
             <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display:block !important"><i class="material-icons">menu</i></a></li>
           </ul>
         </div>
       </nav>
+
+      <!-- create-a-post modal -->
+      <div id="create-post-modal" class="modal">
+        <div class="modal-content" style="min-height: 500px;">
+          <h5>What type of post would you like to submit?</h5>
+          <div class="input-field">
+            <select>
+              <option value="1">Article</option>
+              <option value="2">Question</option>
+              <option value="3">Image</option>
+            </select>
+            <label>Type of post</label>
+          </div>
+          <h5>Enter an image URL below</h5>
+          <div class="input-field">
+            <input id="image-url" type="text" class="validate">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Publish</a>
+        </div>
+      </div>
 
       <div class="container pinboard">
         <div class="row">
@@ -79,15 +97,18 @@
         </div>
       </div>
 
-
     </div>
+
+
 
     <script>
 
-      // initialize the sidebar
+      // initialize various handlers
       $(document).ready(() => {
         const options = { edge: 'right' };
         $('.sidenav').sidenav(options);
+        $('.modal').modal();
+        $('select').formSelect();
       });
 
       // handle pressing of upvote/downvote button
@@ -100,6 +121,8 @@
           $(`#score-${postID}`).text(--scoreValue);
         }
       });
+
+      
 
       (function(d, t) {
         var g = d.createElement(t),
