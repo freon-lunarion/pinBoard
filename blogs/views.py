@@ -9,12 +9,14 @@ from shared.models import *
 from django.contrib import auth
 from django.shortcuts import render,render_to_response
 from django.template import RequestContext
+from django.utils import timezone
+import datetime
 
 from .forms import *
 
 # Create your views here.
 def index(request):
-    latest_post_list = sorted(Post.objects.all(), key=lambda p: p.score)
+    latest_post_list = sorted(Post.objects.all(), key=lambda p: p.score, reverse=True)
     # latest_post_list = Post.objects.all()
     context = {
         'latest_post_list': latest_post_list,
@@ -22,9 +24,33 @@ def index(request):
 
     return render(request, 'blogs/index.html', context=context)
 
-def create_post(request):
+def create_post(request, pk):
     if (request.method == 'POST'):
-        pass
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            publish = form.cleaned_data['publish']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            if (publish):
+                post = Post.objects.create(title=form.cleaned_data['title'],
+                                        kind='Post',
+                                        is_pinned=False,
+                                        pin_board=None,
+                                        operator=None,
+                                        detail=form.cleaned_data['detail'],
+                                        author=User.objects.get(id=pk),
+                                        published_date=now
+                                       )
+            else:
+                post = Post.objects.create(title=form.cleaned_data['title'],
+                                           kind='Post',
+                                           is_pinned=False,
+                                           pin_board=None,
+                                           operator=None,
+                                           detail=form.cleaned_data['detail'],
+                                           author=User.objects.get(id=pk)
+                                           )
+            return render(request, 'blogs/post.html', {'post': post})
+        return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
 class IndexView(generic.ListView):
@@ -59,7 +85,7 @@ class CommentView(generic.ListView):
 
     def get_queryset(self):
         """Return the comments of the certain post ordered by score."""
-        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: c.score)
+        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: c.score, reverse=True)
 
 class LoginView(generic.DetailView):
     model = Post

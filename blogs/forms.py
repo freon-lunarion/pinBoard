@@ -52,8 +52,8 @@ class LoginForm(forms.Form):
 
 
 class AddPostForm(forms.Form):
-    title = forms.CharField()
-    detail = forms.CharField(widget=forms.Textarea)
-    # pin_board =
-    create_time = forms.DateTimeField()
-    update_time = forms.DateTimeField()
+    title = forms.CharField(max_length=128)
+    detail = forms.CharField(required=False, widget=forms.Textarea)
+    publish = forms.BooleanField(required=False, widget=forms.CheckboxInput)
+
+
