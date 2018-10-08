@@ -6,6 +6,7 @@ from shared.models import *
 from django.shortcuts import get_object_or_404
 from django import forms
 from tinymce.widgets import TinyMCE
+from django.contrib.admin import widgets
 
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length=128,
@@ -54,7 +55,10 @@ class LoginForm(forms.Form):
 class AddPostForm(forms.Form):
     title = forms.CharField(max_length=128)
     detail = forms.CharField(required=False, widget=forms.Textarea)
-    publish = forms.BooleanField(required=False, widget=forms.CheckboxInput)
+    # publish = forms.IntegerField(widget=forms.TextInput(attrs={'id': 'publish',
+    #                                                            'type': 'button',
+    #                                                            'checked': 'true'}))
+    # publish = forms.CharField(widget=forms.TimeInput(attrs={'type': 'time'}))
     user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
         'type': 'hidden',
         'id': 'user'
