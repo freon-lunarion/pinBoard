@@ -3,7 +3,7 @@
 {% block content %}
     <div class="post-container">
         {% if "Post" in post.kind %}
-            <div class="col s12 m4 sidebar" style="height: 100%">
+            <div class="col s12 m4 sidebar" id="sidebar">
                 <div class="card blue-grey darken-1" style="position:sticky;top:20px">
                     <div class="card-action voting sidebar">
                         <div class="score-container">
@@ -19,11 +19,11 @@
                         </div>
                     </div>
                     <div class="card-action voting sidebar">
-                        <a class="card-open" href="{% url 'blogs:comments' pk=post.id %}">View Comments</a>
+                        <a class="card-open comments">View Comments</a>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m8">
+            <div class="col s12 m8" id="contents">
                 <div class="card-panel">
                     <h1 class="post-title">{{ post.title }}</h1>
                     <img src="/static/images/post.jpeg" alt="">
@@ -32,6 +32,10 @@
                     </div>
 
                     <div class="content-container">
+                        <p>{{ post.detail }}</p>
+                        <p>{{ post.detail }}</p>
+                        <p>{{ post.detail }}</p>
+                        <p>{{ post.detail }}</p>
                         <p>{{ post.detail }}</p>
                         <p>{{ post.detail }}</p>
                         <p>{{ post.detail }}</p>
@@ -45,12 +49,39 @@
                         <a class="icon-size" href="https://www.weibo.com/login.php" onclick="sharePlugin('sina','http://www.phpernote.com/images/logo.gif','http://www.phpernote.com')"><img src="data:image/png;base64,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"></a>
                     </div>
                 </div>
+
+                <!-- comment section -->
+                <div id="comment-section" style="margin-top:25px">
+                    <div class="card-panel" style="margin-top:15px">
+                        <div style="display:grid;grid-template: 1fr / 1fr 4fr;">
+                            <div style="display:flex;align-items: center;flex-direction:column;justify-content: center;">
+                                <img style="border-radius: 50%;height:50px" src="https://i.imgur.com/cMYa0BJ.png" alt="" >
+                                <p style="font-size:16px;font-weight:700">Michael</p>
+                            </div>
+                            <div>
+                                <p style="margin-top: 5px;">Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim eli.</p>
+                                <p>Reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.</p>
+                                <hr>
+                            </div>
+                        </div>
+                        <div style="display:grid;grid-template: 1fr / 1fr 4fr;">
+                            <div style="display:flex;align-items: center;flex-direction:column;justify-content: center;">
+                                <img style="border-radius: 50%;height:50px" src="https://i.imgur.com/cMYa0BJ.png" alt="" >
+                                <p style="font-size:16px;font-weight:700">Roger</p>
+                            </div>
+                            <div>
+                                <p style="margin-top: 5px;">Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim eli.</p>
+                                <p>Reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         {% elif "Image" in post.kind %}
             <div class="col s12 m12">
                 <div class="card image-post">
                     <div class="image-post">
-                        <img class="content" src="https://i.imgur.com/oCUKS9p.jpg" alt="">
+                        <img class="content materialboxed" src="{{ post.detail }}" alt="">
                     </div>
                     <div class="card-action voting">
                         <h3 class="img-caption">{{ post.title }}</h3>
@@ -78,21 +109,38 @@
                         </div>
                     </div>
                     <div class="card-action voting sidebar">
-                        <a class="card-open" href="{% url 'blogs:comments' pk=post.id %}">View Comments</a>
+                        <a class="card-open comments">View Comments</a>
                     </div>
                 </div>
             </div>
         {% endif %}
+        
     </div>
+    
 
     <script>
-      // initialize dropdown
-      $('#dropdown-trigger').dropdown();
+        // initialize dropdown
+        $('#dropdown-trigger').dropdown();
 
-      // on load, apply margin to toolbox component
-      $(document).ready(() => {
-          const imageMarginLeft = $('.card.image-post').css('margin-left');
-          $('#toolbox').css('margin-left', imageMarginLeft);
-      })
+        $(document).ready(() => {
+
+            // initialize image expand handler
+            $('.materialboxed').materialbox();
+
+            $('#sidebar').css('height', $('#contents').css('height'));
+
+            // on load, apply margin to toolbox component
+            const imageMarginLeft = $('.card.image-post').css('margin-left');
+            $('#toolbox').css('margin-left', imageMarginLeft);
+
+            // on 'view comments' click animate to comments
+            $('.card-open.comments').click(event => {
+                console.log('clicked');
+                $('html, body').animate({
+                    scrollTop: $('#comment-section').offset().top
+                }, 1000);
+            })
+
+        })
     </script>
 {% endblock %}
