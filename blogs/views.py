@@ -55,6 +55,7 @@ def create_post(request, pk):
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
+
 class IndexView(generic.ListView):
     template_name = 'blogs/index.html'
     context_object_name = 'latest_post_list'
