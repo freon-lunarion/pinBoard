@@ -26,12 +26,13 @@ def index(request):
 
     return render(request, 'blogs/index.html', context=context)
 
-def create_post(request, pk):
+def create_post(request):
     if (request.method == 'POST'):
         form = AddPostForm(request.POST)
         if form.is_valid():
             publish = form.cleaned_data['publish']
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            user = form.cleaned_data['user']
             if (publish):
                 post = Post.objects.create(title=form.cleaned_data['title'],
                                         kind='Post',
@@ -39,7 +40,7 @@ def create_post(request, pk):
                                         pin_board=None,
                                         operator=None,
                                         detail=form.cleaned_data['detail'],
-                                        author=User.objects.get(id=pk),
+                                        author=User.objects.get(id=user),
                                         published_date=now
                                        )
             else:
@@ -49,9 +50,9 @@ def create_post(request, pk):
                                            pin_board=None,
                                            operator=None,
                                            detail=form.cleaned_data['detail'],
-                                           author=User.objects.get(id=pk)
+                                           author=User.objects.get(id=user)
                                            )
-            return render(request, 'blogs/post.html', {'post': post})
+            return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 

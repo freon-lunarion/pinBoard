@@ -55,4 +55,8 @@ class AddPostForm(forms.Form):
     title = forms.CharField(max_length=128)
     detail = forms.CharField(required=False, widget=forms.Textarea)
     publish = forms.BooleanField(required=False, widget=forms.CheckboxInput)
+    user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
+        'type': 'hidden',
+        'id': 'user'
+    }))
 
