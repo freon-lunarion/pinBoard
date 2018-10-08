@@ -24,46 +24,85 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
-
     {% load static %} 
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-    <!--<link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %}">-->
-
-    <!--<link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css' %}">-->
 
   </head>
   <body>
     <div class="background">
 
-      <ul id="slide-out" class="sidenav">
-        <li><div class="user-view">
-          <div class="background">
-            <img src="https://i.imgur.com/G91dSvD.jpg">
-          </div>
-          <a href="#user"><img class="circle" src="https://i.imgur.com/8P2xzAg.jpg"></a>
-          <div class="profile-details-panel" style="background: rgba(255,255,255,0.6);border-radius: 8px;">
-              <a href="#name"><span class="black-text name">Gino</span></a>
-              <a href="#email"><span class="black-text email">example@gmail.com</span></a>
-          </div>
+      <!-- side nav -->
+      {% if request.session.username %}
+        <ul id="slide-out" class="sidenav">
+          <li><div class="user-view">
+            <div class="background">
+              <img src="https://i.imgur.com/G91dSvD.jpg">
+            </div>
+            <a href="#user"><img class="circle" src="https://i.imgur.com/8P2xzAg.jpg"></a>
+            <div class="profile-details-panel" style="background: rgba(255,255,255,0.6);border-radius: 8px;">
+                <a href="#name"><span class="black-text name">{{ request.session.username }}</span></a>
+                <!--<a href="#email"><span class="black-text email">example@gmail.com</span></a>-->
+              <a href="#email"><span class="black-text email">{{ request.session.useremail }}</span></a>
+            </div>
 
-        </div></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">add_box</i>Create Post</a></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
-        <li><div class="divider"></div></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">exit_to_app</i>Logout</a></li>
-      </ul>
+          </div></li>
+          <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
+          <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
+          <li><div class="divider"></div></li>
+          <li><a class="waves-effect" href="/blogs/logout/"><i class="material-icons">exit_to_app</i>Logout</a></li>
+        </ul>
+      {% endif %}
       
+      <!-- nav bar -->
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
           <ul class="right hide-on-med-and-down">
-            <!-- <li><a href="#"><i class="material-icons">search</i></a></li> -->
+            <!-- <li><a class="waves-effect modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons">add_box</i>Create Post</a></li> -->
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
             <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display:block !important"><i class="material-icons">menu</i></a></li>
           </ul>
         </div>
       </nav>
+
+      <!-- create-a-post modal -->
+      <div id="create-post-modal" class="modal grey lighten-2">
+        <div class="modal-content" style="min-height: 200px;">
+          <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">What type of post would you like to create?</h5>
+          <div style="display:flex;justify-content: space-evenly">
+            <a href="/blogs/create">
+              <div class="card-panel waves-effect post-type amber" style="display:flex;align-items: center;justify-content: center;width:200px;height:150px">
+                <span class="white-text">Article</span>
+              </div>
+            </a>
+            <a href="#" >
+              <div class="card-panel waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:200px;height:150px">
+                <span class="white-text">Image</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="card-panel waves-effect post-type light-green lighten-1" style="display:flex;align-items: center;justify-content: center;width:200px;height:150px">
+                <span class="white-text">Youtube</span>
+              </div>
+            </a>
+          </div>
+          <!-- <div class="input-field">
+            <select>
+              <option value="1">Article</option>
+              <option value="2">Question</option>
+              <option value="3">Image</option>
+            </select>
+            <label>Type of post</label>
+          </div>
+          <h5>Enter an image URL below</h5>
+          <div class="input-field">
+            <input id="image-url" type="text" class="validate">
+          </div> -->
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Publish</a>
+        </div>
+      </div>
 
       <div class="container pinboard">
         <div class="row">
@@ -74,15 +113,18 @@
         </div>
       </div>
 
-
     </div>
+
+
 
     <script>
 
-      // initialize the sidebar
+      // initialize various handlers
       $(document).ready(() => {
         const options = { edge: 'right' };
         $('.sidenav').sidenav(options);
+        $('.modal').modal();
+        $('select').formSelect();
       });
 
       // handle pressing of upvote/downvote button
@@ -95,6 +137,8 @@
           $(`#score-${postID}`).text(--scoreValue);
         }
       });
+
+      
 
       (function(d, t) {
         var g = d.createElement(t),

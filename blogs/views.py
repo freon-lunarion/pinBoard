@@ -11,6 +11,8 @@ from django.shortcuts import render,render_to_response
 from django.template import RequestContext
 from django.utils import timezone
 import datetime
+from django.shortcuts import redirect
+
 
 from .forms import *
 
@@ -110,7 +112,7 @@ def login(request):
             password = login_form.cleaned_data['password']
 
 
-            #userinfo = User.objects.get(username=username)  #get all info of user
+            userinfo = User.objects.get(username=username)  #get all info of user
 
             #current_user = request.user admin user
             #print(userinfo.email)
@@ -119,14 +121,11 @@ def login(request):
             user = User.objects.filter(username__exact = username,password__exact = password)
             print(user)
             if user:
-                response = HttpResponseRedirect('/blogs/')
-                response.set_cookie('username',username,3600)
-                return response
 
-                #request.session['username'] = user
-                #request.session.set_expiry(600)
-                #return render(request, '/blogs/',{
-                #'welcome':"欢迎你"})
+                request.session['username'] = userinfo.username
+                request.session['useremail'] = userinfo.email
+                request.session.set_expiry(600)
+                return HttpResponseRedirect('/blogs')
             else:
                 error = 'Username is not right or password is not right!'
                 return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
@@ -171,8 +170,8 @@ def register(request):
             # return redirect('/login/')
             return render_to_response("blogs/login.html")
         else:
-            message = 'Invalid input!'
-            return render_to_response("blogs/login.html")
+            email_message = 'Invalid input!'
+            return HttpResponseRedirect('/blogs/register/', {'form': RegisterForm(), 'email_message': email_message})
 
 
     register_form = RegisterForm()
@@ -183,6 +182,14 @@ def post(request):
 
 def comment(request):
     return render(request, 'blogs/comment.html', locals())
+
+
+def logout(request):
+    try:
+        del request.session['username']
+    except KeyError:
+        pass
+    return HttpResponseRedirect('/blogs/login/')
 
 
 

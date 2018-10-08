@@ -31,10 +31,10 @@ h2.content-separator.middle {
 
 .row.pinned-posts {
   margin-bottom: 0;
-  background: transparent;
+  /* background: transparent;
   border: 1px solid wheat;
   padding: 0;
-  border-radius: 12px;
+  border-radius: 12px; */
 }
 
 .card-action.single {
@@ -88,7 +88,6 @@ h2.content-separator.middle {
   text-overflow: ellipsis;
   overflow: hidden;
   word-wrap: break-word;
-  white-space: nowrap;
 }
 
 .card-title.image-post {
@@ -218,6 +217,9 @@ img.content {
   margin-top: 15px;
 }
 
+.card-panel.post-type {
+  cursor: pointer;
+}
 
 /* ------------------------------------------ POST PAGE ------------------------------------------ */
 
