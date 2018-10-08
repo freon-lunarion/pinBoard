@@ -58,7 +58,7 @@ class AddPostForm(forms.Form):
     # publish = forms.IntegerField(widget=forms.TextInput(attrs={'id': 'publish',
     #                                                            'type': 'button',
     #                                                            'checked': 'true'}))
-    # publish = forms.CharField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    # publish = forms.DatetimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
     user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
         'type': 'hidden',
         'id': 'user'

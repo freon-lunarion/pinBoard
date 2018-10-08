@@ -43,7 +43,6 @@ def create_post(request):
                                 author=User.objects.get(id=user),
                                 published_date=now
                                )
-#
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
