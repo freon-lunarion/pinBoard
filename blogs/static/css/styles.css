@@ -31,10 +31,6 @@ h2.content-separator.middle {
 
 .row.pinned-posts {
   margin-bottom: 0;
-  /* background: transparent;
-  border: 1px solid wheat;
-  padding: 0;
-  border-radius: 12px; */
 }
 
 .card-action.single {
@@ -186,10 +182,18 @@ i.material-icons.title {
   text-align: left;
 }
 
+.content-container p {
+  font-size: 18px;
+}
+
+.content-container p iframe {
+  width: 100%;
+}
+
 h1.post-title {
   font-size: 42px;
   font-weight: 100;
-  margin: 0 0 15px 0;
+  margin: 0 0 24px 0;
 }
 
 h3.img-caption {
@@ -219,6 +223,35 @@ img.content {
 
 .card-panel.post-type {
   cursor: pointer;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid lightslategray;
+  padding-top: 24px;
+}
+
+.post-actions a {
+  color: #ffab40;
+  text-transform: uppercase;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.post-tags {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-tags .chip {
+  opacity: 0.8;
+  cursor: default;
+}
+
+.post-tags .chip:hover {
+  transition: 0.3s;
+  opacity: 1;
 }
 
 /* ------------------------------------------ POST PAGE ------------------------------------------ */
