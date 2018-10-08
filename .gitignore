@@ -7,3 +7,4 @@ settings.json
 .DS_Store
 *.sqlite3
 .idea*.sqlite3
+.idea/workspace.xml
