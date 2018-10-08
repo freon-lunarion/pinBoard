@@ -52,7 +52,7 @@ def create_post(request):
                                            detail=form.cleaned_data['detail'],
                                            author=User.objects.get(id=user)
                                            )
-            return render(request, 'blogs/post.html', {'post': post})
+            return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
