@@ -55,3 +55,4 @@ class AddPostForm(forms.Form):
     title = forms.CharField(max_length=128)
     detail = forms.CharField(required=False, widget=forms.Textarea)
     publish = forms.BooleanField(required=False, widget=forms.CheckboxInput)
+
