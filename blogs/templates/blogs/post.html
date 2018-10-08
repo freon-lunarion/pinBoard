@@ -14,8 +14,8 @@
                     </div>
                     <div class="card-content sidebar white-text">
                         <div class="card-description sidebar">
-                            <p>Author: Gino Conte</p>
-                            <p>Published: 14/07/18</p>
+                            <p>Gino Conte</p>
+                            <p style="font-style: italic">{{ post.published_date }}</p>
                         </div>
                     </div>
                     <div class="card-action voting sidebar">
@@ -52,27 +52,38 @@
 
                 <!-- comment section -->
                 <div id="comment-section" style="margin-top:25px">
-                    <div class="card-panel" style="margin-top:15px">
-                        <div style="display:grid;grid-template: 1fr / 1fr 4fr;">
-                            <div style="display:flex;align-items: center;flex-direction:column;justify-content: center;">
-                                <img style="border-radius: 50%;height:50px" src="https://i.imgur.com/cMYa0BJ.png" alt="" >
-                                <p style="font-size:16px;font-weight:700">Michael</p>
-                            </div>
-                            <div>
-                                <p style="margin-top: 5px;">Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim eli.</p>
-                                <p>Reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.</p>
-                                <hr>
-                            </div>
+                    <div class="card horizontal" style="max-width: 450px;">
+                        <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
+                            <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
                         </div>
-                        <div style="display:grid;grid-template: 1fr / 1fr 4fr;">
-                            <div style="display:flex;align-items: center;flex-direction:column;justify-content: center;">
-                                <img style="border-radius: 50%;height:50px" src="https://i.imgur.com/cMYa0BJ.png" alt="" >
-                                <p style="font-size:16px;font-weight:700">Roger</p>
+                        <div class="card-stacked">
+                            <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                <p style="font-weight: 700;">Michael</p>
+                            </div> -->
+                            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                <a style="color:black" href="#">Michael</a>
                             </div>
-                            <div>
-                                <p style="margin-top: 5px;">Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim eli.</p>
-                                <p>Reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.</p>
+                            <div class="card-content" style="min-height: 92px">
+                                <p>Great blog post! It's nice to see you're enjoying the subject.</p>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="card horizontal" style="max-width: 450px;">
+                        <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
+                            <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
+                        </div>
+                        <div class="card-stacked">
+                            <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                <p style="font-weight: 700;">Michael</p>
+                            </div> -->
+                            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                <a style="color:black" href="#">Michael</a>
+                            </div>
+                            <div class="card-content" style="min-height: 92px">
+                                <p>Great blog post!</p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -104,12 +115,71 @@
                     </div>
                     <div class="card-content sidebar white-text">
                         <div class="card-description sidebar">
-                            <p>Author: Gino Conte</p>
-                            <p>Published: 14/07/18</p>
+                            <p>Gino Conte</p>
+                            <p style="font-style: italic">{{ post.published_date }}</p>
                         </div>
                     </div>
                     <div class="card-action voting sidebar">
                         <a class="card-open comments">View Comments</a>
+                    </div>
+                </div>
+            </div>
+        {% elif "Question" in post.kind %}
+            <div class="col s12 m4 sidebar" id="sidebar">
+                <div class="card blue-grey darken-1" style="position:sticky;top:20px">
+                    <div class="card-action voting sidebar">
+                        <div class="score-container">
+                            <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                            <span id="score-{{ post.id }}" class="score">21</span>
+                            <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                        </div>
+                    </div>
+                    <div class="card-content sidebar white-text">
+                        <div class="card-description sidebar">
+                            <p>Gino Conte</p>
+                            <p style="font-style: italic">{{ post.published_date }}</p>
+                        </div>
+                    </div>
+                    <div class="card-action voting sidebar">
+                            <a class="waves-effect waves-light btn-small light-green" style="margin: 5px 0;">Solved</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m8" id="contents">
+                <div class="card-panel">
+                    <h1 class="post-title">Question: {{ post.title }}</h1>
+
+                    <div class="content-container">
+                        <p>{{ post.detail }}</p>
+                    </div>
+                </div>
+
+                <!-- comment section -->
+                <div id="comment-section" style="margin-top:15px">
+                    <div class="card horizontal" style="max-width: 450px;">
+                        <div class="card-image" style="background: url('https://i.imgur.com/tDk4Y5p.png');background-size:cover;width:150px;"></div>
+                        <div class="card-stacked">
+                            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                <a style="color:black" href="#">Tim</a>
+                            </div>
+                            <div class="card-content" style="min-height: 92px">
+                                <p>Have you heard of Google?</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card horizontal" style="max-width: 450px;">
+                        <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;"></div>
+                        <div class="card-stacked">
+                            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);display:flex;justify-content: space-between;">
+                                <a style="color:black" href="#">Michael</a>
+                                <a class="waves-effect waves-light btn-small light-green" style="position: absolute;top:10px;right:10px;">Correct</a>
+                            </div>
+                            <div class="card-content" style="min-height: 92px">
+                                <p>Try turning it off and on again?</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
