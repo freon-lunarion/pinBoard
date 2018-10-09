@@ -73,6 +73,7 @@ class PostView(generic.DeleteView):
         self.pk = kwargs.get('pk', "-1")
         return super(generic.DeleteView, self).dispatch(request, *args, **kwargs)
 
+    # content: post, comments (list), comment_form
     def get_context_data(self, **kwargs):
         post = get_object_or_404(Post, id=self.pk)
         context = super(PostView, self).get_context_data(**kwargs)
@@ -82,6 +83,7 @@ class PostView(generic.DeleteView):
         context['comment_form'] = CommentForm()
         return context
 
+    # redirecting. let me know if it should not be redirecting - Deanna
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
