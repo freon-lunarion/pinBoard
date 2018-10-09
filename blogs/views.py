@@ -65,22 +65,35 @@ class ResultsView(generic.DetailView):
     model = Post
     template_name = 'blogs/results.html'
 
-class PostView(generic.DetailView):
+class PostView(generic.DeleteView):
     model = Post
     template_name = 'blogs/post.html'
 
-    def get_queryset(self):
-        self.post = get_object_or_404(Post, id=self.kwargs['pk'])
-        return Post.objects.filter(id=self.post.id)
+    def dispatch(self, request, *args, **kwargs):
+        self.pk = kwargs.get('pk', "-1")
+        return super(generic.DeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
+        post = get_object_or_404(Post, id=self.pk)
         context = super(PostView, self).get_context_data(**kwargs)
-        # Create any data and add it to the context
-        context['comments'] = sorted(Comment.objects.filter(parent=self.post),
-                                     key=lambda x: (x.score, x.published_date.toordinal() if x.published_date
+        context['comments'] = sorted(Comment.objects.filter(parent=post),
+                                     key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
                                      else 0), reverse=True)
+        context['comment_form'] = CommentForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            post = get_object_or_404(Post, id=self.pk)
+            user = form.cleaned_data['comment_user']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            Comment.objects.create(parent=post,
+                                detail=form.cleaned_data['comment_detail'],
+                                author=User.objects.get(id=user),
+                                published_date=now)
+            return HttpResponseRedirect(f'/blogs/{self.pk}')
+        return HttpResponseRedirect(f'/blogs/{self.pk}')
 
 
 class CommentView(generic.ListView):
