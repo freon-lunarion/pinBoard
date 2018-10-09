@@ -30,28 +30,19 @@ def create_post(request):
     if (request.method == 'POST'):
         form = AddPostForm(request.POST)
         if form.is_valid():
-            publish = form.cleaned_data['publish']
+            #publish = form.cleaned_data['publish']
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
             user = form.cleaned_data['user']
-            if (publish):
-                post = Post.objects.create(title=form.cleaned_data['title'],
-                                        kind='Post',
-                                        is_pinned=False,
-                                        pin_board=None,
-                                        operator=None,
-                                        detail=form.cleaned_data['detail'],
-                                        author=User.objects.get(id=user),
-                                        published_date=now
-                                       )
-            else:
-                post = Post.objects.create(title=form.cleaned_data['title'],
-                                           kind='Post',
-                                           is_pinned=False,
-                                           pin_board=None,
-                                           operator=None,
-                                           detail=form.cleaned_data['detail'],
-                                           author=User.objects.get(id=user)
-                                           )
+            #if (publish):
+            post = Post.objects.create(title=form.cleaned_data['title'],
+                                kind='Post',
+                                is_pinned=False,
+                                pin_board=None,
+                                operator=None,
+                                detail=form.cleaned_data['detail'],
+                                author=User.objects.get(id=user),
+                                published_date=now
+                               )
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
