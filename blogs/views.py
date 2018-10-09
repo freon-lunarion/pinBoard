@@ -35,7 +35,7 @@ def create_post(request):
             user = form.cleaned_data['user']
             #if (publish):
             post = Post.objects.create(title=form.cleaned_data['title'],
-                                kind='Post',
+                                kind=form.cleaned_data['kind'],
                                 is_pinned=False,
                                 pin_board=None,
                                 operator=None,
@@ -68,6 +68,7 @@ class PostView(generic.DetailView):
     model = Post
     template_name = 'blogs/post.html'
 
+
 class CommentView(generic.ListView):
     template_name = 'blogs/comment.html'
     context_object_name = 'comment_list'
@@ -88,12 +89,6 @@ class LoginView(generic.DetailView):
 class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
-
-def vote(request, content_id):
-    if (request.method == 'POST'):
-        user_id = request.POST.get('user_id', None)
-        value = request.POST.get('value', 1)
-        return HttpResponse(str(Vote.vote(content_id, user_id, value)))
 
 def login(request):
     if (request.method == 'POST'):

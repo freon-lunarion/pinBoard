@@ -63,4 +63,8 @@ class AddPostForm(forms.Form):
         'type': 'hidden',
         'id': 'user'
     }))
+    kind = forms.CharField(widget=forms.TextInput(attrs={
+        'type': 'hidden',
+        'id': 'kind'
+    }))
 
