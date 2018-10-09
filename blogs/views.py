@@ -18,7 +18,8 @@ from .forms import *
 
 # Create your views here.
 def index(request):
-    latest_post_list = sorted(Post.objects.all(), key=lambda p: p.score, reverse=True)
+    latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+                                                                 if p.published_date else 0), reverse=True)
     # latest_post_list = Post.objects.all()
     context = {
         'latest_post_list': latest_post_list,
@@ -68,6 +69,19 @@ class PostView(generic.DetailView):
     model = Post
     template_name = 'blogs/post.html'
 
+    def get_queryset(self):
+        self.post = get_object_or_404(Post, id=self.kwargs['pk'])
+        return Post.objects.filter(id=self.post.id)
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(PostView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['comments'] = sorted(Comment.objects.filter(parent=self.post),
+                                     key=lambda x: (x.score, x.published_date.toordinal() if x.published_date
+                                     else 0), reverse=True)
+        return context
+
 
 class CommentView(generic.ListView):
     template_name = 'blogs/comment.html'
@@ -80,7 +94,8 @@ class CommentView(generic.ListView):
 
     def get_queryset(self):
         """Return the comments of the certain post ordered by score."""
-        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: c.score, reverse=True)
+        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: (c.score, c.published_date.toordinal()
+                                      if c.published_date else 0), reverse=True)
 
 class LoginView(generic.DetailView):
     model = Post
