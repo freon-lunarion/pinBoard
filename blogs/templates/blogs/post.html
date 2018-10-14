@@ -22,8 +22,17 @@
                         <a class="card-open comments">View Comments</a>
                         &nbsp;
                         &nbsp;
-                        <a class="comments" style="cursor: pointer">Make Comments</a>
+                        <a class="comments" style="cursor: pointer" id="make-comments">Make Comments</a>
                     </div>
+                    <form class="col s12 comment-box">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+                                <label for="textarea2"></label>
+                            </div>
+                        </div>
+                    </form>
+                    <button class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
                 </div>
             </div>
             <div class="col s12 m8" id="contents">
@@ -230,6 +239,20 @@
         },function(){
             $(".media").css("display","none");
         });
+
+
+        $( "#make-comments" ).click(function() {
+            if($(".comment-box").css("display") == 'block'){
+                $(".comment-box").css("display","none");
+                $(".comment-submit").css("display","none");
+            }else{
+                $(".comment-box").css("display","block");
+                $(".comment-submit").css("display","block");
+            }
+        })
+
+
+
 
 
 

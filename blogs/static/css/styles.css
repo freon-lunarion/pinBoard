@@ -331,22 +331,23 @@ img {
 }
 
 #submit{
-  width: 100px;
-  height: 50px;
-  font-size: 23px;
-  border-radius: 11px;
-  color: #00c0ff;
-  border: 1px groove lightgray;
-  outline:none;
-  cursor:pointer;
+  /*width: 100px;*/
+  /*height: 50px;*/
+  /*font-size: 23px;*/
+  /*border-radius: 11px;*/
+  /*color: #00c0ff;*/
+  /*border: 1px groove lightgray;*/
+  /*outline:none;*/
+  /*cursor:pointer;*/
+  margin-top: 20px;
 }
 
 #register{
-  font-size: 21px;
-  border-radius: 11px;
-  color: #00c0ff;
-  border: 1px groove lightgray;
-  outline: none;
+  /*font-size: 21px;*/
+  /*border-radius: 11px;*/
+  /*color: #00c0ff;*/
+  /*border: 1px groove lightgray;*/
+  /*outline: none;*/
   cursor: pointer;
   margin-right: 47%;
   float: left;
@@ -356,11 +357,11 @@ img {
 }
 
 #forget{
-  font-size: 21px;
-  border-radius: 11px;
-  color: #00c0ff;
-  border: 1px groove lightgray;
-  outline: none;
+  /*font-size: 21px;*/
+  /*border-radius: 11px;*/
+  /*color: #00c0ff;*/
+  /*border: 1px groove lightgray;*/
+  /*outline: none;*/
   cursor: pointer;
   float: right;
   margin-right: 9%;
@@ -410,6 +411,15 @@ img {
 .user-name{
   color: rgba(0,0,0,.87);
   font-size: 24px;
+}
+
+.comment-box, .comment-submit{
+  display: none;
+}
+
+.comment-submit{
+  left: 108px;
+  top: -23px;
 }
 
 
