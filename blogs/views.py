@@ -121,6 +121,37 @@ def create_post(request):
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
+def ajaxsubmit(request):
+    ret = {'status': True, 'error': None, 'data': None}
+    if (request.method == 'GET'):
+        #form = CommentForm(request.GET)
+        try:
+            content = request.GET.get('content')
+            username = request.GET.get('username')
+            postId = request.GET.get('postId')
+            print(content)
+            print(username)
+            print(postId)
+            #if form.is_valid():
+            comment = Comment.objects.create(content=content,
+                                            username=username,
+                                            postId=postId
+                                           )
+            #comment = Comment.objects.create()
+            #comment.username = username
+            #comment.content = content
+            #comment.postId = postId
+            #comment.save()
+
+            return render(request, 'blogs/index.html')
+            return HttpResponseRedirect(f'/blogs/{postId}')
+        except Exception as e:
+                ret['status'] = False
+                ret['error'] = 'error request'
+
+    return render(request, 'blogs/post.html', locals())
+
+
 def login(request):
     if (request.method == 'POST'):
         login_form = LoginForm(request.POST)
@@ -208,22 +239,5 @@ def logout(request):
     except KeyError:
         pass
     return HttpResponseRedirect('/blogs/login/')
-
-
-def ajaxsubmit(request):
-    name = request.GET.get('name')
-
-    try:
-        student = Student.objects.get(name=name)
-        age = student.age
-    except:
-        age = "not exit"
-
-    data = {}
-    data['name'] = name
-    data['age'] = age
-
-    return render(request, 'blogs/post.html', locals())
-
 
 
