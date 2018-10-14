@@ -223,8 +223,7 @@ def ajaxsubmit(request):
     data['name'] = name
     data['age'] = age
 
-    #return JsonResponse(data)
-    return redirect('ajaxsubmit:post')
+    return render(request, 'blogs/post.html', locals())
 
 
 
