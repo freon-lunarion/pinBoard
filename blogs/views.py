@@ -17,37 +17,6 @@ from django.shortcuts import redirect
 from .forms import *
 
 # Create your views here.
-def index(request):
-    latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
-                                                                 if p.published_date else 0), reverse=True)
-    # latest_post_list = Post.objects.all()
-    context = {
-        'latest_post_list': latest_post_list,
-    }
-
-    return render(request, 'blogs/index.html', context=context)
-
-def create_post(request):
-    if (request.method == 'POST'):
-        form = AddPostForm(request.POST)
-        if form.is_valid():
-            #publish = form.cleaned_data['publish']
-            now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            user = form.cleaned_data['user']
-            #if (publish):
-            post = Post.objects.create(title=form.cleaned_data['title'],
-                                kind=form.cleaned_data['kind'],
-                                is_pinned=False,
-                                pin_board=None,
-                                operator=None,
-                                detail=form.cleaned_data['detail'],
-                                author=User.objects.get(id=user),
-                                published_date=now
-                               )
-            return HttpResponseRedirect(f'/blogs/{post.id}')
-        return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
-    return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
-
 class IndexView(generic.ListView):
     template_name = 'blogs/index.html'
     context_object_name = 'latest_post_list'
@@ -119,6 +88,37 @@ class LoginView(generic.DetailView):
 class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
+
+def index(request):
+    latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+                                                                 if p.published_date else 0), reverse=True)
+    # latest_post_list = Post.objects.all()
+    context = {
+        'latest_post_list': latest_post_list,
+    }
+
+    return render(request, 'blogs/index.html', context=context)
+
+def create_post(request):
+    if (request.method == 'POST'):
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            #publish = form.cleaned_data['publish']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            user = form.cleaned_data['user']
+            #if (publish):
+            post = Post.objects.create(title=form.cleaned_data['title'],
+                                kind=form.cleaned_data['kind'],
+                                is_pinned=False,
+                                pin_board=None,
+                                operator=None,
+                                detail=form.cleaned_data['detail'],
+                                author=User.objects.get(id=user),
+                                published_date=now
+                               )
+            return HttpResponseRedirect(f'/blogs/{post.id}')
+        return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
+    return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
 def login(request):
     if (request.method == 'POST'):
