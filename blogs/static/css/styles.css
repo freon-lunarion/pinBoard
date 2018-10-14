@@ -71,6 +71,13 @@ h2.content-separator.middle {
   padding-bottom: 12px;
 }
 
+.card-content.with-comments.post {
+  min-height: 201px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .card-content.sidebar {
   padding: 12px 24px;
 }
@@ -109,8 +116,8 @@ h2.content-separator.middle {
 }
 
 .card-open,
-.btn-flat {
-  margin-right: 20px !important;
+a.btn-flat.vote {
+  margin-right: 0 !important;
 }
 
 span.score {
@@ -136,9 +143,13 @@ nav.nav-container.pinboard {
 
 .card-description {
   max-height: 100px;
-  min-height: 100px;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.card-description.post-preview {
+  color: wheat;
+  font-style: italic;
 }
 
 .card-description.sidebar {
@@ -164,7 +175,7 @@ nav.nav-container.pinboard {
 
 i.material-icons.title {
   margin-right: 15px;
-  margin-left:-8px;
+  margin-left:-3px;
   font-size: 35px;
   color: rgba(172,255,72,0.9);
 }
@@ -255,6 +266,28 @@ img.content {
 .post-tags .chip:hover {
   transition: 0.3s;
   opacity: 1;
+}
+
+.card.post {
+  min-height: 246px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.separator {
+  color: black;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: center;
+}
+
+h2.content-separator {
+  font-style: normal;
+  color: black;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 /* ------------------------------------------ POST PAGE ------------------------------------------ */

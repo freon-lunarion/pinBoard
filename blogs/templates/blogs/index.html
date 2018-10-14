@@ -1,25 +1,27 @@
 {% extends "./base.html" %}
 
 {% block content %}
-    <div style="color:black;display:flex;justify-content: center;margin-top:15px;display:flex;align-items: center;color: rgba(255,255,255,0.5);"><i class="material-icons" style="color:black">person_pin</i>&nbsp;<h2 class="content-separator" style="color:black;font-size:20px;">Pinned Posts</h2></div>
+    <div class="separator"><i class="material-icons" style="color:black">person_pin</i>&nbsp;<h2 class="content-separator">Pinned Posts</h2></div>
     <div class="row pinned-posts">
         {% for post in latest_post_list %}
             {% if post.is_pinned %}
                 {% if "Post" in post.kind %}
                     <!-- Blog post card -->
                     <div class="col s12 m6 l3">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content with-comments white-text">
-                                <span class="card-title">{{ post.title }}</span>
-                                <div class="card-description">
-                                    <p>{{ post.detail|striptags }}</p>
+                        <div class="card blue-grey darken-1 post">
+                            <div class="card-content with-comments white-text post">
+                                <div>
+                                    <span class="card-title">{{ post.title }}</span>
+                                    <div class="card-description post-preview">
+                                        <p>{{ post.detail|striptags|safe|truncatechars:90 }}</p>
+                                    </div>
                                 </div>
                                 <div class="card-comments">12 Comments</div>
                             </div>
                             <div class="card-action voting">
                                 <div class="score-container">
                                     <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                    <span id="score-{{ post.id }}" class="score">21</span>
+                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
                                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                                 </div>
                                 <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
@@ -31,7 +33,7 @@
                     <div class="col s12 m6 l3">
                         <div class="card blue-grey darken-1 question">
                             <div class="card-content with-comments white-text">
-                                <span class="card-title" style="display:flex;align-items: center;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
+                                <span class="card-title" style="display:flex;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
                                 <div class="card-description question">
                                     <p>{{ post.detail }}</p>
                                 </div>
@@ -75,7 +77,12 @@
 
     </div>
 
-    <div style="color:black;display:flex;justify-content: center;display:flex;align-items: center;color: rgba(255,255,255,0.5);"><i class="material-icons" style="color:black">stars</i>&nbsp;<h2 class="content-separator" style="color:black;font-size:20px;">Top Posts</h2></div>
+    <div class="separator" style="margin-top:0;">
+        <!-- <hr style="width: 300px;margin:0;"> -->
+        <i class="material-icons" style="color:black">stars</i>
+        &nbsp;
+        <h2 class="content-separator">Top Posts</h2>
+    </div>
     <div class="row" style="padding-bottom: 30px;">
 
         {% for post in latest_post_list %}
@@ -83,11 +90,13 @@
                 {% if "Post" in post.kind %}
                     <!-- Blog post card -->
                     <div class="col s12 m6 l3">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content with-comments white-text">
-                                <span class="card-title">{{ post.title }}</span>
-                                <div class="card-description">
-                                    <p>{{ post.detail|striptags|safe }}</p>
+                        <div class="card blue-grey darken-1 post">
+                            <div class="card-content with-comments white-text post">
+                                <div>
+                                    <span class="card-title" style="display: flex;"><i class="material-icons title">event_note</i>{{ post.title }}</span>
+                                    <div class="card-description post-preview">
+                                        <p>{{ post.detail|striptags|safe|truncatechars:90 }}</p>
+                                    </div>
                                 </div>
                                 <div class="card-comments">12 Comments</div>
                             </div>
@@ -107,7 +116,7 @@
                     <div class="col s12 m6 l3">
                         <div class="card blue-grey darken-1 question">
                             <div class="card-content with-comments white-text" style="min-height: 201px;display: flex;flex-direction: column;justify-content: space-between;">
-                                <span class="card-title" style="display:flex;align-items: center;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
+                                <span class="card-title" style="display:flex;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
                                 <div class="card-comments">12 Comments</div>
                             </div>
                             <div class="card-action voting">

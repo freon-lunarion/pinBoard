@@ -7,9 +7,9 @@
                 <div class="card blue-grey darken-1" style="position:sticky;top:20px">
                     <div class="card-action voting sidebar">
                         <div class="score-container">
-                            <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                            <a class="btn-flat vote" style="padding-left: 0;margin-right: 0;"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
                             <span id="score-{{ post.id }}" class="score">21</span>
-                            <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                            <a class="btn-flat vote" style="margin-right: 0;"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                         </div>
                     </div>
                     <div class="card-content sidebar white-text">
@@ -209,7 +209,6 @@
 
             // on 'view comments' click animate to comments
             $('.card-open.comments').click(event => {
-                console.log('clicked');
                 $('html, body').animate({
                     scrollTop: $('#comment-section').offset().top
                 }, 1000);
