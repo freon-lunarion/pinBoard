@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </form>
-                    <button class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
+                    <button class="waves-effect waves-light btn-small orange lighten-1 comment-submit" id="AJAX_submit">submit</button>
                 </div>
             </div>
             <div class="col s12 m8" id="contents">
@@ -231,7 +231,6 @@
                     scrollTop: $('#comment-section').offset().top
                 }, 1000);
             })
-
         })
 
         $(".share-to").hover(function(){
@@ -249,6 +248,28 @@
                 $(".comment-box").css("display","block");
                 $(".comment-submit").css("display","block");
             }
+        })
+
+        $('#AJAX_submit').click(function() {
+            $.ajax({
+                url: "/blogs/ajaxsubmit",
+                type: 'GET',
+                data: {
+                    'hostname': $('#host').val(),
+                    'ip': $('#ip').val(),
+                    'port': $('#port').val(),
+                    'b_id': $('#sel').val()
+                },
+
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    if (obj.status) {
+                        location.reload();
+                    } else {
+                        $('#erro_msg').text(obj.error);
+                    }
+                }
+            })
         })
 
 

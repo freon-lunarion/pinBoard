@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.utils import timezone
 import datetime
 from django.shortcuts import redirect
+from django.http import JsonResponse
 
 
 from .forms import *
@@ -207,6 +208,23 @@ def logout(request):
     except KeyError:
         pass
     return HttpResponseRedirect('/blogs/login/')
+
+
+def ajaxsubmit(request):
+    name = request.GET.get('name')
+
+    try:
+        student = Student.objects.get(name=name)
+        age = student.age
+    except:
+        age = "not exit"
+
+    data = {}
+    data['name'] = name
+    data['age'] = age
+
+    #return JsonResponse(data)
+    return redirect('ajaxsubmit:post')
 
 
 
