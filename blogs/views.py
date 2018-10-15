@@ -1,27 +1,24 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-from django.views import generic
-from django.http import HttpResponse
-
-from .models import Post, Comment
-from shared.models import *
-from django.contrib import auth
-from django.shortcuts import render,render_to_response
-from django.template import RequestContext
-from django.utils import timezone
-import datetime
-from django.shortcuts import redirect
-from django.http import JsonResponse
-
-
 from .forms import *
+from .models import Post, Comment
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, render,render_to_response, redirect
+from django.template import RequestContext
+from django.urls import reverse
+from django.utils import timezone
+from django.views import generic
+from shared.models import *
+import datetime
+
+
 
 # Create your views here.
+@login_required(login_url='/blogs/login/')
 class IndexView(generic.ListView):
     template_name = 'blogs/index.html'
     context_object_name = 'latest_post_list'
-
+    
     def get_queryset(self):
         """Return the last five published questions."""
         return Post.objects.order_by('-create_time')[:5]
@@ -156,28 +153,40 @@ def login(request):
     if (request.method == 'POST'):
         login_form = LoginForm(request.POST)
 
+        # REF: https://docs.djangoproject.com/en/2.1/topics/auth/default/#how-to-log-a-user-in
         if login_form.is_valid():
-            username = login_form.cleaned_data['username']
-            password = login_form.cleaned_data['password']
-
-
-            userinfo = User.objects.get(username=username)  #get all info of user
-
-            #current_user = request.user admin user
-            #print(userinfo.email)
-
-
-            user = User.objects.filter(username__exact = username,password__exact = password)
-            print(user)
-            if user:
-
-                request.session['username'] = userinfo.username
-                request.session['useremail'] = userinfo.email
-                request.session.set_expiry(600)
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
                 return HttpResponseRedirect('/blogs')
             else:
                 error = 'Username is not right or password is not right!'
                 return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
+        return render(request, 'blogs/login.html', locals())
+
+        #end of patch
+            # username = login_form.cleaned_data['username']
+            # password = login_form.cleaned_data['password']
+
+
+            # userinfo = User.objects.get(username=username)  #get all info of user
+
+            # #current_user = request.user admin user
+            # #print(userinfo.email)
+
+
+            # user = User.objects.filter(username__exact = username,password__exact = password)
+            # print(user)
+            # if user:
+
+            #     request.session['username'] = userinfo.username
+            #     request.session['useremail'] = userinfo.email
+            #     request.session.set_expiry(600)
+            #     return HttpResponseRedirect('/blogs')
+            # else:
+            #     error = 'Username is not right or password is not right!'
+            #     return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
 
     #return render(request, 'blogs/login.html', locals())
 
