@@ -127,3 +127,4 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'shared.User'
+LOGIN_URL = '/blogs/login'

@@ -7,21 +7,20 @@ from django.shortcuts import get_object_or_404, render,render_to_response, redir
 from django.template import RequestContext
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views import generic
 from shared.models import *
 import datetime
 
 
 
-# Create your views here.
-@login_required(login_url='/blogs/login/')
-class IndexView(generic.ListView):
-    template_name = 'blogs/index.html'
-    context_object_name = 'latest_post_list'
-    
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Post.objects.order_by('-create_time')[:5]
+# class IndexView(generic.ListView):
+#     template_name = 'blogs/index.html'
+#     context_object_name = 'latest_post_list'
+
+#     def get_queryset(self):
+#         """Return the last five published questions."""
+#         return Post.objects.order_by('-create_time')[:5]
 
 class DetailView(generic.DetailView):
     model = Post
@@ -87,6 +86,7 @@ class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
 
+@login_required
 def index(request):
     latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
                                                                  if p.published_date else 0), reverse=True)
@@ -148,8 +148,8 @@ def ajaxsubmit(request):
 
     return render(request, 'blogs/post.html', locals())
 
-
-def login(request):
+#
+def loginView(request):
     if (request.method == 'POST'):
         login_form = LoginForm(request.POST)
 
@@ -159,36 +159,12 @@ def login(request):
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                login(request, user)
                 return HttpResponseRedirect('/blogs')
             else:
                 error = 'Username is not right or password is not right!'
                 return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
         return render(request, 'blogs/login.html', locals())
-
-        #end of patch
-            # username = login_form.cleaned_data['username']
-            # password = login_form.cleaned_data['password']
-
-
-            # userinfo = User.objects.get(username=username)  #get all info of user
-
-            # #current_user = request.user admin user
-            # #print(userinfo.email)
-
-
-            # user = User.objects.filter(username__exact = username,password__exact = password)
-            # print(user)
-            # if user:
-
-            #     request.session['username'] = userinfo.username
-            #     request.session['useremail'] = userinfo.email
-            #     request.session.set_expiry(600)
-            #     return HttpResponseRedirect('/blogs')
-            # else:
-            #     error = 'Username is not right or password is not right!'
-            #     return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
-
-    #return render(request, 'blogs/login.html', locals())
 
     login_form = LoginForm()
     return render(request, 'blogs/login.html', {'form': login_form, 'message': ''})
@@ -235,13 +211,15 @@ def register(request):
     register_form = RegisterForm()
     return render(request, 'blogs/register.html', {'form': register_form, 'message': ''})
 
+@login_required
 def post(request):
     return render(request, 'blogs/post.html', locals())
 
+@login_required
 def comment(request):
     return render(request, 'blogs/comment.html', locals())
 
-
+@login_required
 def logout(request):
     try:
         del request.session['username']
