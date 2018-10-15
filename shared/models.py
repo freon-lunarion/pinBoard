@@ -99,3 +99,9 @@ class Vote(models.Model):
         user = get_object_or_404(User, id=user_id)
         Vote.objects.create(content=content, user=user, value=value)
         return content.score
+
+    @staticmethod
+    def exist(content_id, user_id):
+        content = get_object_or_404(Content, id=content_id)
+        user = get_object_or_404(User, id=user_id)
+        return Vote.objects.filter(content=content, user=user).exists()

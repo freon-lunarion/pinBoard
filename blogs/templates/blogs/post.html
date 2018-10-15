@@ -7,9 +7,9 @@
                 <div class="card blue-grey darken-1" style="position:sticky;top:20px">
                     <div class="card-action voting sidebar">
                         <div class="score-container">
-                            <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                            <span id="score-{{ post.id }}" class="score">21</span>
-                            <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                            <a class="btn-flat vote" style="padding-left: 0;margin-right: 0;"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                            <span id="score-{{ post.id }}" class="score">0</span>
+                            <a class="btn-flat vote" style="margin-right: 0;"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                         </div>
                     </div>
                     <div class="card-content sidebar white-text">
@@ -20,7 +20,22 @@
                     </div>
                     <div class="card-action voting sidebar">
                         <a class="card-open comments">View Comments</a>
+                        &nbsp;
+                        &nbsp;
+                        <a class="comments" style="cursor: pointer" id="make-comments">Make Comments</a>
                     </div>
+                    <!--<div id="username">{{request.session.username}}</div>-->
+                    <!--<div id="postId">{{ post.id }}</div>-->
+                    <form class="col s12 comment-box">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="textarea2" class="materialize-textarea aaa" data-length="120"></textarea>
+                                <label for="textarea2"></label>
+                                <!--<input type="text" id="content">-->
+                            </div>
+                        </div>
+                    </form>
+                    <button class="waves-effect waves-light btn-small orange lighten-1 comment-submit" id="AJAX_submit">submit</button>
                 </div>
             </div>
             <div class="col s12 m8" id="contents">
@@ -38,55 +53,66 @@
                         {% endautoescape %}
                     </div>
                     <div class="post-actions">
-                        <a class="card-open comments">Share</a>
+                        <div class="share-to">
+                            <a class="card-open comments">Share</a>
+                            <div class="media" style="display: none; clear: both">
+                                <a class="fav_facebook icon-size" rel="nofollow" href="javascript:window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(document.location.href)+'&amp;t='+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIPSURBVGhD7ZnLSwJRGMWl/ojqj9GpVtEDZgTtvWghVKsWQcuQWkUPCAqEoNBdrcqZygKF3mEPMip30SIqjKDIIiJvc/VzpPwEnSHvTNwDv5V3jufMfSzm2ri4uLj+l1yuxUpBCrY5JCXgEJXNMuO3O5VW2/BwBcTRJ7u0VuMQ5aggKYQxh4JLroZYpYnOhDoLB4gpK/Z0zQxdTogZU9LLrFTRPYGZsYTuGYhXvARRCWNmTFEzQbzi5ZDkbdSMITQTxCtef12koz9CRiZPyfTcBfH54xp9Q7voeIqpirg9YXIceySF5AvE0ecopinS2Bkit/dJiIzLEkVm5y8hbmFZosjxWf6S+vpKkfOrJ3J0lkjjnThFn6WYpsjdwxvEz4nOEjYWwzRFnl8+IH5OQ6NRdCyGaYq8Jj8hfk6WKFLnXCXtvRGN5Ft+kbGZ2I8xTV0bqBeFWRF63Jaq0SkTbnY9RTyDO6gXxTJFUilCGtrXUS+KZYo8JN5RnyzMitQ6FdLcvaGBnVre8RPtd1oc88nCrMhvLHv8/oYXAXgRzMwIvAjAi2BmRuBFAF4EMzMCkyJ/8cnUaBF9n0xFxY+aGWApeE1WQjc/6BnYQsdi6PuIbcJrBUGSXRCveGWu3JS9fDNm6LvooYKrt33EtNzs1rcsV0EsnVLfglrGrZotwAVl2cj8p+w2fBnKxcXFZTLZbN9S86sn1aGunQAAAABJRU5ErkJggg=="></a>
+                                <a class="icon-size" href="http://news.ycombinator.com/submit"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHeSURBVGhD7ZnNK0RRGMavz1KKbPwfspCNhRJlY8FCKQvJYjDJV/4EQhKSUiSSlJRSk1JTFhZKGpmEJCFEsp7XfevJ3DEvc6h7z6T3V7/FnPue0/N0NndmHEVRlP9BIuRMJrqdSFbpZkI8c9xNUep2KJvkTIhnjhbxUS0iHWZTLSIdZlN/i4yUE611Jl1skee8rrSn7ukvlue+6G+R3nyipwv6JJEgGq2QZ9m5BgyCywN5TtDfIuxqB1KBk215juXgXmbr5TlB/4uEC4ier5DMhW9lrDJ9bqYOA+D6MH3mB/0vwq53IR2I7aTPXETxEMw3ps/8YDBFwoVELzdICMarks+na7EIbo6IenJSz8hgMEXYjRBSgtPd5LPzfSyChabUvQYGV6SviOj1FknBRDXRVA0+gNvjX98GG1wRdjOMtOAsQhTfwwew2CzvzWCwRfhW3u6RWOAu5t5Grrw3g8EWYbcGkFpgqVXeY2DwRfiV4/0RyT08xN03gTx5j4HBF2G3h5Hew3KbPGuonSJDZUjvYbBUnjXUTpHBEqT3wGvSrKFaRDrMWC3yvVpEOsxYLfK9dorw9xPvDwwsr0mzhtop4oNaRDrMplpEOsymWkQ6zKZ/LfI//gxVFEXJQhznAyuKR0YL4FcvAAAAAElFTkSuQmCC"></a>
+                                <a class="fav_twitter icon-size" rel="nofollow" href="javascript:window.open('http://twitter.com/home?status='+encodeURIComponent(document.location.href)+' '+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMqSURBVGhD7Zg7aBRBGMfX3TvBRrFQFMEHqFiIiDZ2QkC00cqAxCqYQkUQxMInIQRNIaYIiAFRUDGZWS6C2FloYWPlk4AgaqGixaF3N7OJz2z+s/ep590Y93ZnNxbzgz+7uex+r3nszDgWi8VisVhmi9LECpcH+z0mBz0uL7hMnirw2lbHDz16opUwnEN3CeFT89IbIcbkUgQ/4nHxAwmELWLyhceCnfR0nRuVhS6Xp5FsN/2SDBg56jExQH8mpsjEeth5q02gUUxMQWdUi7lc3MZ9gMTfOf7HBWQqGajSc+UAFTlOP7UPry1CQG9ago4jJr4gkY7ITuKegW4VVei34SGnN3Tpv7GBjYsNNuKLyTJapQv3O5DMpWgcJWK0urbZOLraXYcHy+iJf3O9PB+JfG62E09C/rxX44QsJgAD7U/DJFUpJnvitI7Hg11aG21JnE094cDQh1bDdblMPEK1O2eaNtE1DuvejSUmvkcFMwGqf17rpFFMvELV+osjYgO99gskckj7ThwxWSEzBvAnlsNotcXJ38TEe7TULVz70K/34TqgfS6OYIuiMAMC2wOjjbNXPsIHkkJIR5HJTVTdTlT3JLrPV63DjBTNkEbw5RKdg/wkhimS9KAqz/ROspcaYxRGelxeO6BzkoecUnUNhWGAe2EBU+gDnaNMxeQ4RWCQ+vI7WjzmJXwIe8m7YeprpsvQN51jo8KKVxWPPBtmdHJl0ZcbMR3vxSB8og3AmMQV8mqeAgu26J0aFlbKaitMbrMBjvwWx8Yl+sldhmC7iRnssT6A9MIAf4qV9FzyljHqMICJm7pAUkmtdEu1deQlP9S2E/35GrrC6/RrMLzffHqSNwiiAwm91AcYQ9g8eby2m8zlT3S8w8VVBJJ8eY/uBG0nkzmCPuyy2kEMyjupEoAwaTzMZ0zwyVWo+DCCvk/Lk/i7xJnEpMAH9YRaw5GnHOgNXSTSraZFbVDtiMlP0KAzJhaT9dmh6AebEdAQghlHS+nPbpvFZBli6EZd0Rnyfwc+jEhmG1qqx/XlMYyXc6rauPYh6CPqLMvhldVJTiUtFovFYrFYHGcazS5/dDE9KGwAAAAASUVORK5CYII="></a>
+                                <a class="fav_google icon-size" rel="nofollow" href="javascript:window.open('http://www.google.com/bookmarks/mark?op=add&amp;bkmk='+encodeURIComponent(document.location.href)+'&amp;title='+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,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"></a>
+                                <a class="icon-size" href="https://www.weibo.com/login.php" onclick="sharePlugin('sina','http://www.phpernote.com/images/logo.gif','http://www.phpernote.com')"><img src="data:image/png;base64,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"></a>
+                            </div>
+                        </div>
                         <a class="card-open comments">Save</a>
                     </div>
-                    <!-- <div class="icon">
-                        <a class="fav_facebook icon-size" rel="nofollow" href="javascript:window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(document.location.href)+'&amp;t='+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIPSURBVGhD7ZnLSwJRGMWl/ojqj9GpVtEDZgTtvWghVKsWQcuQWkUPCAqEoNBdrcqZygKF3mEPMip30SIqjKDIIiJvc/VzpPwEnSHvTNwDv5V3jufMfSzm2ri4uLj+l1yuxUpBCrY5JCXgEJXNMuO3O5VW2/BwBcTRJ7u0VuMQ5aggKYQxh4JLroZYpYnOhDoLB4gpK/Z0zQxdTogZU9LLrFTRPYGZsYTuGYhXvARRCWNmTFEzQbzi5ZDkbdSMITQTxCtef12koz9CRiZPyfTcBfH54xp9Q7voeIqpirg9YXIceySF5AvE0ecopinS2Bkit/dJiIzLEkVm5y8hbmFZosjxWf6S+vpKkfOrJ3J0lkjjnThFn6WYpsjdwxvEz4nOEjYWwzRFnl8+IH5OQ6NRdCyGaYq8Jj8hfk6WKFLnXCXtvRGN5Ft+kbGZ2I8xTV0bqBeFWRF63Jaq0SkTbnY9RTyDO6gXxTJFUilCGtrXUS+KZYo8JN5RnyzMitQ6FdLcvaGBnVre8RPtd1oc88nCrMhvLHv8/oYXAXgRzMwIvAjAi2BmRuBFAF4EMzMCkyJ/8cnUaBF9n0xFxY+aGWApeE1WQjc/6BnYQsdi6PuIbcJrBUGSXRCveGWu3JS9fDNm6LvooYKrt33EtNzs1rcsV0EsnVLfglrGrZotwAVl2cj8p+w2fBnKxcXFZTLZbN9S86sn1aGunQAAAABJRU5ErkJggg=="></a>
-                        <a class="icon-size" href="http://news.ycombinator.com/submit"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHeSURBVGhD7ZnNK0RRGMavz1KKbPwfspCNhRJlY8FCKQvJYjDJV/4EQhKSUiSSlJRSk1JTFhZKGpmEJCFEsp7XfevJ3DEvc6h7z6T3V7/FnPue0/N0NndmHEVRlP9BIuRMJrqdSFbpZkI8c9xNUep2KJvkTIhnjhbxUS0iHWZTLSIdZlN/i4yUE611Jl1skee8rrSn7ukvlue+6G+R3nyipwv6JJEgGq2QZ9m5BgyCywN5TtDfIuxqB1KBk215juXgXmbr5TlB/4uEC4ier5DMhW9lrDJ9bqYOA+D6MH3mB/0vwq53IR2I7aTPXETxEMw3ps/8YDBFwoVELzdICMarks+na7EIbo6IenJSz8hgMEXYjRBSgtPd5LPzfSyChabUvQYGV6SviOj1FknBRDXRVA0+gNvjX98GG1wRdjOMtOAsQhTfwwew2CzvzWCwRfhW3u6RWOAu5t5Grrw3g8EWYbcGkFpgqVXeY2DwRfiV4/0RyT08xN03gTx5j4HBF2G3h5Hew3KbPGuonSJDZUjvYbBUnjXUTpHBEqT3wGvSrKFaRDrMWC3yvVpEOsxYLfK9dorw9xPvDwwsr0mzhtop4oNaRDrMplpEOsymWkQ6zKZ/LfI//gxVFEXJQhznAyuKR0YL4FcvAAAAAElFTkSuQmCC"></a>
-                        <a class="fav_twitter icon-size" rel="nofollow" href="javascript:window.open('http://twitter.com/home?status='+encodeURIComponent(document.location.href)+' '+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMqSURBVGhD7Zg7aBRBGMfX3TvBRrFQFMEHqFiIiDZ2QkC00cqAxCqYQkUQxMInIQRNIaYIiAFRUDGZWS6C2FloYWPlk4AgaqGixaF3N7OJz2z+s/ep590Y93ZnNxbzgz+7uex+r3nszDgWi8VisVhmi9LECpcH+z0mBz0uL7hMnirw2lbHDz16opUwnEN3CeFT89IbIcbkUgQ/4nHxAwmELWLyhceCnfR0nRuVhS6Xp5FsN/2SDBg56jExQH8mpsjEeth5q02gUUxMQWdUi7lc3MZ9gMTfOf7HBWQqGajSc+UAFTlOP7UPry1CQG9ago4jJr4gkY7ITuKegW4VVei34SGnN3Tpv7GBjYsNNuKLyTJapQv3O5DMpWgcJWK0urbZOLraXYcHy+iJf3O9PB+JfG62E09C/rxX44QsJgAD7U/DJFUpJnvitI7Hg11aG21JnE094cDQh1bDdblMPEK1O2eaNtE1DuvejSUmvkcFMwGqf17rpFFMvELV+osjYgO99gskckj7ThwxWSEzBvAnlsNotcXJ38TEe7TULVz70K/34TqgfS6OYIuiMAMC2wOjjbNXPsIHkkJIR5HJTVTdTlT3JLrPV63DjBTNkEbw5RKdg/wkhimS9KAqz/ROspcaYxRGelxeO6BzkoecUnUNhWGAe2EBU+gDnaNMxeQ4RWCQ+vI7WjzmJXwIe8m7YeprpsvQN51jo8KKVxWPPBtmdHJl0ZcbMR3vxSB8og3AmMQV8mqeAgu26J0aFlbKaitMbrMBjvwWx8Yl+sldhmC7iRnssT6A9MIAf4qV9FzyljHqMICJm7pAUkmtdEu1deQlP9S2E/35GrrC6/RrMLzffHqSNwiiAwm91AcYQ9g8eby2m8zlT3S8w8VVBJJ8eY/uBG0nkzmCPuyy2kEMyjupEoAwaTzMZ0zwyVWo+DCCvk/Lk/i7xJnEpMAH9YRaw5GnHOgNXSTSraZFbVDtiMlP0KAzJhaT9dmh6AebEdAQghlHS+nPbpvFZBli6EZd0Rnyfwc+jEhmG1qqx/XlMYyXc6rauPYh6CPqLMvhldVJTiUtFovFYrFYHGcazS5/dDE9KGwAAAAASUVORK5CYII="></a>
-                        <a class="fav_google icon-size" rel="nofollow" href="javascript:window.open('http://www.google.com/bookmarks/mark?op=add&amp;bkmk='+encodeURIComponent(document.location.href)+'&amp;title='+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,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"></a>
-                        <a class="icon-size" href="https://www.weibo.com/login.php" onclick="sharePlugin('sina','http://www.phpernote.com/images/logo.gif','http://www.phpernote.com')"><img src="data:image/png;base64,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"></a>
-                    </div> -->
+                     <!--<div class="icon media" style="">-->
+                        <!--<a class="fav_facebook icon-size" rel="nofollow" href="javascript:window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(document.location.href)+'&amp;t='+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIPSURBVGhD7ZnLSwJRGMWl/ojqj9GpVtEDZgTtvWghVKsWQcuQWkUPCAqEoNBdrcqZygKF3mEPMip30SIqjKDIIiJvc/VzpPwEnSHvTNwDv5V3jufMfSzm2ri4uLj+l1yuxUpBCrY5JCXgEJXNMuO3O5VW2/BwBcTRJ7u0VuMQ5aggKYQxh4JLroZYpYnOhDoLB4gpK/Z0zQxdTogZU9LLrFTRPYGZsYTuGYhXvARRCWNmTFEzQbzi5ZDkbdSMITQTxCtef12koz9CRiZPyfTcBfH54xp9Q7voeIqpirg9YXIceySF5AvE0ecopinS2Bkit/dJiIzLEkVm5y8hbmFZosjxWf6S+vpKkfOrJ3J0lkjjnThFn6WYpsjdwxvEz4nOEjYWwzRFnl8+IH5OQ6NRdCyGaYq8Jj8hfk6WKFLnXCXtvRGN5Ft+kbGZ2I8xTV0bqBeFWRF63Jaq0SkTbnY9RTyDO6gXxTJFUilCGtrXUS+KZYo8JN5RnyzMitQ6FdLcvaGBnVre8RPtd1oc88nCrMhvLHv8/oYXAXgRzMwIvAjAi2BmRuBFAF4EMzMCkyJ/8cnUaBF9n0xFxY+aGWApeE1WQjc/6BnYQsdi6PuIbcJrBUGSXRCveGWu3JS9fDNm6LvooYKrt33EtNzs1rcsV0EsnVLfglrGrZotwAVl2cj8p+w2fBnKxcXFZTLZbN9S86sn1aGunQAAAABJRU5ErkJggg=="></a>-->
+                        <!--<a class="icon-size" href="http://news.ycombinator.com/submit"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHeSURBVGhD7ZnNK0RRGMavz1KKbPwfspCNhRJlY8FCKQvJYjDJV/4EQhKSUiSSlJRSk1JTFhZKGpmEJCFEsp7XfevJ3DEvc6h7z6T3V7/FnPue0/N0NndmHEVRlP9BIuRMJrqdSFbpZkI8c9xNUep2KJvkTIhnjhbxUS0iHWZTLSIdZlN/i4yUE611Jl1skee8rrSn7ukvlue+6G+R3nyipwv6JJEgGq2QZ9m5BgyCywN5TtDfIuxqB1KBk215juXgXmbr5TlB/4uEC4ier5DMhW9lrDJ9bqYOA+D6MH3mB/0vwq53IR2I7aTPXETxEMw3ps/8YDBFwoVELzdICMarks+na7EIbo6IenJSz8hgMEXYjRBSgtPd5LPzfSyChabUvQYGV6SviOj1FknBRDXRVA0+gNvjX98GG1wRdjOMtOAsQhTfwwew2CzvzWCwRfhW3u6RWOAu5t5Grrw3g8EWYbcGkFpgqVXeY2DwRfiV4/0RyT08xN03gTx5j4HBF2G3h5Hew3KbPGuonSJDZUjvYbBUnjXUTpHBEqT3wGvSrKFaRDrMWC3yvVpEOsxYLfK9dorw9xPvDwwsr0mzhtop4oNaRDrMplpEOsymWkQ6zKZ/LfI//gxVFEXJQhznAyuKR0YL4FcvAAAAAElFTkSuQmCC"></a>-->
+                        <!--<a class="fav_twitter icon-size" rel="nofollow" href="javascript:window.open('http://twitter.com/home?status='+encodeURIComponent(document.location.href)+' '+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMqSURBVGhD7Zg7aBRBGMfX3TvBRrFQFMEHqFiIiDZ2QkC00cqAxCqYQkUQxMInIQRNIaYIiAFRUDGZWS6C2FloYWPlk4AgaqGixaF3N7OJz2z+s/ep590Y93ZnNxbzgz+7uex+r3nszDgWi8VisVhmi9LECpcH+z0mBz0uL7hMnirw2lbHDz16opUwnEN3CeFT89IbIcbkUgQ/4nHxAwmELWLyhceCnfR0nRuVhS6Xp5FsN/2SDBg56jExQH8mpsjEeth5q02gUUxMQWdUi7lc3MZ9gMTfOf7HBWQqGajSc+UAFTlOP7UPry1CQG9ago4jJr4gkY7ITuKegW4VVei34SGnN3Tpv7GBjYsNNuKLyTJapQv3O5DMpWgcJWK0urbZOLraXYcHy+iJf3O9PB+JfG62E09C/rxX44QsJgAD7U/DJFUpJnvitI7Hg11aG21JnE094cDQh1bDdblMPEK1O2eaNtE1DuvejSUmvkcFMwGqf17rpFFMvELV+osjYgO99gskckj7ThwxWSEzBvAnlsNotcXJ38TEe7TULVz70K/34TqgfS6OYIuiMAMC2wOjjbNXPsIHkkJIR5HJTVTdTlT3JLrPV63DjBTNkEbw5RKdg/wkhimS9KAqz/ROspcaYxRGelxeO6BzkoecUnUNhWGAe2EBU+gDnaNMxeQ4RWCQ+vI7WjzmJXwIe8m7YeprpsvQN51jo8KKVxWPPBtmdHJl0ZcbMR3vxSB8og3AmMQV8mqeAgu26J0aFlbKaitMbrMBjvwWx8Yl+sldhmC7iRnssT6A9MIAf4qV9FzyljHqMICJm7pAUkmtdEu1deQlP9S2E/35GrrC6/RrMLzffHqSNwiiAwm91AcYQ9g8eby2m8zlT3S8w8VVBJJ8eY/uBG0nkzmCPuyy2kEMyjupEoAwaTzMZ0zwyVWo+DCCvk/Lk/i7xJnEpMAH9YRaw5GnHOgNXSTSraZFbVDtiMlP0KAzJhaT9dmh6AebEdAQghlHS+nPbpvFZBli6EZd0Rnyfwc+jEhmG1qqx/XlMYyXc6rauPYh6CPqLMvhldVJTiUtFovFYrFYHGcazS5/dDE9KGwAAAAASUVORK5CYII="></a>-->
+                        <!--<a class="fav_google icon-size" rel="nofollow" href="javascript:window.open('http://www.google.com/bookmarks/mark?op=add&amp;bkmk='+encodeURIComponent(document.location.href)+'&amp;title='+encodeURIComponent(document.title));void(0)"><img src="data:image/png;base64,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"></a>-->
+                        <!--<a class="icon-size" href="https://www.weibo.com/login.php" onclick="sharePlugin('sina','http://www.phpernote.com/images/logo.gif','http://www.phpernote.com')"><img src="data:image/png;base64,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"></a>-->
+                    <!--</div>-->
                 </div>
 
                 <!-- comment section -->
-                <div id="comment-section" style="margin-top:25px">
-                    <div class="card horizontal" style="max-width: 450px;">
-                        <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
-                            <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
-                        </div>
-                        <div class="card-stacked">
-                            <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                <p style="font-weight: 700;">Michael</p>
-                            </div> -->
-                            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                <a style="color:black" href="#">Michael</a>
+                <!--{% if "Comment" in comment %}-->
+                    <div id="comment-section" style="margin-top:25px">
+                        <div class="card horizontal" style="max-width: 450px;">
+                            <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
+                                <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
                             </div>
-                            <div class="card-content" style="min-height: 92px">
-                                <p>Great blog post! It's nice to see you're enjoying the subject.</p>
-                            </div>
+                            <div class="card-stacked">
+                                <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                    <p style="font-weight: 700;">Michael</p>
+                                </div> -->
+                                <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                    <a style="color:black" href="#">Michael</a>
+                                </div>
+                                <div class="card-content" style="min-height: 92px">
+                                    <p>Great blog post! It's nice to see you're enjoying the subject.</p>
+                                </div>
 
+                            </div>
+                        </div>
+                        <div class="card horizontal" style="max-width: 450px;">
+                            <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
+                                <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
+                            </div>
+                            <div class="card-stacked">
+                                <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                    <p style="font-weight: 700;">Michael</p>
+                                </div> -->
+                                <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                    <a style="color:black" href="#">Michael</a>
+                                </div>
+                                <div class="card-content" style="min-height: 92px">
+                                    <p>Great blog post!</p>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="card horizontal" style="max-width: 450px;">
-                        <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
-                            <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
-                        </div>
-                        <div class="card-stacked">
-                            <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                <p style="font-weight: 700;">Michael</p>
-                            </div> -->
-                            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                <a style="color:black" href="#">Michael</a>
-                            </div>
-                            <div class="card-content" style="min-height: 92px">
-                                <p>Great blog post!</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                <!--{% endif %}-->
             </div>
         {% elif "Image" in post.kind %}
             <div class="col s12 m12">
@@ -109,7 +135,7 @@
                     <div class="card-action voting sidebar">
                         <div class="score-container">
                             <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                            <span id="score-{{ post.id }}" class="score">21</span>
+                            <span id="score-{{ post.id }}" class="score">0</span>
                             <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                         </div>
                     </div>
@@ -130,7 +156,7 @@
                     <div class="card-action voting sidebar">
                         <div class="score-container">
                             <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                            <span id="score-{{ post.id }}" class="score">21</span>
+                            <span id="score-{{ post.id }}" class="score">0</span>
                             <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                         </div>
                     </div>
@@ -184,9 +210,9 @@
                 </div>
             </div>
         {% endif %}
-        
+
     </div>
-    
+
 
     <script>
         // initialize dropdown
@@ -205,12 +231,60 @@
 
             // on 'view comments' click animate to comments
             $('.card-open.comments').click(event => {
-                console.log('clicked');
                 $('html, body').animate({
                     scrollTop: $('#comment-section').offset().top
                 }, 1000);
             })
-
         })
+
+        $(".share-to").hover(function(){
+            $(".media").css("display","block");
+        },function(){
+            $(".media").css("display","none");
+        });
+
+
+        $( "#make-comments" ).click(function() {
+            if($(".comment-box").css("display") == 'block'){
+                $(".comment-box").css("display","none");
+                $(".comment-submit").css("display","none");
+            }else{
+                $(".comment-box").css("display","block");
+                $(".comment-submit").css("display","block");
+            }
+        })
+
+        $('#AJAX_submit').click(function() {
+
+//            console.log($('#content').val())
+//            console.log($('#username').text())
+//            console.log($('#postId').text())
+            $.ajax({
+
+                url: "/blogs/ajaxsubmit",
+                type: 'GET',
+                data: {
+                    'content': $('#content').val(),
+                    'username': $('#username').text(),
+                    'postId': $('#postId').text()
+                },
+
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    if (obj.status) {
+                        location.reload();
+                    } else {
+                        $('#erro_msg').text(obj.error);
+                    }
+                }
+            })
+        })
+
+
+
+
+
+
+
     </script>
 {% endblock %}

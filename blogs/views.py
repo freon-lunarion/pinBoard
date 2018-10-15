@@ -12,41 +12,12 @@ from django.template import RequestContext
 from django.utils import timezone
 import datetime
 from django.shortcuts import redirect
+from django.http import JsonResponse
 
 
 from .forms import *
 
 # Create your views here.
-def index(request):
-    latest_post_list = sorted(Post.objects.all(), key=lambda p: p.score, reverse=True)
-    # latest_post_list = Post.objects.all()
-    context = {
-        'latest_post_list': latest_post_list,
-    }
-
-    return render(request, 'blogs/index.html', context=context)
-
-def create_post(request):
-    if (request.method == 'POST'):
-        form = AddPostForm(request.POST)
-        if form.is_valid():
-            #publish = form.cleaned_data['publish']
-            now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            user = form.cleaned_data['user']
-            #if (publish):
-            post = Post.objects.create(title=form.cleaned_data['title'],
-                                kind='Post',
-                                is_pinned=False,
-                                pin_board=None,
-                                operator=None,
-                                detail=form.cleaned_data['detail'],
-                                author=User.objects.get(id=user),
-                                published_date=now
-                               )
-            return HttpResponseRedirect(f'/blogs/{post.id}')
-        return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
-    return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
-
 class IndexView(generic.ListView):
     template_name = 'blogs/index.html'
     context_object_name = 'latest_post_list'
@@ -64,9 +35,38 @@ class ResultsView(generic.DetailView):
     model = Post
     template_name = 'blogs/results.html'
 
-class PostView(generic.DetailView):
+class PostView(generic.DeleteView):
     model = Post
     template_name = 'blogs/post.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.pk = kwargs.get('pk', "-1")
+        return super(generic.DeleteView, self).dispatch(request, *args, **kwargs)
+
+    # content: post, comments (list), comment_form
+    def get_context_data(self, **kwargs):
+        post = get_object_or_404(Post, id=self.pk)
+        context = super(PostView, self).get_context_data(**kwargs)
+        context['comments'] = sorted(Comment.objects.filter(parent=post),
+                                     key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
+                                     else 0), reverse=True)
+        context['comment_form'] = CommentForm()
+        return context
+
+    # redirecting. let me know if it should not be redirecting - Deanna
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            post = get_object_or_404(Post, id=self.pk)
+            user = form.cleaned_data['comment_user']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            Comment.objects.create(parent=post,
+                                detail=form.cleaned_data['comment_detail'],
+                                author=User.objects.get(id=user),
+                                published_date=now)
+            return HttpResponseRedirect(f'/blogs/{self.pk}')
+        return HttpResponseRedirect(f'/blogs/{self.pk}')
+
 
 class CommentView(generic.ListView):
     template_name = 'blogs/comment.html'
@@ -79,7 +79,8 @@ class CommentView(generic.ListView):
 
     def get_queryset(self):
         """Return the comments of the certain post ordered by score."""
-        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: c.score, reverse=True)
+        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: (c.score, c.published_date.toordinal()
+                                      if c.published_date else 0), reverse=True)
 
 class LoginView(generic.DetailView):
     model = Post
@@ -89,11 +90,67 @@ class RegisterView(generic.DetailView):
     model = Post
     template_name = 'blogs/register.html'
 
-def vote(request, content_id):
+def index(request):
+    latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+                                                                 if p.published_date else 0), reverse=True)
+    # latest_post_list = Post.objects.all()
+    context = {
+        'latest_post_list': latest_post_list,
+    }
+
+    return render(request, 'blogs/index.html', context=context)
+
+def create_post(request):
     if (request.method == 'POST'):
-        user_id = request.POST.get('user_id', None)
-        value = request.POST.get('value', 1)
-        return HttpResponse(str(Vote.vote(content_id, user_id, value)))
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            #publish = form.cleaned_data['publish']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            user = form.cleaned_data['user']
+            #if (publish):
+            post = Post.objects.create(title=form.cleaned_data['title'],
+                                kind=form.cleaned_data['kind'],
+                                is_pinned=False,
+                                pin_board=None,
+                                operator=None,
+                                detail=form.cleaned_data['detail'],
+                                author=User.objects.get(id=user),
+                                published_date=now
+                               )
+            return HttpResponseRedirect(f'/blogs/{post.id}')
+        return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
+    return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
+
+def ajaxsubmit(request):
+    ret = {'status': True, 'error': None, 'data': None}
+    if (request.method == 'GET'):
+        #form = CommentForm(request.GET)
+        try:
+            content = request.GET.get('content')
+            username = request.GET.get('username')
+            postId = request.GET.get('postId')
+            print(content)
+            print(username)
+            print(postId)
+            #if form.is_valid():
+            comment = Comment.objects.create(content=content,
+                                            username=username,
+                                            postId=postId
+                                           )
+            #comment = Comment.objects.create()
+            #comment.username = username
+            #comment.content = content
+            #comment.postId = postId
+            #comment.save()
+
+            return render(request, 'blogs/index.html')
+            return HttpResponseRedirect(f'/blogs/{postId}')
+        except Exception as e:
+                ret['status'] = False
+                ret['error'] = 'error request'
+
+    return render(request, 'blogs/post.html', locals())
+
 
 def login(request):
     if (request.method == 'POST'):
@@ -182,6 +239,5 @@ def logout(request):
     except KeyError:
         pass
     return HttpResponseRedirect('/blogs/login/')
-
 
 
