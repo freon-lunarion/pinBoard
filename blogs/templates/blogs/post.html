@@ -26,16 +26,28 @@
                     </div>
                     <!--<div id="username">{{request.session.username}}</div>-->
                     <!--<div id="postId">{{ post.id }}</div>-->
-                    <form class="col s12 comment-box">
+
+                    <!--<form class="col s12 comment-box">-->
+                        <!--<div class="row">-->
+                            <!--<div class="input-field col s12">-->
+                                <!--<textarea id="textarea2" class="materialize-textarea aaa" data-length="120"></textarea>-->
+                                <!--<label for="textarea2"></label>-->
+                                <!--&lt;!&ndash;<input type="text" id="content">&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</form>-->
+                    <!--<button class="waves-effect waves-light btn-small orange lighten-1 comment-submit" id="AJAX_submit">submit</button>-->
+
+                    <form method="post" action="somepage" class="col s12 comment-box">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea2" class="materialize-textarea aaa" data-length="120"></textarea>
-                                <label for="textarea2"></label>
-                                <!--<input type="text" id="content">-->
+                                <textarea id="myTextArea" class="mceEditor"></textarea>
                             </div>
                         </div>
+
                     </form>
-                    <button class="waves-effect waves-light btn-small orange lighten-1 comment-submit" id="AJAX_submit">submit</button>
+
+                    <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
                 </div>
             </div>
             <div class="col s12 m8" id="contents">
@@ -252,13 +264,28 @@
                 $(".comment-box").css("display","block");
                 $(".comment-submit").css("display","block");
             }
-        })
+        });
+
+
+
+
+//        tinyMCE.init({
+//            mode : "specific_textareas",
+//            editor_selector : "mceEditor"
+//        });
+
 
         $('#AJAX_submit').click(function() {
 
-//            console.log($('#content').val())
-//            console.log($('#username').text())
-//            console.log($('#postId').text())
+            alert(tinyMCE.get('myTextArea').getContent());
+
+//            var temp = tinymce.get('textAreaName').save();
+//            console.log(temp)
+
+            console.log($('#textarea2').text())
+            console.log($('#bbb').val())
+            console.log($('#username').text())
+            console.log($('#postId').text())
             $.ajax({
 
                 url: "/blogs/ajaxsubmit",
