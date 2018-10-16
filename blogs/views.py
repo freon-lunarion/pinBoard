@@ -11,85 +11,13 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from shared.models import *
 import datetime
+from django.shortcuts import redirect
 
 
 
-# class IndexView(generic.ListView):
-#     template_name = 'blogs/index.html'
-#     context_object_name = 'latest_post_list'
-
-#     def get_queryset(self):
-#         """Return the last five published questions."""
-#         return Post.objects.order_by('-create_time')[:5]
-
-class DetailView(generic.DetailView):
-    model = Post
-    template_name = 'blogs/detail.html'
-
-
-class ResultsView(generic.DetailView):
-    model = Post
-    template_name = 'blogs/results.html'
-
-class PostView(generic.DeleteView):
-    model = Post
-    template_name = 'blogs/post.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        self.pk = kwargs.get('pk', "-1")
-        return super(generic.DeleteView, self).dispatch(request, *args, **kwargs)
-
-    # content: post, comments (list), comment_form
-    def get_context_data(self, **kwargs):
-        post = get_object_or_404(Post, id=self.pk)
-        context = super(PostView, self).get_context_data(**kwargs)
-        context['comments'] = sorted(Comment.objects.filter(parent=post),
-                                     key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
-                                     else 0), reverse=True)
-        context['comment_form'] = CommentForm()
-        return context
-
-    # redirecting. let me know if it should not be redirecting - Deanna
-    def post(self, request, *args, **kwargs):
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            post = get_object_or_404(Post, id=self.pk)
-            user = form.cleaned_data['comment_user']
-            now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            Comment.objects.create(parent=post,
-                                detail=form.cleaned_data['comment_detail'],
-                                author=User.objects.get(id=user),
-                                published_date=now)
-            return HttpResponseRedirect(f'/blogs/{self.pk}')
-        return HttpResponseRedirect(f'/blogs/{self.pk}')
-
-
-class CommentView(generic.ListView):
-    template_name = 'blogs/comment.html'
-    context_object_name = 'comment_list'
-
-    # dispatch is called when the class instance loads
-    def dispatch(self, request, *args, **kwargs):
-        self.pk = kwargs.get('pk', "-1")
-        return super(generic.ListView, self).dispatch(request, *args, **kwargs)
-
-    def get_queryset(self):
-        """Return the comments of the certain post ordered by score."""
-        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: (c.score, c.published_date.toordinal()
-                                      if c.published_date else 0), reverse=True)
-
-class LoginView(generic.DetailView):
-    model = Post
-    template_name = 'blogs/login.html'
-
-class RegisterView(generic.DetailView):
-    model = Post
-    template_name = 'blogs/register.html'
-
-@login_required
+# Create your views here.
 def index(request):
-    latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
-                                                                 if p.published_date else 0), reverse=True)
+    latest_post_list = sorted(Post.objects.all(), key=lambda p: p.score, reverse=True)
     # latest_post_list = Post.objects.all()
     context = {
         'latest_post_list': latest_post_list,
@@ -106,7 +34,7 @@ def create_post(request):
             user = form.cleaned_data['user']
             #if (publish):
             post = Post.objects.create(title=form.cleaned_data['title'],
-                                kind=form.cleaned_data['kind'],
+                                kind='Post',
                                 is_pinned=False,
                                 pin_board=None,
                                 operator=None,
@@ -118,53 +46,86 @@ def create_post(request):
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
-def ajaxsubmit(request):
-    ret = {'status': True, 'error': None, 'data': None}
-    if (request.method == 'GET'):
-        #form = CommentForm(request.GET)
-        try:
-            content = request.GET.get('content')
-            username = request.GET.get('username')
-            postId = request.GET.get('postId')
-            print(content)
-            print(username)
-            print(postId)
-            #if form.is_valid():
-            comment = Comment.objects.create(content=content,
-                                            username=username,
-                                            postId=postId
-                                           )
-            #comment = Comment.objects.create()
-            #comment.username = username
-            #comment.content = content
-            #comment.postId = postId
-            #comment.save()
+class IndexView(generic.ListView):
+    template_name = 'blogs/index.html'
+    context_object_name = 'latest_post_list'
 
-            return render(request, 'blogs/index.html')
-            return HttpResponseRedirect(f'/blogs/{postId}')
-        except Exception as e:
-                ret['status'] = False
-                ret['error'] = 'error request'
+#     def get_queryset(self):
+#         """Return the last five published questions."""
+#         return Post.objects.order_by('-create_time')[:5]
 
-    return render(request, 'blogs/post.html', locals())
+class DetailView(generic.DetailView):
+    model = Post
+    template_name = 'blogs/detail.html'
 
-#
-def loginView(request):
+
+class ResultsView(generic.DetailView):
+    model = Post
+    template_name = 'blogs/results.html'
+
+class PostView(generic.DetailView):
+    model = Post
+    template_name = 'blogs/post.html'
+
+class CommentView(generic.ListView):
+    template_name = 'blogs/comment.html'
+    context_object_name = 'comment_list'
+
+    # dispatch is called when the class instance loads
+    def dispatch(self, request, *args, **kwargs):
+        self.pk = kwargs.get('pk', "-1")
+        return super(generic.ListView, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        """Return the comments of the certain post ordered by score."""
+        return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: c.score, reverse=True)
+
+class LoginView(generic.DetailView):
+    model = Post
+    template_name = 'blogs/login.html'
+
+class RegisterView(generic.DetailView):
+    model = Post
+    template_name = 'blogs/register.html'
+
+def vote(request, content_id):
+    if (request.method == 'POST'):
+        user_id = request.POST.get('user_id', None)
+        value = request.POST.get('value', 1)
+        return HttpResponse(str(Vote.vote(content_id, user_id, value)))
+
+def login(request):
     if (request.method == 'POST'):
         login_form = LoginForm(request.POST)
 
         # REF: https://docs.djangoproject.com/en/2.1/topics/auth/default/#how-to-log-a-user-in
+        # if login_form.is_valid():
+        #     # username = request.POST['username']
+        #     # password = request.POST['password']
+        #     user = authenticate(request, username=username, password=password)
+        #     if user is not None:
+        #         login(request, user)
+        #         return HttpResponseRedirect('/blogs')
+        #     else:
+        #         error = 'Username is not right or password is not right!'
+        #         return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
+        # return render(request, 'blogs/login.html', locals())
+
         if login_form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect('/blogs')
-            else:
-                error = 'Username is not right or password is not right!'
-                return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
-        return render(request, 'blogs/login.html', locals())
+            username = login_form.cleaned_data['username'] 
+            password = login_form.cleaned_data['password'] 
+            userinfo = User.objects.get(username=username)  #get all info of user 
+            user = User.objects.filter(username__exact = username,password__exact = password) 
+            print(user) 
+            if user: 
+ 
+                request.session['username'] = userinfo.username 
+                request.session['useremail'] = userinfo.email 
+                request.session.set_expiry(600) 
+                return HttpResponseRedirect('/blogs') 
+            else: 
+                error = 'Username is not right or password is not right!' 
+                return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error}) 
 
     login_form = LoginForm()
     return render(request, 'blogs/login.html', {'form': login_form, 'message': ''})
@@ -226,5 +187,6 @@ def logout(request):
     except KeyError:
         pass
     return HttpResponseRedirect('/blogs/login/')
+
 
 

@@ -14,10 +14,10 @@ urlpatterns = [
     path('<int:pk>/post/', views.PostView.as_view(), name='post'),
     path('<int:pk>/login/', views.LoginView.as_view(), name='login'),
     path('<int:pk>/register/', views.RegisterView.as_view(), name='register'),
-    url(r'login/$',views.loginView),
+    path('<int:post_id>/vote/', views.vote, name='vote'),
+    url(r'^login/$',views.login),
     url(r'^register/$',views.register),
     url(r'^post/$',views.post),
     url(r'^comment/$',views.comment),
-    url(r'^logout/$',views.logout),
-    url(r'^ajaxsubmit/$', views.ajaxsubmit)
+    url(r'^logout/$',views.logout)
 ]

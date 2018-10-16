@@ -23,5 +23,4 @@ urlpatterns = [
     path('blogs/', include('blogs.urls')),
     path('quiz/', include('quiz.urls')),
     path('tinymce/', include('tinymce.urls')),
-    path('<int:pk>/', include('shared.urls', namespace="shared")),
 ]

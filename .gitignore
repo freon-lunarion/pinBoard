@@ -8,4 +8,3 @@ settings.json
 *.sqlite3
 .idea*.sqlite3
 .idea/workspace.xml
-workspace.xml
