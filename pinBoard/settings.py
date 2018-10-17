@@ -126,4 +126,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'shared/static'),
 ]
 
-AUTH_USER_MODEL = 'shared.User'
+# AUTH_USER_MODEL = 'shared.User'

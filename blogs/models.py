@@ -1,10 +1,11 @@
-import datetime
-from django.db import models
-from django.utils import timezone
-from django.db.models import Sum
-from shared.models import *
-from django.shortcuts import get_object_or_404
 from django import forms
+from django.contrib.auth.models import User
+from django.db import models
+from django.db.models import Sum
+from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from shared.models import *
+import datetime
 
 # Create your models here.
 
@@ -98,8 +99,3 @@ class UserFavorite(models.Model):
         post = get_object_or_404(Post, id=post_id)
         user = get_object_or_404(User, id=user_id)
         return UserFavorite.objects.create(post=post, user=user)
-
-
-class User():
-    username = models.CharField(max_length=150)
-    password = models.CharField(max_length=150)
