@@ -125,5 +125,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'shared/static'),
 ]
+LOGIN_URL='/blogs/login' # default = /account/login 
 
-AUTH_USER_MODEL = 'shared.User'
+# AUTH_USER_MODEL = 'shared.User'
