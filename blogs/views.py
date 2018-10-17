@@ -88,6 +88,18 @@ class PostView(generic.DeleteView):
 def index(request):
     latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
                                                                  if p.published_date else 0), reverse=True)
+
+    # get comment counts
+    for post in latest_post_list:
+        count = Comment.objects.filter(parent=post).count()
+        if count == 0:
+            count_string = "No Comments"
+        if count == 1:
+            count_string = "1 Comment"
+        if count > 1:
+            count_string = count.append(' Comments')
+        post.comments = count_string
+
     # latest_post_list = Post.objects.all()
     context = {
         'latest_post_list': latest_post_list,
