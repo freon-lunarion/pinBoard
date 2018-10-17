@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from shared.models import *
 from tinymce.widgets import TinyMCE
-import datetime
+from datetime import datetime 
 
 class AddRoomForm(forms.Form):
     title = forms.CharField(max_length=128)
