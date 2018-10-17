@@ -33,25 +33,25 @@
 
       <!-- side nav -->
       <!--{% if request.session.username %}-->
-        <ul id="slide-out" class="sidenav">
-          <li><div class="user-view">
-            <div class="background">
-              <img src="https://i.imgur.com/G91dSvD.jpg">
-            </div>
-            <a href="#user"><img class="circle" src="https://i.imgur.com/8P2xzAg.jpg"></a>
-            <div class="profile-details-panel" style="background: rgba(255,255,255,0.6);border-radius: 8px;">
-                <a href="#email"><span class="black-text name">Mike</span></a>
-                <!--<a href="#name"><span class="black-text name">{{ request.session.username }}</span></a>-->
-                <a href="#email"><span class="black-text email">example@gmail.com</span></a>
-              <!--<a href="#email"><span class="black-text email">{{ request.session.useremail }}</span></a>-->
-            </div>
+      <ul id="slide-out" class="sidenav">
+        <li><div class="user-view">
+          <div class="background">
+            <img src="https://i.imgur.com/G91dSvD.jpg">
+          </div>
+          <a href="#user"><img class="circle" src="https://i.imgur.com/8P2xzAg.jpg"></a>
+          <div class="profile-details-panel" style="background: rgba(255,255,255,0.6);border-radius: 8px;">
+              <a href="#email"><span class="black-text name">Mike</span></a>
+              <!--<a href="#name"><span class="black-text name">{{ request.session.username }}</span></a>-->
+              <a href="#email"><span class="black-text email">example@gmail.com</span></a>
+            <!--<a href="#email"><span class="black-text email">{{ request.session.useremail }}</span></a>-->
+          </div>
 
-          </div></li>
-          <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
-          <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
-          <li><div class="divider"></div></li>
-          <li><a class="waves-effect" href=""><i class="material-icons">exit_to_app</i>Logout</a></li>
-        </ul>
+        </div></li>
+        <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
+        <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="waves-effect" href=""><i class="material-icons">exit_to_app</i>Logout</a></li>
+      </ul>
       <!--{% endif %}-->
       
       <!-- nav bar -->
@@ -59,15 +59,20 @@
         <div class="nav-wrapper transparent">
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
           <ul class="right hide-on-med-and-down">
-            <!-- <li><a class="waves-effect modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons">add_box</i>Create Post</a></li> -->
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
-            <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display:block !important"><i class="material-icons">menu</i></a></li>
+            {% if request.session.username and request.session.username.strip %}
+              <li><span>Hello, {{ request.session.username }}&nbsp;</span><span class="logout-link">(Logout)</span></li>
+            {% else %}
+            <li><a class="waves-effect waves-light btn-flat white-text" data-target="create-post-modal" href="/blogs/register">Register</a></li>
+            <li><a class="waves-effect waves-light btn-flat white-text" data-target="create-post-modal" href="/blogs/login">Login</a></li>
+            {% endif %}
+            <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display: block !important"><i class="material-icons">menu</i></a></li>
           </ul>
         </div>
       </nav>
 
       <!-- create-a-post modal -->
-      <div id="create-post-modal" class="modal grey lighten-2">
+      <div id="create-post-modal" class="modal grey lighten-2" style="max-width: 800px;">
         <div class="modal-content" style="min-height: 200px;">
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">What type of post would you like to create?</h5>
           <div style="display:flex;justify-content: space-evenly">
@@ -104,7 +109,7 @@
           </div> -->
         </div>
         <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Publish</a>
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
       </div>
 
@@ -127,6 +132,7 @@
       $(document).ready(() => {
         const options = { edge: 'right' };
         $('.sidenav').sidenav(options);
+        // $('.sidenav').sidenav('open');
         $('.modal').modal();
         $('select').formSelect();
       });

@@ -180,6 +180,19 @@ i.material-icons.title {
   color: rgba(172,255,72,0.9);
 }
 
+.logged-in-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logout-link {
+  color: lightblue;
+  text-decoration: underline;
+  font-size: 12px;
+  display: inline-block;
+}
+
 /* ------------------------------------------ POST PAGE - Gino ------------------------------------------ */
 
 .post-container {
