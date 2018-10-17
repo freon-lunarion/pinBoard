@@ -50,7 +50,7 @@
           <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
           <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
           <li><div class="divider"></div></li>
-          <li><a class="waves-effect" href=""><i class="material-icons">exit_to_app</i>Logout</a></li>
+          <li><a class="waves-effect" href="/blogs/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
         </ul>
       {% endif %}
       
@@ -64,8 +64,8 @@
             {% if request.session.username and request.session.username.strip %}
               <li><span>Hello, {{ request.session.username }}&nbsp;</span><span class="logout-link">(Logout)</span></li>
             {% else %}
-              <li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/register">Register</a></li>
-              <li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/login">Login</a></li>
+              <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/register">Register</a></li>-->
+              <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/login">Login</a></li>-->
             {% endif %}
             <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display: block !important"><i class="material-icons">menu</i></a></li>
           </ul>
