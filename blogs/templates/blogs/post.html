@@ -38,16 +38,22 @@
                     <!--</form>-->
                     <!--<button class="waves-effect waves-light btn-small orange lighten-1 comment-submit" id="AJAX_submit">submit</button>-->
 
-                    <form method="post" action="somepage" class="col s12 comment-box">
+                    <form method="post" class="col s12 comment-box">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="myTextArea" class="mceEditor"></textarea>
+
+                                {% autoescape off %}
+                                {{ comment_form.comment_detail }}
+                                {{ comment_form.comment_user }}
+                                {% endautoescape %}
+                                <!--<textarea id="myTextArea" class="mceEditor"></textarea>-->
                             </div>
                         </div>
-
+                        <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
                     </form>
 
-                    <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
+                    <!--<button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>-->
                 </div>
             </div>
             <div class="col s12 m8" id="contents">
@@ -87,44 +93,27 @@
                 </div>
 
                 <!-- comment section -->
-                <!--{% if "Comment" in comment %}-->
-                    <div id="comment-section" style="margin-top:25px">
+                <div id="comment-section" style="margin-top:25px">
+                    {% for comment in comments %}
                         <div class="card horizontal" style="max-width: 450px;">
                             <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
-                                <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
+                                 <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
                             </div>
                             <div class="card-stacked">
                                 <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
                                     <p style="font-weight: 700;">Michael</p>
                                 </div> -->
                                 <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <a style="color:black" href="#">Michael</a>
+                                    <a style="color:black" href="#">{{ comment.author.username }}</a>
                                 </div>
                                 <div class="card-content" style="min-height: 92px">
-                                    <p>Great blog post! It's nice to see you're enjoying the subject.</p>
+                                    <p>{{ comment.detail | safe }}</p>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="card horizontal" style="max-width: 450px;">
-                            <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;">
-                                <!-- <img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px"> -->
-                            </div>
-                            <div class="card-stacked">
-                                <!-- <div class="card-content" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <p style="font-weight: 700;">Michael</p>
-                                </div> -->
-                                <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <a style="color:black" href="#">Michael</a>
-                                </div>
-                                <div class="card-content" style="min-height: 92px">
-                                    <p>Great blog post!</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                <!--{% endif %}-->
+                    {% endfor %}
+                </div>
             </div>
         {% elif "Image" in post.kind %}
             <div class="col s12 m12">
@@ -227,6 +216,9 @@
 
 
     <script>
+
+        document.getElementById('comment_user').value = 2;
+
         // initialize dropdown
         $('#dropdown-trigger').dropdown();
 
@@ -244,6 +236,7 @@
             // on 'view comments' click animate to comments
             $('.card-open.comments').click(event => {
                 $('html, body').animate({
+
                     scrollTop: $('#comment-section').offset().top
                 }, 1000);
             })
@@ -275,43 +268,35 @@
 //        });
 
 
-        $('#AJAX_submit').click(function() {
-
-            alert(tinyMCE.get('myTextArea').getContent());
+//        $('#AJAX_submit').click(function() {
 
 //            var temp = tinymce.get('textAreaName').save();
 //            console.log(temp)
 
-            console.log($('#textarea2').text())
-            console.log($('#bbb').val())
-            console.log($('#username').text())
-            console.log($('#postId').text())
-            $.ajax({
+//            console.log($('#textarea2').text())
+//            console.log($('#bbb').val())
+//            console.log($('#username').text())
+//            console.log($('#postId').text())
+//           $.ajax({
 
-                url: "/blogs/ajaxsubmit",
-                type: 'GET',
-                data: {
-                    'content': $('#content').val(),
-                    'username': $('#username').text(),
-                    'postId': $('#postId').text()
-                },
+//                url: "/blogs/ajaxsubmit",
+//                type: 'GET',
+//                data: {
+//                    'content': $('#content').val(),
+//                    'username': $('#username').text(),
+//                    'postId': $('#postId').text()
+//                },
 
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    if (obj.status) {
-                        location.reload();
-                    } else {
-                        $('#erro_msg').text(obj.error);
-                    }
-                }
-            })
-        })
-
-
-
-
-
-
+//                success: function (data) {
+//                    var obj = JSON.parse(data);
+//                    if (obj.status) {
+//                        location.reload();
+//                    } else {
+//                        $('#erro_msg').text(obj.error);
+//                    }
+//                }
+//            })
+//        })
 
     </script>
 {% endblock %}

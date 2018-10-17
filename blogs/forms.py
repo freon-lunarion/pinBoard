@@ -69,7 +69,10 @@ class AddPostForm(forms.Form):
     }))
 
 class CommentForm(forms.Form):
-    comment_detail = forms.CharField(required=False, widget=forms.Textarea)
+    comment_detail = forms.CharField(required=False, widget=forms.Textarea(attrs={
+        'id': "comment_detail",
+        'style': 'height: 300px'
+    }))
     comment_user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
         'type': 'hidden',
         'id': 'comment_user'

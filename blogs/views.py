@@ -35,13 +35,13 @@ class ResultsView(generic.DetailView):
     model = Post
     template_name = 'blogs/results.html'
 
-class PostView(generic.DeleteView):
+class PostView(generic.DetailView):
     model = Post
     template_name = 'blogs/post.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.pk = kwargs.get('pk', "-1")
-        return super(generic.DeleteView, self).dispatch(request, *args, **kwargs)
+        return super(PostView, self).dispatch(request, *args, **kwargs)
 
     # content: post, comments (list), comment_form
     def get_context_data(self, **kwargs):
