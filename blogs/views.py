@@ -26,15 +26,6 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Post.objects.order_by('-create_time')[:5]
 
-class DetailView(generic.DetailView):
-    model = Post
-    template_name = 'blogs/detail.html'
-
-
-class ResultsView(generic.DetailView):
-    model = Post
-    template_name = 'blogs/results.html'
-
 class PostView(generic.DetailView):
     model = Post
     template_name = 'blogs/post.html'
@@ -82,6 +73,10 @@ class CommentView(generic.ListView):
         return sorted(Comment.objects.filter(parent=self.pk), key=lambda c: (c.score, c.published_date.toordinal()
                                       if c.published_date else 0), reverse=True)
 
+class QuestionView(generic.DetailView):
+    pass
+
+
 class LoginView(generic.DetailView):
     model = Post
     template_name = 'blogs/login.html'
@@ -107,6 +102,7 @@ def create_post(request):
             #publish = form.cleaned_data['publish']
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
             user = form.cleaned_data['user']
+            tags = form.cleaned_data['tags'].split(',')
             #if (publish):
             post = Post.objects.create(title=form.cleaned_data['title'],
                                 kind=form.cleaned_data['kind'],
@@ -117,39 +113,42 @@ def create_post(request):
                                 author=User.objects.get(id=user),
                                 published_date=now
                                )
+            for title in tags:
+                tag = Tag.create(title.strip())
+                ContentTag.create(post.id, tag.id)
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
-def ajaxsubmit(request):
-    ret = {'status': True, 'error': None, 'data': None}
-    if (request.method == 'GET'):
-        #form = CommentForm(request.GET)
-        try:
-            content = request.GET.get('content')
-            username = request.GET.get('username')
-            postId = request.GET.get('postId')
-            print(content)
-            print(username)
-            print(postId)
-            #if form.is_valid():
-            comment = Comment.objects.create(content=content,
-                                            username=username,
-                                            postId=postId
-                                           )
-            #comment = Comment.objects.create()
-            #comment.username = username
-            #comment.content = content
-            #comment.postId = postId
-            #comment.save()
-
-            return render(request, 'blogs/index.html')
-            return HttpResponseRedirect(f'/blogs/{postId}')
-        except Exception as e:
-                ret['status'] = False
-                ret['error'] = 'error request'
-
-    return render(request, 'blogs/post.html', locals())
+# def ajaxsubmit(request):
+#     ret = {'status': True, 'error': None, 'data': None}
+#     if (request.method == 'GET'):
+#         #form = CommentForm(request.GET)
+#         try:
+#             content = request.GET.get('content')
+#             username = request.GET.get('username')
+#             postId = request.GET.get('postId')
+#             print(content)
+#             print(username)
+#             print(postId)
+#             #if form.is_valid():
+#             comment = Comment.objects.create(content=content,
+#                                             username=username,
+#                                             postId=postId
+#                                            )
+#             #comment = Comment.objects.create()
+#             #comment.username = username
+#             #comment.content = content
+#             #comment.postId = postId
+#             #comment.save()
+#
+#             return render(request, 'blogs/index.html')
+#             return HttpResponseRedirect(f'/blogs/{postId}')
+#         except Exception as e:
+#                 ret['status'] = False
+#                 ret['error'] = 'error request'
+#
+#     return render(request, 'blogs/post.html', locals())
 
 
 def login(request):
@@ -226,11 +225,11 @@ def register(request):
     register_form = RegisterForm()
     return render(request, 'blogs/register.html', {'form': register_form, 'message': ''})
 
-def post(request):
-    return render(request, 'blogs/post.html', locals())
-
-def comment(request):
-    return render(request, 'blogs/comment.html', locals())
+# def post(request):
+#     return render(request, 'blogs/post.html', locals())
+#
+# def comment(request):
+#     return render(request, 'blogs/comment.html', locals())
 
 
 def logout(request):

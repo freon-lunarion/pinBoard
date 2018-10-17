@@ -54,7 +54,9 @@
                     <hr style="margin-bottom: 24px;">
                     <!-- <h3 class="post-subtitle">Lorem ipsum Sed eiusmod esse aliqua</h3> -->
                     <div class="post-tags">
-                        <div class="chip">Tutorial</div><div class="chip">Cooking</div>
+                        {% for tag in post.tags %}
+                            <div class="chip">{{ tag }}</div>
+                        {% endfor %}
                     </div>
 
                     <div class="content-container">

@@ -57,6 +57,10 @@ class Content(models.Model):
     def is_published_recently(self):
         return self.create_time >= timezone.now() - datetime.timedelta(days=1)
 
+    @property
+    def tags(self):
+        return [obj.tag.title for obj in ContentTag.objects.filter(content__exact=self)]
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)

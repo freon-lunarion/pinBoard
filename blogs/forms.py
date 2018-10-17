@@ -55,6 +55,10 @@ class LoginForm(forms.Form):
 class AddPostForm(forms.Form):
     title = forms.CharField(max_length=128)
     detail = forms.CharField(required=False, widget=forms.Textarea)
+    tags = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'id': 'tags',
+        'placeholder': 'use , to separate tags'
+    }))
     # publish = forms.IntegerField(widget=forms.TextInput(attrs={'id': 'publish',
     #                                                            'type': 'button',
     #                                                            'checked': 'true'}))
