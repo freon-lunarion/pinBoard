@@ -4,7 +4,7 @@
     <div class="post-container">
         {% if "Post" in post.kind %}
             <div class="col s12 m4 sidebar" id="sidebar">
-                <div class="card blue-grey darken-1" style="position:sticky;top:20px">
+                <div class="card blue-grey darken-1" style="position:relative;top:1px;width: 360px;left: -59px;">
                     <div class="card-action voting sidebar">
                         <div class="score-container">
                             <a class="btn-flat vote" style="padding-left: 0;margin-right: 0;"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
@@ -20,23 +20,13 @@
                     </div>
                     <div class="card-action voting sidebar">
                         <a class="card-open comments">View Comments</a>
+                        {% if comments %}
+                            <span style="color: #ffab40;">({{ comments|length}})</span>
+                        {% endif %}
                         &nbsp;
                         &nbsp;
                         <a class="comments" style="cursor: pointer" id="make-comments">Make Comments</a>
                     </div>
-                    <!--<div id="username">{{request.session.username}}</div>-->
-                    <!--<div id="postId">{{ post.id }}</div>-->
-
-                    <!--<form class="col s12 comment-box">-->
-                        <!--<div class="row">-->
-                            <!--<div class="input-field col s12">-->
-                                <!--<textarea id="textarea2" class="materialize-textarea aaa" data-length="120"></textarea>-->
-                                <!--<label for="textarea2"></label>-->
-                                <!--&lt;!&ndash;<input type="text" id="content">&ndash;&gt;-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</form>-->
-                    <!--<button class="waves-effect waves-light btn-small orange lighten-1 comment-submit" id="AJAX_submit">submit</button>-->
 
                     <form method="post" class="col s12 comment-box">
                         {% csrf_token %}
@@ -52,6 +42,8 @@
                         </div>
                         <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
                     </form>
+
+                    <button  id="" class="waves-effect waves-light btn-small orange lighten-1 comment-submit" style="visibility: hidden">submit</button>
 
                     <!--<button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>-->
                 </div>
