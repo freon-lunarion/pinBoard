@@ -19,5 +19,6 @@ urlpatterns = [
     # url(r'^post/$',views.post),
     # url(r'^comment/$',views.comment),
     url(r'^logout/$',views.logout),
-    # url(r'^ajaxsubmit/$', views.ajaxsubmit)
+    # url(r'^ajaxsubmit/$', views.ajaxsubmit),
+    url(r'^vote/$',views.vote),
 ]

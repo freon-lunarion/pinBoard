@@ -455,6 +455,11 @@ img {
   top: 6px;
 }
 
+.cleanfloat::after{display: block; clear: both; content:""; visibility: hidden; height: 0;}
+
+ul li{list-style:none; float:left; font-size:30px; margin:5px; color:#ccc; cursor:pointer;}
+.hs,.cs{color:#f00;}
+
 
 
 

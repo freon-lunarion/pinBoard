@@ -1,6 +1,8 @@
 {% extends "./base.html" %}
 
 {% block content %}
+
+    <div class="username">{{request.session.username}}</div>
     <div class="post-container">
         {% if "Post" in post.kind %}
             <div class="col s12 m4 sidebar" id="sidebar">
@@ -103,6 +105,17 @@
                                 <div class="card-content" style="min-height: 92px">
                                     <p>{{ comment.detail | safe }}</p>
                                 </div>
+
+                                <ul class="cleanfloat">
+                                    <li>&#9733;</li>
+                                    <li>&#9733;</li>
+                                    <li>&#9733;</li>
+                                    <li>&#9733;</li>
+                                    <li>&#9733;</li>
+                                </ul>
+
+                                <!--<input type="text" class="vote">-->
+
 
                             </div>
                         </div>
@@ -253,6 +266,24 @@
             }
         });
 
+        var isVote = 0;
+        $(function () {
+            $("ul li").hover(function(){
+                $(this).addClass('hs');
+                $(this).prevAll().addClass('hs');
+            },function(){
+                $(this).removeClass('hs');
+                $(this).prevAll().removeClass('hs');
+            })
+
+            $("ul li").click(function () {
+                isVote = 1;
+                $(this).addClass('cs');
+                $(this).prevAll().addClass('cs');
+                $(this).nextAll().removeClass('cs');
+            })
+        })
+
 
 
 
@@ -262,35 +293,25 @@
 //        });
 
 
-//        $('#AJAX_submit').click(function() {
+        $('.cleanfloat').click(function() {
 
-//            var temp = tinymce.get('textAreaName').save();
-//            console.log(temp)
 
-//            console.log($('#textarea2').text())
-//            console.log($('#bbb').val())
-//            console.log($('#username').text())
-//            console.log($('#postId').text())
-//           $.ajax({
+            console.log($('.username').text())
+            console.log($('.vote').val())
+           $.ajax({
 
-//                url: "/blogs/ajaxsubmit",
-//                type: 'GET',
-//                data: {
-//                    'content': $('#content').val(),
-//                    'username': $('#username').text(),
-//                    'postId': $('#postId').text()
-//                },
+                url: "/blogs/vote/",
+                type: 'GET',
+                data: {
+                    'username': $('.username').text(),
+                    'vote': isVote
+                },
 
-//                success: function (data) {
-//                    var obj = JSON.parse(data);
-//                    if (obj.status) {
-//                        location.reload();
-//                    } else {
-//                        $('#erro_msg').text(obj.error);
-//                    }
-//                }
-//            })
-//        })
+                success: function (data) {
+                    alert(data.message);
+                }
+            })
+        })
 
     </script>
 {% endblock %}
