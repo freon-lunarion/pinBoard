@@ -1,6 +1,6 @@
 tinymce.init({
   selector: 'textarea',
-  height: 300,
+  height: 330,
   menubar: false,
   plugins: [
     'advlist autolink lists link image charmap print preview anchor textcolor',

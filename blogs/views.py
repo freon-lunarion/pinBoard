@@ -304,3 +304,30 @@ def logout_view(request):
     return HttpResponseRedirect('/blogs/login/')
 
 
+
+def vote(request):
+    if (request.method == 'GET'):
+        data = request.GET
+        print(data)
+        username = data.get('username')
+        vote = data.get('vote')
+        print("niha")
+        print(vote)
+
+        if (vote == "1"):
+
+            print("nihaoalalla")
+            vote = Vote.objects.create()
+            vote.content_id = username
+            vote.content = vote
+            vote.save()
+
+            print("nihaoa")
+            voteinfo = Vote.objects.get(content_id=username)
+            response_data = {}
+            response_data['result'] = voteinfo.username
+            return HttpResponse(json.dumps(response_data), content_type="application/json")
+            #return HttpResponse(str(Vote.exist(pk, user)))
+        #return HttpResponse(str(Vote.vote(pk, user, vote)))
+
+
