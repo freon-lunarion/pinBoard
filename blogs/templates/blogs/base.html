@@ -83,7 +83,7 @@
                 <span class="white-text">&nbsp;Article</span>
               </div>
             </a>
-            <a href="#" >
+            <a id="toggle-image-post-form">
               <div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">insert_photo</i>
                 <span class="white-text">&nbsp;Image</span>
@@ -108,6 +108,13 @@
           <div class="input-field">
             <input id="image-url" type="text" class="validate">
           </div> -->
+        </div>
+        <div id="submit-image-post">
+          <div class="image-post-form-container">
+            <input type="text" placeholder="Title" name="image_post_title" style="max-width: 200px">
+            <input type="text" placeholder="Image URL" name="image_post_url" style="max-width: 200px">
+            <a class="waves-effect waves-light btn-small cyan lighten-1">Submit</a></li>
+          </div>
         </div>
         <div class="modal-footer">
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
@@ -149,7 +156,11 @@
         }
       });
 
-      
+      //toggle image post form
+      $('#toggle-image-post-form').click(event => {
+        $('#submit-image-post').slideToggle('fast');
+
+      });
 
       (function(d, t) {
         var g = d.createElement(t),
@@ -157,8 +168,6 @@
         g.src = '//hnbutton.appspot.com/static/hn.min.js';
         s.parentNode.insertBefore(g, s);
       }(document, 'script'));
-
-
 
     </script>
 

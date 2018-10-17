@@ -193,6 +193,19 @@ i.material-icons.title {
   display: inline-block;
 }
 
+.image-post-form-container {
+  width: 100%;
+  background: #fafafa;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#submit-image-post {
+  display: none;
+}
+
 /* ------------------------------------------ POST PAGE - Gino ------------------------------------------ */
 
 .post-container {
@@ -470,8 +483,8 @@ img {
 
 .cleanfloat::after{display: block; clear: both; content:""; visibility: hidden; height: 0;}
 
-ul li{list-style:none; float:left; font-size:30px; margin:5px; color:#ccc; cursor:pointer;}
-.hs,.cs{color:#f00;}
+/* ul li{list-style:none; float:left; font-size:30px; margin:5px; color:#ccc; cursor:pointer;}
+.hs,.cs{color:#f00;} */
 
 
 
