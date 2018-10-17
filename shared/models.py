@@ -1,26 +1,43 @@
-from django.db import models
-from django.utils import timezone
-import datetime
-from django.db.models import Sum, Count
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+from django.db import models
+from django.db.models import Sum, Count
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from tinymce import models as tinymce_models
+import datetime
 
 # Create your models here.
 
-class User(AbstractUser):
+class UserProfile(models.Model):
+    # REF : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
+    # REF : https://stackoverflow.com/questions/6396442/add-image-avatar-field-to-users-in-django
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField()
 
-    def __str__(self):
-        return self.username
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            UserProfile.objects.create(user=instance)
 
-    @staticmethod
-    def create_student(username, password, email=''):
-        return User.objects.create_user(username, email, password)
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.shared.save()
 
-    @staticmethod
-    def create_moderator(username, password, email=''):
-        return User.objects.create_superuser(username, email, password)
+# class User(AbstractUser):
+
+#     def __str__(self):
+#         return self.username
+
+#     @staticmethod
+#     def create_student(username, password, email=''):
+#         return User.objects.create_user(username, email, password)
+
+#     @staticmethod
+#     def create_moderator(username, password, email=''):
+#         return User.objects.create_superuser(username, email, password)
 
 
 class PinBoard(models.Model):
