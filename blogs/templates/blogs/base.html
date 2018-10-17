@@ -63,8 +63,8 @@
             {% if request.session.username and request.session.username.strip %}
               <li><span>Hello, {{ request.session.username }}&nbsp;</span><span class="logout-link">(Logout)</span></li>
             {% else %}
-            <li><a class="waves-effect waves-light btn-flat white-text" data-target="create-post-modal" href="/blogs/register">Register</a></li>
-            <li><a class="waves-effect waves-light btn-flat white-text" data-target="create-post-modal" href="/blogs/login">Login</a></li>
+              <li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/register">Register</a></li>
+              <li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/login">Login</a></li>
             {% endif %}
             <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display: block !important"><i class="material-icons">menu</i></a></li>
           </ul>
@@ -72,24 +72,24 @@
       </nav>
 
       <!-- create-a-post modal -->
-      <div id="create-post-modal" class="modal grey lighten-2" style="max-width: 800px;">
+      <div id="create-post-modal" class="modal grey lighten-2" style="max-width: 600px;">
         <div class="modal-content" style="min-height: 200px;">
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">What type of post would you like to create?</h5>
           <div style="display:flex;justify-content: space-evenly">
             <a href="/blogs/create">
-              <div class="card-panel waves-light  waves-effect post-type amber" style="display:flex;align-items: center;justify-content: center;width:200px;height:150px">
+              <div class="card-panel waves-light  waves-effect post-type amber" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">event_note</i>
                 <span class="white-text">&nbsp;Article</span>
               </div>
             </a>
             <a href="#" >
-              <div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:200px;height:150px">
+              <div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">insert_photo</i>
                 <span class="white-text">&nbsp;Image</span>
               </div>
             </a>
             <a href="#">
-              <div class="card-panel waves-light waves-effect post-type light-green lighten-1" style="display:flex;align-items: center;justify-content: center;width:200px;height:150px">
+              <div class="card-panel waves-light waves-effect post-type light-green lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">question_answer</i>
                 <span class="white-text">&nbsp;Question</span>
               </div>
