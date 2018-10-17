@@ -52,11 +52,12 @@ class PostView(generic.DeleteView):
         form = CommentForm(request.POST)
         if form.is_valid():
             post = get_object_or_404(Post, id=self.pk)
-            user = form.cleaned_data['comment_user']
+            # user = form.cleaned_data['comment_user']
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
             Comment.objects.create(parent=post,
                                 detail=form.cleaned_data['comment_detail'],
-                                author=User.objects.get(id=user),
+                                # author=User.objects.get(id=user),
+                                author= request.user,
                                 published_date=now)
             return HttpResponseRedirect(f'/blogs/{self.pk}')
         return HttpResponseRedirect(f'/blogs/{self.pk}')
