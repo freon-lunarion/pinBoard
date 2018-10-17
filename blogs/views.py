@@ -271,11 +271,13 @@ def register(request):
                 return render(request, 'blogs/register.html', {'form': RegisterForm(), 'email_message': email_message})
 
             User.objects.create_user(username,email,password)
-            login(request, user)
-            request.session['username'] = user.username
-            request.session['useremail'] = user.email
-            request.session.set_expiry(600)
-            return HttpResponseRedirect('/blogs')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                request.session['username'] = user.username
+                request.session['useremail'] = user.email
+                request.session.set_expiry(600)
+                return HttpResponseRedirect('/blogs')
             # message = 'Registered Successfully!'
             # return render_to_response("blogs/login.html")
         else:
