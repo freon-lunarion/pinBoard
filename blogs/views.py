@@ -97,7 +97,9 @@ def index(request):
         if count == 1:
             count_string = "1 Comment"
         if count > 1:
-            count_string = count.append(' Comments')
+            count_string = str(count) + ' Comments'
+            # count_string = count.append(' Comments')
+            
         post.comments = count_string
 
     # latest_post_list = Post.objects.all()
