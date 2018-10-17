@@ -356,7 +356,7 @@ img {
   background-color: #fff;
   border-radius: 20px;
   width: 36%;
-  height: 45%;
+  height: 47%;
   margin: auto;
   position: absolute;
   top: 0;
@@ -398,7 +398,18 @@ img {
   /*border: 1px groove lightgray;*/
   /*outline:none;*/
   /*cursor:pointer;*/
-  margin-top: 20px;
+  width: 100px;
+  margin-top: 13px;
+}
+
+#try-register{
+  margin-top: 13px;
+  width: 102px;
+  margin-left: -3px;
+}
+#try-login{
+  margin-top: 13px;
+  width: 102px;
 }
 
 #register{

@@ -60,9 +60,11 @@
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
           <ul class="right hide-on-med-and-down">
             <!-- <li><a class="waves-effect modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons">add_box</i>Create Post</a></li> -->
+            {% if request.session.username %}
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
+            {% endif %}
             {% if request.session.username and request.session.username.strip %}
-              <li><span>Hello, {{ request.session.username }}&nbsp;</span><span class="logout-link">(Logout)</span></li>
+              <li><span>Hello, {{ request.session.username }}&nbsp;</span></li>
             {% else %}
               <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/register">Register</a></li>-->
               <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/login">Login</a></li>-->
