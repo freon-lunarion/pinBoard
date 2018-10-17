@@ -24,16 +24,15 @@ class QuizBank(models.Model):
     tryout_beginTime = models.DateTimeField(default=timezone.now)
     tryout_endTime = models.DateTimeField(default=timezone.now)
 
-
     def is_submit_time(self):
-        if (submit_beginTime <= timezone.now and timezone.now <= submit_endTime):
+        if (self.submit_beginTime <= timezone.now and timezone.now <= self.submit_endTime):
             return True
         else:
             return False
         
     
     def is_tryout_time(self):
-        if (tryout_beginTime <= timezone.now and timezone.now <= tryout_endTime):
+        if (self.tryout_beginTime <= timezone.now and timezone.now <= self.tryout_endTime):
             return True
         else:
             return False
