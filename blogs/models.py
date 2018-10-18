@@ -64,6 +64,8 @@ class Comment(Content):
 
 class QnaQuestion(Content):
     title = models.CharField(max_length=150)
+    kind = models.CharField(max_length=20, default='Question')
+
     # is_live_question = models.BooleanField(default=False)
     # parent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
 
