@@ -1,9 +1,12 @@
-import datetime
 from django.db import models
 from shared.models import *
+import datetime
+import django.utils.timezone 
 
 # Each Quiz is a question bank, which can be use for one theme,a course or a topic.
 class QuizBank(models.Model):
+    # max_date = '9999-12-31 23:59:59'
+
     title = models.CharField(max_length=100)
     detail = models.TextField(blank=True, null=True) # this for decription of the quiz or instruction
 

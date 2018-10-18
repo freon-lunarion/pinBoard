@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+
+{% block content %}
+    <form  method="post">
+        {% csrf_token %}
+        <div class="card-panel post-container">
+            {{ form.as_p }}
+            
+            <button class="waves-effect waves-light btn-small orange lighten-1">submit</button>
+        </div>
+    </form>
+    <script>
+        
+
+        $('input').attr('autocomplete', 'off');
+        
+    </script>
+    <script>
+        $("input:checkbox").each(function(index){
+            let checkbox = $(this);
+            let label = checkbox.parent().children('label').html();
+            checkbox.parent().children('label').remove();
+            checkbox.add(this.nextSibling).add(checkbox.next()).wrapAll('<label />')
+            checkbox.after('<span>'+label+'</span>');
+        });
+
+    </script>
+{% endblock %}
