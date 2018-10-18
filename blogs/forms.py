@@ -63,13 +63,13 @@ class AddPostForm(forms.Form):
     #                                                            'type': 'button',
     #                                                            'checked': 'true'}))
     # publish = forms.DatetimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
-    user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
-        'type': 'hidden',
-        'id': 'user'
-    }))
-    kind = forms.CharField(widget=forms.TextInput(attrs={
-        'type': 'hidden',
-        'id': 'kind'
+
+class AddQuestionForm(forms.Form):
+    title = forms.CharField(max_length=128)
+    detail = forms.CharField(required=False, widget=forms.Textarea)
+    tags = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'id': 'tags',
+        'placeholder': 'use , to separate tags'
     }))
 
 class CommentForm(forms.Form):

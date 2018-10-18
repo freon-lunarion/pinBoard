@@ -1,5 +1,5 @@
 from .forms import *
-from .models import Post, Comment
+from .models import Post, Comment, QnaQuestion, QnaAnswer
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -29,8 +29,8 @@ import datetime
 #     model = Post
 #     template_name = 'blogs/results.html'
 
-class PostView(generic.DeleteView):
-    model = Post
+class PostView(generic.DetailView):
+    model = Content
     template_name = 'blogs/post.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -39,8 +39,48 @@ class PostView(generic.DeleteView):
 
     # content: post, comments (list), comment_form
     def get_context_data(self, **kwargs):
-        post = get_object_or_404(Post, id=self.pk)
+        content = get_object_or_404(Content, id=self.pk)
         context = super(PostView, self).get_context_data(**kwargs)
+        post_res = Post.objects.all().filter(id=content.id)
+        if post_res.count() == 1:
+            post = post_res[0]
+            context['post'] = post
+            context['comments'] = sorted(Comment.objects.filter(parent=post),
+                                         key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
+                                         else 0), reverse=True)
+            context['comment_form'] = CommentForm()
+        else:
+            question = get_object_or_404(QnaQuestion, id=self.pk)
+            context['post'] = question
+
+        return context
+
+    # redirecting. let me know if it should not be redirecting - Deanna
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            post = get_object_or_404(Post, id=self.pk)
+            # user = form.cleaned_data['comment_user']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            Comment.objects.create(parent=post,
+                                detail=form.cleaned_data['comment_detail'],
+                                author= request.user,
+                                published_date=now)
+            return HttpResponseRedirect(f'/blogs/{self.pk}')
+        return HttpResponseRedirect(f'/blogs/{self.pk}')
+
+class QuestionView(generic.DetailView):
+    model = QnaQuestion
+    template_name = 'blogs/post.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.pk = kwargs.get('pk', "-1")
+        return super(QuestionView, self).dispatch(request, *args, **kwargs)
+
+    # content: post, comments (list), comment_form
+    def get_context_data(self, **kwargs):
+        post = get_object_or_404(Post, id=self.pk)
+        context = super(QuestionView, self).get_context_data(**kwargs)
         context['comments'] = sorted(Comment.objects.filter(parent=post),
                                      key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
                                      else 0), reverse=True)
@@ -55,10 +95,9 @@ class PostView(generic.DeleteView):
             # user = form.cleaned_data['comment_user']
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
             Comment.objects.create(parent=post,
-                                detail=form.cleaned_data['comment_detail'],
-                                # author=User.objects.get(id=user),
-                                author= request.user,
-                                published_date=now)
+                                   detail=form.cleaned_data['comment_detail'],
+                                   author=request.user,
+                                   published_date=now)
             return HttpResponseRedirect(f'/blogs/{self.pk}')
         return HttpResponseRedirect(f'/blogs/{self.pk}')
 
@@ -116,16 +155,13 @@ def create_post(request):
         if form.is_valid():
             #publish = form.cleaned_data['publish']
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            user = form.cleaned_data['user']
             tags = form.cleaned_data['tags'].split(',')
             #if (publish):
             post = Post.objects.create(title=form.cleaned_data['title'],
-                                kind=form.cleaned_data['kind'],
                                 is_pinned=False,
                                 pin_board=None,
                                 operator=None,
                                 detail=form.cleaned_data['detail'],
-                                # author=User.objects.get(id=user),
                                 author= request.user,
                                 published_date=now
                                )
@@ -135,6 +171,28 @@ def create_post(request):
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
+
+@login_required
+def create_question(request):
+    if (request.method == 'POST'):
+        form = AddQuestionForm(request.POST)
+        if form.is_valid():
+            # publish = form.cleaned_data['publish']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            tags = form.cleaned_data['tags'].split(',')
+            # if (publish):
+            question = QnaQuestion.objects.create(title=form.cleaned_data['title'],
+                                       detail=form.cleaned_data['detail'],
+                                       author=request.user,
+                                       published_date=now
+                                       )
+            for title in tags:
+                tag = Tag.create(title.strip())
+                ContentTag.create(question.id, tag.id)
+            return HttpResponseRedirect(f'/blogs/{question.id}')
+        return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
+    return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
+
 
 # def ajaxsubmit(request):
 #     ret = {'status': True, 'error': None, 'data': None}
