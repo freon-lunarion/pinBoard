@@ -10,6 +10,9 @@ from django.utils import timezone
 from django.views import generic
 from shared.models import *
 import datetime
+import simplejson as json
+from django.template.loader import render_to_string
+
 
 # Create your views here.
 # class IndexView(generic.ListView):
@@ -44,6 +47,7 @@ class PostView(generic.DeleteView):
         context['comments'] = sorted(Comment.objects.filter(parent=post),
                                      key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
                                      else 0), reverse=True)
+        context['vote'] = sorted(Vote.objects.filter(content=post))
         context['comment_form'] = CommentForm()
         return context
 
@@ -319,36 +323,60 @@ def logout_view(request):
     return HttpResponseRedirect('/blogs/login/')
 
 
-
+@login_required
 def vote(request):
     if (request.method == 'GET'):
         data = request.GET
-        print(data)
-        username = data.get('username')
-        isvote = data.get('vote')
-        commentid = data.get('commentid')
-        print("niha")
-        print(username)
-        print(isvote)
+        #isvote = data.get('vote')
+        isvote  = 1
+        comment_id = int(data.get('commentid'))
+        comment = get_object_or_404(Comment,id = comment_id)
+        postid = int(data.get('postid'))
+        hasvote  = Vote.objects.filter(content=comment, user=request.user).exists()
+        valuevote  = Vote.objects.filter(content=comment, user=request.user)
+        print("what is valuevote:")
+        print(valuevote)
+        initialvalue = 0
+        for vote in valuevote:
+            if (comment_id == vote.content.id):
+                print('value:')
+                vote.value += isvote
+                initialvalue = vote.value
+            print('commentID:')
+            print(vote.content.id)
+            print(vote.user)
+            print(vote.value)
+        print(initialvalue)
 
 
+        if (hasvote):
+            return HttpResponse("You have voted")
+        else:
 
-        if (isvote):
+            voteinfo = Vote.objects.create(
+                content = comment,
+                user = request.user,
+                value = initialvalue
+            )
 
+            print(voteinfo)
 
-            vote = Vote.objects.create(content=commentid,
-                                            user=username
-                                           )
+            valuevote  = Vote.objects.filter(content=comment, user=request.user)
+            print("what is it?")
+            print(voteinfo)
 
-            print(vote)
+            context = {}
+            for vote in valuevote:
+                if (comment_id == vote.content.id):
+                    context = {
+                            'comment_id': vote.content.id,
+                            'user': vote.user.username,
+                            'value': vote.value
 
-            print("nihaoa")
-            vote = sorted(Vote.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
-                                                                                     if p.published_date else 0), reverse=True)
-            print(vote)
-            response_data['result'] = voteinfo.username
-            return HttpResponse(json.dumps(response_data), content_type="application/json")
-            #return HttpResponse(str(Vote.exist(pk, user)))
-        #return HttpResponse(str(Vote.vote(pk, user, vote)))
+                        }
+            print("context是啥：")
+            print(context)
+
+            return HttpResponse("Done")
 
 
