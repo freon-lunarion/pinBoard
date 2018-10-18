@@ -19,6 +19,7 @@ urlpatterns = [
     path('<int:pk>/', views.QuestionView.as_view(), name='question'),
     path('create/', views.create_post, name='create_post'),
     path('createQuestion/', views.create_question, name='create_question'),
+    path('createImagePost/', views.create_image_post, name='create_image_post'),
     url(r'^login/$',views.login_view),
     url(r'^logout/$',views.logout_view),
     url(r'^register/$',views.register),

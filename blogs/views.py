@@ -190,6 +190,23 @@ def create_post(request):
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
 
 @login_required
+def create_image_post(request):
+    if (request.method == 'POST'):
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            post = Post.objects.create(title=form.cleaned_data['title'],
+                                is_pinned=False,
+                                pin_board=None,
+                                operator=None,
+                                kind='Image',
+                                detail=form.cleaned_data['detail'],
+                                author= request.user,
+                                published_date=now
+                               )
+            return HttpResponseRedirect(f'/blogs/{post.id}')
+
+@login_required
 def create_question(request):
     if (request.method == 'POST'):
         form = AddQuestionForm(request.POST)

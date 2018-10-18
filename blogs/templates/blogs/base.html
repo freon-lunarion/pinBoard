@@ -112,11 +112,14 @@
           </div> -->
         </div>
         <div id="submit-image-post">
-          <div class="image-post-form-container">
-            <input type="text" placeholder="Title" name="image_post_title" style="max-width: 200px">
-            <input type="text" placeholder="Image URL" name="image_post_url" style="max-width: 200px">
-            <a class="waves-effect waves-light btn-small cyan lighten-1">Submit</a></li>
-          </div>
+          <form style="margin: 0;" action="/blogs/createImagePost/" method="POST">
+            {% csrf_token %}
+            <div class="image-post-form-container">
+              <input type="text" placeholder="Title" name="title" style="max-width: 200px">
+              <input type="text" placeholder="Image URL" name="detail" style="max-width: 200px">
+              <button type="submit" class="waves-effect waves-light btn-small cyan lighten-1">Submit</button>
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
