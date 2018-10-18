@@ -209,6 +209,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                request.session['userid'] = user.id
                 request.session['username'] = user.username
                 request.session['useremail'] = user.email
                 request.session.set_expiry(600)

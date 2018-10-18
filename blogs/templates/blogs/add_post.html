@@ -9,9 +9,8 @@
         </div>
     </form>
     <script>
-//        document.getElementById('user').value = 1;
-
         document.getElementById('kind').value = 'Post';
+        document.getElementById('user').value = "{{request.session.userid}}";
 
         $('input').attr('autocomplete', 'off');
     </script>
