@@ -51,6 +51,21 @@ class LoginForm(forms.Form):
                                 }))
     # captcha = CaptchaField(label='capcha')
 
+class ManageForm(forms.Form):
+    newpassword = forms.CharField(max_length=128,
+                               widget=forms.TextInput(attrs={
+                                   # 'class': 'form-control',
+                                   'placeholder': 'newpassword',
+                                   'id': 'username'
+                               }))
+    renewpassword = forms.CharField(max_length=256,
+                                widget=forms.PasswordInput(attrs={
+                                    # 'class': 'form-control',
+                                    'placeholder': 'confirm',
+                                    'id': 'password'
+                                }))
+
+
 
 class AddPostForm(forms.Form):
     title = forms.CharField(max_length=128)
@@ -63,13 +78,13 @@ class AddPostForm(forms.Form):
     #                                                            'type': 'button',
     #                                                            'checked': 'true'}))
     # publish = forms.DatetimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
-    user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
-        'type': 'hidden',
-        'id': 'user'
-    }))
-    kind = forms.CharField(widget=forms.TextInput(attrs={
-        'type': 'hidden',
-        'id': 'kind'
+
+class AddQuestionForm(forms.Form):
+    title = forms.CharField(max_length=128)
+    detail = forms.CharField(required=False, widget=forms.Textarea)
+    tags = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'id': 'tags',
+        'placeholder': 'use , to separate tags'
     }))
 
 class CommentForm(forms.Form):
@@ -77,7 +92,7 @@ class CommentForm(forms.Form):
         'id': "comment_detail",
         'style': 'height: 300px'
     }))
-    comment_user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
+    comment_kind = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'hidden',
-        'id': 'comment_user'
+        'id': 'comment_kind'
     }))

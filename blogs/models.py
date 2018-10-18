@@ -64,6 +64,8 @@ class Comment(Content):
 
 class QnaQuestion(Content):
     title = models.CharField(max_length=150)
+    kind = models.CharField(max_length=20, default='Question')
+
     # is_live_question = models.BooleanField(default=False)
     # parent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)
 
@@ -73,6 +75,16 @@ class QnaQuestion(Content):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
+    @property
+    def answers(self):
+        return sorted(QnaAnswer.objects.filter(parent=self),
+                        key=lambda x: (1 if x.is_correct else 0, x.score, -x.published_date.toordinal() if x.published_date
+                        else 0), reverse=True)
+
+    @property
+    def solved(self):
+        return QnaAnswer.objects.filter(parent=self, is_correct=True) > 0
 
 
 class QnaAnswer(Content):

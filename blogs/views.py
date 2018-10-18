@@ -1,5 +1,5 @@
 from .forms import *
-from .models import Post, Comment
+from .models import Post, Comment, QnaQuestion, QnaAnswer
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -10,6 +10,8 @@ from django.utils import timezone
 from django.views import generic
 from shared.models import *
 import datetime
+from django.template.loader import render_to_string
+
 
 # Create your views here.
 # class IndexView(generic.ListView):
@@ -29,8 +31,8 @@ import datetime
 #     model = Post
 #     template_name = 'blogs/results.html'
 
-class PostView(generic.DeleteView):
-    model = Post
+class PostView(generic.DetailView):
+    model = Content
     template_name = 'blogs/post.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -39,27 +41,44 @@ class PostView(generic.DeleteView):
 
     # content: post, comments (list), comment_form
     def get_context_data(self, **kwargs):
-        post = get_object_or_404(Post, id=self.pk)
+        content = get_object_or_404(Content, id=self.pk)
         context = super(PostView, self).get_context_data(**kwargs)
-        context['comments'] = sorted(Comment.objects.filter(parent=post),
-                                     key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
-                                     else 0), reverse=True)
-        context['comment_form'] = CommentForm()
+        post_res = Post.objects.all().filter(id=content.id)
+        if post_res.count() == 1:
+            post = post_res[0]
+            context['post'] = post
+            context['comments'] = sorted(Comment.objects.filter(parent=post),
+                                         key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
+                                         else 0), reverse=True)
+            context['comment_form'] = CommentForm()
+        else:
+            question = get_object_or_404(QnaQuestion, id=self.pk)
+            context['post'] = question
+            context['comment_form'] = CommentForm()
+
         return context
 
     # redirecting. let me know if it should not be redirecting - Deanna
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
-            post = get_object_or_404(Post, id=self.pk)
-            # user = form.cleaned_data['comment_user']
-            now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            Comment.objects.create(parent=post,
-                                detail=form.cleaned_data['comment_detail'],
-                                # author=User.objects.get(id=user),
-                                author= request.user,
-                                published_date=now)
-            return HttpResponseRedirect(f'/blogs/{self.pk}')
+            if form.cleaned_data['comment_kind'] == 'Post':
+                post = get_object_or_404(Post, id=self.pk)
+                now = timezone.now().strftime("%Y-%m-%d %H:%M")
+                Comment.objects.create(parent=post,
+                                    detail=form.cleaned_data['comment_detail'],
+                                    author= request.user,
+                                    published_date=now)
+                return HttpResponseRedirect(f'/blogs/{self.pk}')
+            else:
+                question = get_object_or_404(QnaQuestion, id=self.pk)
+                # user = form.cleaned_data['comment_user']
+                now = timezone.now().strftime("%Y-%m-%d %H:%M")
+                QnaAnswer.objects.create(parent=question,
+                                       detail=form.cleaned_data['comment_detail'],
+                                       author=request.user,
+                                       published_date=now)
+                return HttpResponseRedirect(f'/blogs/{self.pk}')
         return HttpResponseRedirect(f'/blogs/{self.pk}')
 
 
@@ -88,23 +107,12 @@ class PostView(generic.DeleteView):
 def index(request):
     latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
                                                                  if p.published_date else 0), reverse=True)
-
-    # get comment counts
-    for post in latest_post_list:
-        count = Comment.objects.filter(parent=post).count()
-        if count == 0:
-            count_string = "No Comments"
-        if count == 1:
-            count_string = "1 Comment"
-        if count > 1:
-            count_string = str(count) + ' Comments'
-            # count_string = count.append(' Comments')
-            
-        post.comments = count_string
+    latest_question_list = sorted(QnaQuestion.objects.all(), key=lambda q: (q.score, q.published_date.toordinal()
+                                                                 if q.published_date else 0), reverse=True)
 
     # latest_post_list = Post.objects.all()
     context = {
-        'latest_post_list': latest_post_list,
+        'latest_post_list': latest_post_list + latest_question_list,
     }
 
     return render(request, 'blogs/index.html', context=context)
@@ -116,16 +124,13 @@ def create_post(request):
         if form.is_valid():
             #publish = form.cleaned_data['publish']
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            user = form.cleaned_data['user']
             tags = form.cleaned_data['tags'].split(',')
             #if (publish):
             post = Post.objects.create(title=form.cleaned_data['title'],
-                                kind=form.cleaned_data['kind'],
                                 is_pinned=False,
                                 pin_board=None,
                                 operator=None,
                                 detail=form.cleaned_data['detail'],
-                                # author=User.objects.get(id=user),
                                 author= request.user,
                                 published_date=now
                                )
@@ -135,6 +140,45 @@ def create_post(request):
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
+
+@login_required
+def create_image_post(request):
+    if (request.method == 'POST'):
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            post = Post.objects.create(title=form.cleaned_data['title'],
+                                is_pinned=False,
+                                pin_board=None,
+                                operator=None,
+                                kind='Image',
+                                detail=form.cleaned_data['detail'],
+                                author= request.user,
+                                published_date=now
+                               )
+            return HttpResponseRedirect(f'/blogs/{post.id}')
+
+@login_required
+def create_question(request):
+    if (request.method == 'POST'):
+        form = AddQuestionForm(request.POST)
+        if form.is_valid():
+            # publish = form.cleaned_data['publish']
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            tags = form.cleaned_data['tags'].split(',')
+            # if (publish):
+            question = QnaQuestion.objects.create(title=form.cleaned_data['title'],
+                                       detail=form.cleaned_data['detail'],
+                                       author=request.user,
+                                       published_date=now
+                                       )
+            for title in tags:
+                tag = Tag.create(title.strip())
+                ContentTag.create(question.id, tag.id)
+            return HttpResponseRedirect(f'/blogs/{question.id}')
+        return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
+    return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
+
 
 # def ajaxsubmit(request):
 #     ret = {'status': True, 'error': None, 'data': None}
@@ -198,6 +242,34 @@ def create_post(request):
 
 #     login_form = LoginForm()
 #     return render(request, 'blogs/login.html', {'form': login_form, 'message': ''})
+
+def manage(request):
+    if request.method == 'POST':
+        manage_form = ManageForm(request.POST)
+
+        if manage_form.is_valid():
+            newpassword = request.POST['newpassword']
+            renewpassword = request.POST['renewpassword']
+
+            latest_post_list = sorted(User.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+                                                                             if p.published_date else 0), reverse=True)
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                request.session['userid'] = user.id
+                request.session['username'] = user.username
+                request.session['useremail'] = user.email
+                request.session.set_expiry(600)
+                return HttpResponseRedirect('/blogs')
+
+            else:
+                error = 'Username or password is not right!'
+                return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
+
+        return render(request, 'blogs/login.html', locals())
+
+    manage_form = ManageForm()
+    return render(request, 'blogs/login.html', {'form': manage_form, 'message': ''})
 
 def login_view(request):
     if request.method == 'POST':
@@ -320,36 +392,60 @@ def logout_view(request):
     return HttpResponseRedirect('/blogs/login/')
 
 
-
+@login_required
 def vote(request):
     if (request.method == 'GET'):
         data = request.GET
-        print(data)
-        username = data.get('username')
-        isvote = data.get('vote')
-        commentid = data.get('commentid')
-        print("niha")
-        print(username)
-        print(isvote)
+        #isvote = data.get('vote')
+        isvote  = 1
+        comment_id = int(data.get('commentid'))
+        comment = get_object_or_404(Comment,id = comment_id)
+        postid = int(data.get('postid'))
+        hasvote  = Vote.objects.filter(content=comment, user=request.user).exists()
+        valuevote  = Vote.objects.filter(content=comment, user=request.user)
+        print("what is valuevote:")
+        print(valuevote)
+        initialvalue = 0
+        for vote in valuevote:
+            if (comment_id == vote.content.id):
+                print('value:')
+                vote.value += isvote
+                initialvalue = vote.value
+            print('commentID:')
+            print(vote.content.id)
+            print(vote.user)
+            print(vote.value)
+        print(initialvalue)
 
 
+        if (hasvote):
+            return HttpResponse("You have voted")
+        else:
 
-        if (isvote):
+            voteinfo = Vote.objects.create(
+                content = comment,
+                user = request.user,
+                value = initialvalue
+            )
 
+            print(voteinfo)
 
-            vote = Vote.objects.create(content=commentid,
-                                            user=username
-                                           )
+            valuevote  = Vote.objects.filter(content=comment, user=request.user)
+            print("what is it?")
+            print(voteinfo)
 
-            print(vote)
+            context = {}
+            for vote in valuevote:
+                if (comment_id == vote.content.id):
+                    context = {
+                            'comment_id': vote.content.id,
+                            'user': vote.user.username,
+                            'value': vote.value
 
-            print("nihaoa")
-            vote = sorted(Vote.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
-                                                                                     if p.published_date else 0), reverse=True)
-            print(vote)
-            response_data['result'] = voteinfo.username
-            return HttpResponse(json.dumps(response_data), content_type="application/json")
-            #return HttpResponse(str(Vote.exist(pk, user)))
-        #return HttpResponse(str(Vote.vote(pk, user, vote)))
+                        }
+            print("context是啥：")
+            print(context)
+
+            return HttpResponse("Done")
 
 

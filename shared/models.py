@@ -107,16 +107,16 @@ class ContentTag(models.Model):
 class Vote(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    value = models.IntegerField(default=1)
+    value = models.IntegerField(default=0)
     timestamp = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = ("content", "user")
 
     @staticmethod
-    def vote(content_id, user_id, value):
+    def vote(content_id, name, value):
         content = get_object_or_404(Content, id=content_id)
-        user = get_object_or_404(User, id=user_id)
+        user = get_object_or_404(User, name=name)
         Vote.objects.create(content=content, user=user, value=value)
         return content.score
 
