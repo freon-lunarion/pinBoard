@@ -51,6 +51,21 @@ class LoginForm(forms.Form):
                                 }))
     # captcha = CaptchaField(label='capcha')
 
+class ManageForm(forms.Form):
+    newpassword = forms.CharField(max_length=128,
+                               widget=forms.TextInput(attrs={
+                                   # 'class': 'form-control',
+                                   'placeholder': 'newpassword',
+                                   'id': 'username'
+                               }))
+    renewpassword = forms.CharField(max_length=256,
+                                widget=forms.PasswordInput(attrs={
+                                    # 'class': 'form-control',
+                                    'placeholder': 'confirm',
+                                    'id': 'password'
+                                }))
+
+
 
 class AddPostForm(forms.Form):
     title = forms.CharField(max_length=128)

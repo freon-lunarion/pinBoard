@@ -274,6 +274,34 @@ def create_question(request):
 #     login_form = LoginForm()
 #     return render(request, 'blogs/login.html', {'form': login_form, 'message': ''})
 
+def manage(request):
+    if request.method == 'POST':
+        manage_form = ManageForm(request.POST)
+
+        if manage_form.is_valid():
+            newpassword = request.POST['newpassword']
+            renewpassword = request.POST['renewpassword']
+
+            latest_post_list = sorted(User.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+                                                                             if p.published_date else 0), reverse=True)
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                request.session['userid'] = user.id
+                request.session['username'] = user.username
+                request.session['useremail'] = user.email
+                request.session.set_expiry(600)
+                return HttpResponseRedirect('/blogs')
+
+            else:
+                error = 'Username or password is not right!'
+                return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
+
+        return render(request, 'blogs/login.html', locals())
+
+    manage_form = ManageForm()
+    return render(request, 'blogs/login.html', {'form': manage_form, 'message': ''})
+
 def login_view(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
