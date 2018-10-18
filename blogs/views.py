@@ -10,7 +10,6 @@ from django.utils import timezone
 from django.views import generic
 from shared.models import *
 import datetime
-import simplejson as json
 from django.template.loader import render_to_string
 
 
@@ -55,6 +54,7 @@ class PostView(generic.DetailView):
         else:
             question = get_object_or_404(QnaQuestion, id=self.pk)
             context['post'] = question
+            context['comment_form'] = CommentForm()
 
         return context
 
@@ -62,47 +62,23 @@ class PostView(generic.DetailView):
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
-            post = get_object_or_404(Post, id=self.pk)
-            # user = form.cleaned_data['comment_user']
-            now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            Comment.objects.create(parent=post,
-                                detail=form.cleaned_data['comment_detail'],
-                                author= request.user,
-                                published_date=now)
-            return HttpResponseRedirect(f'/blogs/{self.pk}')
-        return HttpResponseRedirect(f'/blogs/{self.pk}')
-
-class QuestionView(generic.DetailView):
-    model = QnaQuestion
-    template_name = 'blogs/post.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        self.pk = kwargs.get('pk', "-1")
-        return super(QuestionView, self).dispatch(request, *args, **kwargs)
-
-    # content: post, comments (list), comment_form
-    def get_context_data(self, **kwargs):
-        post = get_object_or_404(Post, id=self.pk)
-        context = super(QuestionView, self).get_context_data(**kwargs)
-        context['comments'] = sorted(Comment.objects.filter(parent=post),
-                                     key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
-                                     else 0), reverse=True)
-        context['vote'] = sorted(Vote.objects.filter(content=post))
-        context['comment_form'] = CommentForm()
-        return context
-
-    # redirecting. let me know if it should not be redirecting - Deanna
-    def post(self, request, *args, **kwargs):
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            post = get_object_or_404(Post, id=self.pk)
-            # user = form.cleaned_data['comment_user']
-            now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            Comment.objects.create(parent=post,
-                                   detail=form.cleaned_data['comment_detail'],
-                                   author=request.user,
-                                   published_date=now)
-            return HttpResponseRedirect(f'/blogs/{self.pk}')
+            if form.cleaned_data['comment_kind'] == 'Post':
+                post = get_object_or_404(Post, id=self.pk)
+                now = timezone.now().strftime("%Y-%m-%d %H:%M")
+                Comment.objects.create(parent=post,
+                                    detail=form.cleaned_data['comment_detail'],
+                                    author= request.user,
+                                    published_date=now)
+                return HttpResponseRedirect(f'/blogs/{self.pk}')
+            else:
+                question = get_object_or_404(QnaQuestion, id=self.pk)
+                # user = form.cleaned_data['comment_user']
+                now = timezone.now().strftime("%Y-%m-%d %H:%M")
+                QnaAnswer.objects.create(parent=question,
+                                       detail=form.cleaned_data['comment_detail'],
+                                       author=request.user,
+                                       published_date=now)
+                return HttpResponseRedirect(f'/blogs/{self.pk}')
         return HttpResponseRedirect(f'/blogs/{self.pk}')
 
 
@@ -133,30 +109,6 @@ def index(request):
                                                                  if p.published_date else 0), reverse=True)
     latest_question_list = sorted(QnaQuestion.objects.all(), key=lambda q: (q.score, q.published_date.toordinal()
                                                                  if q.published_date else 0), reverse=True)
-
-    # get comment counts
-    for post in latest_post_list:
-        count = Comment.objects.filter(parent=post).count()
-        if count == 0:
-            count_string = "No Comments"
-        if count == 1:
-            count_string = "1 Comment"
-        if count > 1:
-            count_string = str(count) + ' Comments'
-            # count_string = count.append(' Comments')
-            
-        post.comments = count_string
-
-    for question in latest_question_list:
-        count = QnaAnswer.objects.filter(parent=question).count()
-        if count == 0:
-            count_string = "No Answers"
-        if count == 1:
-            count_string = "1 Answer"
-        if count > 1:
-            count_string = str(count) + ' Answers'
-
-        question.answers = count_string
 
     # latest_post_list = Post.objects.all()
     context = {

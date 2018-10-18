@@ -76,6 +76,16 @@ class QnaQuestion(Content):
         self.published_date = timezone.now()
         self.save()
 
+    @property
+    def answers(self):
+        return sorted(QnaAnswer.objects.filter(parent=self),
+                        key=lambda x: (1 if x.is_correct else 0, x.score, -x.published_date.toordinal() if x.published_date
+                        else 0), reverse=True)
+
+    @property
+    def solved(self):
+        return QnaAnswer.objects.filter(parent=self, is_correct=True) > 0
+
 
 class QnaAnswer(Content):
     is_correct = models.BooleanField(default=False)

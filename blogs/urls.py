@@ -16,7 +16,6 @@ urlpatterns = [
     # url(r'^post/$',views.post),
     path('', views.index, name='index'),
     path('<int:pk>/', views.PostView.as_view(), name='post'),
-    path('<int:pk>/', views.QuestionView.as_view(), name='question'),
     path('create/', views.create_post, name='create_post'),
     path('createQuestion/', views.create_question, name='create_question'),
     path('createImagePost/', views.create_image_post, name='create_image_post'),

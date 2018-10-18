@@ -92,7 +92,7 @@ class CommentForm(forms.Form):
         'id': "comment_detail",
         'style': 'height: 300px'
     }))
-    comment_user = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={
+    comment_kind = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'hidden',
-        'id': 'comment_user'
+        'id': 'comment_kind'
     }))
