@@ -188,7 +188,7 @@
                     <h1 class="post-title">Question: {{ post.title }}</h1>
 
                     <div class="content-container">
-                        <p>{{ post.detail }}</p>
+                        <p>{{ post.detail | safe }}</p>
                     </div>
                 </div>
 

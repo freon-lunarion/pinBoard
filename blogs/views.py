@@ -127,6 +127,8 @@ class QuestionView(generic.DetailView):
 def index(request):
     latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
                                                                  if p.published_date else 0), reverse=True)
+    latest_question_list = sorted(QnaQuestion.objects.all(), key=lambda q: (q.score, q.published_date.toordinal()
+                                                                 if q.published_date else 0), reverse=True)
 
     # get comment counts
     for post in latest_post_list:
@@ -141,9 +143,20 @@ def index(request):
             
         post.comments = count_string
 
+    for question in latest_question_list:
+        count = QnaAnswer.objects.filter(parent=question).count()
+        if count == 0:
+            count_string = "No Answers"
+        if count == 1:
+            count_string = "1 Answer"
+        if count > 1:
+            count_string = str(count) + ' Answers'
+
+        question.answers = count_string
+
     # latest_post_list = Post.objects.all()
     context = {
-        'latest_post_list': latest_post_list,
+        'latest_post_list': latest_post_list + latest_question_list,
     }
 
     return render(request, 'blogs/index.html', context=context)
