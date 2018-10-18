@@ -48,12 +48,26 @@
 
           </div></li>
           <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
-          <li><a class="waves-effect" href="#!"><i class="material-icons">account_box</i>Manage Account</a></li>
+          <li><a class="waves-effect modal-trigger" href="#modal1"><i class="material-icons">account_box</i>Modal</a></li>
           <li><div class="divider"></div></li>
           <li><a class="waves-effect" href="/blogs/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
         </ul>
       {% endif %}
-      
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Change Password</h4>
+          <form  method="post">
+            <input type="password" placeholder="newpassword">
+            <input type="password" placeholder="confirm">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="waves-effect waves-light btn">Submit</a>
+        </div>
+      </div>
+
       <!-- nav bar -->
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
