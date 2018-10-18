@@ -5,20 +5,27 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render,render_to_response
 from django.template import RequestContext
-from django.template import RequestContext
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views import generic
 from shared.models import *
 
 
-
 class QuizBankListView(generic.ListView):
     model = QuizBank
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
     
 
 class QuizBankDetailView(generic.DetailView):
     model = QuizBank
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
  
     
 @login_required
