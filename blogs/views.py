@@ -325,21 +325,27 @@ def vote(request):
         data = request.GET
         print(data)
         username = data.get('username')
-        vote = data.get('vote')
+        isvote = data.get('vote')
+        commentid = data.get('commentid')
         print("niha")
-        print(vote)
+        print(username)
+        print(isvote)
 
-        if (vote == "1"):
 
-            print("nihaoalalla")
-            vote = Vote.objects.create()
-            vote.content_id = username
-            vote.content = vote
-            vote.save()
+
+        if (isvote):
+
+
+            vote = Vote.objects.create(content=commentid,
+                                            user=username
+                                           )
+
+            print(vote)
 
             print("nihaoa")
-            voteinfo = Vote.objects.get(content_id=username)
-            response_data = {}
+            vote = sorted(Vote.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+                                                                                     if p.published_date else 0), reverse=True)
+            print(vote)
             response_data['result'] = voteinfo.username
             return HttpResponse(json.dumps(response_data), content_type="application/json")
             #return HttpResponse(str(Vote.exist(pk, user)))
