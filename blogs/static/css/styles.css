@@ -176,8 +176,20 @@ nav.nav-container.pinboard {
 i.material-icons.title {
   margin-right: 15px;
   margin-left:-3px;
+  margin-bottom: 10px;
   font-size: 35px;
   color: rgba(172,255,72,0.9);
+  cursor: default;
+}
+
+i.material-icons.title.fa-clickable {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+i.material-icons.title.fa-clickable:hover {
+  transition: 0.3s;
+  color: rgba(228, 255, 196, 0.9);
 }
 
 .logged-in-container {
