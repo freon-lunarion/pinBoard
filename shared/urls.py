@@ -4,5 +4,6 @@ from django.conf.urls import *
 from . import views
 app_name = 'shared'
 urlpatterns = [
-    path('vote/', views.vote, name='vote'),
+    path('<int:pk>/vote/', views.vote, name='vote'),
+    path('score/', views.score, name='user_score'),
 ]
