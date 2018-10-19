@@ -20,31 +20,22 @@ class QuizBankForm(forms.ModelForm):
 
 # REF: https://www.caktusgroup.com/blog/2018/05/07/creating-dynamic-forms-django/
 class QuestionForm(forms.ModelForm):
-    detail = forms.CharField(required=True, widget=forms.Textarea)
+    quizBank = forms.ModelChoiceField(queryset=QuizBank.objects.all(),widget=forms.HiddenInput())
+    
+    # detail = forms.CharField(required=True, widget=forms.Textarea)
     options_0 = forms.CharField(required =True,label="Option 1")
-    true_0 = forms.BooleanField(label="is the right answer?")
+    true_0 = forms.BooleanField(required =False, label="is the right answer?")
 
     options_1 = forms.CharField(required =True,label="Option 2")
-    true_1 = forms.BooleanField(label="is the right answer?", initial=1)
+    true_1 = forms.BooleanField(required =False,label="is the right answer?",)
 
     options_2 = forms.CharField(required =True,label="Option 3")
-    true_2 = forms.BooleanField(label="is the right answer?", initial=2)
+    true_2 = forms.BooleanField(required =False,label="is the right answer?",)
 
     options_3 = forms.CharField(required =True,label="Option 4")
-    true_3 = forms.BooleanField(label="is the right answer?",initial=3)
+    true_3 = forms.BooleanField(required =False,label="is the right answer?",)
 
 
     class Meta:
         model = Question
-        fields = ['detail']
-    
-    def save(self):
-        question = self.instance
-        question.detail = self.cleaned_data["detail"]
-
-        question.options_set.all().delete()
-        for i in range(4):
-            option = self.cleaned_data["options_{}".format(i)]
-            isTrue = self.cleaned_data["true_{}".format(i)]
-            Options.objects.create(question = Question, detail = option, isCorrect = isTrue)
-    
+        fields = ['detail','quizBank']

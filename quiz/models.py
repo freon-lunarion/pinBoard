@@ -48,6 +48,17 @@ class QuizBank(models.Model):
 
 class Question(Content):
     quizBank = models.ForeignKey(QuizBank, on_delete=models.CASCADE)
+    def save(self, *args, **kwargs):
+        super(Question, self).save(*args, **kwargs)
+
+    @property    
+    def correct_answer(self):
+        answer = Options.objects.filter(question = self, isCorrect = True)[:1]
+        if answer:
+            return answer.get().detail
+        else:
+            return None
+
     
 class Options(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
