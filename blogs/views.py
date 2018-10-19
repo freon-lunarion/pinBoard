@@ -55,6 +55,7 @@ class PostView(generic.DetailView):
         else:
             question = get_object_or_404(QnaQuestion, id=self.pk)
             context['post'] = question
+            context['comments'] = question.answers
             context['comment_form'] = CommentForm()
 
         return context
@@ -84,8 +85,9 @@ class PostView(generic.DetailView):
             data = json.loads(request.body)
             if 'action' in data.keys():
                 if data['action'] == 'SetCorrectAnswer':
-                    QnaAnswer.objects.get(id=data['answer_id']).set_correct()
-                    return HttpResponseRedirect(f'/blogs/{self.pk}')
+                    question = QnaAnswer.objects.get(id=data['answer_id'])
+                    question.set_correct()
+                    return JsonResponse({'score': question.score})
                 return HttpResponseRedirect(f'/blogs/{self.pk}')
             else:
                 return HttpResponseRedirect(f'/blogs/{self.pk}')
