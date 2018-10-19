@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^register/$',views.register),
     url(r'^vote/$',views.vote),
     url(r'^manage/$',views.manage),
+    url(r'^reset/$',views.reset),
 ]

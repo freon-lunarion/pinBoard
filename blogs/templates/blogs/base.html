@@ -59,12 +59,14 @@
         <div class="modal-content">
           <h4>Change Password</h4>
           <form  method="post">
-            <input type="password" placeholder="newpassword">
-            <input type="password" placeholder="confirm">
+            <input type="password" placeholder="newpassword" class="newpassword">
+            <input type="password" placeholder="confirm" class="renewpassword">
           </form>
+          <div class="msgforreset1" style="color: red; display: none;">Please confirm the password</div>
+          <div class="msgforreset2" style="color: red; display: none;">Successful</div>
         </div>
         <div class="modal-footer">
-          <a href="#!" class="waves-effect waves-light btn">Submit</a>
+          <a href="#!" class="waves-effect waves-light btn resetpassword">Submit</a>
         </div>
       </div>
 
@@ -187,6 +189,38 @@
         g.src = '//hnbutton.appspot.com/static/hn.min.js';
         s.parentNode.insertBefore(g, s);
       }(document, 'script'));
+
+
+      $('.resetpassword').click(event => {
+
+        console.log($('.newpassword').val());
+        console.log($('#password').text());
+        $.ajax({
+          url: "/blogs/reset/",
+          type: 'GET',
+          data: {
+            'newpassword': $('.newpassword').val(),
+            'renewpassword': $('.renewpassword').val(),
+            'password': $('#password').text()
+
+           },
+          success: function (data) {
+              if (data == 'Done'){
+                $(".msgforreset2").css("display","block");
+                $(".msgforreset1").css("display","none");
+              }else if ('Password is not matched'){
+                $(".msgforreset1").css("display","block");
+                $(".msgforreset2").css("display","none");
+              }
+
+
+          }
+        })
+
+
+
+      });
+
 
     </script>
 

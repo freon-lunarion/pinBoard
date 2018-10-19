@@ -301,6 +301,7 @@ def login_view(request):
                 request.session['userid'] = user.id
                 request.session['username'] = user.username
                 request.session['useremail'] = user.email
+                request.session['password'] = user.password
                 request.session.set_expiry(600)
                 return HttpResponseRedirect('/blogs')
                 
@@ -465,4 +466,22 @@ def vote(request):
 
             return HttpResponse("Done")
 
+
+@login_required
+def reset(request):
+    if (request.method == 'GET'):
+        data = request.GET
+        newpassword = data.get('newpassword')
+        renewpassword = data.get('renewpassword')
+        if (newpassword != renewpassword):
+           return HttpResponse("Password is not matched")
+        username = str(request.user)
+        users = User.objects.all()
+        for user in users:
+            if (user.username == username):
+                user.set_password(renewpassword)
+                user.save()
+                return HttpResponse('Done')
+
+        return HttpResponse("Wrong")
 
