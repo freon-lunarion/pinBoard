@@ -6,4 +6,5 @@ app_name = 'shared'
 urlpatterns = [
     path('<int:pk>/vote/', views.vote, name='vote'),
     path('score/', views.score, name='user_score'),
+    path('user/', views.user_avatar, name='user_avatar')
 ]

@@ -38,7 +38,7 @@
             <div class="background">
               <img src="https://i.imgur.com/G91dSvD.jpg">
             </div>
-            <a href="#user"><img class="circle" src="https://i.imgur.com/8P2xzAg.jpg"></a>
+            <a href="#user" class="modal-trigger"><img class="circle" src="https://i.imgur.com/8P2xzAg.jpg"></a>
             <div class="profile-details-panel" style="background: rgba(255,255,255,0.6);border-radius: 8px;">
                 <!--<a href="#email"><span class="black-text name">Mike</span></a>-->
                 <a href="#name"><span class="black-text name">{{ request.session.username }}</span></a>
@@ -67,6 +67,27 @@
         </div>
         <div class="modal-footer">
           <a href="#!" class="waves-effect waves-light btn resetpassword">Submit</a>
+        </div>
+      </div>
+
+      <!--Upload Avatar Modal-->
+      <!--<form method="POST" action="{% url 'shared:user_avatar' %}">-->
+      <div id="user" class="modal">
+        <div class="modal-content">
+          <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">Upload Avatar</h5>
+          <div class="row">
+            <div class="col s12 m4">
+              <img id='uploaded-avatar' src="{% static '/images/empty-profile.png' %}" style="width:180px;height:180px;">
+            </div>
+            <div class="col s12 m8">
+              <div class="row">
+                <input name="avatar" accept="image/*" required="" id="id_avatar" autocomplete="off" type="file">
+              </div>
+              <div class="row">
+                <button type="submit" id="submit-avatar" class="waves-effect waves-light btn-small cyan lighten-1">Submit</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -156,6 +177,48 @@
 
 
     <script>
+      document.getElementById('id_avatar').onchange = (e) => {uploadAvatar(e)};
+      function uploadAvatar(event) {
+        const [ file ] = event.target.files;
+
+        const validFileTypes = [ 'image/jpeg', 'image/png', 'image/jpg' ];
+        const valid = validFileTypes.find(type => type === file.type);
+
+        if (!valid) return false;
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          const dataURL = e.target.result;
+          let img = document.getElementById('uploaded-avatar');
+          img.src = dataURL;
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      document.getElementById('submit-avatar').addEventListener('click', event => {
+        fetch("{% url 'shared:user_avatar' %}", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+          body: JSON.stringify({
+            'avatar': document.getElementById('id_avatar').value
+          })
+        }).then(res => res.json()).then(json => {console.log(json)});
+      });
+
+      //$('#submit-avatar').click(event => {
+      //  $.ajax({
+      //    url: "{% url 'shared:user_avatar' %}",
+      //   type: 'POST',
+      //    data: {
+      //      'avatar': $('#id_avatar').value
+      //   },
+      //  }),
+      //  success: function (data) {
+      //    console.log(data);
+      //  }
+      //});
 
       // initialize various handlers
       $(document).ready(() => {

@@ -164,7 +164,6 @@ def create_post(request):
 def create_image_post(request):
     if (request.method == 'POST'):
         form = AddImageForm(request.POST)
-        print(form)
         if form.is_valid():
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
             tags = form.cleaned_data['tags'].split(',')
@@ -187,7 +186,7 @@ def create_image_post(request):
                     ContentTag.create(post.id, Tag.create(title.strip()).id)
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
-    return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
+    return render(request, 'blogs/add_image.html', {'form': AddImageForm(), 'test': UpdateUserAvatarForm()})
 
 @login_required
 def create_question(request):

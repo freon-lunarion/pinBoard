@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404
 from django import forms
 from tinymce.widgets import TinyMCE
 from django.contrib.admin import widgets
-from django.core.files.images import get_image_dimensions
 
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length=128,
@@ -100,7 +99,7 @@ class CommentForm(forms.Form):
 
 class AddImageForm(forms.Form):
     title = forms.CharField(max_length=128)
-    image = forms.ImageField(required=False, widget=forms.FileInput(attrs={
+    image = forms.CharField(required=False, widget=forms.FileInput(attrs={
         'type': 'file',
         'id': 'picker'
     }))
@@ -112,3 +111,8 @@ class AddImageForm(forms.Form):
         'id': 'detail',
         'type': 'hidden'
     }))
+
+
+
+
+# <label for="id_avatar">Avatar:</label> <input name="avatar" accept="image/*" required="" id="id_avatar" autocomplete="off" type="file">

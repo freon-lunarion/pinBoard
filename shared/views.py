@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views import generic
 from django.http import HttpResponse, JsonResponse
 from .models import *
+from .forms import *
 from django.contrib import auth
 from django.shortcuts import render,render_to_response
 from django.template import RequestContext
@@ -26,3 +27,9 @@ def vote(request, pk):
 def score(request):
     if (request.method == 'GET'):
         return JsonResponse({'score': sum([c.score for c in Content.objects.filter(author=request.user)])})
+
+def user_avatar(request):
+    if (request.method == 'POST'):
+        data = json.loads(request.body)
+        print(data)
+        return JsonResponse({'message': "succeed"})
