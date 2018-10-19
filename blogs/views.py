@@ -47,10 +47,12 @@ class PostView(generic.DetailView):
         post_res = Post.objects.all().filter(id=content.id)
         if post_res.count() == 1:
             post = post_res[0]
+            
             context['post'] = post
             context['comments'] = sorted(Comment.objects.filter(parent=post),
                                          key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
                                          else 0), reverse=True)
+
             context['comment_form'] = CommentForm()
         else:
             question = get_object_or_404(QnaQuestion, id=self.pk)
@@ -125,6 +127,30 @@ def index(request):
                                                                  if q.published_date else 0), reverse=True)
 
     # latest_post_list = Post.objects.all()
+
+    # get comment counts
+    for post in latest_post_list:
+        count = Comment.objects.filter(parent=post).count()
+        if count == 0:
+            count_string = "No Comments"
+        if count == 1:
+            count_string = "1 Comment"
+        if count > 1:
+            count_string = str(count) + ' Comments'
+            # count_string = count.append(' Comments')
+            
+        post.comment_count_string = count_string
+
+    #  for question in latest_question_list:
+    #     count = QnaAnswer.objects.filter(parent=question).count()
+    #     if count == 0:
+    #         count_string = "No Answers"
+    #     if count == 1:
+    #         count_string = "1 Answer"
+    #     if count > 1:
+    #         count_string = str(count) + ' Answers'
+    #      question.answers = count_string
+         
     context = {
         'latest_post_list': latest_post_list + latest_question_list,
     }
