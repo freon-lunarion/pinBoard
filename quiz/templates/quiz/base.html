@@ -65,9 +65,7 @@
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
               <li><span>Hello, {{ request.session.username }}&nbsp;</span></li>
-            {% else %}
-              <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/register">Register</a></li>-->
-              <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/login">Login</a></li>-->
+            
             {% endif %}
             <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display: block !important"><i class="material-icons">menu</i></a></li>
           </ul>
@@ -83,6 +81,12 @@
               <div class="card-panel waves-light  waves-effect post-type amber" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">event_note</i>
                 <span class="white-text">&nbsp;Article</span>
+              </div>
+            </a>
+            <a href="/quiz/new">
+              <div class="card-panel waves-light  waves-effect post-type indigo" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
+                <i class="material-icons" style="color: white">format_list_bulleted</i>
+                <span class="white-text">&nbsp;Quiz</span>
               </div>
             </a>
             <a id="toggle-image-post-form">

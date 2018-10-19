@@ -58,6 +58,13 @@ class Question(Content):
             return answer.get().detail
         else:
             return None
+    
+    def get_options(self):
+        options = Options.objects.filter(question = self)
+        if options:
+            return options
+        else:
+            return None
 
     
 class Options(models.Model):
