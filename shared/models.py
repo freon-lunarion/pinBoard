@@ -110,9 +110,6 @@ class Vote(models.Model):
     value = models.IntegerField(default=0)
     timestamp = models.DateTimeField(default=timezone.now)
 
-    class Meta:
-        unique_together = ("content", "user")
-
     @staticmethod
     def vote(content_id, user_id, value):
         content = get_object_or_404(Content, id=content_id)
@@ -124,4 +121,7 @@ class Vote(models.Model):
     def exist(content_id, user_id):
         content = get_object_or_404(Content, id=content_id)
         user = get_object_or_404(User, id=user_id)
-        return Vote.objects.filter(content=content, user=user).exists()
+        if Vote.objects.filter(content=content, user=user).exists():
+            return 1
+        else:
+            return 0

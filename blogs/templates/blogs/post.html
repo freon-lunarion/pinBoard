@@ -5,14 +5,14 @@
     <div class="username" style="display: none">{{request.session.username}}</div>
     <div class="post-container">
         {% if "Post" in post.kind %}
-            <div id="post-id">{{post.id}}</div>
+            <!--<div id="post-id">{{post.id}}</div>-->
             <div class="col s12 m4 sidebar" id="sidebar">
                 <div class="card blue-grey darken-1" style="position:relative;top:1px;width: 360px;left: -59px;">
                     <div class="card-action voting sidebar">
                         <div class="score-container">
-                            <a class="btn-flat vote" style="padding-left: 0;margin-right: 0;"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                            <span id="score-{{ post.id }}" class="score">0</span>
-                            <a class="btn-flat vote" style="margin-right: 0;"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                            <a class="btn-flat vote" id="downvote-btn-{{post.id}}" style="padding-left: 0;margin-right: 0;"><i id="downvote-{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                            <span id="score-{{ post.id }}" class="score">{{post.score}}</span>
+                            <a class="btn-flat vote" id="upvote-btn-{{post.id}}" style="margin-right: 0;"><i id="upvote-{{ post.id }}" class="material-icons">arrow_upward</i></a>
                         </div>
                     </div>
                     <div class="card-content sidebar white-text">
@@ -119,11 +119,13 @@
                                     <!--<li>&#9733;</li>-->
                                 <!--</ul>-->
 
-                                <!--<i class="icofont-ui-love"></i>-->
-                                <img style="max-width: 50px;" id="{{comment.id}}" class="likes" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALGSURBVGhD7Zc5qxRBFEZHcQFR3HAXI3H9BaYiKuKCICKamrhFYqYmIpq9VBRN3AUxNNLINXLfF0QMDDQRxMD1fDAXLkWVPT093dMNfeDAUK/q1v3m1avX3WlpaWlpaRITcQkuxMkaKIhqqJZqqnZpjMbNeA6/4t/Aj3geN+IYzEJzNqHWfMKw3hc8i9pTew+ENfgEw81SvsWtmGIbvsPY2piPcDX2zSg8in8wtsEP/B2MeS/hVDSm4RWMzZWqpZqxn6mHI6iecnMGfbFfqKOwHtWUGIs623vxHvr58j0uwsX4oTvmvYu7UTVUS0zHDai9wi/qNObiAPoCD3AZZrEKH6Nf+7mrH9NxWYlZLMeH6Nfux55Yij/RFt7APDeJ/pCPY+xIakzHtZcLwdDeN9FqqDf9hjO5hrZIf7j9Xq+6cb6h1dJn3VT9MAX9BXEV/8sC9N+kzmoRVuD3rvpcBH0J1pd6nI9J9qFNfqaBAaCrs9D16XiO1t8eDaTw16POct04htbfZQ2kuI02cbsGasYOtP5uaSDFS7SJ+o9eN9ST9adek9xBm7hTAzVjF1p/6jXJCbSJ1zVQM/zRP6mBFGvRJsqiV+Yg0aOR701P2kn0yKxr1ybr+WkcDptJ+BqtrzeY+Xi/Dm2BHMFhcxF9T1uwJ06hX3gIh8Vh9L1cwJ4Zj/fRFziIVaM9fQ96Cp+AuZiB4ZthlWHCEE9RPfWFFqqAL1hFmFiImViIqsOEIXSLFg5hqJC/lmUZYUoNYZQdJhZiFpaCCpcRJgyh947SQhjawL/gyCJhhhLCGFSYWIjZWCnasEiYMMQLrDyEoY3VgG+olzC1CmHMwTxhYiFUoxaoEf+aLGNhwhBaU5sQRlaYRoQw5mIsTBjiFWpurVGDatQ37m1ECGMexsJoTD9rFGrYv2frc+NCGBam0SEMBWh8iJaWZtPp/AOQbnKKkJzHbQAAAABJRU5ErkJggg==">
+                                <div class="card-action" id="comment-btns-{{ comment.id }}" style="text-align: center"></div>
 
-                                <img class="{{comment.id}} likes" id="{{comment.id}}" style="max-width: 50px; display: none" src="data:image/png;base64,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">
-                                <span style="display: none" class="checkvote-{{comment.id}}">You have voted for it:)</span>
+                                <!--<i class="icofont-ui-love"></i>-->
+                                <!--<img style="max-width: 50px;" id="{{comment.id}}" class="likes" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALGSURBVGhD7Zc5qxRBFEZHcQFR3HAXI3H9BaYiKuKCICKamrhFYqYmIpq9VBRN3AUxNNLINXLfF0QMDDQRxMD1fDAXLkWVPT093dMNfeDAUK/q1v3m1avX3WlpaWlpaRITcQkuxMkaKIhqqJZqqnZpjMbNeA6/4t/Aj3geN+IYzEJzNqHWfMKw3hc8i9pTew+ENfgEw81SvsWtmGIbvsPY2piPcDX2zSg8in8wtsEP/B2MeS/hVDSm4RWMzZWqpZqxn6mHI6iecnMGfbFfqKOwHtWUGIs623vxHvr58j0uwsX4oTvmvYu7UTVUS0zHDai9wi/qNObiAPoCD3AZZrEKH6Nf+7mrH9NxWYlZLMeH6Nfux55Yij/RFt7APDeJ/pCPY+xIakzHtZcLwdDeN9FqqDf9hjO5hrZIf7j9Xq+6cb6h1dJn3VT9MAX9BXEV/8sC9N+kzmoRVuD3rvpcBH0J1pd6nI9J9qFNfqaBAaCrs9D16XiO1t8eDaTw16POct04htbfZQ2kuI02cbsGasYOtP5uaSDFS7SJ+o9eN9ST9adek9xBm7hTAzVjF1p/6jXJCbSJ1zVQM/zRP6mBFGvRJsqiV+Yg0aOR701P2kn0yKxr1ybr+WkcDptJ+BqtrzeY+Xi/Dm2BHMFhcxF9T1uwJ06hX3gIh8Vh9L1cwJ4Zj/fRFziIVaM9fQ96Cp+AuZiB4ZthlWHCEE9RPfWFFqqAL1hFmFiImViIqsOEIXSLFg5hqJC/lmUZYUoNYZQdJhZiFpaCCpcRJgyh947SQhjawL/gyCJhhhLCGFSYWIjZWCnasEiYMMQLrDyEoY3VgG+olzC1CmHMwTxhYiFUoxaoEf+aLGNhwhBaU5sQRlaYRoQw5mIsTBjiFWpurVGDatQ37m1ECGMexsJoTD9rFGrYv2frc+NCGBam0SEMBWh8iJaWZtPp/AOQbnKKkJzHbQAAAABJRU5ErkJggg==">-->
+
+                                <!--<img class="{{comment.id}} likes" id="{{comment.id}}" style="max-width: 50px; display: none" src="data:image/png;base64,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">-->
+                                <!--<span style="display: none" class="checkvote-{{comment.id}}">You have voted for it:)</span>-->
                                 <!--<input type="text" class="vote">-->
 
 
@@ -152,9 +154,9 @@
                 <div class="card blue-grey darken-1">
                     <div class="card-action voting sidebar">
                         <div class="score-container">
-                            <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                            <span id="score-{{ post.id }}" class="score">0</span>
-                            <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                            <a class="btn-flat vote" id="downvote-btn-{{ post.id }}" style="padding-left: 0"><i id="downvote-{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                            <span id="score-{{ post.id }}" class="score">{{post.score}}</span>
+                            <a class="btn-flat vote" id="upvote-btn-{{ post.id }}"><i id="upvote-{{ post.id }}" class="material-icons">arrow_upward</i></a>
                         </div>
                     </div>
                     <div class="card-content sidebar white-text">
@@ -173,9 +175,9 @@
                 <div class="card blue-grey darken-1" style="position:relative;top:1px;width: 360px;left: -59px;">
                     <div class="card-action voting sidebar">
                         <div class="score-container">
-                            <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                            <span id="score-{{ post.id }}" class="score">0</span>
-                            <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                            <a class="btn-flat vote" id="downvote-btn-{{ post.id }}" style="padding-left: 0"><i id="downvote-{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                            <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
+                            <a class="btn-flat vote" id="upvote-btn-{{ post.id }}"><i id="upvote-{{ post.id }}" class="material-icons">arrow_upward</i></a>
                         </div>
                     </div>
                     <div class="card-content sidebar white-text">
@@ -186,7 +188,7 @@
                     </div>
                     <div class="card-action voting sidebar">
                         {% if post.solved %}
-                            <span class="waves-effect waves-light btn-small gray" style="margin: 5px 0;">Solved</span>
+                            <span class="btn disabled" style="margin: 5px 0;">Solved</span>
                         {% else %}
                             <a class="waves-effect waves-light btn-small light-green" id="make-comments" style="margin: 5px 0;">Answer</a>
                         {% endif %}
@@ -213,6 +215,12 @@
                 <div class="card-panel">
                     <h1 class="post-title">Question: {{ post.title }}</h1>
 
+                    <div class="post-tags">
+                        {% for tag in post.tags %}
+                            <div class="chip">{{ tag }}</div>
+                        {% endfor %}
+                    </div>
+
                     <div class="content-container">
                         <p>{{ post.detail | safe }}</p>
                     </div>
@@ -237,17 +245,15 @@
                                     {% if post.solved == False and request.session.username == post.author.username and post.author.username != comment.author.username %}
                                         <a class="waves-effect waves-light btn-small light-green" id="answer-correct-btn-{{comment.id}}" style="position: absolute;top:10px;right:10px;">Correct</a>
                                     {% elif post.solved and comment.is_correct %}
-                                        <span class="waves-effect waves-light btn-small gray" style="position: absolute;top:10px;right:10px;">Correct</span>
+                                        <span class="btn disabled" style="position: absolute;top:10px;right:10px;">Correct</span>
                                     {% endif %}
                                 </div>
                                 <div class="card-content" style="min-height: 92px">
                                     <p>{{ comment.detail | safe }}</p>
                                 </div>
+                                <div class="card-action" id="comment-btns-{{ comment.id }}" style="text-align: center"></div>
 
-                                <img style="max-width: 50px;" id="{{comment.id}}" class="likes" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALGSURBVGhD7Zc5qxRBFEZHcQFR3HAXI3H9BaYiKuKCICKamrhFYqYmIpq9VBRN3AUxNNLINXLfF0QMDDQRxMD1fDAXLkWVPT093dMNfeDAUK/q1v3m1avX3WlpaWlpaRITcQkuxMkaKIhqqJZqqnZpjMbNeA6/4t/Aj3geN+IYzEJzNqHWfMKw3hc8i9pTew+ENfgEw81SvsWtmGIbvsPY2piPcDX2zSg8in8wtsEP/B2MeS/hVDSm4RWMzZWqpZqxn6mHI6iecnMGfbFfqKOwHtWUGIs623vxHvr58j0uwsX4oTvmvYu7UTVUS0zHDai9wi/qNObiAPoCD3AZZrEKH6Nf+7mrH9NxWYlZLMeH6Nfux55Yij/RFt7APDeJ/pCPY+xIakzHtZcLwdDeN9FqqDf9hjO5hrZIf7j9Xq+6cb6h1dJn3VT9MAX9BXEV/8sC9N+kzmoRVuD3rvpcBH0J1pd6nI9J9qFNfqaBAaCrs9D16XiO1t8eDaTw16POct04htbfZQ2kuI02cbsGasYOtP5uaSDFS7SJ+o9eN9ST9adek9xBm7hTAzVjF1p/6jXJCbSJ1zVQM/zRP6mBFGvRJsqiV+Yg0aOR701P2kn0yKxr1ybr+WkcDptJ+BqtrzeY+Xi/Dm2BHMFhcxF9T1uwJ06hX3gIh8Vh9L1cwJ4Zj/fRFziIVaM9fQ96Cp+AuZiB4ZthlWHCEE9RPfWFFqqAL1hFmFiImViIqsOEIXSLFg5hqJC/lmUZYUoNYZQdJhZiFpaCCpcRJgyh947SQhjawL/gyCJhhhLCGFSYWIjZWCnasEiYMMQLrDyEoY3VgG+olzC1CmHMwTxhYiFUoxaoEf+aLGNhwhBaU5sQRlaYRoQw5mIsTBjiFWpurVGDatQ37m1ECGMexsJoTD9rFGrYv2frc+NCGBam0SEMBWh8iJaWZtPp/AOQbnKKkJzHbQAAAABJRU5ErkJggg==">
 
-                                <img class="{{comment.id}} likes" id="{{comment.id}}" style="max-width: 50px; display: none" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAcdSURBVGhD7VlZbFRVGK6GaIz79mbimmg0PmuiRo0+mZj4gk+GBx+gc5dOh24g0GnBRHQ2hpaWTueee6cLICKKkEqCIAhaWiFsbdlpoRuUgiDEKDBz/P4757Z3prelpduQ9E++ZHrvWf7//N+/nNusGZmRGZk4+cpV/7hP1V4NKtqHfkn/ICgZr9Ez8fqOhdagtcw1sTbtEXLrj4nXEyMBmb0eUNiXQVlvDSg6dwY75FdYacgdfVlMu634Ff0Vv6wvCyrsiPOaOg8qeps5BkaKaWOXgFT9UkDW10DBBC1qqCy+bX6UN+ZV84P5ERP0e5snylkOi5ubyywBBQ2fFH1WLDNEcNLP+WUWo7E0R881+PaiGt78RS1vWZxEE37vwDMD74RRiaDE1vqUmufFMqMTv8o+x+T/gtisAYqeK4rwSwuqRsRZjNns0Tg8l8C8fzB/tlhuQHCyn9I7GrMF63Yt0vnfy+pHRG9pPd9aGOMh8pCs3wwoxhyx3PDCs/g9UCBApxDL0eIdhc5Kj4R2GMQwlzxJtPB6vfcS4IGl9IzBs+2FyYP5a7GWonR7cR3fD2+0Lanl/aV1Ke+6Sup4rSdmechHugq1hwqoVEIDf8TJ9hU5KzoaXMDc73M1a9NDAuYzejcwdiGMWcL4FW+MXynW+TpPMjYIiA9+CDSzG3N5aT3flJc0BhReItROFbycTSf2HTazKzUe7MmL8ojC4oTfEU9OY+zoWxDhJwsi/EB+MvY6iqp5T7HBt4FaF0AxMuYqsCHPgCFmPH4i1E9KWK19BNmjPwq3j8cTkwEyjOKj2m2Y9CJjLsEzGv5GzFwsl8ofEmaYKXYpuasFk5wWm260wENlqs41ZDErdo4ijkwaIhySRni+fQCZ5PraXC3htEim4CCMobhpKIgNxMy6+ZSe2bWwGr4/K6iyj8my/RjotEAmgZJQSDF4p6DYwUXCKxL7KAvFKYL4SKRkkwwFpXZSnIqlFSuIH6R5FkF8aM0xN8toWtlR52YmpSx61XhAL5ntzUJ8dG2YwJQ72egGc86XDNaXjagrIYX1UP24seUuMoRwtXTQkIaCGqRhdpM8cn0TgshpQqaCugDLkM35ZqW/Bo+wY/Xuu8uQywsjaG10tDYGr8+lLpq1UTGsW6no8YsOEwj9Rat5f+Fqx3fTDdI5LLM4mtNaeMSYQyktvapfyKvgnVKYd8wLmTibvYL35q5KGTPdOAydzTqiaJ+Z10x45V/qTK0B5z2rBgxIR7dSlrLYdMLssKH78rlVj5ptilkUcdmhgkNU6sDpOxlhoddd7rjwVIJ0JZ3NYmjJN6rxIlx0k/qtXgdvnIJhR+elGjfdNCNdqXQEXdoLwoykwLIw8a05Bx6xKXw4eyWvVDTOZNwPbM8J02UM9YVmbMh6UKg/KF8XRB8G3zorcQk6YaNWrYwWWmF8n6ssxQgLPVNMsx6gQmW30AmfS7mL2CWgGu/D0nitVM3bhaKt88Kg1WD2anaV8+NpMdStlpmx5bTxRKIfQM1LwBNxn6y/J9R2Fp+iechtP0mpFCM0SJWmS7e7hsZRpxyedGN+nh8190cYuIW6Iwt9m6IJO20KnwLoYrNWruJnhslqZ10reF9+paMS40UT7vykE+ivCzVvL3TjQp//J03cAypZiraBYhblWvB7jRRBMhikHYEKJ9UhJ2XuFMngZomgqjeZt8GxSJkcexIXrtaQzPgf2alUOg1UIZOtgKEtyGr2dxa6lJUT0trQFxXTCEU/HPBUPyHUG5uEVe1p9PrHiVK7bMYchzc0pOPG7MFMRkngjPhtgbxDrY6TgqNBs0knGCHrraSLUOvOhBZAq3+AaPaLqyJFUQtbpQqTv002w+zozhl7VvvNDGxG2OefW/WUUGd8QjUGxuwkZTdKqcF+EhWfPFaPeLHihxKD9d7CaL3TB9B34WRg69tpb6HGxIjXu/4+nE4VbWBI0ZSWpTG73Gxj6PcRxAxa65SMZ0dv7vAFtBPX2FhO1PxKT3vRnmL7iRfwNRub3KpAsO93DQ30GngmDEVaRDYjL1mesnCxcGiKPlpQzVehq4ARN/yyMVdsN7mCbPYO0vMl+pS5Iy1uGlyVA1mODNCRFNaDjvYx6W0NfRcGdali94Gmb4ltpkaWq5FnsHEz0YDqSXrbQtgFetH7X9OMpZaGDOhCK74u2cUSlfbSmmL5qRWv1zsLxpSAbvEyqje24kloxN8b4I10alEWo/pQhr4O82/5FYalvLPEstMnAVV/E/Wmg06WFD+RdnexgzrrH9wiKyn6aZ+kvSGWyQyhltov66txurwc3tmd5h3CblCtXNESyf9tsEpfXs2DYnrmiUgEJ+nE6S5DvRqhDr/pGWh4zC9pb4vhmS2U/4n39PFPUIiy0nXEQ/Gk1obJEqJbQNXeJQx7m5uRGZmRKZCsrP8B/uwgBPBr5PIAAAAASUVORK5CYII=">
-                                <span style="display: none" class="checkvote-{{comment.id}}">You have voted for it:)</span>
                                 <!--<input type="text" class="vote">-->
                             </div>
                         </div>
@@ -261,15 +267,104 @@
 
     <script>
 
+        function vote (content_id, value) {
+            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+                body: JSON.stringify({
+                    'vote': value
+                })
+            });
+        }
+
         document.getElementById('comment_kind').value = "{{ post.kind }}";
-        console.log("{{post.solved}}")
+        {% for comment in comments %}
+            //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', "{{ comment.id }}"), {
+            //    method: 'POST',
+            //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+            //    body: JSON.stringify({
+            //        'vote': 0
+            //    })
+            //})
+            vote("{{ comment.id }}", 0)
+            .then(res => res.json()).then(json => {
+                let comment_btns = document.getElementById("comment-btns-{{ comment.id }}");
+                let helpful_btn = document.createElement('span');
+                helpful_btn.setAttribute('id', "comment-helpful-btn-{{comment.id}}");
+                helpful_btn.setAttribute('style', "margin-right: 15px;");
+                helpful_btn.innerHTML = 'Helpful';
+                let unhelpful_btn = document.createElement('span');
+                unhelpful_btn.setAttribute('id', "comment-unhelpful-btn-{{comment.id}}");
+                unhelpful_btn.setAttribute('style', "margin-right: 15px;");
+                unhelpful_btn.innerHTML = 'Unhelpful';
+                let comment_score = document.createElement('span');
+                comment_score.innerHTML = "{{ comment.score }}"
+                comment_score.setAttribute("id", "comment-score-{{comment.id}}");
+                if (parseInt(json.exist) === 1) {
+                    helpful_btn.setAttribute('class', 'btn disabled');
+                    unhelpful_btn.setAttribute('class', 'btn disabled');
+                }
+                else {
+                    if("{{ request.session.userid }}" === "{{ comment.author.id }}") {
+                        helpful_btn.setAttribute('class', 'btn disabled');
+                        unhelpful_btn.setAttribute('class', 'btn disabled');
+                    }
+                    else {
+                        helpful_btn.setAttribute('class', 'waves-effect waves-light btn-small light-green');
+                        unhelpful_btn.setAttribute('class', 'waves-effect waves-light btn-small light-green');
+                    }
+                }
+                comment_btns.appendChild(helpful_btn);
+                comment_btns.appendChild(unhelpful_btn);
+                comment_btns.appendChild(comment_score);
+            });
+        {% endfor %}
+
+        //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', "{{ post.id }}"), {
+        //    method: 'POST',
+        //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+        //    body: JSON.stringify({
+        //        'vote': 0
+        //    })
+        //})
+        vote("{{ post.id }}", 0)
+        .then(res => res.json()).then(json => {
+            if (parseInt(json.exist) === 1) {
+                document.getElementById("upvote-btn-{{post.id}}").classList.add('disabled');
+                document.getElementById("downvote-btn-{{post.id}}").classList.add('disabled');
+            }
+        });
 
         document.addEventListener('click', e => {
             console.log(e.target.id);
 
+            if (e.target.id === "upvote-{{post.id}}") {
+                console.log("upvote-{{post.id}}");
+                vote("{{post.id}}", 1)
+                .then(res => res.json()).then(json => {
+                    console.log(json);
+                    if ('score' in json) {
+                        document.getElementById("upvote-btn-{{post.id}}").classList.add('disabled');
+                        document.getElementById("downvote-btn-{{post.id}}").classList.add('disabled');
+                        document.getElementById("score-{{post.id}}").innerHTML = json.score;
+                    }
+                });
+            }
+
+            if (e.target.id === "downvote-{{post.id}}") {
+                vote("{{post.id}}", -1)
+                .then(res => res.json()).then(json => {
+                    if ('score' in json) {
+                        document.getElementById("upvote-btn-{{post.id}}").classList.add('disabled');
+                        document.getElementById("downvote-btn-{{post.id}}").classList.add('disabled');
+                        document.getElementById("score-{{post.id}}").innerHTML = json.score;
+                    }
+                });
+            }
+
             if (/^answer-correct-btn-/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^answer-correct-btn-(\d+)$/)[1]);
-                fetch('/blogs/{{ post.id }}/', {
+                fetch("/blogs/{{ post.id }}/", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                     body: JSON.stringify({
@@ -277,12 +372,63 @@
                         'answer_id': id
                     })
                 })
-                .then(res => {
-                    if (res.status == 200) {
-                        location.reload();
+                .then(res => res.json()).then(json => {
+                    if ('score' in json) {
+                        let comment_score = document.getElementById(`comment-score-${id}`);
+                        comment_score.innerHTML = json.score;
+                        let make_comments_btn = document.getElementById(`make-comments`);
+                        make_comments_btn.innerHTML = 'Solved';
+                        make_comments_btn.classList.add('disabled');
+                        e.target.classList.add('disabled');
                     }
                 });
             }
+
+            if (/^comment-helpful-btn-/.test(e.target.id)) {
+                let id = e.target.id.match(/^comment-helpful-btn-(\d+)$/)[1];
+                //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', id), {
+                //    method: 'POST',
+                //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+                //    body: JSON.stringify({
+                //        'vote': 1
+                //    })
+                //})
+                vote(id, 1)
+                .then(res => res.json()).then(json => {
+                    console.log(json);
+                    if ('score' in json) {
+                        let helpful_btn = document.getElementById(`comment-helpful-btn-${id}`);
+                        let unhelpful_btn = document.getElementById(`comment-unhelpful-btn-${id}`);
+                        helpful_btn.classList.add('disabled');
+                        unhelpful_btn.classList.add('disabled');
+                        let comment_score = document.getElementById(`comment-score-${id}`);
+                        comment_score.innerHTML = json.score;
+                    }
+                });
+            }
+
+            if (/^comment-unhelpful-btn-/.test(e.target.id)) {
+                let id = e.target.id.match(/^comment-unhelpful-btn-(\d+)$/)[1];
+                //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', id), {
+                //    method: 'POST',
+                //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+                //    body: JSON.stringify({
+                //        'vote': -1
+                //    })
+                //})
+                vote(id, -1)
+                .then(res => res.json()).then(json => {
+                    if ('score' in json) {
+                        let helpful_btn = document.getElementById(`comment-helpful-btn-${id}`);
+                        let unhelpful_btn = document.getElementById(`comment-unhelpful-btn-${id}`);
+                        helpful_btn.classList.add('disabled');
+                        unhelpful_btn.classList.add('disabled');
+                        let comment_score = document.getElementById(`comment-score-${id}`);
+                        comment_score.innerHTML = json.score;
+                    }
+                });
+            }
+
         });
 
         // initialize dropdown
