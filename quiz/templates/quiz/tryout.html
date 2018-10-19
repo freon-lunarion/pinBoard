@@ -1,0 +1,78 @@
+{% extends "./base.html" %}
+{% block content %}
+<h1 class="white-text">{{ title }}</h1>
+<hr>
+{% for question in questions %}
+    <div class="post-container">
+        <div class="col sm12 m12">
+            <div class="card-panel">
+                <div class="content-container">
+                    {% autoescape off %}
+                        {{ question.detail }}
+                    {% endautoescape %}
+
+                    {% for option in question.get_options %}
+                        <p>
+                            <label>
+                                <input class="options" data-que-id={{question.id}} data-option-id={{option.id}} name="{{question.id}}" type="radio">
+                                <span>{{option.detail}}</span>
+                            </label>
+                        </p>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h5>Result</h5>
+        <p><span id="right">0</span>/{{ questions_num }}</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+<div class="fixed-action-btn">
+    <a id="checkBtn" href="#modal1" class="btn-floating btn-large waves-effect modal-trigger waves-light blue"><i class="material-icons">check</i></a>
+</div>
+
+<script>
+    $("#checkBtn").click(function(){
+        $("#right").html(0)
+        let total = 0
+        $('input[type="radio"]:checked').each(function() {
+            let queId = $(this).data("que-id")
+            let optId = $(this).data("option-id")
+            // sibling = $(this).parent().children('span');
+            console.log(queId + " "+optId)
+            $.ajax({
+                url: '/quiz/check',
+                type:'GET',
+                data: {
+                    'queId':queId,
+                    'optId':optId,
+                },success:function(data, textStatus, xhr){
+                    // console.log(xhr.status);
+                    if(xhr.status === 200) {
+                        let las = parseInt( $("#right").html());
+                        las += 1;
+                        $("#right").html(las)
+                    } else {
+
+                    }
+                    
+                },complete:function(){
+                    
+                }
+            })
+            
+        });
+
+        
+    });
+</script>
+{% endblock %}

@@ -1,4 +1,3 @@
-
 from .forms import *
 from .models import *
 from django.contrib.auth import authenticate, login, logout
@@ -12,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from shared.models import *
+import random
 
 class QuizBankListView(generic.ListView):
     model = QuizBank
@@ -35,7 +35,7 @@ class QuizBankDetailView(generic.DetailView):
         context['questions'] = Question.objects.filter(quizBank=self.pk)[:60]
         
         return context
- 
+
     
 @login_required
 def room_create(request):
@@ -53,9 +53,32 @@ def room_create(request):
 
             return HttpResponseRedirect(f'/quiz/{room.id}')
             
-    return render(request, 'add_room.html', {'form':QuizBankForm()})
-    pass
+    return render(request, 'quiz/add_room.html', {'form':QuizBankForm()})
+    
 
+@login_required
+def tryout_view(request,pk):
+    quizBank = QuizBank.objects.get(pk= pk)
+    questions = Question.objects.filter(quizBank = quizBank)
+    que_ls = []
+    for que in questions:
+        if que.score >= quizBank.tryout_minScore:
+            que_ls.append(que)
+    clean_ls = que_ls
+    if len(que_ls) >= quizBank.tryout_displayNum:
+        clean_ls = random.sample(que_ls, quizBank.tryout_displayNum)
+
+    context = {
+        'title': quizBank.title,
+        'questions' : clean_ls,
+        'questions_num' : len(clean_ls)
+    }
+
+    return render(request, 'quiz/tryout.html', context=context)      
+
+          
+    
+@login_required
 def question_create(request,pk):
     quizBank = QuizBank.objects.get(pk= pk)
     if request.method == 'POST':
@@ -82,7 +105,7 @@ def question_create(request,pk):
             return HttpResponseRedirect(f'/quiz/{quizBank.id}')
     
     form = QuestionForm(initial={'quizBank': quizBank})
-    return render(request, 'add_room.html', {'form':form})
+    return render(request, 'quiz/add_room.html', {'form':form})
 
 @login_required
 def voteAjax(request):
@@ -103,3 +126,13 @@ def voteAjax(request):
                 value = val
             )
             return HttpResponse(status=201)
+@login_required
+def checkAjax(request):
+    if (request.method == 'GET'):
+        data = request.GET
+        queId = data.get('queId')
+        optId = data.get('optId')
+        if Options.objects.filter(id=optId, isCorrect=True).exists():
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=400)

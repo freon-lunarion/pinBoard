@@ -10,5 +10,8 @@ urlpatterns = [
     # path('<int:pk>/new', views.QuestionView.as_view(), name='index'),
     path('<int:pk>/new', views.question_create, name='create-question'),
     url(r'^vote/$',views.voteAjax),
+    path('<int:pk>/tryout', views.tryout_view, name='tryout'),
+    url(r'^check/$',views.checkAjax),
+
 
 ]
