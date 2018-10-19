@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,Comment
+from .models import Post,Comment, QnaAnswer
 
 # Register your models here.
 # admin.site.register(Post)
@@ -26,5 +26,17 @@ class CommentAdmin(admin.ModelAdmin):
         obj.author = request.user
         super().save_model(request, obj, form, change)
 
+class QnaAnswerAdmin(admin.ModelAdmin):
+    list_display = ('id', 'detail', 'create_time', 'is_correct')
+
+    list_link = ('id','title', 'is_correct')
+    list_per_page = 25
+    exclude = ('author','create_time','update_time')
+
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        super().save_model(request, obj, form, change)
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(QnaAnswer, QnaAnswerAdmin)
