@@ -149,6 +149,8 @@ def create_post(request):
                                 published_date=now
                                )
             for title in tags:
+                if title.strip() == '':
+                    continue
                 exist_tag = Tag.objects.filter(title=title.strip())
                 if exist_tag.count() != 0:
                     ContentTag.create(post.id, exist_tag.first().id)
@@ -190,6 +192,8 @@ def create_question(request):
                                        published_date=now
                                        )
             for title in tags:
+                if title.strip() == '':
+                    continue
                 tag = Tag.create(title.strip())
                 ContentTag.create(question.id, tag.id)
             return HttpResponseRedirect(f'/blogs/{question.id}')

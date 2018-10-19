@@ -56,11 +56,13 @@
                     <h1 class="post-title">{{ post.title }}</h1>
                     <hr style="margin-bottom: 24px;">
                     <!-- <h3 class="post-subtitle">Lorem ipsum Sed eiusmod esse aliqua</h3> -->
-                    <div class="post-tags">
-                        {% for tag in post.tags %}
-                            <div class="chip">{{ tag }}</div>
-                        {% endfor %}
-                    </div>
+                    {% if post.tags|length > 0 %}
+                        <div class="post-tags">
+                            {% for tag in post.tags %}
+                                <div class="chip">{{ tag }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
                     <div class="content-container">
                         {% autoescape off %}
@@ -215,11 +217,13 @@
                 <div class="card-panel">
                     <h1 class="post-title">Question: {{ post.title }}</h1>
 
-                    <div class="post-tags">
-                        {% for tag in post.tags %}
-                            <div class="chip">{{ tag }}</div>
-                        {% endfor %}
-                    </div>
+                    {% if post.tags|length > 0 %}
+                        <div class="post-tags">
+                            {% for tag in post.tags %}
+                                <div class="chip">{{ tag }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
                     <div class="content-container">
                         <p>{{ post.detail | safe }}</p>
@@ -277,22 +281,8 @@
             });
         }
 
-        fetch("{% url 'shared:user_score' %}", {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
-        }).then(res => res.json()).then(json => {
-            console.log(json);
-        });
-
         document.getElementById('comment_kind').value = "{{ post.kind }}";
         {% for comment in comments %}
-            //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', "{{ comment.id }}"), {
-            //    method: 'POST',
-            //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-            //    body: JSON.stringify({
-            //        'vote': 0
-            //    })
-            //})
             vote("{{ comment.id }}", 0)
             .then(res => res.json()).then(json => {
                 let comment_btns = document.getElementById("comment-btns-{{ comment.id }}");
@@ -327,13 +317,6 @@
             });
         {% endfor %}
 
-        //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', "{{ post.id }}"), {
-        //    method: 'POST',
-        //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-        //    body: JSON.stringify({
-        //        'vote': 0
-        //    })
-        //})
         vote("{{ post.id }}", 0)
         .then(res => res.json()).then(json => {
             if (parseInt(json.exist) === 1) {
@@ -387,19 +370,17 @@
                         make_comments_btn.innerHTML = 'Solved';
                         make_comments_btn.classList.add('disabled');
                         e.target.classList.add('disabled');
+                        let answer_correct_btns = document.getElementsByClassName('waves-effect waves-light btn-small light-green');
+                        for (let btn of answer_correct_btns) {
+                            if (/^answer-correct-btn-/.test(btn.id) && btn.id !== e.target.id)
+                            btn.style.display = 'none';
+                        }
                     }
                 });
             }
 
             if (/^comment-helpful-btn-/.test(e.target.id)) {
                 let id = e.target.id.match(/^comment-helpful-btn-(\d+)$/)[1];
-                //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', id), {
-                //    method: 'POST',
-                //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-                //    body: JSON.stringify({
-                //        'vote': 1
-                //    })
-                //})
                 vote(id, 1)
                 .then(res => res.json()).then(json => {
                     console.log(json);
@@ -416,13 +397,6 @@
 
             if (/^comment-unhelpful-btn-/.test(e.target.id)) {
                 let id = e.target.id.match(/^comment-unhelpful-btn-(\d+)$/)[1];
-                //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', id), {
-                //    method: 'POST',
-                //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-                //    body: JSON.stringify({
-                //        'vote': -1
-                //    })
-                //})
                 vote(id, -1)
                 .then(res => res.json()).then(json => {
                     if ('score' in json) {
