@@ -1,6 +1,5 @@
 from django.db import models
 from shared.models import *
-from blogs.models import QnaQuestion, QnaAnswer
 
 # Create your models here.
 class LiveQuestionSession(Content):
