@@ -84,7 +84,7 @@ class QnaQuestion(Content):
 
     @property
     def solved(self):
-        return QnaAnswer.objects.filter(parent=self, is_correct=True) > 0
+        return QnaAnswer.objects.filter(parent=self, is_correct=True).count() > 0
 
 
 class QnaAnswer(Content):
@@ -96,6 +96,11 @@ class QnaAnswer(Content):
 
     def publish(self):
         self.published_date = timezone.now()
+        self.save()
+
+    def set_correct(self):
+        Vote.vote(self.id, self.parent.author.id, 5)
+        self.is_correct = True
         self.save()
 
 

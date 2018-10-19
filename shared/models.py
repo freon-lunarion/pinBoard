@@ -114,9 +114,9 @@ class Vote(models.Model):
         unique_together = ("content", "user")
 
     @staticmethod
-    def vote(content_id, name, value):
+    def vote(content_id, user_id, value):
         content = get_object_or_404(Content, id=content_id)
-        user = get_object_or_404(User, name=name)
+        user = get_object_or_404(User, id=user_id)
         Vote.objects.create(content=content, user=user, value=value)
         return content.score
 

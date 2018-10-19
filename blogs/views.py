@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 from shared.models import *
+import json
 import datetime
 from django.template.loader import render_to_string
 
@@ -79,7 +80,18 @@ class PostView(generic.DetailView):
                                        author=request.user,
                                        published_date=now)
                 return HttpResponseRedirect(f'/blogs/{self.pk}')
-        return HttpResponseRedirect(f'/blogs/{self.pk}')
+        else:
+            data = json.loads(request.body)
+            if 'action' in data.keys():
+                if data['action'] == 'SetCorrectAnswer':
+                    QnaAnswer.objects.get(id=data['answer_id']).set_correct()
+                    return HttpResponseRedirect(f'/blogs/{self.pk}')
+                return HttpResponseRedirect(f'/blogs/{self.pk}')
+            else:
+                return HttpResponseRedirect(f'/blogs/{self.pk}')
+
+    # def put(self, request, *args, **kwargs):
+
 
 
 # class CommentView(generic.ListView):
