@@ -277,6 +277,13 @@
             });
         }
 
+        fetch("{% url 'shared:user_score' %}", {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
+        }).then(res => res.json()).then(json => {
+            console.log(json);
+        });
+
         document.getElementById('comment_kind').value = "{{ post.kind }}";
         {% for comment in comments %}
             //fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', "{{ comment.id }}"), {

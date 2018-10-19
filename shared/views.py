@@ -22,3 +22,7 @@ def vote(request, pk):
         if (int(vote) == 0):
             return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
         return JsonResponse({'score': Vote.vote(pk, request.user.id, vote)})
+
+def score(request):
+    if (request.method == 'GET'):
+        return JsonResponse({'score': sum([c.score for c in Content.objects.filter(author=request.user)])})
