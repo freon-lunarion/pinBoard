@@ -21,6 +21,14 @@ class UserProfile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             UserProfile.objects.create(user=instance)
+    @property
+    def score(self):
+        total_score = 0
+        contents = Content.objects.filter(author=self.user)
+        for content in contents:
+            total_score += content.score
+        return total_score
+
 
     # @receiver(post_save, sender=User)
     # def save_user_profile(sender, instance, **kwargs):
