@@ -110,9 +110,6 @@ class Vote(models.Model):
     value = models.IntegerField(default=0)
     timestamp = models.DateTimeField(default=timezone.now)
 
-    class Meta:
-        unique_together = ("content", "user")
-
     @staticmethod
     def vote(content_id, user_id, value):
         content = get_object_or_404(Content, id=content_id)

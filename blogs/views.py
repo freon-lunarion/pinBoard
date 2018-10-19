@@ -149,8 +149,11 @@ def create_post(request):
                                 published_date=now
                                )
             for title in tags:
-                tag = Tag.create(title.strip())
-                ContentTag.create(post.id, tag.id)
+                exist_tag = Tag.objects.filter(title=title.strip())
+                if exist_tag.count() != 0:
+                    ContentTag.create(post.id, exist_tag.first().id)
+                else:
+                    ContentTag.create(post.id, Tag.create(title.strip()).id)
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
     return render(request, 'blogs/add_post.html', {'form': AddPostForm()})

@@ -213,6 +213,12 @@
                 <div class="card-panel">
                     <h1 class="post-title">Question: {{ post.title }}</h1>
 
+                    <div class="post-tags">
+                        {% for tag in post.tags %}
+                            <div class="chip">{{ tag }}</div>
+                        {% endfor %}
+                    </div>
+
                     <div class="content-container">
                         <p>{{ post.detail | safe }}</p>
                     </div>
@@ -288,8 +294,7 @@
                     unhelpful_btn.setAttribute('class', 'btn disabled');
                 }
                 else {
-                    if ("{{ request.session.userid }}" === "{{ post.author.id }}" ||
-                        "{{ request.session.userid }}" === "{{ comment.author.id }}") {
+                    if("{{ request.session.userid }}" === "{{ comment.author.id }}") {
                         helpful_btn.setAttribute('class', 'btn disabled');
                         unhelpful_btn.setAttribute('class', 'btn disabled');
                     }
