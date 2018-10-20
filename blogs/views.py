@@ -143,15 +143,16 @@ def index(request):
                 count_string = str(count) + ' Comments'
                 # count_string = count.append(' Comments')
             post.comment_count_string = count_string
-        else:
-            post.comment_count_string = 'Solved' if post.solved else 'Pending'
-
-    # for question in latest_question_list:
-    #     if question.solved:
-    #         status = 'Solved'
-    #     else:
-    #         status = 'Pending'
-    #     question.comment_count_string = status
+        elif post.kind == 'Question':
+            count = len(post.answers)
+            if count == 0:
+                count_string = "No Responses"
+            if count == 1:
+                count_string = "1 Response"
+            if count > 1:
+                count_string = str(count) + ' Responses'
+            post.question_status = 'Solved' if post.solved else 'Unsolved'
+            post.response_count_string = count_string
          
     context = {
         'latest_post_list': latest_post_list,

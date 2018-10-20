@@ -137,12 +137,19 @@
                                                 <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                             {% else %}
                                                 <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                            {% endif %}                                        </div>
+                                            {% endif %}                                        
+                                        </div>
                                         <div class="card-preview-content">
                                             <span class="card-title">{{ post.title }}</span>
+                                            {% if 'Unsolved' in post.question_status %}
+                                                <span class="new badge question-state unsolved" data-badge-caption=" ">{{ post.question_status }}</span>
+                                            {% else %}
+                                                <span class="new badge question-state" data-badge-caption=" ">{{ post.question_status }}</span>
+                                            {% endif %}                                        
                                         </div>
+
                                     </div>
-                                    <div class="card-comments">{{ post.comment_count_string }}</div>
+                                    <div class="card-comments">{{ post.response_count_string }}</div>
                                 
                                 <!-- <span class="card-title" style="display:flex;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
                                 <div class="card-comments">{{ post.comment_count_string }}</div> -->
