@@ -215,19 +215,6 @@
         }).then(res => res.json()).then(json => {console.log(json)});
       });
 
-      //$('#submit-avatar').click(event => {
-      //  $.ajax({
-      //    url: "{% url 'shared:user_avatar' %}",
-      //   type: 'POST',
-      //    data: {
-      //      'avatar': $('#id_avatar').value
-      //   },
-      //  }),
-      //  success: function (data) {
-      //    console.log(data);
-      //  }
-      //});
-
       // initialize various handlers
       $(document).ready(() => {
         const options = { edge: 'right' };
