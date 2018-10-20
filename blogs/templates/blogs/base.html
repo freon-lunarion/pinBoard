@@ -225,7 +225,7 @@
         }).then(res => res.json()).then(json => {
             if (json.message === 'Succeed') {
                 document.getElementById('user-avatar').src=document.getElementById('uploaded-avatar').src;
-                $('#user').modal('hide');
+                $('.modal').modal('close');
             }
         });
       });
