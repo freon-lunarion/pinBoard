@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 from shared.models import *
+from shared.forms import *
 import json
 import datetime
 from django.template.loader import render_to_string
@@ -153,6 +154,7 @@ def index(request):
          
     context = {
         'latest_post_list': latest_post_list + latest_question_list,
+        'form': UpdateUserAvatarForm()
     }
 
     return render(request, 'blogs/index.html', context=context)
@@ -212,7 +214,7 @@ def create_image_post(request):
                     ContentTag.create(post.id, Tag.create(title.strip()).id)
             return HttpResponseRedirect(f'/blogs/{post.id}')
         return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
-    return render(request, 'blogs/add_image.html', {'form': AddImageForm(), 'test': UpdateUserAvatarForm()})
+    return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
 
 @login_required
 def create_question(request):
@@ -317,6 +319,8 @@ def manage(request):
                 request.session['userid'] = user.id
                 request.session['username'] = user.username
                 request.session['useremail'] = user.email
+                request.session['avatar'] = user.userprofile.avatar
+                print(user.userprofile.avatar)
                 request.session.set_expiry(600)
                 return HttpResponseRedirect('/blogs')
 
@@ -343,6 +347,8 @@ def login_view(request):
                 request.session['username'] = user.username
                 request.session['useremail'] = user.email
                 request.session['password'] = user.password
+                request.session['avatar'] = user.userprofile.avatar
+                print(user.userprofile.avatar)
                 request.session.set_expiry(600)
                 return HttpResponseRedirect('/blogs')
                 

@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     # REF : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     # REF : https://stackoverflow.com/questions/6396442/add-image-avatar-field-to-users-in-django
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='avatars/')
+    avatar = models.TextField()
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

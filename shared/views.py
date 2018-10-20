@@ -13,6 +13,8 @@ from django.utils import timezone
 import datetime
 from django.shortcuts import redirect
 import json
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
@@ -29,7 +31,9 @@ def score(request):
         return JsonResponse({'score': sum([c.score for c in Content.objects.filter(author=request.user)])})
 
 def user_avatar(request):
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
-        return JsonResponse({'message': "succeed"})
+        request.user.userprofile.avatar = data['avatar']
+        request.user.userprofile.save()
+        request.session['avatar'] = data['avatar']
+        return JsonResponse({'message': 'Succeed'})
