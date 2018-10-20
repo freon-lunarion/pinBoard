@@ -534,6 +534,16 @@ img {
 /*.hs,.cs{color:#f00;}*/
 
 
+.backtotop{
+  cursor: pointer;
+  position: fixed;
+  right: -327px;
+  bottom: 20px;
+  width: 400px;
+  display: none;
+}
+
+
 
 
 
