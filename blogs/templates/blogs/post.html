@@ -99,11 +99,11 @@
                     {% for comment in comments %}
 
                         <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
-                            <div class="card-image" style="background: url('https://i.imgur.com/cMYa0BJ.png');background-size:cover;width:150px;height:150px;">
+                            <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
                                 {% if comment.author.userprofile.avatar %}
-                                    <img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">
+                                    <!--<img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">-->
                                 {% else %}
-                                    <img src="/static/images/empty-profile.png" style="max-width: 50px">
+                                    <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
                                 {% endif %}
                                  <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
                             </div>
