@@ -95,9 +95,11 @@
                                 <div class="content-with-utility">
                                     <div class="card-utility">
                                         <i class="material-icons title">event_note</i>
-                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
+                                        {% if request.user.is_superuser %}
+                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
+                                        {% endif %}
                                         {% if post.id in request.user.userprofile.favorites_id %}
-                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
                                         {% else %}
                                             <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                         {% endif %}
@@ -132,9 +134,11 @@
                                         <div class="card-utility">
                                             <!-- <i class="material-icons title">event_note</i> -->
                                             <i class="material-icons title far fa-question-circle" style="font-size: 32px"></i>
-                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
+                                            {% if request.user.is_superuser %}
+                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
+                                            {% endif %}
                                             {% if post.id in request.user.userprofile.favorites_id %}
-                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
                                             {% else %}
                                                 <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                             {% endif %}                                        </div>
@@ -223,6 +227,7 @@
                         if (json.message === 'Succeed') {
                             console.log(json);
                             e.target.classList.replace('far', 'fas');
+                            e.target.setAttribute('data-tooltip', "Click to Unsave")
                         }
                     });
                 }
@@ -234,6 +239,31 @@
                         if (json.message === 'Succeed') {
                             console.log(json);
                             e.target.classList.replace('fas', 'far');
+                            e.target.setAttribute('data-tooltip', "Click to Save")
+                        }
+                    });
+                }
+            }
+
+            if (/^pin-btn-\d+$/.test(e.target.id)) {
+                let id = parseInt(e.target.id.match(/^pin-btn-(\d+)$/)[1]);
+                if (e.target.getAttribute('data-tooltip') === 'Click to Pin') {
+                    fetch("{% url 'blogs:pin' 9999999 %}".replace('9999999', id), {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
+                    }).then(res => {
+                        if (res.status === 200) {
+                            e.target.setAttribute('data-tooltip', "Click to Unpin")
+                        }
+                    });
+                }
+                else {
+                    fetch("{% url 'blogs:unpin' 9999999 %}".replace('9999999', id), {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
+                    }).then(res => {
+                        if (res.status === 200) {
+                            e.target.setAttribute('data-tooltip', "Click to Pin")
                         }
                     });
                 }
