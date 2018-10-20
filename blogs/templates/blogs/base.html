@@ -42,9 +42,9 @@
               <img src="https://i.imgur.com/G91dSvD.jpg">
             </div>
             {% if request.session.avatar %}
-              <a href="#user" class="modal-trigger"><img class="circle" src='{{ request.session.avatar }}'></a>
+              <a href="#user" class="modal-trigger"><img class="circle" src='{{ request.session.avatar }}' id="user-avatar"></a>
             {% else %}
-              <a href="#user" class="modal-trigger"><img class="circle" src="{% static '/images/empty-profile.png' %}"></a>
+              <a href="#user" class="modal-trigger"><img class="circle" src="{% static '/images/empty-profile.png' %}" id="user-avatar"></a>
             {% endif %}
             <div class="profile-details-panel" style="background: rgba(255,255,255,0.6);border-radius: 8px;">
                 <!--<a href="#email"><span class="black-text name">Mike</span></a>-->
@@ -212,7 +212,9 @@
           body: JSON.stringify({
             'avatar': document.getElementById('uploaded-avatar').src
           })
-        }).then(res => res.json()).then(json => {console.log(json)});
+        }).then(res => res.json()).then(json => {
+            document.getElementById('user-avatar').src=document.getElementById('uploaded-avatar').src;
+        });
       });
 
       // initialize various handlers
