@@ -92,13 +92,13 @@
                     <div class="col s12 m6 l3">
                         <div class="card blue-grey darken-1 post">
                             <div class="card-content with-comments white-text post">
-                                <div style="display:grid; grid-template: 1fr / 42px 1fr;">
-                                    <div style="display: flex;flex-direction: column;align-items: center;">
-                                        <i class="material-icons title tooltipped" data-position="top" data-tooltip="Article Post">event_note</i>
-                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="top" data-tooltip="Click to Pin"></i>
-                                        <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="top" data-tooltip="Click to Save"></i>
+                                <div class="content-with-utility">
+                                    <div class="card-utility">
+                                        <i class="material-icons title">event_note</i>
+                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
+                                        <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save"></i>
                                     </div>
-                                    <div style="display:flex;flex-direction: column;">
+                                    <div class="card-preview-content">
                                         <span class="card-title">{{ post.title }}</span>
                                         <div class="card-description post-preview">
                                             <p>{{ post.detail|striptags|safe|truncatechars:90 }}</p>
@@ -123,8 +123,22 @@
                     <div class="col s12 m6 l3">
                         <div class="card blue-grey darken-1 question">
                             <div class="card-content with-comments white-text" style="min-height: 201px;display: flex;flex-direction: column;justify-content: space-between;">
-                                <span class="card-title" style="display:flex;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
-                                <div class="card-comments">{{ post.comment_count_string }}</div>
+
+                                    <div class="content-with-utility">
+                                        <div class="card-utility">
+                                            <!-- <i class="material-icons title">event_note</i> -->
+                                            <i class="material-icons title far fa-question-circle" style="font-size: 32px"></i>
+                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
+                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save"></i>
+                                        </div>
+                                        <div class="card-preview-content">
+                                            <span class="card-title">{{ post.title }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-comments">{{ post.comment_count_string }}</div>
+                                
+                                <!-- <span class="card-title" style="display:flex;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
+                                <div class="card-comments">{{ post.comment_count_string }}</div> -->
                             </div>
                             <div class="card-action voting">
                                 <div class="score-container">

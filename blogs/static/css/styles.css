@@ -15,6 +15,11 @@ html {
 
 /* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
 
+.card:hover {
+  background: rgba(255,255,255,0.5);
+  transition: 0.3s;
+}
+
 h2.content-separator {
   font-size: 24px;
   text-transform: uppercase;
@@ -68,6 +73,7 @@ h2.content-separator.middle {
 }
 
 .card-content.with-comments {
+  background: rgba(119, 205, 255, 0.1);
   padding-bottom: 12px;
 }
 
@@ -107,6 +113,7 @@ h2.content-separator.middle {
   font-size: 13px;
   color: #bbb;
   margin-top: 6px;
+  cursor: default;
 }
 
 .score-container {
@@ -173,6 +180,22 @@ nav.nav-container.pinboard {
   box-shadow: #546e7a;
 }
 
+.content-with-utility {
+  display: grid;
+  grid-template: 1fr / 42px 1fr;
+}
+
+.card-utility {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-preview-content {
+  display: flex;
+  flex-direction: column;
+}
+
 i.material-icons.title {
   margin-right: 15px;
   margin-left:-3px;
@@ -185,11 +208,12 @@ i.material-icons.title {
 i.material-icons.title.fa-clickable {
   font-size: 30px;
   cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 i.material-icons.title.fa-clickable:hover {
   transition: 0.3s;
-  color: rgba(228, 255, 196, 0.9);
+  color: rgba(172,255,72,0.9);
 }
 
 .logged-in-container {
