@@ -67,7 +67,7 @@ class PostView(generic.DetailView):
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
-            if form.cleaned_data['comment_kind'] == 'Post':
+            if form.cleaned_data['comment_kind'] != 'Question':
                 post = get_object_or_404(Post, id=self.pk)
                 now = timezone.now().strftime("%Y-%m-%d %H:%M")
                 Comment.objects.create(parent=post,
