@@ -240,6 +240,41 @@ def create_question(request):
         return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
     return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
 
+@login_required
+def pin(request, pk):
+    if (request.method == 'PUT'):
+        if not request.user.is_superuser:
+            return HttpResponse(status=403)
+        post_res = Post.objects.filter(id=pk)
+        if post_res.count() == 1:
+            post = Post.objects.get(id=pk)
+            post.is_pinned = True
+            post.operator = request.user
+            post.save()
+        else:
+            question = QnaQuestion.objects.get(id=pk)
+            question.is_pinned = True
+            question.operator = request.user
+            question.save()
+        return HttpResponse(status=200)
+
+@login_required
+def unpin(request, pk):
+    if (request.method == 'PUT'):
+        if not request.user.is_superuser:
+            return HttpResponse(status=403)
+        post_res = Post.objects.filter(id=pk)
+        if post_res.count() == 1:
+            post = Post.objects.get(id=pk)
+            post.is_pinned = False
+            post.operator = request.user
+            post.save()
+        else:
+            question = QnaQuestion.objects.get(id=pk)
+            question.is_pinned = False
+            question.operator = request.user
+            question.save()
+        return HttpResponse(status=200)
 
 # def ajaxsubmit(request):
 #     ret = {'status': True, 'error': None, 'data': None}
