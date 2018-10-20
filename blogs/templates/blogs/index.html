@@ -83,13 +83,13 @@
         &nbsp;
         <h2 class="content-separator">Top Posts</h2>
     </div>
-    <div class="row" style="padding-bottom: 30px;">
+    <div id="top-posts-container" class="row" style="padding-bottom: 30px;">
 
         {% for post in latest_post_list %}
             {% if not post.is_pinned %}
                 {% if "Post" in post.kind %}
                     <!-- Blog post card -->
-                    <div class="col s12 m6 l3">
+                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
                         <div class="card blue-grey darken-1 post">
                             <div class="card-content with-comments white-text post">
                                 <div class="content-with-utility">
@@ -124,7 +124,7 @@
                     
                 {% elif "Question" in post.kind %}
                     <!-- Question card -->
-                    <div class="col s12 m6 l3">
+                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
                         <div class="card blue-grey darken-1 question">
                             <div class="card-content with-comments white-text" style="min-height: 201px;display: flex;flex-direction: column;justify-content: space-between;">
 
@@ -167,7 +167,7 @@
                 {% elif "Image" in post.kind %}
 
                     <!-- Blog post card -->
-                    <div class="col s12 m6 l3">
+                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
                         <div class="card blue-grey darken-1">
                             <!-- <div class="card-content white-text">
                                 <span class="card-title">{{ post.title }}</span>
