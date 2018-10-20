@@ -17,7 +17,7 @@
                                         <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
                                         {% endif %}
                                         {% if post.id in request.user.userprofile.favorites_id %}
-                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
                                         {% else %}
                                             <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                         {% endif %}
@@ -56,7 +56,7 @@
                                             <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
                                             {% endif %}
                                             {% if post.id in request.user.userprofile.favorites_id %}
-                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
                                             {% else %}
                                                 <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                             {% endif %}                                        
@@ -94,9 +94,10 @@
                                     <div class="content-with-utility">
                                         <div class="card-utility">
                                             <i class="material-icons title">event_note</i>
-                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
-                                            {% if post.id in request.user.userprofile.favorites_id %}
-                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                            {% if request.user.is_superuser %}
+                                                <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
+                                            {% endif %}                                            {% if post.id in request.user.userprofile.favorites_id %}
+                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
                                             {% else %}
                                                 <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                             {% endif %}
@@ -223,9 +224,10 @@
                                 <div class="content-with-utility">
                                     <div class="card-utility">
                                         <i class="material-icons title">event_note</i>
-                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
-                                        {% if post.id in request.user.userprofile.favorites_id %}
-                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                        {% if request.user.is_superuser %}
+                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
+                                        {% endif %}                                        {% if post.id in request.user.userprofile.favorites_id %}
+                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
                                         {% else %}
                                             <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                         {% endif %}
