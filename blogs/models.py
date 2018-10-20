@@ -66,6 +66,9 @@ class Comment(Content):
 class QnaQuestion(Content):
     title = models.CharField(max_length=150)
     kind = models.CharField(max_length=20, default='Question')
+    is_pinned = models.BooleanField(default=False)
+    pin_board = models.ForeignKey(PinBoard, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    operator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
 
     is_live_question = models.BooleanField(default=False)
     parent = models.ForeignKey(LiveQuestionSession, on_delete=models.CASCADE, blank=True, null=True)

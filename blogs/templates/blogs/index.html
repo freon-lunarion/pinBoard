@@ -189,9 +189,29 @@
         //initialise tooltips
         $(document).ready(() => {
             $('.tooltipped').tooltip();
+            {% for post in latest_post_list %}
+                vote("{{ post.id }}", 0)
+                .then(res => res.json()).then(json => {
+                    if (parseInt(json.exist) === 1) {
+                        document.getElementById("upvote-{{post.id}}").parentNode.classList.add('disabled');
+                        document.getElementById("downvote-{{post.id}}").parentNode.classList.add('disabled');
+                    }
+                });
+            {% endfor %}
         });
 
+        function vote (content_id, value) {
+            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+                body: JSON.stringify({
+                    'vote': value
+                })
+            });
+        }
+
         document.addEventListener('click', e => {
+            console.log(e.target.id);
 
             if (/^like-btn-/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^like-btn-(\d+)$/)[1]);
@@ -217,6 +237,31 @@
                         }
                     });
                 }
+            }
+
+            if (/^upvote-\d+$/.test(e.target.id)) {
+                let id = parseInt(e.target.id.match(/^upvote-(\d+)$/)[1]);
+                vote(id, 1)
+                .then(res => res.json()).then(json => {
+                    if ('score' in json) {
+                        console.log(json);
+                        document.getElementById(`upvote-${id}`).parentNode.classList.add('disabled');
+                        document.getElementById(`downvote-${id}`).parentNode.classList.add('disabled');
+                        document.getElementById(`score-${id}`).innerHTML = json.score;
+                    }
+                });
+            }
+
+            if (/^downvote-\d+$/.test(e.target.id)) {
+                let id = parseInt(e.target.id.match(/^downvote-(\d+)$/)[1]);
+                vote(id, -1)
+                .then(res => res.json()).then(json => {
+                    if ('score' in json) {
+                        document.getElementById(`upvote-${id}`).parentNode.classList.add('disabled');
+                        document.getElementById(`downvote-${id}`).parentNode.classList.add('disabled');
+                        document.getElementById(`score-${id}`).innerHTML = json.score;
+                    }
+                });
             }
         });
     </script>
