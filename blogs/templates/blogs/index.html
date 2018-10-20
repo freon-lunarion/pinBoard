@@ -13,7 +13,9 @@
                                 <div class="content-with-utility">
                                     <div class="card-utility">
                                         <i class="material-icons title">event_note</i>
-                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
+                                        {% if request.user.is_superuser %}
+                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
+                                        {% endif %}
                                         {% if post.id in request.user.userprofile.favorites_id %}
                                             <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                         {% else %}
@@ -50,7 +52,9 @@
                                         <div class="card-utility">
                                             <!-- <i class="material-icons title">event_note</i> -->
                                             <i class="material-icons title far fa-question-circle" style="font-size: 32px"></i>
-                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
+                                            {% if request.user.is_superuser %}
+                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
+                                            {% endif %}
                                             {% if post.id in request.user.userprofile.favorites_id %}
                                                 <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
                                             {% else %}
