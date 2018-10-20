@@ -143,15 +143,16 @@ def index(request):
                 count_string = str(count) + ' Comments'
                 # count_string = count.append(' Comments')
             post.comment_count_string = count_string
-        else:
-            post.comment_count_string = 'Solved' if post.solved else 'Pending'
-
-    # for question in latest_question_list:
-    #     if question.solved:
-    #         status = 'Solved'
-    #     else:
-    #         status = 'Pending'
-    #     question.comment_count_string = status
+        elif post.kind == 'Question':
+            count = len(post.answers)
+            if count == 0:
+                count_string = "No Responses"
+            if count == 1:
+                count_string = "1 Response"
+            if count > 1:
+                count_string = str(count) + ' Responses'
+            post.question_status = 'Solved' if post.solved else 'Unsolved'
+            post.response_count_string = count_string
          
     context = {
         'latest_post_list': latest_post_list,
@@ -239,6 +240,41 @@ def create_question(request):
         return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
     return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
 
+@login_required
+def pin(request, pk):
+    if (request.method == 'PUT'):
+        if not request.user.is_superuser:
+            return HttpResponse(status=403)
+        post_res = Post.objects.filter(id=pk)
+        if post_res.count() == 1:
+            post = Post.objects.get(id=pk)
+            post.is_pinned = True
+            post.operator = request.user
+            post.save()
+        else:
+            question = QnaQuestion.objects.get(id=pk)
+            question.is_pinned = True
+            question.operator = request.user
+            question.save()
+        return HttpResponse(status=200)
+
+@login_required
+def unpin(request, pk):
+    if (request.method == 'PUT'):
+        if not request.user.is_superuser:
+            return HttpResponse(status=403)
+        post_res = Post.objects.filter(id=pk)
+        if post_res.count() == 1:
+            post = Post.objects.get(id=pk)
+            post.is_pinned = False
+            post.operator = request.user
+            post.save()
+        else:
+            question = QnaQuestion.objects.get(id=pk)
+            question.is_pinned = False
+            question.operator = request.user
+            question.save()
+        return HttpResponse(status=200)
 
 # def ajaxsubmit(request):
 #     ret = {'status': True, 'error': None, 'data': None}
