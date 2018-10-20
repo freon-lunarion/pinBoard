@@ -96,7 +96,11 @@
                                     <div class="card-utility">
                                         <i class="material-icons title">event_note</i>
                                         <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
-                                        <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save"></i>
+                                        {% if post.id in request.user.userprofile.favorites_id %}
+                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                        {% else %}
+                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                        {% endif %}
                                     </div>
                                     <div class="card-preview-content">
                                         <span class="card-title">{{ post.title }}</span>
@@ -129,8 +133,11 @@
                                             <!-- <i class="material-icons title">event_note</i> -->
                                             <i class="material-icons title far fa-question-circle" style="font-size: 32px"></i>
                                             <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin"></i>
-                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save"></i>
-                                        </div>
+                                            {% if post.id in request.user.userprofile.favorites_id %}
+                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                            {% else %}
+                                                <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                            {% endif %}                                        </div>
                                         <div class="card-preview-content">
                                             <span class="card-title">{{ post.title }}</span>
                                         </div>
@@ -182,6 +189,35 @@
         //initialise tooltips
         $(document).ready(() => {
             $('.tooltipped').tooltip();
+        });
+
+        document.addEventListener('click', e => {
+
+            if (/^like-btn-/.test(e.target.id)) {
+                let id = parseInt(e.target.id.match(/^like-btn-(\d+)$/)[1]);
+                if (e.target.classList.contains('far')) {
+                    fetch("{% url 'shared:user_like' 9999999 %}".replace('9999999', id), {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
+                    }).then(res => res.json()).then(json => {
+                        if (json.message === 'Succeed') {
+                            console.log(json);
+                            e.target.classList.replace('far', 'fas');
+                        }
+                    });
+                }
+                else {
+                    fetch("{% url 'shared:user_unlike' 9999999 %}".replace('9999999', id), {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
+                    }).then(res => res.json()).then(json => {
+                        if (json.message === 'Succeed') {
+                            console.log(json);
+                            e.target.classList.replace('fas', 'far');
+                        }
+                    });
+                }
+            }
         });
     </script>
 <!--<script>-->

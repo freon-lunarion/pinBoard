@@ -37,3 +37,13 @@ def user_avatar(request):
         request.user.userprofile.save()
         request.session['avatar'] = data['avatar']
         return JsonResponse({'message': 'Succeed'})
+
+def user_like(request, pk):
+    if request.method == 'POST':
+        UserFavorite.create(pk, request.user.id)
+        return JsonResponse({'message': 'Succeed'})
+
+def user_unlike(request, pk):
+    if request.method == 'POST':
+        UserFavorite.objects.get(content__id=pk, user=request.user).delete()
+        return JsonResponse({'message': 'Succeed'})

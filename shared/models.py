@@ -29,6 +29,17 @@ class UserProfile(models.Model):
             total_score += content.score
         return total_score
 
+    @property
+    def favorites_id(self):
+        return [x.content.id for x in sorted(UserFavorite.objects.filter(user=self.user), key=lambda x: -x.create_time.toordinal())]
+
+    @property
+    def favorites(self):
+        return [x.content for x in sorted(UserFavorite.objects.filter(user=self.user), key=lambda x: -x.create_time.toordinal())]
+
+
+
+
 
     # @receiver(post_save, sender=User)
     # def save_user_profile(sender, instance, **kwargs):
@@ -87,6 +98,7 @@ class Content(models.Model):
         return [obj.tag.title for obj in ContentTag.objects.filter(content__exact=self)]
 
 
+
 class Tag(models.Model):
     title = models.CharField(max_length=50)
 
@@ -133,3 +145,17 @@ class Vote(models.Model):
             return 1
         else:
             return 0
+
+class UserFavorite(models.Model):
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    create_time = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ("content", "user")
+
+    @staticmethod
+    def create(content_id, user_id):
+        content = get_object_or_404(Content, id=content_id)
+        user = get_object_or_404(User, id=user_id)
+        return UserFavorite.objects.create(content=content, user=user)

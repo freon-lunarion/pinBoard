@@ -122,39 +122,39 @@ class PostView(generic.DetailView):
 #     template_name = 'blogs/register.html'
 @login_required
 def index(request):
-    latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
-                                                                 if p.published_date else 0), reverse=True)
-    latest_question_list = sorted(QnaQuestion.objects.all(), key=lambda q: (q.score, q.published_date.toordinal()
-                                                                 if q.published_date else 0), reverse=True)
+    latest_post_list = sorted([p for p in Post.objects.all()] + [q for q in QnaQuestion.objects.all()],
+                              key=lambda p: (p.score, p.published_date.toordinal() if p.published_date else 0), reverse=True)
+    # latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+    #                                                              if p.published_date else 0), reverse=True)
+    # latest_question_list = sorted(QnaQuestion.objects.all(), key=lambda q: (q.score, q.published_date.toordinal()
+    #                                                              if q.published_date else 0), reverse=True)
 
     # latest_post_list = Post.objects.all()
 
     # get comment counts
     for post in latest_post_list:
-        count = Comment.objects.filter(parent=post).count()
-        if count == 0:
-            count_string = "No Comments"
-        if count == 1:
-            count_string = "1 Comment"
-        if count > 1:
-            count_string = str(count) + ' Comments'
-            # count_string = count.append(' Comments')
-            
-        post.comment_count_string = count_string
+        if post.kind != 'Question':
+            count = Comment.objects.filter(parent=post).count()
+            if count == 0:
+                count_string = "No Comments"
+            if count == 1:
+                count_string = "1 Comment"
+            if count > 1:
+                count_string = str(count) + ' Comments'
+                # count_string = count.append(' Comments')
+            post.comment_count_string = count_string
+        else:
+            post.comment_count_string = 'Solved' if post.solved else 'Pending'
 
-    #  for question in latest_question_list:
-    #     count = QnaAnswer.objects.filter(parent=question).count()
-    #     if count == 0:
-    #         count_string = "No Answers"
-    #     if count == 1:
-    #         count_string = "1 Answer"
-    #     if count > 1:
-    #         count_string = str(count) + ' Answers'
-    #      question.answers = count_string
+    # for question in latest_question_list:
+    #     if question.solved:
+    #         status = 'Solved'
+    #     else:
+    #         status = 'Pending'
+    #     question.comment_count_string = status
          
     context = {
-        'latest_post_list': latest_post_list + latest_question_list,
-        'form': UpdateUserAvatarForm()
+        'latest_post_list': latest_post_list,
     }
 
     return render(request, 'blogs/index.html', context=context)

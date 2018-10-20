@@ -103,17 +103,3 @@ class QnaAnswer(Content):
         Vote.vote(self.id, self.parent.author.id, 5)
         self.is_correct = True
         self.save()
-
-
-class UserFavorite(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ("post", "user")
-
-    @staticmethod
-    def create(post_id, user_id):
-        post = get_object_or_404(Post, id=post_id)
-        user = get_object_or_404(User, id=user_id)
-        return UserFavorite.objects.create(post=post, user=user)
