@@ -9,5 +9,6 @@ urlpatterns = [
     path('user_avatar/', views.user_avatar, name='user_avatar'),
     path('user/<int:pk>', views.user_profile, name='user_profile'),
     path('<int:pk>/user_like/', views.user_like, name='user_like'),
-    path('<int:pk>/user_unlike/', views.user_unlike, name='user_unlike')
+    path('<int:pk>/user_unlike/', views.user_unlike, name='user_unlike'),
+    path('user/', views.user, name='user')
 ]

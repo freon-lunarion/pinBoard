@@ -14,6 +14,7 @@ from quiz.models import *
 import json, re
 import datetime
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -38,11 +39,13 @@ class PostView(generic.DetailView):
     model = Content
     template_name = 'blogs/post.html'
 
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.pk = kwargs.get('pk', "-1")
         return super(PostView, self).dispatch(request, *args, **kwargs)
 
     # content: post, comments (list), comment_form
+    @method_decorator(login_required)
     def get_context_data(self, **kwargs):
         content = get_object_or_404(Content, id=self.pk)
         context = super(PostView, self).get_context_data(**kwargs)
@@ -65,6 +68,7 @@ class PostView(generic.DetailView):
         return context
 
     # redirecting. let me know if it should not be redirecting - Deanna
+    @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -191,6 +195,7 @@ def index(request):
 
     context = {
         'latest_post_list': latest_post_list,
+        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
     }
 
     return render(request, 'blogs/index.html', context=context)
