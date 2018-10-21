@@ -23,6 +23,9 @@
                         <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                     </div> -->
                     <a class="card-open" href="/quiz/{{ rec.id }}">Open</a>
+                    {% if rec.creator == request.user %}
+                    <a class="card-open" href="/quiz/{{ rec.id }}/edit">Edit</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -32,6 +35,6 @@
     {% endfor %}
 
   {% else %}
-    <p>There are no books in the library.</p>
+    <p>There are no rooms. Be the first</p>
   {% endif %}       
 {% endblock %}

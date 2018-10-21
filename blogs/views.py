@@ -10,7 +10,8 @@ from django.utils import timezone
 from django.views import generic
 from shared.models import *
 from shared.forms import *
-import json
+from quiz.models import *
+import json, re
 import datetime
 from django.template.loader import render_to_string
 
@@ -139,6 +140,22 @@ def index(request):
                 if question_que.count() == 1:
                     res.append(QnaQuestion.objects.get(id=content))
         latest_post_list = sorted(res, key=lambda x: (x.score, x.published_date.timestamp()), reverse=True)
+
+    elif 'title' in request.GET:
+        words = request.GET['title'].strip().split(' ')
+        contents = [rec for rec in Post.objects.all()] + [rec for rec in QnaQuestion.objects.all()] + [rec for rec in QuizBank.objects.all()]
+        res = []
+        for content in contents:
+            hit = True
+            for word in words:
+                m = re.compile(r'\b%s\b' % word, re.IGNORECASE)
+                if not m.search(content.title):
+                    hit = False
+                    continue
+            if hit:
+                res.append(content)
+        latest_post_list = sorted(res, key=lambda x: (x.score, x.create_time.timestamp()), reverse=True)
+
     else:
         latest_post_list = sorted([p for p in Post.objects.all()] + [q for q in QnaQuestion.objects.all()],
                               key=lambda p: (p.score, p.published_date.timestamp() if p.published_date else 0), reverse=True)
@@ -171,7 +188,7 @@ def index(request):
     #             count_string = str(count) + ' Responses'
     #         post.question_status = 'Solved' if post.solved else 'Unsolved'
     #         post.response_count_string = count_string
-         
+
     context = {
         'latest_post_list': latest_post_list,
     }

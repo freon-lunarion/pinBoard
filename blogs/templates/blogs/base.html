@@ -124,7 +124,7 @@
           {% if request.session.username %}
             <form style="height: 100%;left: 300px;position: absolute;">
               <div class="input-field">
-                <input id="search" type="search" required style="width: 404px;">
+                <input id="search" type="search" required style="width: 404px;" placeholder="Start with # to search tags">
                 <label class="label-icon" for="search"><i class="material-icons" style="cursor: pointer;">search</i></label>
                 <i class="material-icons">close</i>
               </div>
@@ -259,6 +259,9 @@
           e.preventDefault();
           if (/^#/.test(e.target.value)) {
             window.location.replace(window.location.pathname + `?tags=${e.target.value}`.replace('#', ''));
+          }
+          else {
+            window.location.replace(window.location.pathname + `?title=${e.target.value}`);
           }
         }
       });
