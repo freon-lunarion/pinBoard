@@ -54,6 +54,22 @@ def room_create(request):
             return HttpResponseRedirect(f'/quiz/{room.id}')
             
     return render(request, 'quiz/add_room.html', {'form':QuizBankForm()})
+
+@login_required
+def room_update(request,pk):
+    quizBank = get_object_or_404(QuizBank, pk=pk)
+
+    if request.method == 'POST':
+        form = QuizBankForm(request.POST, instance=quizBank)
+        if form.is_valid():
+            form = form.save(commit=False)
+            quizBank.update_time = timezone.now()
+            quizBank.save()
+            return HttpResponseRedirect(f'/quiz/{quizBank.id}')
+    else :
+        form = QuizBankForm(instance = quizBank)
+            
+    return render(request, 'quiz/add_room.html', {'form':form})
     
 
 @login_required
@@ -76,10 +92,37 @@ def tryout_view(request,pk):
 
     return render(request, 'quiz/tryout.html', context=context)      
 
-          
-    
 @login_required
 def question_create(request,pk):
+    quizBank = QuizBank.objects.get(pk= pk)
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            question = Question.objects.create(
+                quizBank = quizBank,
+                detail = request.POST['detail'],
+                author = request.user,
+                published_date = now
+            )
+
+            for i in range(4):
+                option = request.POST["options_{}".format(i)]
+                isCorrect = False
+                try:
+                    if request.POST["true_{}".format(i)] == 'on':
+                        isCorrect = True
+                except:
+                    pass
+                Options.objects.create(question = question, detail = option, isCorrect = isCorrect)
+
+            return HttpResponseRedirect(f'/quiz/{quizBank.id}')
+    
+    form = QuestionForm(initial={'quizBank': quizBank})
+    return render(request, 'quiz/add_room.html', {'form':form})
+
+@login_required
+def question_edit(request,pk):
     quizBank = QuizBank.objects.get(pk= pk)
     if request.method == 'POST':
         form = QuestionForm(request.POST)
