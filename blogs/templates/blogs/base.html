@@ -121,6 +121,15 @@
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
+          {% if request.session.username %}
+            <form style="height: 100%;left: 300px;position: absolute;">
+              <div class="input-field">
+                <input id="search" type="search" required style="width: 404px;">
+                <label class="label-icon" for="search"><i class="material-icons" style="cursor: pointer;">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          {% endif %}
           <ul class="right hide-on-med-and-down">
             <!-- <li><a class="waves-effect modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons">add_box</i>Create Post</a></li> -->
             {% if request.session.username %}
