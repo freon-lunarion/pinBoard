@@ -26,27 +26,7 @@
                         {% if comments %}
                             <span style="color: #ffab40;">&nbsp;({{ comments|length}})</span>
                         {% endif %}
-                        &nbsp;
-                        &nbsp;
-                        <a class="comments" style="cursor: pointer" id="make-comments">Make Comments</a>
                     </div>
-
-                    <form method="post" class="col s12 comment-box">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="input-field col s12">
-
-                                {% autoescape off %}
-                                {{ comment_form.comment_detail }}
-                                {{ comment_form.comment_kind }}
-                                {% endautoescape %}
-                                <!--<textarea id="myTextArea" class="mceEditor"></textarea>-->
-                            </div>
-                        </div>
-                        <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
-                    </form>
-
-                    <button  id="" class="waves-effect waves-light btn-small orange lighten-1 comment-submit" style="visibility: hidden">submit</button>
 
                     <!--<button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>-->
                 </div>
@@ -95,6 +75,24 @@
 
                 <!-- comment section -->
                 <div id="comment-section" style="margin-top:30px" class="cccccc">
+                    <a class="comments" style="cursor: pointer" id="make-comments">Make Comments</a>
+                    
+                    <form method="post" class="col s12 comment-box">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="input-field col s12">
+
+                                {% autoescape off %}
+                                {{ comment_form.comment_detail }}
+                                {{ comment_form.comment_kind }}
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                        <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
+                    </form>
+
+                    <button  id="" class="waves-effect waves-light btn-small orange lighten-1 comment-submit" style="visibility: hidden">submit</button>
+
                     {% for comment in comments %}
 
                         <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
