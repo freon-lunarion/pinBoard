@@ -16,7 +16,7 @@ html {
 /* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
 
 .sortable-card {
-  padding: 10px 30px !important;
+  padding: 10px 35px !important;
 }
 
 h2.content-separator {
@@ -242,6 +242,7 @@ i.material-icons.title.fa-clickable:hover {
 }
 
 .new.badge.question-state {
+  cursor: default;
   text-transform: uppercase;
   width: fit-content;
   margin-left: 0;
