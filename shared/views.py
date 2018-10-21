@@ -16,6 +16,7 @@ import datetime
 import json
 # Create your views here.
 
+@login_required
 def vote(request, pk):
     if (request.method == 'POST'):
         data = json.loads(request.body)
@@ -24,10 +25,12 @@ def vote(request, pk):
             return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
         return JsonResponse({'score': Vote.vote(pk, request.user.id, vote)})
 
+@login_required
 def score(request):
     if (request.method == 'GET'):
         return JsonResponse({'score': sum([c.score for c in Content.objects.filter(author=request.user)])})
 
+@login_required
 def user_avatar(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -55,11 +58,13 @@ def user_profile(request, pk):
     
     return render(request,'shared/user_profile.html',context=context)
 
+@login_required
 def user_like(request, pk):
     if request.method == 'POST':
         UserFavorite.create(pk, request.user.id)
         return JsonResponse({'message': 'Succeed'})
 
+@login_required
 def user_unlike(request, pk):
     if request.method == 'POST':
         UserFavorite.objects.get(content__id=pk, user=request.user).delete()
