@@ -250,6 +250,9 @@
           if (/^#/.test(e.target.value)) {
             window.location.replace(window.location.pathname + `?tags=${e.target.value}`.replace('#', ''));
           }
+          else {
+            window.location.replace(window.location.pathname + `?title=${e.target.value}`);
+          }
         }
       });
 
