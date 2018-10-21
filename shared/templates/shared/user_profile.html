@@ -215,19 +215,11 @@
 {% for art in article %}
     <!-- Blog post card -->
     <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
-            <div class="card blue-grey darken-1 post">
+            <div class="card blue-grey darken-1 question">
                 <div class="card-content with-comments white-text post">
                     <div class="content-with-utility">
                         <div class="card-utility">
                             <i class="material-icons title">event_note</i>
-                            {% if request.user.is_superuser %}
-                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
-                            {% endif %}
-                            {% if post.id in request.user.userprofile.favorites_id %}
-                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                            {% else %}
-                                <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                            {% endif %}
                         </div>
                         <div class="card-preview-content">
                             <span class="card-title">{{ art.title }}</span>
@@ -240,9 +232,7 @@
                 </div>
                 <div class="card-action voting">
                     <div class="score-container">
-                        
                         <span id="score-{{ art.id }}" class="score">{{ art.score }}</span>
-                        
                     </div>
                     <a class="card-open" href="/blogs/{{ art.id }}">Open</a>
                 </div>
@@ -257,19 +247,13 @@
 </div>
 <div class="row">
     {% for image in images %}
-    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
+
+    <div class="col s12 m6 l3 sortable-card">
         <div class="card blue-grey darken-1">
-            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
+            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ image.detail }}'); background-size: cover">
                 <div class="content-with-utility">
                     <div class="card-utility">
-                        <i class="material-icons title">image</i>
-                        {% if request.user.is_superuser %}
-                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
-                        {% endif %}                                            {% if post.id in request.user.userprofile.favorites_id %}
-                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                        {% else %}
-                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                        {% endif %}
+                        <i class="material-icons title">event_note</i>
                     </div>
                     <div class="card-preview-content">
                         <span class="card-title">{{ image.title }}</span>
@@ -279,12 +263,13 @@
             </div>
             <div class="card-action voting">
                 <div class="score-container">
-                    <span id="score-{{ post.id }}" class="score">{{ image.score }}</span>
+                    <span id="score-{{ image.id }}" class="score">{{ image.score }}</span>
                 </div>
                 <a class="card-open" href="/blogs/{{ image.id }}">Open</a>
             </div>
         </div>
     </div>
+    
     {% endfor %}
 </div>
 
@@ -303,14 +288,14 @@
                     <div class="card-utility">
                         <!-- <i class="material-icons title">event_note</i> -->
                         <i class="material-icons title far fa-question-circle" style="font-size: 32px"></i>
-                        {% if request.user.is_superuser %}
-                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
-                        {% endif %}
-                        {% if post.id in request.user.userprofile.favorites_id %}
-                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                        {% else %}
-                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                        {% endif %}                                        
+                        <!--{% if request.user.is_superuser %}-->
+                        <!--<i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>-->
+                        <!--{% endif %}-->
+                        <!--{% if post.id in request.user.userprofile.favorites_id %}-->
+                            <!--<i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>-->
+                        <!--{% else %}-->
+                            <!--<i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>-->
+                        <!--{% endif %}                                        -->
                     </div>
                     <div class="card-preview-content">
                         <span class="card-title">{{ que.title }}</span>
