@@ -116,7 +116,7 @@
                                     <p style="font-weight: 700;">Michael</p>
                                 </div> -->
                                 <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <a style="color:black" href="#">{{ comment.author.username }}</a>
+                                    <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
                                 </div>
                                 <div class="card-content" style="min-height: 92px">
                                     <p>{{ comment.detail | safe }}</p>
