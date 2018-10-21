@@ -7,7 +7,7 @@
             {% if post.is_pinned %}
                 {% if "Post" in post.kind %}
                     <!-- Blog post card -->
-                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
+                    <div class="col s12 m6 l3 sortable-card changecolor" data-sort="{{ post.score }}">
                         <div class="card blue-grey darken-1 post">
                             <div class="card-content with-comments white-text post">
                                 <div class="content-with-utility">
@@ -136,7 +136,7 @@
             {% if not post.is_pinned %}
                 {% if "Post" in post.kind %}
                     <!-- Blog post card -->
-                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
+                    <div class="col s12 m6 l3 sortable-card changecolor" data-sort="{{ post.score }}">
                         <div class="card blue-grey darken-1 post">
                             <div class="card-content with-comments white-text post">
                                 <div class="content-with-utility">
@@ -166,14 +166,14 @@
                                     <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
                                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                                 </div>
-                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
+                                <a class="card-open waves-effect waves-light" href="/blogs/{{ post.id }}">Open</a>
                             </div>
                         </div>
                     </div>
                     
                 {% elif "Question" in post.kind %}
                     <!-- Question card -->
-                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
+                    <div class="col s12 m6 l3 sortable-card changecolor" data-sort="{{ post.score }}">
                         <div class="card blue-grey darken-1 question">
                             <div class="card-content with-comments white-text" style="min-height: 201px;display: flex;flex-direction: column;justify-content: space-between;">
 
@@ -211,14 +211,14 @@
                                     <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
                                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                                 </div>
-                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
+                                <a class="card-open waves-effect waves-light" href="/blogs/{{ post.id }}">Open</a>
                             </div>
                         </div>
                     </div>
                 {% elif "Image" in post.kind %}
 
                     <!-- Image post card -->
-                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
+                    <div class="col s12 m6 l3 sortable-card changecolor" data-sort="{{ post.score }}">
                         <div class="card blue-grey darken-1">
                             <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
                                 <div class="content-with-utility">
@@ -244,7 +244,7 @@
                                     <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
                                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                                 </div>
-                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
+                                <a class="card-open waves-effect waves-light" href="/blogs/{{ post.id }}">Open</a>
                             </div>
                         </div>
                     </div>
@@ -358,6 +358,14 @@
                     }
                 });
             }
+        });
+
+
+        $(".changecolor").mouseover(function(){
+            $(this).addClass( "addgray" );
+        });
+        $(".changecolor").mouseout(function(){
+            $(this).removeClass( "addgray" );
         });
     </script>
 <!--<script>-->
