@@ -207,8 +207,13 @@ i.material-icons.title {
 i.material-icons.title.fa-clickable {
   font-size: 30px;
   cursor: pointer;
-  /*color: rgba(255, 255, 255, 0.5);*/
-  color: rgba(172,255,72,0.9);
+  color: rgba(255, 255, 255, 0.5);
+  /* color: rgba(172,255,72,0.9); */
+}
+
+.fas.fa-heart,
+.fa-heart:hover {
+  color: rgba(255, 116, 202, 0.9) !important;
 }
 
 i.material-icons.title.fa-clickable.image-post {

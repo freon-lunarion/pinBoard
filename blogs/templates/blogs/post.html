@@ -81,7 +81,7 @@
                         <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
                             <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
                                 {% if comment.author.userprofile.avatar %}
-                                    <img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">
+                                    <img src="{{comment.author.userprofile.avatar}}" style="max-width: 150px">
                                 {% else %}
                                     <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
                                 {% endif %}
@@ -197,22 +197,31 @@
             </div>
             
             <div class="col s12 m12">
-                <div id="comment-section" style="margin-top:30px" class="cccccc">
+                <!-- comment section -->
+                <div id="comment-section" style="margin-top:30px">
+
                     {% for comment in comments %}
 
                         <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
                             <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
                                 {% if comment.author.userprofile.avatar %}
-                                    <!--<img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">-->
+                                    <img src="{{comment.author.userprofile.avatar}}" style="max-width: 150px">
                                 {% else %}
                                     <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
                                 {% endif %}
-                                 <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
+                                <div class="user-awards">
+                                    <span class="award rank tooltipped" data-position="top" data-tooltip="Rank"> <i class="fas fa-hashtag"></i> {{ user.userprofile.rank }} </span>
+
+                                    <span class="award tooltipped" data-position="bottom" data-tooltip="Points"> <i class="fas fa-star"></i> {{ user.userprofile.score }} </span>
+                                        
+                                    <span class="award correct tooltipped" data-position="top" data-tooltip="Correct Answers"> <i class="fas fa-certificate"></i> {{ user.userprofile.correct_answer_num}} </span>
+                                </div>
+                                    <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
                             </div>
                             <div class="card-stacked">
                                 
                                 <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <a style="color:black" href="#">{{ comment.author.username }}</a>
+                                    <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
                                 </div>
                                 <div class="card-content" style="min-height: 92px">
                                     <p>{{ comment.detail | safe }}</p>
@@ -225,6 +234,16 @@
                             </div>
                         </div>
                     {% endfor %}
+                    <form method="POST" id="create-comment-form" class="comment-form" style="opacity: 1;max-width: 450px;">
+                        {% csrf_token %}
+                        {% autoescape off %}
+                        {{ comment_form.comment_detail }}
+                        {{ comment_form.comment_kind }}
+                        {% endautoescape %}
+                        <div class="comment-submit-container" style="display: flex;justify-content: flex-end;padding-top:15px;">
+                            <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1">Comment</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -261,35 +280,54 @@
                 </div>
                 
                 <div class="col s12 m12">
-                    <div id="comment-section" style="margin-top:30px" class="cccccc">
-                        {% for comment in comments %}
+                    <!-- comment section -->
+                    <div id="comment-section" style="margin-top:30px">
 
-                            <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
-                                <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
-                                    {% if comment.author.userprofile.avatar %}
-                                        <!--<img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">-->
-                                    {% else %}
-                                        <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
-                                    {% endif %}
-                                    <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
-                                </div>
-                                <div class="card-stacked">
-                                    
-                                    <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                        <a style="color:black" href="#">{{ comment.author.username }}</a>
+                            {% for comment in comments %}
+        
+                                <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
+                                    <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
+                                        {% if comment.author.userprofile.avatar %}
+                                            <img src="{{comment.author.userprofile.avatar}}" style="max-width: 150px">
+                                        {% else %}
+                                            <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
+                                        {% endif %}
+                                        <div class="user-awards">
+                                            <span class="award rank tooltipped" data-position="top" data-tooltip="Rank"> <i class="fas fa-hashtag"></i> {{ user.userprofile.rank }} </span>
+        
+                                            <span class="award tooltipped" data-position="bottom" data-tooltip="Points"> <i class="fas fa-star"></i> {{ user.userprofile.score }} </span>
+                                                
+                                            <span class="award correct tooltipped" data-position="top" data-tooltip="Correct Answers"> <i class="fas fa-certificate"></i> {{ user.userprofile.correct_answer_num}} </span>
+                                        </div>
+                                            <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
                                     </div>
-                                    <div class="card-content" style="min-height: 92px">
-                                        <p>{{ comment.detail | safe }}</p>
+                                    <div class="card-stacked">
+                                        
+                                        <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                            <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
+                                        </div>
+                                        <div class="card-content" style="min-height: 92px">
+                                            <p>{{ comment.detail | safe }}</p>
+                                        </div>
+        
+        
+                                        <div class="card-action" style="padding: 5px 24px;display:flex;align-items:center;" id="comment-btns-{{ comment.id }}" style="text-align: center"></div>
+        
+        
                                     </div>
-
-
-                                    <div class="card-action" style="padding: 5px 24px;display:flex;align-items:center;" id="comment-btns-{{ comment.id }}" style="text-align: center"></div>
-
-
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </div>
+                            {% endfor %}
+                            <form method="POST" id="create-comment-form" class="comment-form" style="opacity: 1;max-width: 450px;">
+                                {% csrf_token %}
+                                {% autoescape off %}
+                                {{ comment_form.comment_detail }}
+                                {{ comment_form.comment_kind }}
+                                {% endautoescape %}
+                                <div class="comment-submit-container" style="display: flex;justify-content: flex-end;padding-top:15px;">
+                                    <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1">Comment</button>
+                                </div>
+                            </form>
+                        </div>
                 </div>
 
         {% elif "Question" in post.kind %}
@@ -308,34 +346,21 @@
                             <p style="font-style: italic">{{ post.published_date }}</p>
                         </div>
                     </div>
-                    <div class="card-action voting sidebar">
-                        {% if post.solved %}
-                            <span class="btn disabled" style="margin: 5px 0;">Solved</span>
-                        {% else %}
-                            <a class="waves-effect waves-light btn-small light-green" id="make-comments" style="margin: 5px 0;">Answer</a>
-                        {% endif %}
-                    </div>
-                    <form method="post" class="col s12 comment-box">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="input-field col s12">
-
-                                {% autoescape off %}
-                                {{ comment_form.comment_detail }}
-                                {{ comment_form.comment_kind }}
-                                {% endautoescape %}
-                                <!--<textarea id="myTextArea" class="mceEditor"></textarea>-->
-                            </div>
-                        </div>
-                        <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
-                    </form>
-                    <button  id="" class="waves-effect waves-light btn-small orange lighten-1 comment-submit" style="visibility: hidden">submit</button>
-
                 </div>
             </div>
             <div class="col s12 m8" id="contents">
                 <div class="card-panel">
-                    <h1 class="post-title">Question: {{ post.title }}</h1>
+                    <div>
+                        <h1 class="post-title">
+                            {% if post.solved %}
+                                <span class="btn disabled" style="margin: 5px 0;background: rgba(21, 255, 0, 0.3) !important;color:black !important">Solved</span>
+                            {% else %}
+                                <span class="btn disabled" style="margin: 5px 0;background: rgba(253, 0, 0, 0.3) !important;color:black !important">Unsolved</span>
+                            {% endif %}
+
+                            {{ post.title }}
+                        </h1>
+                    </div>
 
                     {% if post.tags|length > 0 %}
                         <div class="post-tags">
@@ -353,38 +378,50 @@
                 <!-- comment section -->
                 <div id="comment-section" style="margin-top:30px">
 
-                    {% for comment in post.answers %}
+                    {% for comment in comments %}
 
-                        <div class="card horizontal" style="max-width: 450px;margin-bottom:25px;">
+                        <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
                             <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
                                 {% if comment.author.userprofile.avatar %}
-                                    <!--<img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">-->
+                                    <img src="{{comment.author.userprofile.avatar}}" style="max-width: 150px">
                                 {% else %}
                                     <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
                                 {% endif %}
-                                 
-                            </div>
+                                <div class="user-awards">
+                                    <span class="award rank tooltipped" data-position="top" data-tooltip="Rank"> <i class="fas fa-hashtag"></i> {{ user.userprofile.rank }} </span>
 
+                                    <span class="award tooltipped" data-position="bottom" data-tooltip="Points"> <i class="fas fa-star"></i> {{ user.userprofile.score }} </span>
+                                        
+                                    <span class="award correct tooltipped" data-position="top" data-tooltip="Correct Answers"> <i class="fas fa-certificate"></i> {{ user.userprofile.correct_answer_num}} </span>
+                                </div>
+                                    <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
+                            </div>
                             <div class="card-stacked">
                                 
                                 <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <a style="color:black" href="#">{{ comment.author.username }}</a>
-                                    {% if post.solved == False and request.session.username == post.author.username and post.author.username != comment.author.username %}
-                                        <a class="waves-effect waves-light btn-small light-green" id="answer-correct-btn-{{comment.id}}" style="position: absolute;top:10px;right:10px;">Correct</a>
-                                    {% elif post.solved and comment.is_correct %}
-                                        <span class="btn disabled" style="position: absolute;top:10px;right:10px;">Correct</span>
-                                    {% endif %}
+                                    <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
                                 </div>
                                 <div class="card-content" style="min-height: 92px">
                                     <p>{{ comment.detail | safe }}</p>
                                 </div>
-                                <div class="card-action" style="padding: 5px 24px;display:flex;align-items: center;" id="comment-btns-{{ comment.id }}" style="text-align: center"></div>
 
 
-                                <!--<input type="text" class="vote">-->
+                                <div class="card-action" style="padding: 5px 24px;display:flex;align-items:center;" id="comment-btns-{{ comment.id }}" style="text-align: center"></div>
+
+
                             </div>
                         </div>
                     {% endfor %}
+                    <form method="POST" id="create-comment-form" class="comment-form" style="opacity: 1;max-width: 450px;">
+                        {% csrf_token %}
+                        {% autoescape off %}
+                        {{ comment_form.comment_detail }}
+                        {{ comment_form.comment_kind }}
+                        {% endautoescape %}
+                        <div class="comment-submit-container" style="display: flex;justify-content: flex-end;padding-top:15px;">
+                            <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1">Comment</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         {% endif %}
