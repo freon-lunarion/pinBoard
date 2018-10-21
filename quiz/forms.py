@@ -18,6 +18,26 @@ class QuizBankForm(forms.ModelForm):
         model = QuizBank
         fields = ['title', 'detail', 'tryout_minScore', 'tryout_displayNum']
 
+class Question2Form(forms.ModelForm):
+    # detail = forms.CharField(required=True, widget=forms.Textarea)
+    quizBank = forms.ModelChoiceField(queryset= QuizBank.objects.all(),widget=forms.HiddenInput())
+    
+    class Meta:
+        model = Question
+        fields = ('detail','quizBank')
+
+class OptionsForm(forms.ModelForm):
+    question = forms.ModelChoiceField(queryset= Question.objects.all(),widget=forms.HiddenInput())
+
+    isCorrect = forms.BooleanField(required =False, label="is the right answer?")
+    detail = forms.CharField(required =True,label="Option")
+    
+    class Meta:
+        model = Options
+        fields = ('question', 'detail', 'isCorrect')
+
+# OptionsFormSet = forms.inlineformset_factory(Question, Options, form=OptionsForm, extra=1)
+
 # REF: https://www.caktusgroup.com/blog/2018/05/07/creating-dynamic-forms-django/
 class QuestionForm(forms.ModelForm):
     quizBank = forms.ModelChoiceField(queryset=QuizBank.objects.all(),widget=forms.HiddenInput())
@@ -39,3 +59,4 @@ class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['detail','quizBank']
+

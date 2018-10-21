@@ -72,6 +72,7 @@ def room_update(request,pk):
     return render(request, 'quiz/add_room.html', {'form':form})
     
 
+
 @login_required
 def tryout_view(request,pk):
     quizBank = QuizBank.objects.get(pk= pk)
@@ -91,6 +92,17 @@ def tryout_view(request,pk):
     }
 
     return render(request, 'quiz/tryout.html', context=context)      
+
+@login_required
+def question_view(request,pk):
+    question = Question.objects.get(pk=pk)
+    options = Options.objects.filter(question=question)
+    context = {
+        'question' : question,
+        'options' : options
+    }
+
+    return render(request, 'quiz/question_view.html', context=context)
 
 @login_required
 def question_create(request,pk):
@@ -122,33 +134,38 @@ def question_create(request,pk):
     return render(request, 'quiz/add_room.html', {'form':form})
 
 @login_required
-def question_edit(request,pk):
-    quizBank = QuizBank.objects.get(pk= pk)
-    if request.method == 'POST':
-        form = QuestionForm(request.POST)
-        if form.is_valid():
-            now = timezone.now().strftime("%Y-%m-%d %H:%M")
-            question = Question.objects.create(
-                quizBank = quizBank,
-                detail = request.POST['detail'],
-                author = request.user,
-                published_date = now
-            )
-
-            for i in range(4):
-                option = request.POST["options_{}".format(i)]
-                isCorrect = False
-                try:
-                    if request.POST["true_{}".format(i)] == 'on':
-                        isCorrect = True
-                except:
-                    pass
-                Options.objects.create(question = question, detail = option, isCorrect = isCorrect)
-
-            return HttpResponseRedirect(f'/quiz/{quizBank.id}')
+def question_update(request,pk):
+    question = Question.objects.get(pk=pk)
+    # options = Options.objects.filter(question=question)
     
-    form = QuestionForm(initial={'quizBank': quizBank})
-    return render(request, 'quiz/add_room.html', {'form':form})
+    if request.method == 'POST':
+        formParent = Question2Form(request.POST)
+        if formParent.is_valid():
+            question.detail = formParent.cleaned_data['detail']
+            question.save()
+
+            return HttpResponseRedirect(f'/quiz/{question.quizBank.id}')
+    else:
+        formParent = Question2Form(instance = question)
+    return render(request, 'quiz/add_room.html', {'form':formParent})
+
+@login_required
+def option_update(request,pk):
+    options = Options.objects.get(pk=pk)
+    # options = Options.objects.filter(question=question)
+    
+    if request.method == 'POST':
+        formParent = OptionsForm(request.POST)
+        if formParent.is_valid():
+            options.detail = formParent.cleaned_data['detail']
+            options.isCorrect = formParent.cleaned_data['isCorrect']
+            options.save()
+
+            return HttpResponseRedirect(f'/quiz/questions/{options.question.id}')
+    else:
+        formParent = OptionsForm(instance = options)
+    return render(request, 'quiz/add_room.html', {'form':formParent})
+
 
 @login_required
 def voteAjax(request):

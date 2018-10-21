@@ -1,0 +1,124 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col s12 m4 l4">
+        <div class="card">
+            <div class="card-content">
+                <ul>
+                    <li>
+                        <label for="">Creator</label>
+                        <span>{{ question.author}}</span>
+                    </li>
+                    <li>
+                        <label for="">Time</label>
+                        <span>{{ question.create_time}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-action">
+                <div class="score-container ">
+                    <a class="btn-flat vote" data-vote-value="-1" data-question-id="{{question.id}}" style="padding-left: 0"><i \ class="material-icons">arrow_downward</i></a>
+                    <span class="score">{{ question.score }}</span>
+                    <a class="btn-flat vote" data-vote-value="1" data-question-id="{{question.id}}"><i class="material-icons">arrow_upward</i></a>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m6 l4">
+        <div class="card">
+            <div class="card-content">
+                {% autoescape off %}
+                    {{ question.detail }}
+                    
+                {% endautoescape %}
+                {% if question.author == request.user %}
+                <a href="/quiz/questions/{{question.id}}/edit">Edit</a>
+                <br>Options:
+                <ul>
+                    {% for option in options %}
+                    {% if option.detail == question.correct_answer %}
+                    <li><strong><a href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a></strong></li>
+                    {% else %}
+                    <li><a href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a></li>
+                    {% endif %}
+
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <br>Options:
+                <ul>
+                    {% for option in options %}
+                    {% if option.detail == question.correct_answer %}
+                    <li><strong>{{option.detail}}</strong></li>
+                    {% else %}
+                    <li>{{option.detail}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+
+                {% endif %}
+                    
+              
+                
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large ">
+      <i class="large material-icons">more_horiz</i>
+    </a>
+    <ul>
+      <li><a href="create" class="btn-floating blue" title="New Question"><i class="material-icons">note_add</i></a></li>
+      <li><a href="tryout" class="btn-floating red" title="Tryout"><i class="material-icons">play_arrow</i></a></li>
+      
+    </ul>
+  </div>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.fixed-action-btn');
+        var instances = M.FloatingActionButton.init(elems, options);
+    });
+
+    // Or with jQuery
+
+    $(document).ready(function(){
+        $('.fixed-action-btn').floatingActionButton();
+    });
+
+</script>
+
+<script>
+// jquery
+    $('.vote').click(function() {
+        let parent = $(this).parent();
+        let voteVal = $(this).data('vote-value');
+    let qId = $(this).data('question-id');
+        $.ajax({
+            url: '/quiz/vote',
+            type:'GET',
+            data: {
+                'voteVal':voteVal,
+                'qId':qId,
+            },success:function(data, textStatus, xhr){
+                console.log(xhr.status);
+                if(xhr.status === 201) {
+                    let ori = parseInt(parent.children('span').html()) 
+                    ori += parseInt(voteVal)
+                    parent.children('span').html(ori)
+                }
+                
+            },complete:function(){
+                
+            }
+        })
+    });
+
+</script>
+{% endblock %}
