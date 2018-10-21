@@ -123,7 +123,7 @@
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">Leaderboard</h5>
           <ul id="leaderboard-table">
             {% for user in users %}
-            <li class="card" id="user-{{user.id}}">
+            <li class="card touch-leaderboard" id="user-{{user.id}}">
               <a href="{% url 'shared:user_profile' user.id %}">
               <div class="row">
                 {% if user.avatar %}
