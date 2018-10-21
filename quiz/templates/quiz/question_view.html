@@ -1,51 +1,21 @@
 {% extends "blogs/base.html" %}
 
 {% block content %}
-<div class="row">
-    <div class="col s12 l12">
-      <div class="card z-depth-3">
-        <div class="card-image">
-          <img src="https://picsum.photos/800/100/?random">
-          <h1 class="card-title">{{ object.title}}</h1>
-          
-          
-        </div>
-        <div class="card-content">
-            <div class="row ">
-                <div class="col sm12">
 
-                {% autoescape off %}
-                    {{ object.detail }}
-                {% endautoescape %}
-                </div>
-            </div>
-            <div class="row">
-                <p class="col s12 m6 left-align">Created by <a href="/user/{{object.creator.id }}">{{ object.creator }}</a></p>
-                <p class="col s12 m6 right-align">at {{ object.create_time }}</p>
-            </div>
-            
-        </div>
-      </div>
-    </div>
-</div>
 <div class="row">
-    {% for question in questions %}
-    <div class="col s12 m6 l4">
+    <div class="col s12 m4 l4">
         <div class="card">
             <div class="card-content">
-                {% autoescape off %}
-                    {{ question.detail }}
-                    
-                {% endautoescape %}
-                {% if question.correct_answer %}
-                <p><strong class="strong">Correct Answer: {{ question.correct_answer }}</strong></p><br>
-                {% endif %}
-
-                
-                <p class=" ">Posted by <a href="/user/{{question.creator.id }}">{{ question.author }}</a><br>at {{ question.create_time }}</p>
-                    
-              
-                <a href="/quiz/questions/{{question.id}}">View</a>
+                <ul>
+                    <li>
+                        <label for="">Creator</label>
+                        <span>{{ question.author}}</span>
+                    </li>
+                    <li>
+                        <label for="">Time</label>
+                        <span>{{ question.create_time}}</span>
+                    </li>
+                </ul>
             </div>
             <div class="card-action">
                 <div class="score-container ">
@@ -57,7 +27,36 @@
             </div>
         </div>
     </div>
-    {% endfor %}
+    <div class="col s12 m6 l4">
+        <div class="card">
+            <div class="card-content">
+                {% autoescape off %}
+                    {{ question.detail }}
+                    
+                {% endautoescape %}
+                {% if question.author == request.user %}
+                <a href="/quiz/question/{{question.id}}/edit">Edit</a>
+                <ul>
+                    {% for option in options %}
+                    <li><a href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <ul>
+                    {% for option in options %}
+                    <li>{{option.detail}}</li>
+                    {% endfor %}
+                </ul>
+
+                {% endif %}
+                    
+              
+                
+            </div>
+            
+        </div>
+    </div>
+
 </div>
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large ">

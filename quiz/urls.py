@@ -10,6 +10,8 @@ urlpatterns = [
     path('<int:pk>/tryout', views.tryout_view, name='tryout'),
     path('create', views.room_create, name='create-room'),
     path('<int:pk>/edit/',views.room_update, name="room-update"),
+    path('questions/<int:pk>/edit/',views.question_update, name="question-update"),
+    path('questions/<int:pk>',views.question_view, name="question"),
     url(r'^check/$',views.checkAjax),
     url(r'^vote/$',views.voteAjax),
 ]
