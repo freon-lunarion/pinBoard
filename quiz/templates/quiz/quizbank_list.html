@@ -2,6 +2,9 @@
 
 {% block content %}
   <h1>Room List</h1>
+  <ul>
+      <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/create"><i class="material-icons right">add_box</i>Create Room</a></li>
+  </ul>
   {% if quizbank_list %}
 
     {% for rec in quizbank_list %}
@@ -32,6 +35,6 @@
     {% endfor %}
 
   {% else %}
-    <p>There are no books in the library.</p>
+    <p>There are currently no quiz rooms. Go ahead and make one.</p>
   {% endif %}       
 {% endblock %}
