@@ -133,7 +133,7 @@
           <ul class="right hide-on-med-and-down">
             {% if request.session.username %}
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
-            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/"><i class="material-icons right">lightbulb_outline</i>Quiz Room</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/">Quiz Room</a></li>
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
               <li><span>Hello, {{ request.session.username }}&nbsp;</span></li>
