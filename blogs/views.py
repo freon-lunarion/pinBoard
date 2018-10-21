@@ -143,7 +143,7 @@ def index(request):
 
     elif 'title' in request.GET:
         words = request.GET['title'].strip().split(' ')
-        contents = [rec for rec in Post.objects.all()] + [rec for rec in QnaQuestion.objects.all()]# + [rec for rec in QuizBank.objects.all()]
+        contents = [rec for rec in Post.objects.all()] + [rec for rec in QnaQuestion.objects.all()] + [rec for rec in QuizBank.objects.all()]
         res = []
         for content in contents:
             hit = True
@@ -188,7 +188,7 @@ def index(request):
     #             count_string = str(count) + ' Responses'
     #         post.question_status = 'Solved' if post.solved else 'Unsolved'
     #         post.response_count_string = count_string
-         
+
     context = {
         'latest_post_list': latest_post_list,
     }

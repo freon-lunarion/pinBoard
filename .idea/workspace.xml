@@ -23,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogs/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="149" column="30" lean-forward="true" selection-start-line="149" selection-start-column="30" selection-end-line="149" selection-end-column="30" />
+            <state relative-caret-position="-4">
+              <caret line="140" column="67" lean-forward="false" selection-start-line="140" selection-start-column="67" selection-end-line="140" selection-end-column="67" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="253" column="89" lean-forward="false" selection-start-line="253" selection-start-column="89" selection-end-line="253" selection-end-column="89" />
+            <state relative-caret-position="104">
+              <caret line="126" column="120" lean-forward="false" selection-start-line="126" selection-start-column="120" selection-end-line="126" selection-end-column="120" />
               <folding>
                 <element signature="n#style#0;n#i#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -51,7 +51,7 @@
                 <element signature="n#style#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#0;n#label#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#6802#6808#0" expanded="true" />
+                <element signature="e#6791#6797#0" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#li#3;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#li#4;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#li#5;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -61,16 +61,19 @@
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#8079#8085#0" expanded="true" />
-                <marker date="1540111802000" expanded="false" signature="8277:8358" ph="..." />
-                <marker date="1540111802000" expanded="false" signature="8410:8422" ph="..." />
-                <marker date="1540111802000" expanded="false" signature="8482:8488" ph=" " />
-                <marker date="1540111802000" expanded="false" signature="9129:9210" ph="..." />
-                <marker date="1540111802000" expanded="false" signature="9262:9274" ph="..." />
-                <marker date="1540111802000" expanded="false" signature="9337:9343" ph=" " />
-                <marker date="1540111802000" expanded="false" signature="9941:9951" ph="..." />
-                <marker date="1540111802000" expanded="false" signature="10155:10171" ph="..." />
-                <marker date="1540111802000" expanded="false" signature="10252:10268" ph="..." />
+                <element signature="e#8068#8074#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#8471#8477#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#a#2;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#a#2;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#8864#8870#0" expanded="true" />
+                <marker date="1540113396000" expanded="false" signature="9073:9154" ph="..." />
+                <marker date="1540113396000" expanded="false" signature="9206:9218" ph="..." />
+                <marker date="1540113396000" expanded="false" signature="9281:9287" ph=" " />
+                <marker date="1540113396000" expanded="false" signature="9885:9895" ph="..." />
+                <marker date="1540113396000" expanded="false" signature="10099:10115" ph="..." />
+                <marker date="1540113396000" expanded="false" signature="10196:10212" ph="..." />
               </folding>
             </state>
           </provider>
@@ -133,10 +136,14 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="172" column="26" lean-forward="false" selection-start-line="172" selection-start-column="26" selection-end-line="172" selection-end-column="26" />
+            <state relative-caret-position="-661">
+              <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
               <folding>
-                <marker date="1540110623000" expanded="true" signature="25530:25555" ph="..." />
+                <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#2;n#!!top" expanded="true" />
+                <element signature="e#1209#1215#0" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
+                <marker date="1540112493000" expanded="true" signature="7516:7541" ph="..." />
               </folding>
             </state>
           </provider>
@@ -241,8 +248,8 @@
         <option value="$PROJECT_DIR$/shared/views.py" />
         <option value="$PROJECT_DIR$/shared/urls.py" />
         <option value="$PROJECT_DIR$/blogs/urls.py" />
-        <option value="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
         <option value="$PROJECT_DIR$/blogs/views.py" />
+        <option value="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
       </list>
     </option>
   </component>
@@ -1051,20 +1058,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/re.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="168" column="4" lean-forward="false" selection-start-line="168" selection-start-column="4" selection-end-line="168" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="172" column="26" lean-forward="false" selection-start-line="172" selection-start-column="26" selection-end-line="172" selection-end-column="26" />
+        <state relative-caret-position="-661">
+          <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
           <folding>
-            <marker date="1540110623000" expanded="true" signature="25530:25555" ph="..." />
+            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="e#1209#1215#0" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
+            <marker date="1540112493000" expanded="true" signature="7516:7541" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogs/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4">
+          <caret line="140" column="67" lean-forward="false" selection-start-line="140" selection-start-column="67" selection-end-line="140" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="253" column="89" lean-forward="false" selection-start-line="253" selection-start-column="89" selection-end-line="253" selection-end-column="89" />
+        <state relative-caret-position="104">
+          <caret line="126" column="120" lean-forward="false" selection-start-line="126" selection-start-column="120" selection-end-line="126" selection-end-column="120" />
           <folding>
             <element signature="n#style#0;n#i#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1076,7 +1105,7 @@
             <element signature="n#style#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#label#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#6802#6808#0" expanded="true" />
+            <element signature="e#6791#6797#0" expanded="true" />
             <element signature="n#style#0;n#a#0;n#li#3;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#li#4;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#li#5;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1086,34 +1115,19 @@
             <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#8079#8085#0" expanded="true" />
-            <marker date="1540111802000" expanded="false" signature="8277:8358" ph="..." />
-            <marker date="1540111802000" expanded="false" signature="8410:8422" ph="..." />
-            <marker date="1540111802000" expanded="false" signature="8482:8488" ph=" " />
-            <marker date="1540111802000" expanded="false" signature="9129:9210" ph="..." />
-            <marker date="1540111802000" expanded="false" signature="9262:9274" ph="..." />
-            <marker date="1540111802000" expanded="false" signature="9337:9343" ph=" " />
-            <marker date="1540111802000" expanded="false" signature="9941:9951" ph="..." />
-            <marker date="1540111802000" expanded="false" signature="10155:10171" ph="..." />
-            <marker date="1540111802000" expanded="false" signature="10252:10268" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/re.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="168" column="4" lean-forward="false" selection-start-line="168" selection-start-column="4" selection-end-line="168" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogs/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="149" column="30" lean-forward="true" selection-start-line="149" selection-start-column="30" selection-end-line="149" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#8068#8074#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8471#8477#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#a#2;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#a#2;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8864#8870#0" expanded="true" />
+            <marker date="1540113396000" expanded="false" signature="9073:9154" ph="..." />
+            <marker date="1540113396000" expanded="false" signature="9206:9218" ph="..." />
+            <marker date="1540113396000" expanded="false" signature="9281:9287" ph=" " />
+            <marker date="1540113396000" expanded="false" signature="9885:9895" ph="..." />
+            <marker date="1540113396000" expanded="false" signature="10099:10115" ph="..." />
+            <marker date="1540113396000" expanded="false" signature="10196:10212" ph="..." />
           </folding>
         </state>
       </provider>
