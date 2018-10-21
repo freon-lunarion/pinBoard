@@ -40,11 +40,7 @@
                 {% if question.correct_answer %}
                 <p><strong class="strong">Correct Answer: {{ question.correct_answer }}</strong></p><br>
                 {% endif %}
-
-                
                 <p class=" ">Posted by <a href="/user/{{question.creator.id }}">{{ question.author }}</a><br>at {{ question.create_time }}</p>
-                    
-              
                 <a href="/quiz/questions/{{question.id}}">View</a>
             </div>
             <div class="card-action">

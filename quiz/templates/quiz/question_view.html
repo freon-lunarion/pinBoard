@@ -35,16 +35,27 @@
                     
                 {% endautoescape %}
                 {% if question.author == request.user %}
-                <a href="/quiz/question/{{question.id}}/edit">Edit</a>
+                <a href="/quiz/questions/{{question.id}}/edit">Edit</a>
+                <br>Options:
                 <ul>
                     {% for option in options %}
+                    {% if option.detail == question.correct_answer %}
+                    <li><strong><a href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a></strong></li>
+                    {% else %}
                     <li><a href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a></li>
+                    {% endif %}
+
                     {% endfor %}
                 </ul>
                 {% else %}
+                <br>Options:
                 <ul>
                     {% for option in options %}
+                    {% if option.detail == question.correct_answer %}
+                    <li><strong>{{option.detail}}</strong></li>
+                    {% else %}
                     <li>{{option.detail}}</li>
+                    {% endif %}
                     {% endfor %}
                 </ul>
 

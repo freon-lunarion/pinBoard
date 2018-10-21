@@ -72,6 +72,7 @@ def room_update(request,pk):
     return render(request, 'quiz/add_room.html', {'form':form})
     
 
+
 @login_required
 def tryout_view(request,pk):
     quizBank = QuizBank.objects.get(pk= pk)
@@ -92,27 +93,6 @@ def tryout_view(request,pk):
 
     return render(request, 'quiz/tryout.html', context=context)      
 
-# @login_required
-# def question_create(request, *args, **kwargs):
-#     if request.method == 'POST':
-#         parent_form = QuestionForm(request.POST, request.FILES, prefix='parent')
-#         children_forms = OptionsFormSet(request.POST, request.FILES, prefix='children')
-#         parent_valid = parent_form.is_valid()
-#         children_valid = children_forms.is_valid()
-#         if parent_valid and children_valid:
-#             # save the parent then set it as the instance on the formset before
-#             # saving the chldren via the formset so that Django
-#             # can create the relationship in the db
-#             parent = parent_form.save()
-#             children_forms.instance = parent
-#             children_forms.save()
-#             return HttpResponseRedirect('', args=[parent.pk])
-#     else:
-#         parent_form = QuestionForm(prefix='parent')
-#         children_forms = OptionsFormSet(prefix='children')
-    
-#     return render(request, 'quiz/question_form.html', {'parent_form': parent_form, 'children_forms': children_forms})
-
 @login_required
 def question_view(request,pk):
     question = Question.objects.get(pk=pk)
@@ -123,7 +103,6 @@ def question_view(request,pk):
     }
 
     return render(request, 'quiz/question_view.html', context=context)
-
 
 @login_required
 def question_create(request,pk):
@@ -169,6 +148,24 @@ def question_update(request,pk):
     else:
         formParent = Question2Form(instance = question)
     return render(request, 'quiz/add_room.html', {'form':formParent})
+
+@login_required
+def option_update(request,pk):
+    options = Options.objects.get(pk=pk)
+    # options = Options.objects.filter(question=question)
+    
+    if request.method == 'POST':
+        formParent = OptionsForm(request.POST)
+        if formParent.is_valid():
+            options.detail = formParent.cleaned_data['detail']
+            options.isCorrect = formParent.cleaned_data['isCorrect']
+            options.save()
+
+            return HttpResponseRedirect(f'/quiz/questions/{options.question.id}')
+    else:
+        formParent = OptionsForm(instance = options)
+    return render(request, 'quiz/add_room.html', {'form':formParent})
+
 
 @login_required
 def voteAjax(request):
