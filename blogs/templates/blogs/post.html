@@ -231,6 +231,69 @@
                 </div>
             </div>
 
+        {% elif "Youtube" in post.kind %}
+            <div class="col s12 m12">
+                    <div class="card image-post">
+
+                        <div class="card-action voting" style="border-bottom: 1px solid rgba(160,160,160,0.2);padding-right:16px">
+                            <h3 class="img-caption">{{ post.title }}</h3>
+
+                            {% if post.id in request.user.userprofile.favorites_id %}
+                                <a style="margin-right:0;color:black" id="save-btn"><i class="material-icons title fa-clickable fas fa-heart tooltipped image-post" data-position="right" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i></a>
+                            {% else %}
+                                <a style="margin-right:0;color:black" id="save-btn"><i class="material-icons title fa-clickable far fa-heart tooltipped image-post" data-position="right" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i></a>
+                            {% endif %}
+
+                        </div>
+<!-- 
+                        <div class="image-post">
+                            <img class="content materialboxed" src="{{ post.detail }}" alt="">
+                        </div> -->
+                        <iframe class="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/{{ post.detail }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+                        <div class="card-action voting" style="padding-right: 0;">
+                            <h3 class="img-caption username">Submitted by {{ post.author.username }} on {{ post.published_date|date:"d M, Y" }}</h3>
+                            <div class="score-container">
+                                <a class="btn-flat vote" id="downvote-btn-{{ post.id }}" style="padding-left: 0"><i id="downvote-{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                                <span id="score-{{ post.id }}" class="score">{{post.score}}</span>
+                                <a class="btn-flat vote" id="upvote-btn-{{ post.id }}"><i id="upvote-{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col s12 m12">
+                    <div id="comment-section" style="margin-top:30px" class="cccccc">
+                        {% for comment in comments %}
+
+                            <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
+                                <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
+                                    {% if comment.author.userprofile.avatar %}
+                                        <!--<img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">-->
+                                    {% else %}
+                                        <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
+                                    {% endif %}
+                                    <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
+                                </div>
+                                <div class="card-stacked">
+                                    
+                                    <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
+                                        <a style="color:black" href="#">{{ comment.author.username }}</a>
+                                    </div>
+                                    <div class="card-content" style="min-height: 92px">
+                                        <p>{{ comment.detail | safe }}</p>
+                                    </div>
+
+
+                                    <div class="card-action" style="padding: 5px 24px;display:flex;align-items:center;" id="comment-btns-{{ comment.id }}" style="text-align: center"></div>
+
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
         {% elif "Question" in post.kind %}
             <div class="col s12 m4 sidebar" id="sidebar">
