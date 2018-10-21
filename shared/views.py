@@ -1,20 +1,10 @@
-from .forms import *
 from .models import *
 from blogs.models import Post,QnaQuestion
 from quiz.models import QuizBank
-from django.conf import settings
-from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404,redirect, render,render_to_response
-from django.template import RequestContext
-from django.urls import reverse
-from django.utils import timezone
-from django.views import generic
-import datetime
 import json
-from django.utils.decorators import method_decorator
 # Create your views here.
 
 @login_required
@@ -54,7 +44,8 @@ def user_profile(request, pk):
         'article' : article,
         'images' : images,
         'qna' : qna,
-        'quiz' : quiz
+        'quiz' : quiz,
+        'users' : sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
     }
     
     return render(request,'shared/user_profile.html',context=context)
