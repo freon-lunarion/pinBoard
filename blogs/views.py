@@ -236,6 +236,34 @@ def create_image_post(request):
     return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
 
 @login_required
+def create_youtube_post(request):
+    if (request.method == 'POST'):
+        form = AddImageForm(request.POST)
+        if form.is_valid():
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            tags = form.cleaned_data['tags'].split(',')
+            post = Post.objects.create(title=form.cleaned_data['title'],
+                                is_pinned=False,
+                                pin_board=None,
+                                operator=None,
+                                kind='Youtube',
+                                detail=form.cleaned_data['detail'],
+                                author= request.user,
+                                published_date=now
+                            )
+            for title in tags:
+                if title.strip() == '':
+                    continue
+                exist_tag = Tag.objects.filter(title=title.strip())
+                if exist_tag.count() != 0:
+                    ContentTag.create(post.id, exist_tag.first().id)
+                else:
+                    ContentTag.create(post.id, Tag.create(title.strip()).id)
+            return HttpResponseRedirect(f'/blogs/{post.id}')
+        return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
+    return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
+
+@login_required
 def create_question(request):
     if (request.method == 'POST'):
         form = AddQuestionForm(request.POST)
