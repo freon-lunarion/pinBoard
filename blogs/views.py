@@ -14,6 +14,7 @@ from quiz.models import *
 import json, re
 import datetime
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -38,6 +39,7 @@ class PostView(generic.DetailView):
     model = Content
     template_name = 'blogs/post.html'
 
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.pk = kwargs.get('pk', "-1")
         return super(PostView, self).dispatch(request, *args, **kwargs)
@@ -61,10 +63,12 @@ class PostView(generic.DetailView):
             context['post'] = question
             context['comments'] = question.answers
             context['comment_form'] = CommentForm()
+        context['users'] = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
 
         return context
 
     # redirecting. let me know if it should not be redirecting - Deanna
+    @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -143,7 +147,7 @@ def index(request):
 
     elif 'title' in request.GET:
         words = request.GET['title'].strip().split(' ')
-        contents = [rec for rec in Post.objects.all()] + [rec for rec in QnaQuestion.objects.all()]# + [rec for rec in QuizBank.objects.all()]
+        contents = [rec for rec in Post.objects.all()] + [rec for rec in QnaQuestion.objects.all()] + [rec for rec in QuizBank.objects.all()]
         res = []
         for content in contents:
             hit = True
@@ -188,9 +192,10 @@ def index(request):
     #             count_string = str(count) + ' Responses'
     #         post.question_status = 'Solved' if post.solved else 'Unsolved'
     #         post.response_count_string = count_string
-         
+
     context = {
         'latest_post_list': latest_post_list,
+        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
     }
 
     return render(request, 'blogs/index.html', context=context)
@@ -240,6 +245,34 @@ def create_image_post(request):
                                 author= request.user,
                                 published_date=now
                                )
+            for title in tags:
+                if title.strip() == '':
+                    continue
+                exist_tag = Tag.objects.filter(title=title.strip())
+                if exist_tag.count() != 0:
+                    ContentTag.create(post.id, exist_tag.first().id)
+                else:
+                    ContentTag.create(post.id, Tag.create(title.strip()).id)
+            return HttpResponseRedirect(f'/blogs/{post.id}')
+        return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
+    return render(request, 'blogs/add_image.html', {'form': AddImageForm()})
+
+@login_required
+def create_youtube_post(request):
+    if (request.method == 'POST'):
+        form = AddImageForm(request.POST)
+        if form.is_valid():
+            now = timezone.now().strftime("%Y-%m-%d %H:%M")
+            tags = form.cleaned_data['tags'].split(',')
+            post = Post.objects.create(title=form.cleaned_data['title'],
+                                is_pinned=False,
+                                pin_board=None,
+                                operator=None,
+                                kind='Youtube',
+                                detail=form.cleaned_data['detail'],
+                                author= request.user,
+                                published_date=now
+                            )
             for title in tags:
                 if title.strip() == '':
                     continue

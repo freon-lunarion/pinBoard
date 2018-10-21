@@ -14,6 +14,7 @@ from django.utils import timezone
 from django.views import generic
 import datetime
 import json
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 @login_required
@@ -69,3 +70,8 @@ def user_unlike(request, pk):
     if request.method == 'POST':
         UserFavorite.objects.get(content__id=pk, user=request.user).delete()
         return JsonResponse({'message': 'Succeed'})
+
+@login_required
+def user(request):
+    if request.method == 'GET':
+        return JsonResponse({'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))})

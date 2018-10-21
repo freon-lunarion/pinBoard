@@ -1,11 +1,11 @@
-{% block image_post_card %}
+{% block youtube_post_card %}
   {% if not post.is_pinned %}
     <div class="col s12 m6 l4 sortable-card" data-sort="{{ post.score }}">
         <div class="card blue-grey darken-1 changecolor">
-            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
+            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('https://img.youtube.com/vi/{{ post.detail }}/0.jpg'); background-size: cover">
                 <div class="content-with-utility">
                     <div class="card-utility">
-                        <i class="material-icons title">image</i>
+                        <i class="material-icons title">ondemand_video</i>
                         {% if request.user.is_superuser %}
                             <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
                         {% endif %}
@@ -17,6 +17,7 @@
                     </div>
                     <div class="card-preview-content">
                         <span class="card-title">{{ post.title }}</span>
+                        <span class="new badge question-state youtube" data-badge-caption=" ">Video</span>
                     </div>
                 </div>
                 <div class="card-comments">{{ post.comment_count_string }}</div>
@@ -34,17 +35,16 @@
   {% endif %}
 {% endblock %}
 
-{% block image_post_card_pinned %}
+{% block youtube_post_card_pinned %}
   {% if post.is_pinned %}
-    <!-- Image post card -->
     <div class="col s12 m6 l4 sortable-card" data-sort="{{ post.score }}">
-        <div class="card blue-grey darken-1">
-            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
+        <div class="card blue-grey darken-1 changecolor">
+            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('https://img.youtube.com/vi/{{ post.detail }}/0.jpg'); background-size: cover">
                 <div class="content-with-utility">
                     <div class="card-utility">
-                        <i class="material-icons title">image</i>
+                        <i class="material-icons title">ondemand_video</i>
                         {% if request.user.is_superuser %}
-                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
+                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
                         {% endif %}
                         {% if post.id in request.user.userprofile.favorites_id %}
                             <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
@@ -54,6 +54,7 @@
                     </div>
                     <div class="card-preview-content">
                         <span class="card-title">{{ post.title }}</span>
+                        <span class="new badge question-state youtube" data-badge-caption=" ">Video</span>
                     </div>
                 </div>
                 <div class="card-comments">{{ post.comment_count_string }}</div>
@@ -64,7 +65,7 @@
                     <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
                     <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                 </div>
-                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
+                <a class="card-open waves-effect waves-light" href="/blogs/{{ post.id }}">Open</a>
             </div>
         </div>
     </div>

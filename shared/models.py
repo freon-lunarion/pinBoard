@@ -61,7 +61,7 @@ class UserProfile(models.Model):
 
     @property
     def correct_answer_percentage(self):
-        return f'{round(self.correct_answer_num / self.total_answer_num, 3) * 100}%'
+        return f'{round(100 * (self.correct_answer_num / self.total_answer_num) if self.total_answer_num else 0, 1)}%'
 
     @property
     def top_five_posts(self):
@@ -78,6 +78,10 @@ class UserProfile(models.Model):
                 if question_que.count() == 1:
                     res.append(QnaQuestion.objects.get(id=content.id))
         return res
+
+    @property
+    def rank(self):
+        return len(list(filter(lambda x: x.score > self.score, UserProfile.objects.all()))) + 1
 
     # @receiver(post_save, sender=User)
     # def save_user_profile(sender, instance, **kwargs):

@@ -19,6 +19,7 @@ urlpatterns = [
     path('create/', views.create_post, name='create_post'),
     path('createQuestion/', views.create_question, name='create_question'),
     path('createImagePost/', views.create_image_post, name='create_image_post'),
+    path('createYoutubePost/', views.create_youtube_post, name='create_youtube_post'),
     path('<int:pk>/pin/', views.pin, name='pin'),
     path('<int:pk>/unpin/', views.unpin, name='unpin'),
     url(r'^login/$',views.login_view),

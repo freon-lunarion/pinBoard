@@ -207,7 +207,24 @@ i.material-icons.title {
 i.material-icons.title.fa-clickable {
   font-size: 30px;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.5);
+  /*color: rgba(255, 255, 255, 0.5);*/
+  color: rgba(172,255,72,0.9);
+}
+
+i.material-icons.title.fa-clickable.image-post {
+  font-size: 25px;
+  color: rgba(255, 0, 0, 0.3);
+  margin: 0;
+}
+
+i.material-icons.title.fa-clickable.image-post:hover {
+  transition: 0.3s;
+  color: rgba(255, 0, 0, 0.6);
+}
+
+.touch-leaderboard:hover{
+  transition: 0.3s;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.29), rgba(0, 0, 0, 0.02))
 }
 
 i.material-icons.title.fa-clickable:hover {
@@ -237,6 +254,7 @@ i.material-icons.title.fa-clickable:hover {
   justify-content: space-evenly;
 }
 
+#submit-youtube-post,
 #submit-image-post {
   display: none;
 }
@@ -251,6 +269,10 @@ i.material-icons.title.fa-clickable:hover {
 
 .new.badge.question-state.unsolved {
   background: rgba(255, 72, 127, 0.9)
+}
+
+.new.badge.question-state.youtube {
+  background: rgba(202, 0, 0, 0.9)
 }
 
 /* ------------------------------------------ POST PAGE - Gino ------------------------------------------ */
@@ -285,6 +307,12 @@ h3.img-caption {
   font-style: italic;
   text-align: center;
   margin: 8px 0;
+}
+
+h3.img-caption.username {
+  font-style: normal;
+  font-weight: 100;
+  font-size: 14px;
 }
 
 .image-post {
@@ -361,6 +389,18 @@ h2.content-separator {
   color: black;
   font-size: 20px;
   font-weight: 300;
+}
+
+.youtube-video {
+  width: 50vw;
+  height: 50vh;
+}
+
+@media(max-width: 700px) {
+  .youtube-video {
+    width: 100%;
+    height: 200px;
+  }
 }
 
 /* ------------------------------------------ POST PAGE ------------------------------------------ */
