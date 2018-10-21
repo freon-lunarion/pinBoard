@@ -122,7 +122,23 @@ class PostView(generic.DetailView):
 #     template_name = 'blogs/register.html'
 @login_required
 def index(request):
-    latest_post_list = sorted([p for p in Post.objects.all()] + [q for q in QnaQuestion.objects.all()],
+    if 'tags' in request.GET:
+        tags = request.GET['tags'].split(',')
+        contents = set([rec.id for rec in Content.objects.all()])
+        for tag in tags:
+            contents &= set([rec.content.id for rec in ContentTag.objects.filter(tag__title__iexact=tag.strip())])
+        res = []
+        for content in contents:
+            post_que = Post.objects.filter(id=content)
+            if post_que.count() == 1:
+                res.append(Post.objects.get(id=content))
+            else:
+                question_que = QnaQuestion.objects.filter(id=content)
+                if question_que.count() == 1:
+                    res.append(QnaQuestion.objects.get(id=content))
+        latest_post_list = sorted(res, key=lambda x: (x.score, x.published_date.timestamp()), reverse=True)
+    else:
+        latest_post_list = sorted([p for p in Post.objects.all()] + [q for q in QnaQuestion.objects.all()],
                               key=lambda p: (p.score, p.published_date.timestamp() if p.published_date else 0), reverse=True)
     # latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
     #                                                              if p.published_date else 0), reverse=True)
