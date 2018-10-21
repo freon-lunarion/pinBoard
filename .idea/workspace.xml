@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc9605c8-4e8a-4eb9-86cd-6703b364d7f8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/blogs/migrations/0002_qnaquestion_kind.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/blogs/migrations/0003_auto_20181020_1351.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/blogs/migrations/0004_auto_20181020_2112.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/shared/migrations/0002_auto_20181018_2211.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/shared/migrations/0003_auto_20181020_1351.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/shared/migrations/0004_auto_20181020_2112.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/blogs/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quiz/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/quiz/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/shared/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/models.py" afterPath="$PROJECT_DIR$/shared/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pinBoard/urls.py" afterPath="$PROJECT_DIR$/pinBoard/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/urls.py" afterPath="$PROJECT_DIR$/shared/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/views.py" afterPath="$PROJECT_DIR$/shared/views.py" />
     </list>
     <ignored path="pinBoard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,6 +77,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shared/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pinBoard/settings.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -97,11 +102,31 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shared/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="77" column="122" lean-forward="false" selection-start-line="77" selection-start-column="122" selection-end-line="77" selection-end-column="122" />
+            <state relative-caret-position="406">
+              <caret line="70" column="20" lean-forward="true" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shared/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pinBoard/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,7 +135,7 @@
         <entry file="file://$PROJECT_DIR$/../../pinBoard4/pinBoard/blogs/templates/blogs/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="257" column="8" lean-forward="true" selection-start-line="257" selection-start-column="8" selection-end-line="257" selection-end-column="69" />
+              <caret line="257" column="8" lean-forward="false" selection-start-line="257" selection-start-column="8" selection-end-line="257" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -126,11 +151,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="81">
-              <caret line="256" column="12" lean-forward="true" selection-start-line="256" selection-start-column="12" selection-end-line="256" selection-end-column="12" />
+              <caret line="256" column="12" lean-forward="false" selection-start-line="256" selection-start-column="12" selection-end-line="256" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -201,7 +226,6 @@
         <option value="$PROJECT_DIR$/blogs/templates/blogs/add_post.html" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/add_question.html" />
         <option value="$PROJECT_DIR$/blogs/admin.py" />
-        <option value="$PROJECT_DIR$/pinBoard/urls.py" />
         <option value="$PROJECT_DIR$/livesession/templates/base.html" />
         <option value="$PROJECT_DIR$/livesession/templates/index.html" />
         <option value="$PROJECT_DIR$/livesession/forms.py" />
@@ -218,14 +242,15 @@
         <option value="$PROJECT_DIR$/shared/forms.py" />
         <option value="$PROJECT_DIR$/pinBoard/settings.py" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
-        <option value="$PROJECT_DIR$/shared/urls.py" />
         <option value="$PROJECT_DIR$/blogs/models.py" />
-        <option value="$PROJECT_DIR$/shared/views.py" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/post.html" />
         <option value="$PROJECT_DIR$/blogs/urls.py" />
         <option value="$PROJECT_DIR$/blogs/views.py" />
         <option value="$PROJECT_DIR$/shared/models.py" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/index.html" />
+        <option value="$PROJECT_DIR$/shared/urls.py" />
+        <option value="$PROJECT_DIR$/pinBoard/urls.py" />
+        <option value="$PROJECT_DIR$/shared/views.py" />
       </list>
     </option>
   </component>
@@ -272,24 +297,24 @@
             <path>
               <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
               <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
-              <item name="blogs" type="462c0819:PsiDirectoryNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
               <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
-              <item name="blogs" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="blogs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
-              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
               <item name="shared" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -525,8 +550,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="830" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -664,13 +690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="227" column="7" lean-forward="false" selection-start-line="227" selection-start-column="7" selection-end-line="227" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pinBoard/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="24" column="45" lean-forward="false" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -814,13 +833,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shared/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../9321/COMP9321_Ass3/app/safety_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -885,87 +897,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shared/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="46" column="32" lean-forward="false" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/post.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5760">
           <caret line="384" column="16" lean-forward="false" selection-start-line="384" selection-start-column="16" selection-end-line="385" selection-end-column="94" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="e#1648#1654#0" expanded="true" />
-            <element signature="e#1744#1750#0" expanded="true" />
-            <element signature="e#1775#1781#0" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#div#2;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#a#2;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#a#3;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#a#4;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#1;n#div#2;n#div#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#1;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="e#28308#28314#0" expanded="true" />
-            <element signature="e#28404#28410#0" expanded="true" />
-            <element signature="e#28435#28441#0" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#div#2;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#1;n#div#0;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#1;n#div#2;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#1;n#div#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#1;n#div#2;n#div#1;n#div#0;n#div#1;n#div#5;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#p#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="e#1648#1654#0" expanded="false" />
+            <element signature="e#1744#1750#0" expanded="false" />
+            <element signature="e#1775#1781#0" expanded="false" />
+            <element signature="n#style#0;n#a#1;n#div#2;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#hr#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#src#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#src#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#src#0;n#img#0;n#a#2;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#src#0;n#img#0;n#a#3;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#src#0;n#img#0;n#a#4;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1046,7 +1006,7 @@
     <entry file="file://$PROJECT_DIR$/../../pinBoard4/pinBoard/blogs/templates/blogs/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="257" column="8" lean-forward="true" selection-start-line="257" selection-start-column="8" selection-end-line="257" selection-end-column="69" />
+          <caret line="257" column="8" lean-forward="false" selection-start-line="257" selection-start-column="8" selection-end-line="257" selection-end-column="69" />
           <folding />
         </state>
       </provider>
@@ -1069,20 +1029,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="256" column="12" lean-forward="false" selection-start-line="256" selection-start-column="12" selection-end-line="256" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pinBoard/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shared/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="77" column="122" lean-forward="false" selection-start-line="77" selection-start-column="122" selection-end-line="77" selection-end-column="122" />
+        <state relative-caret-position="406">
+          <caret line="70" column="20" lean-forward="true" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/index.html">
+    <entry file="file://$PROJECT_DIR$/shared/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="256" column="12" lean-forward="true" selection-start-line="256" selection-start-column="12" selection-end-line="256" selection-end-column="12" />
+        <state relative-caret-position="315">
+          <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shared/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding />
         </state>
       </provider>

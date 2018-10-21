@@ -42,7 +42,7 @@ def user_profile(request, pk):
     profile = UserProfile.objects.get(pk=pk)
     article = Post.objects.filter(author=profile.user,kind='Post')
     images = Post.objects.filter(author=profile.user,kind='Image')
-    qna = Post.objects.filter(author=profile.user,kind='Question')
+    qna = QnaQuestion.objects.filter(author=profile.user,kind='Question')
     quiz = QuizBank.objects.filter(creator=profile.user)
 
     context = {
