@@ -240,6 +240,19 @@
         reader.readAsDataURL(file);
       }
 
+      $('#search').keypress((e) => {
+        if (e.target.value === '') {
+            return;
+        }
+
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          if (/^#/.test(e.target.value)) {
+            window.location.replace(window.location.pathname + `?tags=${e.target.value}`.replace('#', ''));
+          }
+        }
+      });
+
       document.getElementById('submit-avatar').addEventListener('click', event => {
         fetch("{% url 'shared:user_avatar' %}", {
           method: 'POST',

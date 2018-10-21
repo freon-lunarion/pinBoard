@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bc9605c8-4e8a-4eb9-86cd-6703b364d7f8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/templates/blogs/base.html" afterPath="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/views.py" afterPath="$PROJECT_DIR$/blogs/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/templates/shared/user_profile.html" afterPath="$PROJECT_DIR$/shared/templates/shared/user_profile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/views.py" afterPath="$PROJECT_DIR$/shared/views.py" />
     </list>
     <ignored path="pinBoard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,24 +23,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogs/models.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blogs/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="107" column="31" lean-forward="false" selection-start-line="107" selection-start-column="31" selection-end-line="107" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="84">
+              <caret line="128" column="26" lean-forward="false" selection-start-line="128" selection-start-column="26" selection-end-line="128" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/blogs/views.py">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="143" column="32" lean-forward="false" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
-              <folding />
+            <state relative-caret-position="119">
+              <caret line="250" column="47" lean-forward="false" selection-start-line="250" selection-start-column="47" selection-end-line="250" selection-end-column="47" />
+              <folding>
+                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#label#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,8 +115,8 @@
       <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogs/static/css/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="246" column="19" lean-forward="false" selection-start-line="246" selection-start-column="10" selection-end-line="246" selection-end-column="19" />
+            <state relative-caret-position="60">
+              <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -151,9 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sidenav</find>
-      <find>comment</find>
-      <find>score</find>
       <find>Image</find>
       <find>url</find>
       <find>content</find>
@@ -179,8 +176,11 @@
       <find>open</find>
       <find>.question</find>
       <find>My</find>
-      <find>toordin</find>
       <find>toor</find>
+      <find>search</find>
+      <find>input-</find>
+      <find>form</find>
+      <find>toordin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -218,7 +218,6 @@
         <option value="$PROJECT_DIR$/blogs/forms.py" />
         <option value="$PROJECT_DIR$/shared/forms.py" />
         <option value="$PROJECT_DIR$/pinBoard/settings.py" />
-        <option value="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/post.html" />
         <option value="$PROJECT_DIR$/pinBoard/urls.py" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/index.html" />
@@ -230,6 +229,7 @@
         <option value="$PROJECT_DIR$/shared/urls.py" />
         <option value="$PROJECT_DIR$/blogs/urls.py" />
         <option value="$PROJECT_DIR$/blogs/views.py" />
+        <option value="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
       </list>
     </option>
   </component>
@@ -949,52 +949,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="58" column="70" lean-forward="false" selection-start-line="58" selection-start-column="64" selection-end-line="58" selection-end-column="70" />
-          <folding>
-            <marker date="1540097064000" expanded="true" signature="9517:10678" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="10126:10132" ph=" " />
-            <marker date="1540097064000" expanded="false" signature="10593:10618" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="10814:10831" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="10832:13922" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="10876:10894" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="10895:13219" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="10918:10972" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="11045:11087" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="11088:12752" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="11125:11474" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="11214:11295" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="11296:11457" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="11347:11359" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="11417:11423" ph=" " />
-            <marker date="1540097064000" expanded="true" signature="11520:11877" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="11617:11698" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="11699:11860" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="11750:11762" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="11822:11828" ph=" " />
-            <marker date="1540097064000" expanded="true" signature="12365:12735" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="12469:12550" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="12551:12718" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="12602:12614" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="12677:12683" ph=" " />
-            <marker date="1540097064000" expanded="true" signature="12768:13202" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="13256:13771" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="13281:13291" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="13339:13756" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="13420:13738" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="13495:13511" ph="..." />
-            <marker date="1540097064000" expanded="false" signature="13592:13608" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="13806:13909" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="13962:14136" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="13988:14123" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="14022:14108" ph="..." />
-            <marker date="1540097064000" expanded="true" signature="14210:18438" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/blogs/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -1012,14 +966,6 @@
           <folding>
             <marker date="1540097064000" expanded="true" signature="25387:25412" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogs/static/css/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="246" column="19" lean-forward="false" selection-start-line="246" selection-start-column="10" selection-end-line="246" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,16 +1008,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shared/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="70" column="51" lean-forward="true" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shared/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1082,11 +1018,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/blogs/static/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shared/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="70" column="51" lean-forward="true" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/blogs/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="143" column="32" lean-forward="false" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
+        <state relative-caret-position="84">
+          <caret line="128" column="26" lean-forward="false" selection-start-line="128" selection-start-column="26" selection-end-line="128" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="250" column="47" lean-forward="false" selection-start-line="250" selection-start-column="47" selection-end-line="250" selection-end-column="47" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#label#0;n#div#0;n#form#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
