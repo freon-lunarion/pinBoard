@@ -210,6 +210,17 @@ i.material-icons.title.fa-clickable {
   color: rgba(255, 255, 255, 0.5);
 }
 
+i.material-icons.title.fa-clickable.image-post {
+  font-size: 25px;
+  color: rgba(255, 0, 0, 0.3);
+  margin: 0;
+}
+
+i.material-icons.title.fa-clickable.image-post:hover {
+  transition: 0.3s;
+  color: rgba(255, 0, 0, 0.6);
+}
+
 i.material-icons.title.fa-clickable:hover {
   transition: 0.3s;
   color: rgba(172,255,72,0.9);
@@ -237,6 +248,7 @@ i.material-icons.title.fa-clickable:hover {
   justify-content: space-evenly;
 }
 
+#submit-youtube-post,
 #submit-image-post {
   display: none;
 }
@@ -251,6 +263,10 @@ i.material-icons.title.fa-clickable:hover {
 
 .new.badge.question-state.unsolved {
   background: rgba(255, 72, 127, 0.9)
+}
+
+.new.badge.question-state.youtube {
+  background: rgba(202, 0, 0, 0.9)
 }
 
 /* ------------------------------------------ POST PAGE - Gino ------------------------------------------ */
@@ -285,6 +301,12 @@ h3.img-caption {
   font-style: italic;
   text-align: center;
   margin: 8px 0;
+}
+
+h3.img-caption.username {
+  font-style: normal;
+  font-weight: 100;
+  font-size: 14px;
 }
 
 .image-post {

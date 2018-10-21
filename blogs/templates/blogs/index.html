@@ -23,6 +23,12 @@
                         {% include "./image_post_card.html" %}
                     {% endblock %}
 
+                {% elif "Youtube" in post.kind %}
+
+                    {% block youtube_post_card_pinned %}
+                        {% include "./youtube_post_card.html" %}
+                    {% endblock %}
+
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -55,6 +61,12 @@
 
                     {% block image_post_card %}
                         {% include "./image_post_card.html" %}
+                    {% endblock %}
+
+                {% elif "Youtube" in post.kind %}
+
+                    {% block youtube_post_card %}
+                        {% include "./youtube_post_card.html" %}
                     {% endblock %}
 
                 {% endif %}
