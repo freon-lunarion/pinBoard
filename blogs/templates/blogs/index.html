@@ -6,119 +6,23 @@
         {% for post in latest_post_list %}
             {% if post.is_pinned %}
                 {% if "Post" in post.kind %}
-                    <!-- Blog post card -->
-                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
-                        <div class="card blue-grey darken-1 post changecolor">
-                            <div class="card-content with-comments white-text post">
-                                <div class="content-with-utility">
-                                    <div class="card-utility">
-                                        <i class="material-icons title">event_note</i>
-                                        {% if request.user.is_superuser %}
-                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                        {% if post.id in request.user.userprofile.favorites_id %}
-                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                                        {% else %}
-                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-preview-content">
-                                        <span class="card-title">{{ post.title }}</span>
-                                        <div class="card-description post-preview">
-                                            <p>{{ post.detail|striptags|safe|truncatechars:90 }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-comments">{{ post.comment_count_string }}</div>
-                            </div>
-                            <div class="card-action voting">
-                                <div class="score-container">
-                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                                </div>
-                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
-                            </div>
-                        </div>
-                    </div>
+
+                    {% block article_post_card_pinned %}
+                        {% include "./article_post_card.html" %}
+                    {% endblock %}
                     
                 {% elif "Question" in post.kind %}
-                    <!-- Question card -->
-                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
-                        <div class="card blue-grey darken-1 question">
-                            <div class="card-content with-comments white-text" style="min-height: 201px;display: flex;flex-direction: column;justify-content: space-between;">
 
-                                    <div class="content-with-utility">
-                                        <div class="card-utility">
-                                            <!-- <i class="material-icons title">event_note</i> -->
-                                            <i class="material-icons title far fa-question-circle" style="font-size: 32px"></i>
-                                            {% if request.user.is_superuser %}
-                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
-                                            {% endif %}
-                                            {% if post.id in request.user.userprofile.favorites_id %}
-                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                                            {% else %}
-                                                <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                            {% endif %}                                        
-                                        </div>
-                                        <div class="card-preview-content">
-                                            <span class="card-title">{{ post.title }}</span>
-                                            {% if 'Unsolved' in post.question_status %}
-                                                <span class="new badge question-state unsolved" data-badge-caption=" ">{{ post.question_status }}</span>
-                                            {% else %}
-                                                <span class="new badge question-state" data-badge-caption=" ">{{ post.question_status }}</span>
-                                            {% endif %}                                        
-                                        </div>
+                    {% block qestion_post_card_pinned %}
+                        {% include "./question_post_card.html" %}
+                    {% endblock %}
 
-                                    </div>
-                                    <div class="card-comments">{{ post.response_count_string }}</div>
-                                
-                                <!-- <span class="card-title" style="display:flex;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
-                                <div class="card-comments">{{ post.comment_count_string }}</div> -->
-                            </div>
-                            <div class="card-action voting">
-                                <div class="score-container">
-                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                                </div>
-                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
-                            </div>
-                        </div>
-                    </div>
                 {% elif "Image" in post.kind %}
-                    <!-- Image post card -->
-                    <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
-                                <div class="content-with-utility">
-                                    <div class="card-utility">
-                                        <i class="material-icons title">image</i>
-                                        {% if request.user.is_superuser %}
-                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                        {% if post.id in request.user.userprofile.favorites_id %}
-                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                                        {% else %}
-                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-preview-content">
-                                        <span class="card-title">{{ post.title }}</span>
-                                    </div>
-                                </div>
-                                <div class="card-comments">{{ post.comment_count_string }}</div>
-                            </div>
-                            <div class="card-action voting">
-                                <div class="score-container">
-                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                                </div>
-                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
-                            </div>
-                        </div>
-                    </div>
+
+                    {% block image_post_card_pinned %}
+                        {% include "./image_post_card.html" %}
+                    {% endblock %}
+
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -136,120 +40,23 @@
         {% for post in latest_post_list %}
             {% if not post.is_pinned %}
                 {% if "Post" in post.kind %}
-                    <!-- Blog post card -->
-                    <div class="col s12 m6 l4 sortable-card" data-sort="{{ post.score }}">
-                        <div class="card blue-grey darken-1 post changecolor">
-                            <div class="card-content with-comments white-text post">
-                                <div class="content-with-utility">
-                                    <div class="card-utility">
-                                        <i class="material-icons title">event_note</i>
-                                        {% if request.user.is_superuser %}
-                                        <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                        {% if post.id in request.user.userprofile.favorites_id %}
-                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                                        {% else %}
-                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-preview-content">
-                                        <span class="card-title">{{ post.title }}</span>
-                                        <div class="card-description post-preview">
-                                            <p>{{ post.detail|striptags|safe|truncatechars:90 }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-comments">{{ post.comment_count_string }}</div>
-                            </div>
-                            <div class="card-action voting">
-                                <div class="score-container">
-                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                                </div>
-                                <a class="card-open waves-effect waves-light" href="/blogs/{{ post.id }}">Open</a>
-                            </div>
-                        </div>
-                    </div>
+
+                    {% block article_post_card %}
+                        {% include "./article_post_card.html" %}
+                    {% endblock %}
                     
                 {% elif "Question" in post.kind %}
-                    <!-- Question card -->
-                    <div class="col s12 m6 l4 sortable-card" data-sort="{{ post.score }}">
-                        <div class="card blue-grey darken-1 question changecolor">
-                            <div class="card-content with-comments white-text" style="min-height: 201px;display: flex;flex-direction: column;justify-content: space-between;">
 
-                                    <div class="content-with-utility">
-                                        <div class="card-utility">
-                                            <!-- <i class="material-icons title">event_note</i> -->
-                                            <i class="material-icons title far fa-question-circle" style="font-size: 32px"></i>
-                                            {% if request.user.is_superuser %}
-                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
-                                            {% endif %}
-                                            {% if post.id in request.user.userprofile.favorites_id %}
-                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                                            {% else %}
-                                                <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                            {% endif %}                                        
-                                        </div>
-                                        <div class="card-preview-content">
-                                            <span class="card-title">{{ post.title }}</span>
-                                            {% if 'Unsolved' in post.question_status %}
-                                                <span class="new badge question-state unsolved" data-badge-caption=" ">{{ post.question_status }}</span>
-                                            {% else %}
-                                                <span class="new badge question-state" data-badge-caption=" ">{{ post.question_status }}</span>
-                                            {% endif %}                                        
-                                        </div>
+                    {% block question_post_card %}
+                        {% include "./question_post_card.html" %}
+                    {% endblock %}
 
-                                    </div>
-                                    <div class="card-comments">{{ post.response_count_string }}</div>
-                                
-                                <!-- <span class="card-title" style="display:flex;"><i class="material-icons title">question_answer</i>{{ post.title }}</span>
-                                <div class="card-comments">{{ post.comment_count_string }}</div> -->
-                            </div>
-                            <div class="card-action voting">
-                                <div class="score-container">
-                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                                </div>
-                                <a class="card-open waves-effect waves-light" href="/blogs/{{ post.id }}">Open</a>
-                            </div>
-                        </div>
-                    </div>
                 {% elif "Image" in post.kind %}
 
-                    <!-- Image post card -->
-                    <div class="col s12 m6 l4 sortable-card" data-sort="{{ post.score }}">
-                        <div class="card blue-grey darken-1 changecolor">
-                            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
-                                <div class="content-with-utility">
-                                    <div class="card-utility">
-                                        <i class="material-icons title">image</i>
-                                        {% if request.user.is_superuser %}
-                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                        {% if post.id in request.user.userprofile.favorites_id %}
-                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                                        {% else %}
-                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-preview-content">
-                                        <span class="card-title">{{ post.title }}</span>
-                                    </div>
-                                </div>
-                                <div class="card-comments">{{ post.comment_count_string }}</div>
-                            </div>
-                            <div class="card-action voting">
-                                <div class="score-container">
-                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                                </div>
-                                <a class="card-open waves-effect waves-light" href="/blogs/{{ post.id }}">Open</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% block image_post_card %}
+                        {% include "./image_post_card.html" %}
+                    {% endblock %}
+
                 {% endif %}
             {% endif %}
         {% endfor %}

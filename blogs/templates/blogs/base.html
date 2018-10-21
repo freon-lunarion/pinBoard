@@ -133,7 +133,7 @@
           <ul class="right hide-on-med-and-down">
             {% if request.session.username %}
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
-            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/"><i class="material-icons right">lightbulb_outline</i>Quiz Room</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/">Quiz Room</a></li>
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
               <li><span>Hello, {{ request.session.username }}&nbsp;</span></li>
@@ -163,12 +163,12 @@
                 <span class="white-text">&nbsp;Image</span>
               </div>
             </a>
-            <!--<a id="toggle-image-post-form">-->
-              <!--<div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">-->
-                <!--<i class="material-icons" style="color: white">insert_photo</i>-->
-                <!--<span class="white-text">&nbsp;Image</span>-->
-              <!--</div>-->
-            <!--</a>-->
+            <a href="/blogs/create">
+              <div class="card-panel waves-light  waves-effect post-type indigo" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
+                <i class="material-icons" style="color: white">playlist_add_check</i>
+                <span class="white-text">&nbsp;Quiz Rooms</span>
+              </div>
+            </a>
             <a href="/blogs/createQuestion">
               <div class="card-panel waves-light waves-effect post-type light-green lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">question_answer</i>
