@@ -157,18 +157,25 @@
                 <span class="white-text">&nbsp;Article</span>
               </div>
             </a>
-            <a id="toggle-image-post-form">
-              <div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
-                <i class="material-icons" style="color: white">insert_photo</i>
-                <span class="white-text">&nbsp;Image</span>
-              </div>
-            </a>
-            <!--<a id="toggle-image-post-form">-->
-              <!--<div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">-->
-                <!--<i class="material-icons" style="color: white">insert_photo</i>-->
-                <!--<span class="white-text">&nbsp;Image</span>-->
-              <!--</div>-->
-            <!--</a>-->
+            
+            <div class="image-or-video" style="display: flex; flex-direction: column;justify-content: space-evenly">
+
+                <a id="toggle-image-post-form">
+                  <div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:55px;margin-bottom: 5px">
+                      <i class="material-icons" style="color: white">insert_photo</i>
+                    <span class="white-text">&nbsp;Image</span>
+                  </div>
+                </a>
+                
+                <a id="toggle-youtube-post-form">
+                  <div class="card-panel waves-light waves-effect post-type red lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:55px;">
+                    <i class="fab fa-youtube" style="color:white; font-size: 25px;"></i>
+                    <span class="white-text">&nbsp;Youtube</span>
+                  </div>
+                </a>
+
+            </div>
+
             <a href="/blogs/createQuestion">
               <div class="card-panel waves-light waves-effect post-type light-green lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">question_answer</i>
@@ -176,19 +183,9 @@
               </div>
             </a>
           </div>
-          <!-- <div class="input-field">
-            <select>
-              <option value="1">Article</option>
-              <option value="2">Question</option>
-              <option value="3">Image</option>
-            </select>
-            <label>Type of post</label>
-          </div>
-          <h5>Enter an image URL below</h5>
-          <div class="input-field">
-            <input id="image-url" type="text" class="validate">
-          </div> -->
+
         </div>
+
         <div id="submit-image-post">
           <form style="margin: 0;" action="/blogs/createImagePost/" method="POST">
             {% csrf_token %}
@@ -199,6 +196,19 @@
             </div>
           </form>
         </div>
+
+        <div id="submit-youtube-post">
+          <form style="margin: 0;" action="/blogs/createYoutubePost/" method="POST">
+            {% csrf_token %}
+            <div class="image-post-form-container">
+              <input type="text" placeholder="Title" name="title" style="max-width: 200px">
+              <input type="text" placeholder="Youtube URL" name="detail" style="max-width: 200px">
+              <button type="submit" class="waves-effect waves-light btn-small cyan lighten-1">Submit</button>
+            </div>
+          </form>
+        </div>
+
+
         <div class="modal-footer">
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
@@ -298,7 +308,11 @@
       //toggle image post form
       $('#toggle-image-post-form').click(event => {
         $('#submit-image-post').slideToggle('fast');
+      });
 
+      //toggle youtube form
+      $('#toggle-youtube-post-form').click(event => {
+        $('#submit-youtube-post').slideToggle('fast');
       });
 
       (function(d, t) {
