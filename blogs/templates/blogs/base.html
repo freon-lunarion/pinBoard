@@ -131,6 +131,9 @@
                 <img src="{% static '/images/empty-profile.png' %}" class="circle rounded float-left" style="height:80px;vertical-align:middle;padding:10px">
                 {% endif %}
                 <span>{{user.user.username}}</span>
+                <span>correct answer / total answer: {{user.correct_answer_num}} / {{user.total_answer_num}}</span>
+                <span>score: {{user.score}}</span>
+                <span>rank: {{user.rank}}</span>
               </div>
             </li>
             {% endfor %}

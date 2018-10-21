@@ -79,6 +79,10 @@ class UserProfile(models.Model):
                     res.append(QnaQuestion.objects.get(id=content.id))
         return res
 
+    @property
+    def rank(self):
+        return len(list(filter(lambda x: x.score > self.score, UserProfile.objects.all()))) + 1
+
     # @receiver(post_save, sender=User)
     # def save_user_profile(sender, instance, **kwargs):
     #     instance.shared.save()
