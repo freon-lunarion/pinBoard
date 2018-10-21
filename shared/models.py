@@ -61,7 +61,7 @@ class UserProfile(models.Model):
 
     @property
     def correct_answer_percentage(self):
-        return f'{round(self.correct_answer_num / self.total_answer_num, 3) * 100}%'
+        return f'{round(100 * (self.correct_answer_num / self.total_answer_num) if self.total_answer_num else 0, 1)}%'
 
     @property
     def top_five_posts(self):

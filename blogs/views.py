@@ -45,7 +45,6 @@ class PostView(generic.DetailView):
         return super(PostView, self).dispatch(request, *args, **kwargs)
 
     # content: post, comments (list), comment_form
-    @method_decorator(login_required)
     def get_context_data(self, **kwargs):
         content = get_object_or_404(Content, id=self.pk)
         context = super(PostView, self).get_context_data(**kwargs)
@@ -64,6 +63,7 @@ class PostView(generic.DetailView):
             context['post'] = question
             context['comments'] = question.answers
             context['comment_form'] = CommentForm()
+        context['users'] = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
 
         return context
 

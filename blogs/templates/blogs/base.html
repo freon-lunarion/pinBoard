@@ -124,6 +124,7 @@
           <ul id="leaderboard-table">
             {% for user in users %}
             <li class="card" id="user-{{user.id}}">
+              <a href="{% url 'shared:user_profile' user.id %}">
               <div class="row">
                 {% if user.avatar %}
                 <img src="{{user.avatar}}" class="circle rounded float-left" style="height:80px;vertical-align:middle;padding:10px">
@@ -132,9 +133,11 @@
                 {% endif %}
                 <span>{{user.user.username}}</span>
                 <span>correct answer / total answer: {{user.correct_answer_num}} / {{user.total_answer_num}}</span>
+                <span>percentage: {{user.correct_answer_percentage}}</span>
                 <span>score: {{user.score}}</span>
                 <span>rank: {{user.rank}}</span>
               </div>
+              </a>
             </li>
             {% endfor %}
           </ul>
