@@ -38,6 +38,19 @@ class Post(Content):
         """String for representing the Post object."""
         return f'{self.title}'
 
+    @property
+    def comment_count_string(self):
+        count = Comment.objects.filter(parent=self).count()
+        count_string = ''
+        if count == 0:
+            count_string = "No Comments"
+        if count == 1:
+            count_string = "1 Comment"
+        if count > 1:
+            count_string = str(count) + ' Comments'
+            # count_string = count.append(' Comments')
+        return count_string
+
 
 class Comment(Content):
     parent = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -89,6 +102,22 @@ class QnaQuestion(Content):
     @property
     def solved(self):
         return QnaAnswer.objects.filter(parent=self, is_correct=True).count() > 0
+
+    @property
+    def question_status(self):
+        return 'Solved' if self.solved else 'Unsolved'
+
+    @property
+    def response_count_string(self):
+        count = len(self.answers)
+        count_string = ''
+        if count == 0:
+            count_string = "No Responses"
+        if count == 1:
+            count_string = "1 Response"
+        if count > 1:
+            count_string = str(count) + ' Responses'
+        return count_string
 
 
 class QnaAnswer(Content):

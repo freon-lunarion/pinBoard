@@ -51,7 +51,7 @@ class PostView(generic.DetailView):
             
             context['post'] = post
             context['comments'] = sorted(Comment.objects.filter(parent=post),
-                                         key=lambda x: (x.score, -x.published_date.toordinal() if x.published_date
+                                         key=lambda x: (x.score, -x.published_date.timestamp() if x.published_date
                                          else 0), reverse=True)
 
             context['comment_form'] = CommentForm()
@@ -123,7 +123,7 @@ class PostView(generic.DetailView):
 @login_required
 def index(request):
     latest_post_list = sorted([p for p in Post.objects.all()] + [q for q in QnaQuestion.objects.all()],
-                              key=lambda p: (p.score, p.published_date.toordinal() if p.published_date else 0), reverse=True)
+                              key=lambda p: (p.score, p.published_date.timestamp() if p.published_date else 0), reverse=True)
     # latest_post_list = sorted(Post.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
     #                                                              if p.published_date else 0), reverse=True)
     # latest_question_list = sorted(QnaQuestion.objects.all(), key=lambda q: (q.score, q.published_date.toordinal()
@@ -132,27 +132,27 @@ def index(request):
     # latest_post_list = Post.objects.all()
 
     # get comment counts
-    for post in latest_post_list:
-        if post.kind != 'Question':
-            count = Comment.objects.filter(parent=post).count()
-            if count == 0:
-                count_string = "No Comments"
-            if count == 1:
-                count_string = "1 Comment"
-            if count > 1:
-                count_string = str(count) + ' Comments'
-                # count_string = count.append(' Comments')
-            post.comment_count_string = count_string
-        elif post.kind == 'Question':
-            count = len(post.answers)
-            if count == 0:
-                count_string = "No Responses"
-            if count == 1:
-                count_string = "1 Response"
-            if count > 1:
-                count_string = str(count) + ' Responses'
-            post.question_status = 'Solved' if post.solved else 'Unsolved'
-            post.response_count_string = count_string
+    # for post in latest_post_list:
+    #     if post.kind != 'Question':
+    #         count = Comment.objects.filter(parent=post).count()
+    #         if count == 0:
+    #             count_string = "No Comments"
+    #         if count == 1:
+    #             count_string = "1 Comment"
+    #         if count > 1:
+    #             count_string = str(count) + ' Comments'
+    #             # count_string = count.append(' Comments')
+    #         post.comment_count_string = count_string
+    #     elif post.kind == 'Question':
+    #         count = len(post.answers)
+    #         if count == 0:
+    #             count_string = "No Responses"
+    #         if count == 1:
+    #             count_string = "1 Response"
+    #         if count > 1:
+    #             count_string = str(count) + ' Responses'
+    #         post.question_status = 'Solved' if post.solved else 'Unsolved'
+    #         post.response_count_string = count_string
          
     context = {
         'latest_post_list': latest_post_list,
@@ -347,7 +347,7 @@ def manage(request):
             newpassword = request.POST['newpassword']
             renewpassword = request.POST['renewpassword']
 
-            latest_post_list = sorted(User.objects.all(), key=lambda p: (p.score, p.published_date.toordinal()
+            latest_post_list = sorted(User.objects.all(), key=lambda p: (p.score, p.published_date.timestamp()
                                                                              if p.published_date else 0), reverse=True)
             user = authenticate(request, username=username, password=password)
             if user is not None:
