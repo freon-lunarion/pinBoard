@@ -117,23 +117,52 @@
         </div>
       </div>
 
+      <!--leaderboard modal-->
+      <div id="leaderboard-modal" class="modal modal-lg">
+        <div class="modal-content">
+          <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">Leaderboard</h5>
+          <ul id="leaderboard-table">
+            {% for user in users %}
+            <li class="card touch-leaderboard" id="user-{{user.id}}">
+              <a href="{% url 'shared:user_profile' user.id %}">
+              <div class="row">
+                {% if user.avatar %}
+                <img src="{{user.avatar}}" class="circle rounded float-left" style="height:80px;vertical-align:middle;padding:10px">
+                {% else %}
+                <img src="{% static '/images/empty-profile.png' %}" class="circle rounded float-left" style="height:80px;vertical-align:middle;padding:10px">
+                {% endif %}
+                <span>{{user.user.username}}</span>
+                <span>correct answer / total answer: {{user.correct_answer_num}} / {{user.total_answer_num}}</span>
+                <span>percentage: {{user.correct_answer_percentage}}</span>
+                <span>score: {{user.score}}</span>
+                <span>rank: {{user.rank}}</span>
+              </div>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
       <!-- nav bar -->
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
-          {% if request.session.username %}
-            <form style="height: 100%;left: 300px;position: absolute;">
-              <div class="input-field">
-                <input id="search" type="search" required style="width: 404px;" placeholder="Start with # to search tags">
-                <label class="label-icon" for="search"><i class="material-icons" style="cursor: pointer;">search</i></label>
-                <i class="material-icons">close</i>
-              </div>
-            </form>
-          {% endif %}
+          <!--{% if request.session.username %}-->
+            <!--<form style="height: 100%;left: 300px;position: absolute;">-->
+              <!--<div class="input-field">-->
+                <!--<input id="search" type="search" required style="width: 404px;" placeholder="Start with # to search tags">-->
+                <!--<label class="label-icon" for="search"><i class="material-icons" style="cursor: pointer;">search</i></label>-->
+                <!--<i class="material-icons">close</i>-->
+              <!--</div>-->
+            <!--</form>-->
+          <!--{% endif %}-->
           <ul class="right hide-on-med-and-down">
             {% if request.session.username %}
+            <li><input id="search" type="search" required style="width: flex; width: 275px; color: white;" placeholder="Start with # to search tags"></li>
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
-            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/">Quiz Room</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/"><i class="material-icons right">edit</i>Quiz Room</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="leaderboard-modal" href="#leaderboard-modal"><i class="material-icons right">people</i>Leaderboard</a></li>
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
               <li><span>Hello, {{ request.session.username }}&nbsp;</span></li>
@@ -258,7 +287,7 @@
         if (e.keyCode === 13) {
           e.preventDefault();
           if (/^#/.test(e.target.value)) {
-            window.location.replace(window.location.pathname + `?tags=${e.target.value}`.replace('#', ''));
+            window.location.replace(window.location.pathname + `?tags=${e.target.value.replace(/#/g, ',').replace(/^,/, '')}`);
           }
           else {
             window.location.replace(window.location.pathname + `?title=${e.target.value}`);

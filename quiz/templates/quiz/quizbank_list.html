@@ -2,6 +2,9 @@
 
 {% block content %}
   <h1>Room List</h1>
+  <ul>
+      <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/create"><i class="material-icons right">add_box</i>Create Room</a></li>
+  </ul>
   {% if quizbank_list %}
 
     {% for rec in quizbank_list %}
@@ -23,9 +26,6 @@
                         <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
                     </div> -->
                     <a class="card-open" href="/quiz/{{ rec.id }}">Open</a>
-                    {% if rec.creator == request.user %}
-                    <a class="card-open" href="/quiz/{{ rec.id }}/edit">Edit</a>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -35,6 +35,6 @@
     {% endfor %}
 
   {% else %}
-    <p>There are no rooms. Be the first</p>
-  {% endif %}       
+    <p>There are currently no quiz rooms. Go ahead and make one.</p>
+  {% endif %}
 {% endblock %}
