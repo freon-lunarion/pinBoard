@@ -74,34 +74,24 @@
                 <div>{{vote}}</div>
 
                 <!-- comment section -->
-                <div id="comment-section" style="margin-top:30px" class="cccccc">
-                    <a class="comments" style="cursor: pointer" id="make-comments">Make Comments</a>
-                    
-                    <form method="post" class="col s12 comment-box">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="input-field col s12">
-
-                                {% autoescape off %}
-                                {{ comment_form.comment_detail }}
-                                {{ comment_form.comment_kind }}
-                                {% endautoescape %}
-                            </div>
-                        </div>
-                        <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1 comment-submit">submit</button>
-                    </form>
-
-                    <button  id="" class="waves-effect waves-light btn-small orange lighten-1 comment-submit" style="visibility: hidden">submit</button>
+                <div id="comment-section" style="margin-top:30px">
 
                     {% for comment in comments %}
 
                         <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
                             <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
                                 {% if comment.author.userprofile.avatar %}
-                                    <!--<img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">-->
+                                    <img src="{{comment.author.userprofile.avatar}}" style="max-width: 50px">
                                 {% else %}
                                     <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
                                 {% endif %}
+                                <div class="user-awards">
+                                    <span class="award rank tooltipped" data-position="top" data-tooltip="Rank"> <i class="fas fa-hashtag"></i> {{ user.userprofile.rank }} </span>
+
+                                    <span class="award tooltipped" data-position="bottom" data-tooltip="Points"> <i class="fas fa-star"></i> {{ user.userprofile.score }} </span>
+                                        
+                                    <span class="award correct tooltipped" data-position="top" data-tooltip="Correct Answers"> <i class="fas fa-certificate"></i> {{ user.profile.correct_answer_num}}0 </span>
+                                </div>
                                  <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
                             </div>
                             <div class="card-stacked">
@@ -120,6 +110,16 @@
                             </div>
                         </div>
                     {% endfor %}
+                    <form method="POST" id="create-comment-form" class="comment-form" style="opacity: 1;max-width: 450px;">
+                        {% csrf_token %}
+                        {% autoescape off %}
+                        {{ comment_form.comment_detail }}
+                        {{ comment_form.comment_kind }}
+                        {% endautoescape %}
+                        <div class="comment-submit-container" style="display: flex;justify-content: flex-end;padding-top:15px;">
+                            <button  id="AJAX_submit" class="waves-effect waves-light btn-small orange lighten-1">Comment</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         {% elif "Image" in post.kind %}
@@ -393,6 +393,16 @@
 
 
     <script>
+
+        // slide open comment form
+        $('#toggle-comment-form').click(() => {
+            $('#create-comment-form').slideToggle('fast');
+        })
+
+        //initialise tooltips 
+        $(document).ready(() => {
+            $('.tooltipped').tooltip();
+        })
 
         function vote (content_id, value) {
             return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {

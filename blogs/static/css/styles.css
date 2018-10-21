@@ -275,7 +275,33 @@ i.material-icons.title.fa-clickable:hover {
   background: rgba(202, 0, 0, 0.9)
 }
 
+#comment_detail_ifr {
+  height: 150px !important;
+}
+
 /* ------------------------------------------ POST PAGE - Gino ------------------------------------------ */
+
+span.award {
+  cursor: default;
+  padding: 3px;
+  color: rgba(255, 198, 25, 0.974);
+}
+
+span.award.rank {
+  color: rgba(113, 206, 0, 0.8);
+}
+
+span.award.correct {
+  color: lightskyblue;
+}
+
+.user-awards {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding:0 15px;
+  height:47px;
+}
 
 .post-container {
   max-width: 1000px;
