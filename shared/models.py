@@ -31,20 +31,28 @@ class UserProfile(models.Model):
 
     @property
     def favorites_id(self):
-        return [x.content.id for x in sorted(UserFavorite.objects.filter(user=self.user), key=lambda x: -x.create_time.toordinal())]
+        return [x.content.id for x in sorted(UserFavorite.objects.filter(user=self.user), key=lambda x: -x.create_time.timestamp())]
 
     @property
     def favorites(self):
         from blogs.models import Post, QnaQuestion
-        contents = [rec.content for rec in UserFavorite.objects.filter(user=self.user)]
+        contents = [rec.content for rec in sorted(UserFavorite.objects.filter(user=self.user),
+                                                  key=lambda x: -x.create_time.timestamp())]
         res = []
         for content in contents:
             post_que = Post.objects.filter(id=content.id)
             if post_que.count() == 1:
                 res.append(Post.objects.get(id=content.id))
             else:
-                res.append(QnaQuestion.objects.get(id=content.id))
-        return sorted(res, key=lambda x: x.create_time.toordinal(), reverse=True)
+                question_que = QnaQuestion.objects.filter(id=content.id)
+                if question_que.count() == 1:
+                    res.append(QnaQuestion.objects.get(id=content.id))
+        return res
+
+    @property
+    def total_answer_num(self):
+        from blogs.models import QnaAnswer
+        return QnaAnswer.objects.filter(author=self.user).count()
 
     @property
     def correct_answer_num(self):
@@ -53,29 +61,23 @@ class UserProfile(models.Model):
 
     @property
     def correct_answer_percentage(self):
-        from blogs.models import QnaAnswer
-        total = QnaAnswer.objects.filter(author=self.user).count()
-        return QnaAnswer.objects.filter(author=self.user, is_correct=True).count() / total if total > 0 else 0
+        return f'{round(self.correct_answer_num / self.total_answer_num, 3) * 100}%'
 
     @property
-    def comments(self):
-        from blogs.models import Comment
-        return sorted(Comment.objects.filter(author=self.user), key=lambda x: x.create_time.toordinal(), reverse=True)
-
-    @property
-    def answers(self):
-        from blogs.models import QnaAnswer
-        return sorted(QnaAnswer.objects.filter(author=self.user), key=lambda x: x.create_time.toordinal(), reverse=True)
-
-    @property
-    def posts(self):
-        from blogs.models import Post
-        return sorted(Post.objects.filter(author=self.user), key=lambda x: x.create_time.toordinal(), reverse=True)
-
-    @property
-    def questions(self):
-        from blogs.models import QnaQuestion
-        return sorted(QnaQuestion.objects.filter(author=self.user), key=lambda x: x.create_time.toordinal(), reverse=True)
+    def top_five_posts(self):
+        from blogs.models import Post, QnaQuestion
+        contents = sorted([rec for rec in Content.objects.filter(author=self.user)],
+                          key=lambda x: (x.score, x.create_time.timestamp()), reverse=True)[:5]
+        res = []
+        for content in contents:
+            post_que = Post.objects.filter(id=content.id)
+            if post_que.count() == 1:
+                res.append(Post.objects.get(id=content.id))
+            else:
+                question_que = QnaQuestion.objects.filter(id=content.id)
+                if question_que.count() == 1:
+                    res.append(QnaQuestion.objects.get(id=content.id))
+        return res
 
     # @receiver(post_save, sender=User)
     # def save_user_profile(sender, instance, **kwargs):

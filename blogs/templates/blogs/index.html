@@ -89,35 +89,36 @@
                 {% elif "Image" in post.kind %}
                     <!-- Image post card -->
                     <div class="col s12 m6 l3 sortable-card" data-sort="{{ post.score }}">
-                            <div class="card blue-grey darken-1">
-                                <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
-                                    <div class="content-with-utility">
-                                        <div class="card-utility">
-                                            <i class="material-icons title">event_note</i>
-                                            {% if request.user.is_superuser %}
-                                                <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
-                                            {% endif %}                                            {% if post.id in request.user.userprofile.favorites_id %}
-                                                <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
-                                            {% else %}
-                                                <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
-                                            {% endif %}
-                                        </div>
-                                        <div class="card-preview-content">
-                                            <span class="card-title">{{ post.title }}</span>
-                                        </div>
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content with-comments white-text post" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0)), url('{{ post.detail }}'); background-size: cover">
+                                <div class="content-with-utility">
+                                    <div class="card-utility">
+                                        <i class="material-icons title">event_note</i>
+                                        {% if request.user.is_superuser %}
+                                            <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Unpin" id="pin-btn-{{post.id}}"></i>
+                                        {% endif %}
+                                        {% if post.id in request.user.userprofile.favorites_id %}
+                                            <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
+                                        {% else %}
+                                            <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
+                                        {% endif %}
                                     </div>
-                                    <div class="card-comments">{{ post.comment_count_string }}</div>
-                                </div>
-                                <div class="card-action voting">
-                                    <div class="score-container">
-                                        <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
-                                        <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                                        <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                                    <div class="card-preview-content">
+                                        <span class="card-title">{{ post.title }}</span>
                                     </div>
-                                    <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                                 </div>
+                                <div class="card-comments">{{ post.comment_count_string }}</div>
+                            </div>
+                            <div class="card-action voting">
+                                <div class="score-container">
+                                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                                    <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
+                                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
+                                </div>
+                                <a class="card-open" href="/blogs/{{ post.id }}">Open</a>
                             </div>
                         </div>
+                    </div>
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -226,7 +227,8 @@
                                         <i class="material-icons title">event_note</i>
                                         {% if request.user.is_superuser %}
                                             <i class="material-icons title fa-clickable fas fa-thumbtack tooltipped" data-position="left" data-tooltip="Click to Pin" id="pin-btn-{{post.id}}"></i>
-                                        {% endif %}                                        {% if post.id in request.user.userprofile.favorites_id %}
+                                        {% endif %}
+                                        {% if post.id in request.user.userprofile.favorites_id %}
                                             <i class="material-icons title fa-clickable fas fa-heart tooltipped" data-position="left" data-tooltip="Click to Unsave" id="like-btn-{{post.id}}"></i>
                                         {% else %}
                                             <i class="material-icons title fa-clickable far fa-heart tooltipped" data-position="left" data-tooltip="Click to Save" id="like-btn-{{post.id}}"></i>
