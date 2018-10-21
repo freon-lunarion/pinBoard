@@ -15,6 +15,10 @@ html {
 
 /* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
 
+.sortable-card {
+  padding: 10px 35px !important;
+}
+
 h2.content-separator {
   font-size: 24px;
   text-transform: uppercase;
@@ -238,6 +242,7 @@ i.material-icons.title.fa-clickable:hover {
 }
 
 .new.badge.question-state {
+  cursor: default;
   text-transform: uppercase;
   width: fit-content;
   margin-left: 0;
@@ -551,7 +556,7 @@ img {
 
 .addgray{
   z-index: 1;
-  background: #ffcccc9e;
+  /* background: #ffcccc9e; */
 }
 
 
