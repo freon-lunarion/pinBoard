@@ -126,6 +126,8 @@ def index(request):
         tags = request.GET['tags'].split(',')
         contents = set([rec.id for rec in Content.objects.all()])
         for tag in tags:
+            if tag.strip() == '':
+                continue
             contents &= set([rec.content.id for rec in ContentTag.objects.filter(tag__title__iexact=tag.strip())])
         res = []
         for content in contents:
