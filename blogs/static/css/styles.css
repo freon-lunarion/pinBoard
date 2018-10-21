@@ -549,6 +549,10 @@ img {
   display: none;
 }
 
+.addgray{
+  z-index: 1;
+  background: #ffcccc9e;
+}
 
 
 
