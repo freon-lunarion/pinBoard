@@ -159,7 +159,7 @@
           <!--{% endif %}-->
           <ul class="right hide-on-med-and-down">
             {% if request.session.username %}
-            <li><input id="search" type="search" required style="width: flex; width: 275px;" placeholder="Start with # to search tags"></li>
+            <li><input id="search" type="search" required style="width: flex; width: 275px; color: white;" placeholder="Start with # to search tags"></li>
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
             <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/"><i class="material-icons right">edit</i>Quiz Room</a></li>
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="leaderboard-modal" href="#leaderboard-modal"><i class="material-icons right">people</i>Leaderboard</a></li>
@@ -287,7 +287,7 @@
         if (e.keyCode === 13) {
           e.preventDefault();
           if (/^#/.test(e.target.value)) {
-            window.location.replace(window.location.pathname + `?tags=${e.target.value}`.replace('#', ''));
+            window.location.replace(window.location.pathname + `?tags=${e.target.value.replace(/#/g, ',').replace(/^,/, '')}`);
           }
           else {
             window.location.replace(window.location.pathname + `?title=${e.target.value}`);

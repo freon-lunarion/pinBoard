@@ -1,7 +1,10 @@
 {% extends "blogs/base.html" %}
 
 {% block content %}
-  <h1>Room List</h1>
+  <div class="separator">
+    <i class="material-icons" style="color:black">filter_none</i>&nbsp;
+    <h2 class="content-separator">Rooms</h2>
+  </div>
   {% if quizbank_list %}
 
     {% for rec in quizbank_list %}
@@ -31,7 +34,5 @@
       </li> -->
     {% endfor %}
 
-  {% else %}
-    <p>There are no books in the library.</p>
   {% endif %}       
 {% endblock %}

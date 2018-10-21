@@ -188,12 +188,16 @@ def create_youtube_post(request):
         if form.is_valid():
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
             tags = form.cleaned_data['tags'].split(',')
+            detail = form.cleaned_data['detail']
+            if 'v=' in detail:
+                m = re.compile(r'v=([_\w]+)')
+                detail = m.findall(detail)[0]
             post = Post.objects.create(title=form.cleaned_data['title'],
                                 is_pinned=False,
                                 pin_board=None,
                                 operator=None,
                                 kind='Youtube',
-                                detail=form.cleaned_data['detail'],
+                                detail=detail,
                                 author= request.user,
                                 published_date=now
                             )
