@@ -1,0 +1,117 @@
+[
+    {
+        "model": "shared.Content",
+        "pk":1,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
+            "author": 1,
+            "published_date": "2018-10-01 10:10"
+
+        }
+    },
+    {
+        "model": "blogs.Post",
+        "content": 1,
+        "fields":{
+           
+           "title": "First Article",
+           "kind": "Post"
+        }
+    },
+    {
+        "model": "shared.Content",
+        "pk":2,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p>",
+            "author": 2,
+            "published_date": "2018-10-02 10:20"
+
+        }
+    },
+    {
+        "model": "blogs.Comment",
+        "content" : 2,
+        "fields":{
+            "parent" : 1
+
+        }
+    },
+    {
+        "model": "shared.Content",
+        "pk":3,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p>",
+            "author": 1,
+            "published_date": "2018-10-02 10:25"
+
+        }
+    },
+    {
+        "model": "blogs.Comment",
+        "content" : 3,
+        "fields":{
+            "parent" : 1
+
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk":4,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
+            "author": 2,
+            "published_date": "2018-10-04 08:30"
+
+        }
+    },
+    {
+        "model": "blogs.Post",
+        "content": 4,
+        "fields":{
+           
+           "title": "Second Article",
+           "kind": "Post"
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk":5,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
+            "author": 4,
+            "published_date": "2018-10-06 12:30"
+
+        }
+    },
+    {
+        "model": "blogs.Post",
+        "content": 5,
+        "fields":{
+           
+           "title": "Third Article",
+           "kind": "Post"
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk":6,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
+            "author": 1,
+            "published_date": "2018-10-12 10:30"
+
+        }
+    },
+    {
+        "model": "blogs.Comment",
+        "content" : 6,
+        "fields":{
+            "parent" : 5
+
+        }
+    }
+    
+]

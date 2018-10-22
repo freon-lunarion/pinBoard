@@ -12,6 +12,35 @@ html {
   background: -webkit-linear-gradient(to right, rgba(242, 200, 76, 0.753), rgba(242, 152, 74, 0.753));  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, rgba(242, 200, 76, 0.774), rgba(242, 152, 74, 0.712)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+/* ------------------------------------------ Leaderboard modal ------------------------------------------ */
+
+.leaderboard-rank {
+  background: rgb(0, 217, 255);
+  font-size: 28px;
+  color: white;
+  font-weight: 300;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-right: 2px solid black;
+}
+
+.leaderboard-rank.rank-1 {
+  background: rgba(255, 79, 25, 0.974);
+}
+
+.leaderboard-rank.rank-2 {
+  background: rgba(255, 201, 25, 0.974);
+}
+
+.leaderboard-rank.rank-3 {
+  background: rgba(220, 255, 25, 0.974);
+}
+
+.leaderboard-grid-row {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
 
 /* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
 
@@ -278,6 +307,14 @@ i.material-icons.title.fa-clickable:hover {
 
 .new.badge.question-state.youtube {
   background: rgba(202, 0, 0, 0.9)
+}
+
+.new.badge.question-state.points {
+  background: rgba(255, 207, 48, 0.9)
+}
+
+.new.badge.question-state.correct {
+  background: rgba(47, 231, 255, 0.9)
 }
 
 #comment_detail_ifr {
@@ -628,6 +665,10 @@ img {
 .addgray{
   z-index: 1;
   /* background: #ffcccc9e; */
+}
+
+.upImage {
+  top: 15px !important;
 }
 
 

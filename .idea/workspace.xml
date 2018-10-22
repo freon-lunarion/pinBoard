@@ -2,10 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc9605c8-4e8a-4eb9-86cd-6703b364d7f8" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/shared/static/images/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/shared/static/images/logo_white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/shared/migrations/__init__.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/blogs/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/livesession/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/quiz/migrations/0001_initial.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/blogs/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/livesession/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/livesession/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quiz/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/quiz/migrations/0001_initial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/static/css/styles.css" afterPath="$PROJECT_DIR$/blogs/static/css/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/templates/blogs/base.html" afterPath="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/templates/blogs/post.html" afterPath="$PROJECT_DIR$/blogs/templates/blogs/post.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html" afterPath="$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirement.txt" afterPath="$PROJECT_DIR$/requirement.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.sh" afterPath="$PROJECT_DIR$/setup.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/templates/shared/user_profile.html" afterPath="$PROJECT_DIR$/shared/templates/shared/user_profile.html" />
     </list>
     <ignored path="pinBoard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +40,12 @@
         <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/post.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="355">
-              <caret line="70" column="34" lean-forward="true" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+              <caret line="70" column="34" lean-forward="false" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
               <folding>
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#1;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#1;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
@@ -44,23 +57,66 @@
                 <element signature="n#style#0;n#a#1;n#div#3;n#div#0;n#div#7;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#7;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#7;n#div#1;n#!!top" expanded="true" />
-                <marker date="1540190378000" expanded="false" signature="2973:2999" ph="..." />
-                <marker date="1540190378000" expanded="false" signature="3267:4137" ph="data:" />
-                <marker date="1540190378000" expanded="false" signature="4256:5058" ph="data:" />
-                <marker date="1540190378000" expanded="false" signature="5317:6563" ph="data:" />
-                <marker date="1540190378000" expanded="false" signature="6853:10319" ph="data:" />
-                <marker date="1540190378000" expanded="false" signature="10535:13125" ph="data:" />
+                <marker date="1540198580000" expanded="false" signature="2973:2999" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="3267:4137" ph="data:" />
+                <marker date="1540198580000" expanded="false" signature="4256:5058" ph="data:" />
+                <marker date="1540198580000" expanded="false" signature="5317:6563" ph="data:" />
+                <marker date="1540198580000" expanded="false" signature="6853:10319" ph="data:" />
+                <marker date="1540198580000" expanded="false" signature="10535:13125" ph="data:" />
+                <marker date="1540198580000" expanded="false" signature="16025:16071" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="16120:16131" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="16320:16336" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="16515:16565" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="16609:16627" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="16830:16858" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="17174:17231" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="20097:20162" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="21083:21100" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="21980:21995" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="22110:22147" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="22209:22313" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="22483:22499" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="22632:22657" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="23740:23786" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="23835:23846" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="24023:24039" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="24218:24268" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="24312:24330" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="24533:24561" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="24877:24934" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="25364:25429" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="25635:25661" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="25900:25926" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="26613:26630" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="26936:26951" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="27562:27577" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="27716:27753" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="27823:27927" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="28113:28129" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="28278:28303" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="29490:29536" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="29593:29604" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="29809:29825" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="30044:30094" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="30138:30156" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="30407:30435" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="30799:30856" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="31289:31340" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="31550:31565" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="32184:32202" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="34343:34358" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="34473:34510" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="34572:34676" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="34846:34862" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="34995:35020" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="36103:36149" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="36198:36209" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="37026:37042" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="37221:37271" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="37315:37333" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="37536:37564" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="37880:37937" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="question_post_card.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/question_post_card.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="53" column="53" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="53" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -68,11 +124,31 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogs/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="246" column="14" lean-forward="false" selection-start-line="246" selection-start-column="9" selection-end-line="246" selection-end-column="14" />
+            <state relative-caret-position="1491">
+              <caret line="391" column="89" lean-forward="true" selection-start-line="391" selection-start-column="89" selection-end-line="391" selection-end-column="89" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shared/migrations/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/quiz/migrations/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,7 +165,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quiz/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="113">
@@ -99,51 +175,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1418">
-              <caret line="223" column="17" lean-forward="false" selection-start-line="223" selection-start-column="17" selection-end-line="223" selection-end-column="17" />
-              <folding>
-                <element signature="n#style#0;n#h5#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#li#0;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#9409#9415#0" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#9991#9997#0" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#10451#10457#0" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#10906#10912#0" expanded="true" />
-                <element signature="n#style#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1540186565000" expanded="true" signature="5865:6816" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="article_post_card.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/article_post_card.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="43" column="65" lean-forward="false" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shared/tests.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blogs/migrations/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -152,24 +185,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shared/models.py">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="80" column="95" lean-forward="false" selection-start-line="80" selection-start-column="95" selection-end-line="80" selection-end-column="95" />
+            <state relative-caret-position="233">
+              <caret line="378" column="45" lean-forward="true" selection-start-line="378" selection-start-column="45" selection-end-line="378" selection-end-column="45" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="n#style#0;n#h5#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h6#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#li#0;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#10371#10377#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#10953#10959#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#11413#11419#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#11868#11874#0" expanded="true" />
+                <element signature="n#style#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1540198580000" expanded="false" signature="9071:9077" ph=" " />
+                <marker date="1540198580000" expanded="false" signature="9194:9225" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="9349:9380" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="9524:9549" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="9745:9762" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="9807:9825" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="9849:9903" ph="..." />
+                <marker date="1540198580000" expanded="false" signature="9976:10018" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="image_post_card.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/image_post_card.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="25" column="45" lean-forward="false" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -179,18 +238,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Quiz</find>
-      <find>Que</find>
       <find>login</find>
       <find>create</find>
-      <find>reset</find>
       <find>create_ar</find>
       <find>modal</find>
       <find>close</find>
@@ -213,9 +269,12 @@
       <find>down</find>
       <find>downvote</find>
       <find>(request):</find>
-      <find>users</find>
       <find>My P</find>
       <find>comment</find>
+      <find>reset</find>
+      <find>users</find>
+      <find>Quiz</find>
+      <find>resetpassword</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -233,7 +292,6 @@
         <option value="$PROJECT_DIR$/blogs/apps.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/comment.html" />
-        <option value="$PROJECT_DIR$/blogs/migrations/0001_initial.py" />
         <option value="$PROJECT_DIR$/shared/static/js/tinymce/comment_detail.js" />
         <option value="$PROJECT_DIR$/shared/static/js/tinymce/custom.js" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/add_post.html" />
@@ -272,6 +330,9 @@
         <option value="$PROJECT_DIR$/blogs/views.py" />
         <option value="$PROJECT_DIR$/shared/views.py" />
         <option value="$PROJECT_DIR$/quiz/views.py" />
+        <option value="$PROJECT_DIR$/blogs/migrations/0001_initial.py" />
+        <option value="$PROJECT_DIR$/quiz/migrations/0001_initial.py" />
+        <option value="$PROJECT_DIR$/shared/migrations/__init__.py" />
       </list>
     </option>
   </component>
@@ -319,14 +380,18 @@
               <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
               <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
               <item name="blogs" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
               <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
-              <item name="blogs" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="blogs" type="462c0819:PsiDirectoryNode" />
+              <item name="livesession" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="livesession" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
@@ -343,6 +408,18 @@
               <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
               <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
               <item name="shared" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -585,14 +662,14 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="829" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42915532" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42915532" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42915532" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -671,48 +748,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/livesession/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="49" column="44" lean-forward="false" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/livesession/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../9321/COMP9321_Ass3/app/safety_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="22" column="45" lean-forward="false" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/livesession/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quiz/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quiz/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-215">
@@ -837,7 +872,7 @@
         <state relative-caret-position="690">
           <caret line="46" column="27" lean-forward="false" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
           <folding>
-            <marker date="1540189825000" expanded="true" signature="18550:18559" ph="..." />
+            <marker date="1540198580000" expanded="true" signature="18566:18575" ph="..." />
           </folding>
         </state>
       </provider>
@@ -895,7 +930,7 @@
         <state relative-caret-position="-269">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -971,7 +1006,7 @@
         <state relative-caret-position="280">
           <caret line="63" column="45" lean-forward="false" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1010,13 +1045,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogs/views.py">
+    <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/question_post_card.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="53" column="53" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quiz/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
-          <caret line="246" column="14" lean-forward="false" selection-start-line="246" selection-start-column="9" selection-end-line="246" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
+          <caret line="97" column="14" lean-forward="false" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogs/migrations/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1030,53 +1079,95 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/blogs/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1491">
+          <caret line="391" column="89" lean-forward="true" selection-start-line="391" selection-start-column="89" selection-end-line="391" selection-end-column="89" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogs/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quiz/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="34" column="22" lean-forward="false" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shared/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1418">
-          <caret line="223" column="17" lean-forward="false" selection-start-line="223" selection-start-column="17" selection-end-line="223" selection-end-column="17" />
+        <state relative-caret-position="233">
+          <caret line="378" column="45" lean-forward="true" selection-start-line="378" selection-start-column="45" selection-end-line="378" selection-end-column="45" />
           <folding>
             <element signature="n#style#0;n#h5#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h6#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#li#0;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#9409#9415#0" expanded="true" />
+            <element signature="e#10371#10377#0" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#9991#9997#0" expanded="true" />
+            <element signature="e#10953#10959#0" expanded="true" />
             <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#10451#10457#0" expanded="true" />
+            <element signature="e#11413#11419#0" expanded="true" />
             <element signature="n#style#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#div#0;n#a#1;n#div#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#10906#10912#0" expanded="true" />
+            <element signature="e#11868#11874#0" expanded="true" />
             <element signature="n#style#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#1;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#2;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1540186565000" expanded="true" signature="5865:6816" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="9071:9077" ph=" " />
+            <marker date="1540198580000" expanded="false" signature="9194:9225" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="9349:9380" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="9524:9549" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="9745:9762" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="9807:9825" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="9849:9903" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="9976:10018" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/question_post_card.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="53" column="53" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/post.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
-          <caret line="70" column="34" lean-forward="true" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+          <caret line="70" column="34" lean-forward="false" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
           <folding>
             <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#1;n#div#2;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#1;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
@@ -1088,20 +1179,81 @@
             <element signature="n#style#0;n#a#1;n#div#3;n#div#0;n#div#7;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#7;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#7;n#div#1;n#!!top" expanded="true" />
-            <marker date="1540190378000" expanded="false" signature="2973:2999" ph="..." />
-            <marker date="1540190378000" expanded="false" signature="3267:4137" ph="data:" />
-            <marker date="1540190378000" expanded="false" signature="4256:5058" ph="data:" />
-            <marker date="1540190378000" expanded="false" signature="5317:6563" ph="data:" />
-            <marker date="1540190378000" expanded="false" signature="6853:10319" ph="data:" />
-            <marker date="1540190378000" expanded="false" signature="10535:13125" ph="data:" />
+            <marker date="1540198580000" expanded="false" signature="2973:2999" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="3267:4137" ph="data:" />
+            <marker date="1540198580000" expanded="false" signature="4256:5058" ph="data:" />
+            <marker date="1540198580000" expanded="false" signature="5317:6563" ph="data:" />
+            <marker date="1540198580000" expanded="false" signature="6853:10319" ph="data:" />
+            <marker date="1540198580000" expanded="false" signature="10535:13125" ph="data:" />
+            <marker date="1540198580000" expanded="false" signature="16025:16071" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="16120:16131" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="16320:16336" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="16515:16565" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="16609:16627" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="16830:16858" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="17174:17231" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="20097:20162" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="21083:21100" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="21980:21995" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="22110:22147" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="22209:22313" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="22483:22499" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="22632:22657" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="23740:23786" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="23835:23846" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="24023:24039" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="24218:24268" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="24312:24330" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="24533:24561" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="24877:24934" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="25364:25429" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="25635:25661" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="25900:25926" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="26613:26630" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="26936:26951" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="27562:27577" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="27716:27753" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="27823:27927" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="28113:28129" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="28278:28303" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="29490:29536" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="29593:29604" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="29809:29825" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="30044:30094" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="30138:30156" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="30407:30435" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="30799:30856" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="31289:31340" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="31550:31565" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="32184:32202" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="34343:34358" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="34473:34510" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="34572:34676" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="34846:34862" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="34995:35020" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="36103:36149" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="36198:36209" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="37026:37042" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="37221:37271" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="37315:37333" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="37536:37564" ph="..." />
+            <marker date="1540198580000" expanded="false" signature="37880:37937" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quiz/views.py">
+    <entry file="file://$PROJECT_DIR$/shared/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="97" column="14" lean-forward="false" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="14" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quiz/migrations/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
