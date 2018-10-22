@@ -460,7 +460,7 @@
 
         function vote (content_id, value) {
             return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-                method: 'POST',
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                 body: JSON.stringify({
                     'vote': value
@@ -468,9 +468,16 @@
             });
         }
 
+        function get_vote (content_id) {
+            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+            });
+        }
+
         document.getElementById('comment_kind') ? document.getElementById('comment_kind').value = "{{ post.kind }}" : null;
         {% for comment in comments %}
-            vote("{{ comment.id }}", 0)
+            get_vote("{{ comment.id }}")
             .then(res => res.json()).then(json => {
                 let comment_btns = document.getElementById("comment-btns-{{ comment.id }}");
                 let helpful_btn = document.createElement('span');
@@ -504,7 +511,7 @@
             });
         {% endfor %}
 
-        vote("{{ post.id }}", 0)
+        get_vote("{{ post.id }}")
         .then(res => res.json()).then(json => {
             if (parseInt(json.exist) === 1) {
                 document.getElementById("upvote-btn-{{post.id}}").classList.add('disabled');
@@ -542,7 +549,7 @@
             if (/^answer-correct-btn-/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^answer-correct-btn-(\d+)$/)[1]);
                 fetch("/blogs/{{ post.id }}/", {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                     body: JSON.stringify({
                         'action': 'SetCorrectAnswer',
@@ -607,7 +614,7 @@
                 }
                 $.ajax({
                     url: url,
-                    type: 'POST',
+                    type: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                     success: function(result){
                         console.log(result);

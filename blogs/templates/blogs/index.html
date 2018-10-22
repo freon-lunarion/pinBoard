@@ -80,7 +80,7 @@
         $(document).ready(() => {
             $('.tooltipped').tooltip();
             {% for post in latest_post_list %}
-                vote("{{ post.id }}", 0)
+                get_vote("{{ post.id }}")
                 .then(res => res.json()).then(json => {
                     if (parseInt(json.exist) === 1) {
                         document.getElementById("upvote-{{post.id}}").parentNode.classList.add('disabled');
@@ -92,11 +92,18 @@
 
         function vote (content_id, value) {
             return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-                method: 'POST',
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                 body: JSON.stringify({
                     'vote': value
                 })
+            });
+        }
+
+        function get_vote (content_id) {
+            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
             });
         }
 
@@ -107,7 +114,7 @@
                 let id = parseInt(e.target.id.match(/^like-btn-(\d+)$/)[1]);
                 if (e.target.classList.contains('far')) {
                     fetch("{% url 'shared:user_like' 9999999 %}".replace('9999999', id), {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
                     }).then(res => res.json()).then(json => {
                         if (json.message === 'Succeed') {
@@ -119,7 +126,7 @@
                 }
                 else {
                     fetch("{% url 'shared:user_unlike' 9999999 %}".replace('9999999', id), {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
                     }).then(res => res.json()).then(json => {
                         if (json.message === 'Succeed') {
@@ -181,7 +188,6 @@
             }
         });
 
-
         $(".changecolor").mouseover(function(){
             // $(this).addClass( "z-depth-3" );
             $(this).css('box-shadow', '0 8px 15px 2px rgba(0,0,0,0.4)');
@@ -191,28 +197,5 @@
             $(this).css('box-shadow', '0 2px 2px 0 rgba(0,0,0,0.2)');
         });
     </script>
-<!--<script>-->
-    <!--$(function(){-->
-        <!--$("#Email").bind('input porpertychange',function(){-->
-            <!--var regEmail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/-->
-            <!--if (regEmail.test($(this).val()) == false){-->
-                <!--$('.email-error').css("display","block");-->
-            <!--}-->
-            <!--if (regEmail.test($(this).val())){-->
-                <!--$('.email-error').css("display","none");-->
-            <!--}-->
-        <!--});-->
 
-
-        <!--$("#repassword").bind('input porpertychange',function(){-->
-            <!--if($('#repassword').val() != $('#password').val() ){-->
-                <!--$('.password-error').css("display","block");-->
-            <!--}-->
-
-            <!--if($('#repassword').val() == $('#password').val() ){-->
-                <!--$('.password-error').css("display","none");-->
-            <!--}-->
-        <!--});-->
-    <!--});-->
-<!--</script>-->
 {% endblock %}

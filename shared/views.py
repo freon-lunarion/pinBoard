@@ -10,12 +10,12 @@ from django.core.serializers import serialize
 
 @login_required
 def vote(request, pk):
-    if (request.method == 'POST'):
+    if (request.method == 'PUT'):
         data = json.loads(request.body)
         vote =  data['vote']
-        if (int(vote) == 0):
-            return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
         return JsonResponse({'score': Vote.vote(pk, request.user.id, vote)})
+    if (request.method == 'GET'):
+        return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
 
 @login_required
 def score(request):
@@ -24,7 +24,7 @@ def score(request):
 
 @login_required
 def user_avatar(request):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         data = json.loads(request.body)
         request.user.userprofile.avatar = data['avatar']
         request.user.userprofile.save()
@@ -53,13 +53,13 @@ def user_profile(request, pk):
 
 @login_required
 def user_like(request, pk):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         UserFavorite.create(pk, request.user.id)
         return JsonResponse({'message': 'Succeed'})
 
 @login_required
 def user_unlike(request, pk):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         UserFavorite.objects.get(content__id=pk, user=request.user).delete()
         return JsonResponse({'message': 'Succeed'})
 
