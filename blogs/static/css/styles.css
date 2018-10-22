@@ -677,6 +677,10 @@ img {
   top: 15px !important;
 }
 
+#profile{
+  margin-top: -27px;
+}
+
 
 /* ------------------------------------------ Responsiveness ------------------------------------------ */
 
@@ -713,6 +717,16 @@ img {
   }
 }
 
+
+/*@media only screen and (max-width: 999px) {*/
+  /*#changepassword {*/
+    /*!*display: none;*!*/
+     /*visibility: hidden;*/
+  /*}*/
+  /*#profile{*/
+    /*margin-top: -9px;*/
+  /*}*/
+/*}*/
 
 
 
