@@ -19,7 +19,11 @@ class QuizBankListView(generic.ListView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
-    
+    def get_context_data(self, **kwargs):
+        context = super(QuizBankListView, self).get_context_data(**kwargs)
+        context['users'] = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        return context
+
 
 class QuizBankDetailView(generic.DetailView):
     model = QuizBank
@@ -33,6 +37,7 @@ class QuizBankDetailView(generic.DetailView):
         # Call the base implementation first to get a context
         context = super(QuizBankDetailView, self).get_context_data(**kwargs)
         context['questions'] = Question.objects.filter(quizBank=self.pk)[:60]
+        context['users'] = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
         
         return context
 
@@ -52,8 +57,9 @@ def room_create(request):
               )
 
             return HttpResponseRedirect(f'/quiz/{room.id}')
-            
-    return render(request, 'quiz/add_room.html', {'form':QuizBankForm()})
+    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+
+    return render(request, 'quiz/add_room.html', {'form':QuizBankForm(),'users':users})
 
 @login_required
 def room_update(request,pk):
@@ -68,8 +74,8 @@ def room_update(request,pk):
             return HttpResponseRedirect(f'/quiz/{quizBank.id}')
     else :
         form = QuizBankForm(instance = quizBank)
-            
-    return render(request, 'quiz/add_room.html', {'form':form})
+    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))            
+    return render(request, 'quiz/add_room.html', {'form':form,'users':users})
     
 
 
@@ -84,11 +90,12 @@ def tryout_view(request,pk):
     clean_ls = que_ls
     if len(que_ls) >= quizBank.tryout_displayNum:
         clean_ls = random.sample(que_ls, quizBank.tryout_displayNum)
-
+    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
     context = {
         'title': quizBank.title,
         'questions' : clean_ls,
-        'questions_num' : len(clean_ls)
+        'questions_num' : len(clean_ls),
+        'users':users 
     }
 
     return render(request, 'quiz/tryout.html', context=context)      
@@ -147,7 +154,8 @@ def question_update(request,pk):
             return HttpResponseRedirect(f'/quiz/{question.quizBank.id}')
     else:
         formParent = Question2Form(instance = question)
-    return render(request, 'quiz/add_room.html', {'form':formParent})
+    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+    return render(request, 'quiz/add_room.html', {'form':formParent,'users':users})
 
 @login_required
 def option_update(request,pk):
@@ -164,7 +172,8 @@ def option_update(request,pk):
             return HttpResponseRedirect(f'/quiz/questions/{options.question.id}')
     else:
         formParent = OptionsForm(instance = options)
-    return render(request, 'quiz/add_room.html', {'form':formParent})
+    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+    return render(request, 'quiz/add_room.html', {'form':formParent,'users':users})
 
 
 @login_required
