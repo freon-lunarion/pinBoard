@@ -353,9 +353,9 @@
                     <div>
                         <h1 class="post-title">
                             {% if post.solved %}
-                                <span class="btn disabled" style="margin: 5px 0;background: rgba(21, 255, 0, 0.3) !important;color:black !important">Solved</span>
+                                <span class="btn disabled" id='question-status' style="margin: 5px 0;background: rgba(21, 255, 0, 0.3) !important;color:black !important">Solved</span>
                             {% else %}
-                                <span class="btn disabled" style="margin: 5px 0;background: rgba(253, 0, 0, 0.3) !important;color:black !important">Unsolved</span>
+                                <span class="btn disabled" id='question-status' style="margin: 5px 0;background: rgba(253, 0, 0, 0.3) !important;color:black !important">Unsolved</span>
                             {% endif %}
 
                             {{ post.title }}
@@ -400,6 +400,11 @@
                                 
                                 <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
                                     <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
+                                    {% if post.solved == False and request.session.username == post.author.username and post.author.username != comment.author.username %}
+                                        <a class="waves-effect waves-light btn-small light-green" id="answer-correct-btn-{{comment.id}}" style="position: absolute;top:10px;right:10px;">Correct</a>
+                                    {% elif post.solved and comment.is_correct %}
+                                        <span class="btn disabled" style="position: absolute;top:10px;right:10px;">Correct</span>
+                                    {% endif %}
                                 </div>
                                 <div class="card-content" style="min-height: 92px">
                                     <p>{{ comment.detail | safe }}</p>
@@ -536,9 +541,12 @@
                     if ('score' in json) {
                         let comment_score = document.getElementById(`comment-score-${id}`);
                         comment_score.innerHTML = json.score;
-                        let make_comments_btn = document.getElementById(`make-comments`);
-                        make_comments_btn.innerHTML = 'Solved';
-                        make_comments_btn.classList.add('disabled');
+                        //let make_comments_btn = document.getElementById(`make-comments`);
+                        //make_comments_btn.innerHTML = 'Solved';
+                        //make_comments_btn.classList.add('disabled');
+                        let question_status = document.getElementById(`question-status`);
+                        question_status.innerHTML = 'Solved';
+                        question_status.style = 'margin: 5px 0;background: rgba(21, 255, 0, 0.3) !important;color:black !important';
                         e.target.classList.add('disabled');
                         let answer_correct_btns = document.getElementsByClassName('waves-effect waves-light btn-small light-green');
                         for (let btn of answer_correct_btns) {
