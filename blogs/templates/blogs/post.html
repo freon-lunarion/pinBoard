@@ -101,7 +101,7 @@
                             <div class="card-stacked">
                                 
                                 <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
+                                    <a style="color:black" href="/user/{{ comment.author.userprofile.id }}">{{ comment.author.username }}</a>
                                 </div>
                                 <div class="card-content" style="min-height: 92px">
                                     <p>{{ comment.detail | safe }}</p>
@@ -308,7 +308,7 @@
                                     <div class="card-stacked">
                                         
                                         <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                            <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
+                                            <a style="color:black" href="/user/{{ comment.author.userprofile.id }}">{{ comment.author.username }}</a>
                                         </div>
                                         <div class="card-content" style="min-height: 92px">
                                             <p>{{ comment.detail | safe }}</p>
@@ -410,7 +410,7 @@
                             <div class="card-stacked">
                                 
                                 <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2)">
-                                    <a style="color:black" href="/user/{{ comment.author.id }}">{{ comment.author.username }}</a>
+                                    <a style="color:black" href="/user/{{ comment.author.userprofile.id }}">{{ comment.author.username }}</a>
                                     {% if post.solved == False and request.session.username == post.author.username and post.author.username != comment.author.username %}
                                         <a class="waves-effect waves-light btn-small light-green" id="answer-correct-btn-{{comment.id}}" style="position: absolute;top:10px;right:10px;">Correct</a>
                                     {% elif post.solved and comment.is_correct %}
