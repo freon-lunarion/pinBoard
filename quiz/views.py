@@ -54,12 +54,13 @@ def room_create(request):
                 tryout_minScore = request.POST['tryout_minScore'],
                 tryout_displayNum = request.POST['tryout_displayNum'],
                 creator = request.user
-              )
+            )
 
             return HttpResponseRedirect(f'/quiz/{room.id}')
-    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
+    # get leaderboard rank
+    leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
 
-    return render(request, 'quiz/add_room.html', {'form':QuizBankForm(),'users':users})
+    return render(request, 'quiz/add_room.html', {'form':QuizBankForm(),'users':leaderboard})
 
 @login_required
 def room_update(request,pk):
@@ -74,8 +75,10 @@ def room_update(request,pk):
             return HttpResponseRedirect(f'/quiz/{quizBank.id}')
     else :
         form = QuizBankForm(instance = quizBank)
-    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
-    return render(request, 'quiz/add_room.html', {'form':form,'users':users})
+    
+    # get leaderboard rank        
+    leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
+    return render(request, 'quiz/add_room.html', {'form':form,'users':leaderboard})
     
 
 
@@ -90,12 +93,14 @@ def tryout_view(request,pk):
     clean_ls = que_ls
     if len(que_ls) >= quizBank.tryout_displayNum:
         clean_ls = random.sample(que_ls, quizBank.tryout_displayNum)
-    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
+
+    # get leaderboard rank                
+    leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     context = {
         'title': quizBank.title,
         'questions' : clean_ls,
         'questions_num' : len(clean_ls),
-        'users':users 
+        'users':leaderboard 
     }
 
     return render(request, 'quiz/tryout.html', context=context)
@@ -104,9 +109,14 @@ def tryout_view(request,pk):
 def question_view(request,pk):
     question = Question.objects.get(pk=pk)
     options = Options.objects.filter(question=question)
+
+    # get leaderboard rank  
+    leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
+
     context = {
         'question' : question,
-        'options' : options
+        'options' : options,
+        'users':leaderboard 
     }
 
     return render(request, 'quiz/question_view.html', context=context)
@@ -136,9 +146,11 @@ def question_create(request,pk):
                 Options.objects.create(question = question, detail = option, isCorrect = isCorrect)
 
             return HttpResponseRedirect(f'/quiz/{quizBank.id}')
-    
+    # get leaderboard rank  
+    leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
+
     form = QuestionForm(initial={'quizBank': quizBank})
-    return render(request, 'quiz/add_room.html', {'form':form})
+    return render(request, 'quiz/add_room.html', {'form':form,'users':leaderboard})
 
 @login_required
 def question_update(request,pk):
@@ -154,8 +166,10 @@ def question_update(request,pk):
             return HttpResponseRedirect(f'/quiz/{question.quizBank.id}')
     else:
         formParent = Question2Form(instance = question)
-    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
-    return render(request, 'quiz/add_room.html', {'form':formParent,'users':users})
+
+    # get leaderboard rank  
+    leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
+    return render(request, 'quiz/add_room.html', {'form':formParent,'users':leaderboard})
 
 @login_required
 def option_update(request,pk):
@@ -172,8 +186,9 @@ def option_update(request,pk):
             return HttpResponseRedirect(f'/quiz/questions/{options.question.id}')
     else:
         formParent = OptionsForm(instance = options)
-    users = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
-    return render(request, 'quiz/add_room.html', {'form':formParent,'users':users})
+    # get leaderboard rank  
+    leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
+    return render(request, 'quiz/add_room.html', {'form':formParent,'users':leaderboard})
 
 
 @login_required
