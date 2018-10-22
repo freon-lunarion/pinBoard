@@ -26,7 +26,7 @@
                 {% endif %}
             <div class="card-content">
                 <!--<span class="card-title">{{profile.user}}</span>-->
-                <ul style="margin-top: -11px;">
+                <ul style="" id="profile">
                     <li><h5 class="value"><p>{{profile.user}}</p></h5></li>
                     <li><label>Email</label><div class="value"><p>{{profile.user.email}}</p></div></li>
                     <li><label>Score</label><div class="value"><p>{{profile.score}}</p></div></li>
@@ -36,6 +36,27 @@
                     </li>
                 </ul>
 
+                <a class="waves-effect waves-light btn modal-trigger changepassword" id="changepassword" href="#reset-password-modal" style="bottom: 13px; left: -8px; display: block; height: 34px;">Change Password</a>
+            </div>
+
+            <!--<li><a class="waves-effect modal-trigger" href="#reset-password-modal"><i class="material-icons">border_color</i>Manage Account</a></li>-->
+
+
+
+            <!-- Reset Password Modal -->
+            <div id="reset-password-modal" class="modal">
+                <div class="modal-content">
+                    <h4>Change Password</h4>
+                    <form  method="post">
+                        <input type="password" placeholder="newpassword" class="newpassword">
+                        <input type="password" placeholder="confirm" class="renewpassword">
+                    </form>
+                    <div class="msgforreset1" style="color: red; display: none;">Please confirm the password</div>
+                    <div class="msgforreset2" style="color: red; display: none;">Successful</div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="waves-effect waves-light btn resetpassword">Submit</a>
+                </div>
             </div>
           
         </div>
@@ -486,7 +507,36 @@
             <!--</div>-->
         <!--</div>-->
     <!--</div>-->
-    {% endfor %}    
+    {% endfor %}
+
+
+    <script>
+        $('.resetpassword').click(event => {
+            $.ajax({
+            url: "/blogs/reset/",
+            type: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+            data: JSON.stringify({
+                'newpassword': $('.newpassword').val(),
+                'renewpassword': $('.renewpassword').val(),
+                'password': $('#password').text()
+            }),
+            statusCode: {
+                400: function() {
+                    $(".msgforreset1").css("display","block");
+                    $(".msgforreset2").css("display","none");
+                },
+            },
+            success: function (data, statusText, xhr) {
+                if (xhr.status === 200) {
+                    $(".msgforreset2").css("display","block");
+                    $(".msgforreset1").css("display","none");
+                    $("#reset-password-modal").modal('close');
+                }
+            },
+        })
+        });
+    </script>
     
 </div>
 
