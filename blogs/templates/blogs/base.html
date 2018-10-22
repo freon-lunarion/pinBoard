@@ -175,7 +175,7 @@
             {% if request.session.username %}
             <li><input id="search" type="search" required style="width: flex; width: 275px; color: white;" placeholder="Start with # to search tags"></li>
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
-            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/"><i class="material-icons right">edit</i>Quiz Room</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/"><i class="material-icons right">edit</i>Quiz Sets</a></li>
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="leaderboard-modal" href="#leaderboard-modal"><i class="material-icons right">people</i>Leaderboard</a></li>
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
@@ -295,25 +295,6 @@
         };
 
         reader.readAsDataURL(file);
-      }
-
-      // Vote a content
-      function vote (content_id, value) {
-        return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-          body: JSON.stringify({
-            'vote': value
-          })
-        });
-      }
-
-      // Whether the content is already voted by this user
-      function get_vote (content_id) {
-        return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-        });
       }
 
       // Initializing leaderboard
