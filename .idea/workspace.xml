@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc9605c8-4e8a-4eb9-86cd-6703b364d7f8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/templates/blogs/base.html" afterPath="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/templates/blogs/index.html" afterPath="$PROJECT_DIR$/blogs/templates/blogs/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/templates/shared/user_profile.html" afterPath="$PROJECT_DIR$/shared/templates/shared/user_profile.html" />
     </list>
     <ignored path="pinBoard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,17 +53,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_profile.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user_profile.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shared/templates/shared/user_profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="378" column="4" lean-forward="false" selection-start-line="378" selection-start-column="4" selection-end-line="401" selection-end-column="10" />
+            <state relative-caret-position="193">
+              <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#span#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1540215136000" expanded="true" signature="15439:15448" ph="..." />
+                <marker date="1540227119000" expanded="true" signature="16214:16223" ph="..." />
               </folding>
             </state>
           </provider>
@@ -122,7 +123,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="356">
@@ -212,8 +213,8 @@
       <find>iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP</find>
       <find>iVBORw0KGgoAAAANSUhEUgAAADIAAAAy</find>
       <find>sortable</find>
-      <find>location</find>
       <find>sort</find>
+      <find>location</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -266,13 +267,13 @@
         <option value="$PROJECT_DIR$/blogs/models.py" />
         <option value="$PROJECT_DIR$/shared/models.py" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/post.html" />
-        <option value="$PROJECT_DIR$/shared/templates/shared/user_profile.html" />
         <option value="$PROJECT_DIR$/quiz/models.py" />
         <option value="$PROJECT_DIR$/../../pinBoard 6/pinBoard/blogs/templates/blogs/index.html" />
         <option value="$PROJECT_DIR$/blogs/views.py" />
         <option value="$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/index.html" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/base.html" />
+        <option value="$PROJECT_DIR$/shared/templates/shared/user_profile.html" />
       </list>
     </option>
   </component>
@@ -328,6 +329,24 @@
               <item name="blogs" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="blogs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -569,8 +588,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="829" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42915532" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1021,20 +1041,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shared/templates/shared/user_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="378" column="4" lean-forward="false" selection-start-line="378" selection-start-column="4" selection-end-line="401" selection-end-column="10" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1540215136000" expanded="true" signature="15439:15448" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="53">
@@ -1132,6 +1138,22 @@
         <state relative-caret-position="356">
           <caret line="193" column="27" lean-forward="false" selection-start-line="193" selection-start-column="27" selection-end-line="193" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shared/templates/shared/user_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#span#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#span#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1540227119000" expanded="true" signature="16214:16223" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

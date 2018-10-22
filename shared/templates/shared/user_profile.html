@@ -7,12 +7,22 @@
     <div class="col s12 m12">
         
         <div class="card horizontal" style="height: 210px;">
+                {% if profile.id == request.user.id %}
                 {% if profile.avatar %}
                 <a href="#user" class="modal-trigger"><img class="circle" style="width:200px;height:200px;padding:5px;" src='{{ request.session.avatar }}' id="user-profile-avatar"></a>
                 <!--<img class="circle upImage" src="{{ profile.avatar }}" style="width:180px;height:180px;">-->
                 {% else %}
                 <a href="#user" class="modal-trigger"><img class="circle" style="width:200px;height:200px;padding:5px;" src="{% static '/images/empty-profile.png' %}" id="user-profile-avatar"></a>
                 <!--<img class="circle upImage" src="{% static '/images/empty-profile.png' %}" style="width:180px;height:180px;">-->
+                {% endif %}
+                {% else %}
+                {% if profile.avatar %}
+                <span><img class="circle" style="width:200px;height:200px;padding:5px;" src='{{ request.session.avatar }}' id="user-profile-avatar"></span>
+                <!--<img class="circle upImage" src="{{ profile.avatar }}" style="width:180px;height:180px;">-->
+                {% else %}
+                <span><img class="circle" style="width:200px;height:200px;padding:5px;" src="{% static '/images/empty-profile.png' %}" id="user-profile-avatar"></span>
+                <!--<img class="circle upImage" src="{% static '/images/empty-profile.png' %}" style="width:180px;height:180px;">-->
+                {% endif %}
                 {% endif %}
             <div class="card-content">
                 <!--<span class="card-title">{{profile.user}}</span>-->
