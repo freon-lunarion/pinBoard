@@ -67,6 +67,8 @@ def room_update(request,pk):
     quizBank = get_object_or_404(QuizBank, pk=pk)
 
     if request.method == 'POST':
+        # accept data from form "POST"
+
         form = QuizBankForm(request.POST, instance=quizBank)
         if form.is_valid():
             form = form.save(commit=False)
@@ -74,6 +76,8 @@ def room_update(request,pk):
             quizBank.save()
             return HttpResponseRedirect(f'/quiz/{quizBank.id}')
     else :
+        # repopulate form with data form db
+
         form = QuizBankForm(instance = quizBank)
     
     # get leaderboard rank        
@@ -124,7 +128,10 @@ def question_view(request,pk):
 @login_required
 def question_create(request,pk):
     quizBank = QuizBank.objects.get(pk= pk)
+    
     if request.method == 'POST':
+        # accept data from form "POST"
+
         form = QuestionForm(request.POST)
         if form.is_valid():
             now = timezone.now().strftime("%Y-%m-%d %H:%M")
@@ -155,9 +162,9 @@ def question_create(request,pk):
 @login_required
 def question_update(request,pk):
     question = Question.objects.get(pk=pk)
-    # options = Options.objects.filter(question=question)
-    
+
     if request.method == 'POST':
+        # accept data from form "POST"
         formParent = Question2Form(request.POST)
         if formParent.is_valid():
             question.detail = formParent.cleaned_data['detail']
@@ -165,6 +172,8 @@ def question_update(request,pk):
 
             return HttpResponseRedirect(f'/quiz/{question.quizBank.id}')
     else:
+        # repopulate form with data form db
+
         formParent = Question2Form(instance = question)
 
     # get leaderboard rank  
@@ -174,9 +183,9 @@ def question_update(request,pk):
 @login_required
 def option_update(request,pk):
     options = Options.objects.get(pk=pk)
-    # options = Options.objects.filter(question=question)
     
     if request.method == 'POST':
+        # accept data from form "POST"
         formParent = OptionsForm(request.POST)
         if formParent.is_valid():
             options.detail = formParent.cleaned_data['detail']
@@ -185,6 +194,7 @@ def option_update(request,pk):
 
             return HttpResponseRedirect(f'/quiz/questions/{options.question.id}')
     else:
+        # repopulate form with data form db
         formParent = OptionsForm(instance = options)
     # get leaderboard rank  
     leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
