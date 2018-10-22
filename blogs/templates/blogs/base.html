@@ -131,7 +131,7 @@
           <h6 style="font-weight:100;text-align: center;margin-bottom: 24px">Top 10 Contributors</h6>
           <div class="leaderboard-grid" style="display: grid; grid-template: repeat(5, 1fr) / 1fr 1fr;grid-auto-flow: column;">
             {% for user in users %}
-              <div class="leaderboard-grid-row card s6 m6 l6" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
+              <a href="{% url 'shared:user_profile' user.id %}" class="leaderboard-grid-row card s6 m6 l6" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
 
                 <div class="leaderboard-rank rank-{{ user.rank }}" style="display: flex;justify-content: center; align-items:center;">
                   {{ user.rank }}
@@ -145,7 +145,7 @@
                   {% endif %}
                 </div>
 
-                <div class="leaderboard-username" style="display: flex;justify-content: flex-start; align-items:center;">
+                <div class="leaderboard-username" style="color:black;display: flex;justify-content: flex-start; align-items:center;">
                   {{ user.user.username }}
                 </div>
 
@@ -154,7 +154,7 @@
                   <span class="new badge question-state correct tooltipped" data-badge-caption=" " data-position="top" data-tooltip="{{user.correct_answer_percentage}} Correct answer rate">{{ user.correct_answer_num }} Answers</span>
                 </div>
 
-              </div>
+              </a>
             {% endfor %}
           </div>
 
