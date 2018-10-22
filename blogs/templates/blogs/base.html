@@ -2,13 +2,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Your Pinboard</title>
+    <title>Pinboard</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--Tinymce Text-Editor (Must be in Head Tag) -->
     {% load staticfiles %}
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
+
     <script src="{% static '/js/tinymce/tinymce.min.js' %}"></script>
     <script type="text/javascript" src="{% static '/js/tinymce/custom.js' %}" ></script>
 
@@ -26,6 +28,7 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
 
     {% load static %} 
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -129,7 +132,7 @@
         <div class="modal-content">
           <h5 style="font-weight:100;text-align: center;margin-top:5px">Leaderboard</h5>
           <h6 style="font-weight:100;text-align: center;margin-bottom: 24px">Top 10 Contributors</h6>
-          <div class="leaderboard-grid" style="display: grid; grid-template: repeat(5, 1fr) / 1fr 1fr;grid-auto-flow: column;">
+          <div class="leaderboard-grid">
             {% for user in users %}
               <a href="{% url 'shared:user_profile' user.id %}" class="leaderboard-grid-row card s6 m6 l6" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
 

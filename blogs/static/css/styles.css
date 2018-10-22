@@ -36,6 +36,12 @@ html {
   background: rgba(220, 255, 25, 0.974);
 }
 
+.leaderboard-grid {
+  display: grid; 
+  grid-template: repeat(5, 1fr) / 1fr 1fr;
+  grid-auto-flow: column;
+}
+
 .leaderboard-grid-row {
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
@@ -43,19 +49,6 @@ html {
 
 
 /* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
-
-@media(max-width: 800px) {
-  .post-type-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media(min-width: 999px) {
-  .hide-on-large {
-    display: none;
-  }
-}
 
 .sortable-card {
   padding: 10px 35px !important;
@@ -685,7 +678,40 @@ img {
 }
 
 
+/* ------------------------------------------ Responsiveness ------------------------------------------ */
 
+@media(max-width: 800px) {
+  .post-type-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media(max-width: 544px) {
+  .youtube-video {
+    width: 100%;
+  }
+}
+
+@media(max-width: 1215px) {
+  #search {
+    display: none;
+  }
+
+  .youtube-video {
+    width: 80vw;
+  }
+
+  .leaderboard-grid {
+    grid-template: repeat(10, 1fr) / 1fr;
+  }
+}
+
+@media(min-width: 999px) {
+  .hide-on-large {
+    display: none;
+  }
+}
 
 
 
