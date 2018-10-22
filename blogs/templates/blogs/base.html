@@ -69,7 +69,8 @@
 
           </div></li>
           <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
-          <li><a class="waves-effect modal-trigger" href="#modal1"><i class="material-icons">account_box</i>Manage Account</a></li>
+          <li><a class="waves-effect modal-trigger" href="{% url 'shared:user_profile' request.user.userprofile.id %}"><i class="material-icons">account_box</i>My Profile</a></li>
+          <li><a class="waves-effect modal-trigger" href="#modal1"><i class="material-icons">border_color</i>Manage Account</a></li>
           <li><div class="divider"></div></li>
           <li><a class="waves-effect" href="/blogs/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
         </ul>
