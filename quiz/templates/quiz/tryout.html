@@ -8,7 +8,7 @@
 {% for question in questions %}
     <div class="post-container">
         <div class="col sm12 m12">
-            <div class="card-panel">
+            <div class="card-panel blue-grey darken-1 post changecolor white-text">
                 <div class="content-container">
                     {% autoescape off %}
                         {{ question.detail }}
@@ -18,7 +18,7 @@
                         <p>
                             <label>
                                 <input class="options" data-que-id={{question.id}} data-option-id={{option.id}} name="{{question.id}}" type="radio">
-                                <span>{{option.detail}}</span>
+                                <span class="white-text">{{option.detail}}</span>
                             </label>
                         </p>
 
