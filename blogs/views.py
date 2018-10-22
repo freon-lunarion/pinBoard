@@ -24,7 +24,7 @@ class PostView(generic.DetailView):
         context = super(PostView, self).get_context_data(**kwargs)
         post_res = Post.objects.all().filter(id=content.id)
 
-        # If it is not a question (artical, image, youtube)
+        # If it is not a question (article, image, youtube)
         if post_res.count() == 1:
             post = post_res[0]
             context['post'] = post
@@ -132,9 +132,9 @@ def index(request):
 
     return render(request, 'blogs/index.html', context=context)
 
-# Create artical post
+# Create article post
 @login_required
-def create_artical_post(request):
+def create_article_post(request):
     if (request.method == 'POST'):
         form = AddPostForm(request.POST)
         if form.is_valid():
