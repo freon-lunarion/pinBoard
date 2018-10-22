@@ -172,7 +172,10 @@
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
               <li>
-                <span style="margin: 0 5px;">Hello, {{ request.session.username }}&nbsp;<a href="/blogs/logout" style="margin: 0 5px;text-decoration: underline;padding:0;display: inline-block">Logout</a></span>
+                <a href="/user/{{request.user.id}}" style="margin: 0 3px;cursor:pointer;">Hello, {{ request.session.username }}</a>
+              </li>
+              <li>
+                <a href="/blogs/logout" style="margin: 0 3px;cursor:pointer;">Logout</a>
               </li>
             {% else %}
               <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/register">Register</a></li>-->
