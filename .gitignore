@@ -9,5 +9,6 @@ settings.json
 .idea*.sqlite3
 .idea/workspace.xml
 workspace.xml
-
-shared/migrations/
+shared/migrations/0*.py
+blogs/migrations/0*.py
+quiz/migrations/0*.py
