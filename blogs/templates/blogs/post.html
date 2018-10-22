@@ -5,7 +5,6 @@
     <div class="username" style="display: none">{{request.session.username}}</div>
     <div class="post-container">
         {% if "Post" in post.kind %}
-            <!--<div id="post-id">{{post.id}}</div>-->
             <div class="col s12 m4 sidebar" id="sidebar">
                 <div class="card blue-grey darken-1" style="position:relative;top:1px;width: 360px;left: -59px;">
                     <div class="card-action voting sidebar">
@@ -460,7 +459,7 @@
 
         function vote (content_id, value) {
             return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-                method: 'POST',
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                 body: JSON.stringify({
                     'vote': value
@@ -468,9 +467,16 @@
             });
         }
 
+        function get_vote (content_id) {
+            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+            });
+        }
+
         document.getElementById('comment_kind') ? document.getElementById('comment_kind').value = "{{ post.kind }}" : null;
         {% for comment in comments %}
-            vote("{{ comment.id }}", 0)
+            get_vote("{{ comment.id }}")
             .then(res => res.json()).then(json => {
                 let comment_btns = document.getElementById("comment-btns-{{ comment.id }}");
                 let helpful_btn = document.createElement('span');
@@ -504,7 +510,7 @@
             });
         {% endfor %}
 
-        vote("{{ post.id }}", 0)
+        get_vote("{{ post.id }}")
         .then(res => res.json()).then(json => {
             if (parseInt(json.exist) === 1) {
                 document.getElementById("upvote-btn-{{post.id}}").classList.add('disabled');
@@ -526,6 +532,7 @@
                         document.getElementById("score-{{post.id}}").innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (e.target.id === "downvote-{{post.id}}") {
@@ -537,12 +544,13 @@
                         document.getElementById("score-{{post.id}}").innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (/^answer-correct-btn-/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^answer-correct-btn-(\d+)$/)[1]);
                 fetch("/blogs/{{ post.id }}/", {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                     body: JSON.stringify({
                         'action': 'SetCorrectAnswer',
@@ -567,6 +575,7 @@
                         }
                     }
                 });
+                return;
             }
 
             if (/^comment-helpful-btn-/.test(e.target.id)) {
@@ -583,6 +592,7 @@
                         comment_score.innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (/^comment-unhelpful-btn-/.test(e.target.id)) {
@@ -598,6 +608,7 @@
                         comment_score.innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (e.target.id === 'save-btn') {
@@ -607,7 +618,7 @@
                 }
                 $.ajax({
                     url: url,
-                    type: 'POST',
+                    type: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
                     success: function(result){
                         console.log(result);
@@ -621,6 +632,7 @@
                         }
                     }
                 });
+                return;
             }
 
         });
@@ -655,7 +667,6 @@
             $(".media").css("display","none");
         });
 
-
         $( "#make-comments" ).click(function() {
             if($(".comment-box").css("display") == 'block'){
                 $(".comment-box").css("display","none");
@@ -683,45 +694,6 @@
                 $(this).nextAll().removeClass('cs');
             })
         })
-
-
-        $('.likes').click(function() {
-
-
-            console.log(event.target.id);
-            var curcomid = event.target.id;
-
-            var isVote = 1;
-
-            console.log($('.username').text())
-            console.log($('.vote').val())
-            console.log($('.comment-id').val())
-            console.log('是多少？')
-            console.log(curcomid)
-           $.ajax({
-
-                url: "/blogs/vote/",
-                type: 'GET',
-                data: {
-                    'username': $('.username').text(),
-                    'vote': isVote,
-                    'commentid': curcomid,
-                    'postid': $('#post-id').text()
-                },
-                success: function (data) {
-//                    alert(data);
-                    if (data == "You have voted"){
-                        $('.checkvote-'+curcomid).css("display","block");
-                    }else if(data == 'Done'){
-                        $('#'+curcomid).css("display","none");
-                        $('.'+curcomid).css("display","block");
-                    }
-
-                }
-            })
-        })
-
-
 
     </script>
 {% endblock %}

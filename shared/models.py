@@ -21,13 +21,10 @@ class UserProfile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             UserProfile.objects.create(user=instance)
+
     @property
     def score(self):
-        total_score = 0
-        contents = Content.objects.filter(author=self.user)
-        for content in contents:
-            total_score += content.score
-        return total_score
+        return sum([c.score for c in Content.objects.filter(author=self.user)])
 
     @property
     def favorites_id(self):
@@ -82,24 +79,6 @@ class UserProfile(models.Model):
     @property
     def rank(self):
         return len(list(filter(lambda x: x.score > self.score, UserProfile.objects.all()))) + 1
-
-    # @receiver(post_save, sender=User)
-    # def save_user_profile(sender, instance, **kwargs):
-    #     instance.shared.save()
-
-# class User(AbstractUser):
-
-#     def __str__(self):
-#         return self.username
-
-#     @staticmethod
-#     def create_student(username, password, email=''):
-#         return User.objects.create_user(username, email, password)
-
-#     @staticmethod
-#     def create_moderator(username, password, email=''):
-#         return User.objects.create_superuser(username, email, password)
-
 
 class PinBoard(models.Model):
     title = models.CharField(max_length=50)

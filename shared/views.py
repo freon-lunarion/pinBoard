@@ -2,29 +2,23 @@ from .models import *
 from blogs.models import Post,QnaQuestion
 from quiz.models import QuizBank
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404,redirect, render,render_to_response
+from django.http import JsonResponse
+from django.shortcuts import render
 import json
-from django.core.serializers import serialize
 # Create your views here.
 
 @login_required
 def vote(request, pk):
-    if (request.method == 'POST'):
+    if (request.method == 'PUT'):
         data = json.loads(request.body)
         vote =  data['vote']
-        if (int(vote) == 0):
-            return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
         return JsonResponse({'score': Vote.vote(pk, request.user.id, vote)})
-
-@login_required
-def score(request):
     if (request.method == 'GET'):
-        return JsonResponse({'score': sum([c.score for c in Content.objects.filter(author=request.user)])})
+        return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
 
 @login_required
 def user_avatar(request):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         data = json.loads(request.body)
         request.user.userprofile.avatar = data['avatar']
         request.user.userprofile.save()
@@ -53,16 +47,17 @@ def user_profile(request, pk):
 
 @login_required
 def user_like(request, pk):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         UserFavorite.create(pk, request.user.id)
         return JsonResponse({'message': 'Succeed'})
 
 @login_required
 def user_unlike(request, pk):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         UserFavorite.objects.get(content__id=pk, user=request.user).delete()
         return JsonResponse({'message': 'Succeed'})
 
+# Get user data for leaderboard
 @login_required
 def user(request):
     if request.method == 'GET':

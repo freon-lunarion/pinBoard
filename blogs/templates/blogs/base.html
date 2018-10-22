@@ -68,16 +68,16 @@
             </div>
 
           </div></li>
-          <li><a class="waves-effect" href="/blogs/create"><i class="material-icons">add_box</i>Create Post</a></li>
+          <li><a class="waves-effect" href="/blogs/createArticalPost"><i class="material-icons">add_box</i>Create Post</a></li>
           <li><a class="waves-effect modal-trigger" href="{% url 'shared:user_profile' request.user.userprofile.id %}"><i class="material-icons">account_box</i>My Profile</a></li>
-          <li><a class="waves-effect modal-trigger" href="#modal1"><i class="material-icons">border_color</i>Manage Account</a></li>
+          <li><a class="waves-effect modal-trigger" href="#reset-password-modal"><i class="material-icons">border_color</i>Manage Account</a></li>
           <li><div class="divider"></div></li>
           <li><a class="waves-effect" href="/blogs/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
         </ul>
       {% endif %}
 
-      <!-- Modal Structure -->
-      <div id="modal1" class="modal">
+      <!-- Reset Password Modal -->
+      <div id="reset-password-modal" class="modal">
         <div class="modal-content">
           <h4>Change Password</h4>
           <form  method="post">
@@ -93,7 +93,6 @@
       </div>
 
       <!--Upload Avatar Modal-->
-      <!--<form method="POST" action="{% url 'shared:user_avatar' %}">-->
       <div id="user" class="modal">
         <div class="modal-content">
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">Upload Avatar</h5>
@@ -108,7 +107,6 @@
             <div class="col s12 m8">
               <div class="row">
                 <input name="avatar" accept="image/*" required="" id="id_avatar" autocomplete="off" type="file">
-                <!--{{ form.as_p }}-->
               </div>
               <div class="row">
                 <button type="submit" id="submit-avatar" class="waves-effect waves-light btn-small cyan lighten-1">Submit</button>
@@ -149,15 +147,6 @@
       <nav class="nav-container pinboard">
         <div class="nav-wrapper transparent">
           <a href="/" class="brand-logo pinboard"><i class="large material-icons">event_note</i>Pinboard</a>
-          <!--{% if request.session.username %}-->
-            <!--<form style="height: 100%;left: 300px;position: absolute;">-->
-              <!--<div class="input-field">-->
-                <!--<input id="search" type="search" required style="width: 404px;" placeholder="Start with # to search tags">-->
-                <!--<label class="label-icon" for="search"><i class="material-icons" style="cursor: pointer;">search</i></label>-->
-                <!--<i class="material-icons">close</i>-->
-              <!--</div>-->
-            <!--</form>-->
-          <!--{% endif %}-->
           <ul class="right hide-on-med-and-down">
             {% if request.session.username %}
             <li><input id="search" type="search" required style="width: flex; width: 275px; color: white;" placeholder="Start with # to search tags"></li>
@@ -181,7 +170,7 @@
         <div class="modal-content" style="min-height: 200px;">
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">What type of post would you like to create?</h5>
           <div style="display:flex;justify-content: space-evenly">
-            <a href="/blogs/create">
+            <a href="/blogs/createArticalPost">
               <div class="card-panel waves-light  waves-effect post-type amber changecolor" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">event_note</i>
                 <span class="white-text">&nbsp;Article</span>
@@ -255,10 +244,6 @@
 
     </div>
 
-    <!--<div class="backtotop">回到顶部</div>-->
-
-
-
     <script>
       document.getElementById('id_avatar').onchange = (e) => {uploadAvatar(e)};
       function uploadAvatar(event) {
@@ -312,7 +297,7 @@
 
       document.getElementById('submit-avatar').addEventListener('click', event => {
         fetch("{% url 'shared:user_avatar' %}", {
-          method: 'POST',
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
           body: JSON.stringify({
             'avatar': document.getElementById('uploaded-avatar').src
@@ -371,27 +356,28 @@
 
 
       $('.resetpassword').click(event => {
-
-        console.log($('.newpassword').val());
-        console.log($('#password').text());
         $.ajax({
           url: "/blogs/reset/",
-          type: 'GET',
-          data: {
+          type: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+          data: JSON.stringify({
             'newpassword': $('.newpassword').val(),
             'renewpassword': $('.renewpassword').val(),
             'password': $('#password').text()
-
-           },
-          success: function (data) {
-              if (data == 'Done'){
-                $(".msgforreset2").css("display","block");
-                $(".msgforreset1").css("display","none");
-              }else if ('Password is not matched'){
-                $(".msgforreset1").css("display","block");
-                $(".msgforreset2").css("display","none");
-              }
-          }
+           }),
+          statusCode: {
+            400: function() {
+              $(".msgforreset1").css("display","block");
+              $(".msgforreset2").css("display","none");
+            },
+          },
+          success: function (data, statusText, xhr) {
+            if (xhr.status === 200) {
+              $(".msgforreset2").css("display","block");
+              $(".msgforreset1").css("display","none");
+              $("#reset-password-modal").modal('close');
+            }
+          },
         })
       });
 
