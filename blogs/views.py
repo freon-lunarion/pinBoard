@@ -42,7 +42,7 @@ class PostView(generic.DetailView):
             context['comments'] = question.answers
             context['comment_form'] = CommentForm()
 
-        context['users'] = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        context['users'] = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
 
         return context
 
@@ -128,7 +128,7 @@ def index(request):
 
     context = {
         'latest_post_list': latest_post_list,
-        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     }
 
     return render(request, 'blogs/index.html', context=context)
@@ -160,7 +160,7 @@ def create_artical_post(request):
             return HttpResponseRedirect(f'/blogs/{post.id}')
     return render(request, 'blogs/add_post.html', {
         'form': AddPostForm(),
-        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     })
 
 # Create image post
@@ -244,7 +244,7 @@ def create_question(request):
             return HttpResponseRedirect(f'/blogs/{question.id}')
     return render(request, 'blogs/add_question.html', {
         'form': AddQuestionForm(),
-        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     })
 
 # Pin a post or a question

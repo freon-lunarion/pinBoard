@@ -40,7 +40,7 @@ def user_profile(request, pk):
         'images' : images,
         'qna' : qna,
         'quiz' : quiz,
-        'users' : sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        'users' : sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     }
     
     return render(request,'shared/user_profile.html',context=context)
@@ -62,7 +62,7 @@ def user_unlike(request, pk):
 def user(request):
     if request.method == 'GET':
         users = []
-        for user in sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username)):
+        for user in sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]:
             user_json = {}
             user_json['avatar'] = user.avatar
             user_json['id'] = user.id
