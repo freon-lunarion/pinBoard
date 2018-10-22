@@ -104,7 +104,7 @@ def index(request):
                     res.append(QnaQuestion.objects.get(id=content))
         latest_post_list = sorted(res, key=lambda x: (x.score, x.published_date.timestamp()), reverse=True)
 
-    # Search by title
+    # Search by title and kind
     elif 'title' in request.GET:
         words = request.GET['title'].strip().split(' ')
         contents = [rec for rec in Post.objects.all()] + [rec for rec in QnaQuestion.objects.all()]
@@ -113,7 +113,7 @@ def index(request):
             hit = True
             for word in words:
                 m = re.compile(r'\b%s\b' % word, re.IGNORECASE)
-                if not m.search(content.title):
+                if not m.search(content.title) and word.lower() != content.kind.lower():
                     hit = False
                     continue
             if hit:

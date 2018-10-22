@@ -151,7 +151,8 @@
                         headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
                     }).then(res => {
                         if (res.status === 200) {
-                            e.target.setAttribute('data-tooltip', "Click to Unpin")
+                            e.target.setAttribute('data-tooltip', "Click to Unpin");
+                            document.location.reload();
                         }
                     });
                 }
@@ -161,7 +162,8 @@
                         headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" }
                     }).then(res => {
                         if (res.status === 200) {
-                            e.target.setAttribute('data-tooltip', "Click to Pin")
+                            e.target.setAttribute('data-tooltip', "Click to Pin");
+                            document.location.reload();
                         }
                     });
                 }

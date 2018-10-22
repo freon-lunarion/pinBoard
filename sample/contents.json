@@ -4,20 +4,21 @@
         "pk":1,
         "fields":{
             "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
-            "author": 1,
+            "author": 10,
             "published_date": "2018-10-01 10:10"
 
         }
     },
     {
-        "model": "blogs.Post",
+        "model": "blogs.QnaQuestion",
         "content": 1,
+        "pk":1,
         "fields":{
-           
-           "title": "First Article",
-           "kind": "Post"
+           "title": "First Question",
+           "kind": "Question"
         }
     },
+
     {
         "model": "shared.Content",
         "pk":2,
@@ -29,11 +30,11 @@
         }
     },
     {
-        "model": "blogs.Comment",
+        "model": "blogs.QnaAnswer",
         "content" : 2,
+        "pk":2,
         "fields":{
             "parent" : 1
-
         }
     },
     {
@@ -41,14 +42,15 @@
         "pk":3,
         "fields":{
             "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p>",
-            "author": 1,
+            "author": 3,
             "published_date": "2018-10-02 10:25"
 
         }
     },
     {
-        "model": "blogs.Comment",
+        "model": "blogs.QnaAnswer",
         "content" : 3,
+        "pk":3,
         "fields":{
             "parent" : 1
 
@@ -60,17 +62,19 @@
         "pk":4,
         "fields":{
             "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
-            "author": 2,
+            "author": 1,
             "published_date": "2018-10-04 08:30"
 
         }
     },
+
     {
         "model": "blogs.Post",
         "content": 4,
+        "pk":4,
         "fields":{
            
-           "title": "Second Article",
+           "title": "First Artical",
            "kind": "Post"
         }
     },
@@ -79,19 +83,20 @@
         "model": "shared.Content",
         "pk":5,
         "fields":{
-            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
-            "author": 4,
-            "published_date": "2018-10-06 12:30"
+            "detail": "https://preview.ibb.co/fL58BV/3-h.jpg",
+            "author": 10,
+            "published_date": "2018-10-04 08:30"
 
         }
     },
+
     {
         "model": "blogs.Post",
         "content": 5,
+        "pk":5,
         "fields":{
-           
-           "title": "Third Article",
-           "kind": "Post"
+           "title": "First Image",
+           "kind": "Image"
         }
     },
 
@@ -99,18 +104,109 @@
         "model": "shared.Content",
         "pk":6,
         "fields":{
-            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p><p>Nulla sed dapibus diam, et gravida lectus. In gravida velit ut ultrices lobortis. Donec eu lacus leo. Suspendisse accumsan pretium turpis et fringilla. Vestibulum eu lacus vel mauris rhoncus dictum. Curabitur pulvinar metus id eleifend aliquam. Vivamus vitae facilisis quam, nec vehicula nisi. Sed fermentum elit eget lectus suscipit lacinia. Nullam vel massa erat. Cras ultrices, lacus a egestas tempus, metus est dictum augue, eget posuere libero libero euismod enim. Mauris lacus lorem, malesuada id commodo venenatis, ornare non risus. Suspendisse viverra mi vitae velit sodales consectetur. Vivamus vestibulum fringilla quam, vel vulputate turpis consectetur eget. Praesent id lorem at ipsum sagittis pellentesque in pharetra sapien.</p>",
-            "author": 1,
-            "published_date": "2018-10-12 10:30"
+            "detail": "D6esTdOLXh4",
+            "author": 10,
+            "published_date": "2018-10-06 12:30"
+        }
+    },
+
+    {
+        "model": "blogs.Post",
+        "content": 6,
+        "pk":6,
+        "fields":{
+           "title": "First Vedio",
+           "kind": "Youtube"
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk":7,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p>",
+            "author": 4,
+            "published_date": "2018-10-06 12:30"
+        }
+    },
+
+    {
+        "model": "blogs.QnaQuestion",
+        "content": 7,
+        "pk":7,
+        "fields":{
+           "title": "Second Question",
+           "kind": "Question"
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk":8,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p>",
+            "author": 10,
+            "published_date": "2018-10-02 10:20"
+
+        }
+    },
+    {
+        "model": "blogs.QnaAnswer",
+        "content" : 8,
+        "pk":8,
+        "fields":{
+            "parent" : 7
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk":9,
+        "fields":{
+            "detail": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquet metus est, quis malesuada elit lacinia in. Pellentesque molestie non nunc sed fringilla. Duis pretium lorem et sollicitudin euismod. In ut massa a lectus porttitor luctus in sed nibh. Pellentesque eu erat ut erat posuere finibus. Sed dapibus non arcu a gravida. Fusce eleifend eget quam vel tincidunt. Donec diam tellus, ultrices ut lacinia et, consequat vitae dui. Donec egestas tempus neque.</p>",
+            "author": 6,
+            "published_date": "2018-10-02 10:20"
 
         }
     },
     {
         "model": "blogs.Comment",
-        "content" : 6,
+        "content" : 9,
+        "pk":9,
         "fields":{
-            "parent" : 5
+            "parent" : 4
+        }
+    },
 
+    {
+        "model": "shared.Tag",
+        "pk":1,
+        "fields":{
+            "title" : "Coding"
+        }
+    },
+
+    {
+        "model": "shared.Tag",
+        "pk":2,
+        "fields":{
+            "title" : "Django"
+        }
+    },
+
+    {
+        "model": "shared.ContentTag",
+        "fields":{
+            "content": 1,
+            "tag": 1
+        }
+    },
+
+    {
+        "model": "shared.ContentTag",
+        "fields":{
+            "content": 4,
+            "tag": 2
         }
     }
     
