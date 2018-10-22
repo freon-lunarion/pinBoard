@@ -457,24 +457,9 @@
             $('.tooltipped').tooltip();
         })
 
-        function vote (content_id, value) {
-            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-                body: JSON.stringify({
-                    'vote': value
-                })
-            });
-        }
-
-        function get_vote (content_id) {
-            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-            });
-        }
-
         document.getElementById('comment_kind') ? document.getElementById('comment_kind').value = "{{ post.kind }}" : null;
+
+        // Initialize the vote buttons for comments
         {% for comment in comments %}
             get_vote("{{ comment.id }}")
             .then(res => res.json()).then(json => {
@@ -510,6 +495,7 @@
             });
         {% endfor %}
 
+        // Initialize the vote buttons for the post
         get_vote("{{ post.id }}")
         .then(res => res.json()).then(json => {
             if (parseInt(json.exist) === 1) {
@@ -521,6 +507,7 @@
         document.addEventListener('click', e => {
             console.log(e.target.id);
 
+            // Upvote the post
             if (e.target.id === "upvote-{{post.id}}") {
                 console.log("upvote-{{post.id}}");
                 vote("{{post.id}}", 1)
@@ -535,6 +522,7 @@
                 return;
             }
 
+            // Downvote the post
             if (e.target.id === "downvote-{{post.id}}") {
                 vote("{{post.id}}", -1)
                 .then(res => res.json()).then(json => {
@@ -547,6 +535,7 @@
                 return;
             }
 
+            // Set a qna answer as correct answer (for post author only)
             if (/^answer-correct-btn-/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^answer-correct-btn-(\d+)$/)[1]);
                 fetch("/blogs/{{ post.id }}/", {
@@ -578,6 +567,7 @@
                 return;
             }
 
+            // Upvote a comment
             if (/^comment-helpful-btn-/.test(e.target.id)) {
                 let id = e.target.id.match(/^comment-helpful-btn-(\d+)$/)[1];
                 vote(id, 1)
@@ -595,6 +585,7 @@
                 return;
             }
 
+            // Downvote a comment
             if (/^comment-unhelpful-btn-/.test(e.target.id)) {
                 let id = e.target.id.match(/^comment-unhelpful-btn-(\d+)$/)[1];
                 vote(id, -1)
@@ -611,6 +602,7 @@
                 return;
             }
 
+            // Save the post as favorite
             if (e.target.id === 'save-btn') {
                 let url = "{% url 'shared:user_like' post.id %}";
                 if ($('#save-btn').hasClass('fas')) {

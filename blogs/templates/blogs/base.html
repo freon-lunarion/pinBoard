@@ -289,6 +289,25 @@
         reader.readAsDataURL(file);
       }
 
+      // Vote a content
+      function vote (content_id, value) {
+        return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+          body: JSON.stringify({
+            'vote': value
+          })
+        });
+      }
+
+      // Whether the content is already voted by this user
+      function get_vote (content_id) {
+        return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+        });
+      }
+
       // Initializing leaderboard
       //(function() {
       //  let leaderboard = $('#leaderboard-table');
