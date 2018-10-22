@@ -44,6 +44,19 @@ html {
 
 /* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
 
+@media(max-width: 800px) {
+  .post-type-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media(min-width: 999px) {
+  .hide-on-large {
+    display: none;
+  }
+}
+
 .sortable-card {
   padding: 10px 35px !important;
 }
