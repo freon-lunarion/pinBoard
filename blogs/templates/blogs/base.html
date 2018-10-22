@@ -68,7 +68,10 @@
             </div>
 
           </div></li>
-          <li><a class="waves-effect" href="/blogs/createArticalPost"><i class="material-icons">add_box</i>Create Post</a></li>
+          <li><a class="waves-effect modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons">add_box</i>Create Post</a></li>
+          <li><a class="waves-effect" href="/quiz/"><i class="material-icons">edit</i>Quiz Room</a></li>
+          <li><a class="waves-effect modal-trigger" data-target="leaderboard-modal" href="#leaderboard-modal"><i class="material-icons">people</i>Leaderboard</a></li>
+
           <li><a class="waves-effect modal-trigger" href="{% url 'shared:user_profile' request.user.userprofile.id %}"><i class="material-icons">account_box</i>My Profile</a></li>
           <li><a class="waves-effect modal-trigger" href="#reset-password-modal"><i class="material-icons">border_color</i>Manage Account</a></li>
           <li><div class="divider"></div></li>
@@ -168,13 +171,18 @@
             <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="leaderboard-modal" href="#leaderboard-modal"><i class="material-icons right">people</i>Leaderboard</a></li>
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
-              <li><span>Hello, {{ request.session.username }}&nbsp;</span></li>
+              <li>
+                <span style="margin: 0 5px;">Hello, {{ request.session.username }}&nbsp;<a style="margin: 0 5px;text-decoration: underline;padding:0;display: inline-block">Logout</a></span>
+              </li>
             {% else %}
               <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/register">Register</a></li>-->
               <!--<li><a class="waves-effect waves-light btn-flat white-text" style="margin-left: 0;margin-right: 0;" href="/blogs/login">Login</a></li>-->
             {% endif %}
+          </ul>
+          <ul class="right hide-on-large">
             <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display: block !important"><i class="material-icons">menu</i></a></li>
           </ul>
+
         </div>
       </nav>
 
@@ -182,7 +190,7 @@
       <div id="create-post-modal" class="modal grey lighten-2" style="max-width: 600px;">
         <div class="modal-content" style="min-height: 200px;">
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">What type of post would you like to create?</h5>
-          <div style="display:flex;justify-content: space-evenly">
+          <div class="post-type-container" style="display:flex;justify-content: space-evenly">
             <a href="/blogs/createArticalPost">
               <div class="card-panel waves-light  waves-effect post-type amber changecolor" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">event_note</i>
