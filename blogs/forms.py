@@ -42,18 +42,6 @@ class LoginForm(forms.Form):
                                     'id': 'password'
                                 }))
 
-class ManageForm(forms.Form):
-    newpassword = forms.CharField(max_length=128,
-                               widget=forms.TextInput(attrs={
-                                   'placeholder': 'newpassword',
-                                   'id': 'username'
-                               }))
-    renewpassword = forms.CharField(max_length=256,
-                                widget=forms.PasswordInput(attrs={
-                                    'placeholder': 'confirm',
-                                    'id': 'password'
-                                }))
-
 class AddPostForm(forms.Form):
     title = forms.CharField(max_length=128)
     detail = forms.CharField(required=False, widget=forms.Textarea)
@@ -70,16 +58,6 @@ class AddQuestionForm(forms.Form):
         'placeholder': 'use , to separate tags'
     }))
 
-class CommentForm(forms.Form):
-    comment_detail = forms.CharField(required=False, widget=forms.Textarea(attrs={
-        'id': "comment_detail",
-        'style': 'height: 300px'
-    }))
-    comment_kind = forms.CharField(widget=forms.TextInput(attrs={
-        'type': 'hidden',
-        'id': 'comment_kind'
-    }))
-
 class AddImageForm(forms.Form):
     title = forms.CharField(max_length=128)
     image = forms.CharField(required=False, widget=forms.FileInput(attrs={
@@ -93,4 +71,14 @@ class AddImageForm(forms.Form):
     detail = forms.CharField(widget=forms.TextInput(attrs={
         'id': 'detail',
         'type': 'hidden'
+    }))
+
+class CommentForm(forms.Form):
+    comment_detail = forms.CharField(required=False, widget=forms.Textarea(attrs={
+        'id': "comment_detail",
+        'style': 'height: 300px'
+    }))
+    comment_kind = forms.CharField(widget=forms.TextInput(attrs={
+        'type': 'hidden',
+        'id': 'comment_kind'
     }))

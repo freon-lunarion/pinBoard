@@ -98,7 +98,7 @@ def tryout_view(request,pk):
         'users':users 
     }
 
-    return render(request, 'quiz/tryout.html', context=context)      
+    return render(request, 'quiz/tryout.html', context=context)
 
 @login_required
 def question_view(request,pk):

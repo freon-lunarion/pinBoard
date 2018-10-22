@@ -22,14 +22,17 @@ class UserProfile(models.Model):
         if created:
             UserProfile.objects.create(user=instance)
 
+    # Score that a user receives as their work being voted by others
     @property
     def score(self):
         return sum([c.score for c in Content.objects.filter(author=self.user)])
 
+    # Ids of user's favorite posts
     @property
     def favorites_id(self):
         return [x.content.id for x in sorted(UserFavorite.objects.filter(user=self.user), key=lambda x: -x.create_time.timestamp())]
 
+    # User's favorite posts
     @property
     def favorites(self):
         from blogs.models import Post, QnaQuestion
@@ -46,20 +49,24 @@ class UserProfile(models.Model):
                     res.append(QnaQuestion.objects.get(id=content.id))
         return res
 
+    # How many qna answers did the user give
     @property
     def total_answer_num(self):
         from blogs.models import QnaAnswer
         return QnaAnswer.objects.filter(author=self.user).count()
 
+    # How many qna answers that the user gave were approved as correct answer for qna questions
     @property
     def correct_answer_num(self):
         from blogs.models import QnaAnswer
         return QnaAnswer.objects.filter(author=self.user, is_correct=True).count()
 
+    # The ratio of #correct answer / #total answer
     @property
     def correct_answer_percentage(self):
         return f'{round(100 * (self.correct_answer_num / self.total_answer_num) if self.total_answer_num else 0, 1)}%'
 
+    # Five posts with highest score
     @property
     def top_five_posts(self):
         from blogs.models import Post, QnaQuestion
@@ -76,10 +83,12 @@ class UserProfile(models.Model):
                     res.append(QnaQuestion.objects.get(id=content.id))
         return res
 
+    # Score rank
     @property
     def rank(self):
         return len(list(filter(lambda x: x.score > self.score, UserProfile.objects.all()))) + 1
 
+# Pinboard model which is not used in the demo. For further development.
 class PinBoard(models.Model):
     title = models.CharField(max_length=50)
     detail = models.TextField()
@@ -92,7 +101,7 @@ class PinBoard(models.Model):
     def create(title, creator, detail=''):
         return PinBoard.objects.create(title=title, detail=detail, creator=creator)
 
-
+# Base model for post, comment, qna question, qna answer and quiz quesiton, supporting voting, tagging and saving as favorite
 class Content(models.Model):
     detail = tinymce_models.HTMLField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -119,7 +128,7 @@ class Content(models.Model):
         return [obj.tag.title for obj in ContentTag.objects.filter(content__exact=self)]
 
 
-
+# Tags
 class Tag(models.Model):
     title = models.CharField(max_length=50)
 
@@ -131,6 +140,7 @@ class Tag(models.Model):
         return Tag.objects.create(title=title)
 
 
+# Relate contents to tags
 class ContentTag(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
@@ -144,7 +154,7 @@ class ContentTag(models.Model):
         tag = get_object_or_404(Tag, id=tag_id)
         return ContentTag.objects.create(content=content, tag=tag)
 
-
+# Store voting data
 class Vote(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -167,6 +177,7 @@ class Vote(models.Model):
         else:
             return 0
 
+# Relate users to favorite posts
 class UserFavorite(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)

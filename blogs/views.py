@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404, redirect, render,render_to_respo
 from django.views import generic
 import json, re
 from django.utils.decorators import method_decorator
-from django.http import QueryDict
 
 # Render content of posts
 class PostView(generic.DetailView):
@@ -82,7 +81,7 @@ class PostView(generic.DetailView):
                 return JsonResponse({'score': question.score})
         return HttpResponseRedirect(f'/blogs/{self.pk}')
 
-# Index page, supporting search by tags and search by title
+# Render index page, supporting search by tags and search by title
 @login_required
 def index(request):
 
@@ -247,7 +246,7 @@ def create_question(request):
         'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     })
 
-# Pin a post or a question
+# API: Pin a post or a question
 @login_required
 def pin(request, pk):
     if (request.method == 'PUT'):
@@ -270,7 +269,7 @@ def pin(request, pk):
             question.save()
         return HttpResponse(status=200)
 
-# Unpin a post or a question
+# API: Unpin a post or a question
 @login_required
 def unpin(request, pk):
     if (request.method == 'PUT'):
@@ -292,36 +291,6 @@ def unpin(request, pk):
             question.operator = request.user
             question.save()
         return HttpResponse(status=200)
-
-def manage(request):
-    if request.method == 'POST':
-        manage_form = ManageForm(request.POST)
-
-        if manage_form.is_valid():
-            newpassword = request.POST['newpassword']
-            renewpassword = request.POST['renewpassword']
-
-            latest_post_list = sorted(User.objects.all(), key=lambda p: (p.score, p.published_date.timestamp()
-                                                                             if p.published_date else 0), reverse=True)
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                request.session['userid'] = user.id
-                request.session['username'] = user.username
-                request.session['useremail'] = user.email
-                request.session['avatar'] = user.userprofile.avatar
-                print(user.userprofile.avatar)
-                request.session.set_expiry(600)
-                return HttpResponseRedirect('/blogs')
-
-            else:
-                error = 'Username or password is not right!'
-                return render(request,'blogs/login.html', {'form': LoginForm(), 'error': error})
-
-        return render(request, 'blogs/login.html', locals())
-
-    manage_form = ManageForm()
-    return render(request, 'blogs/login.html', {'form': manage_form, 'message': ''})
 
 # Log in
 def login_view(request):
@@ -356,7 +325,6 @@ def login_view(request):
 def register(request):
     if (request.method == 'POST'):
         register_form = RegisterForm(request.POST)
-        # message = "Please check the information"
         if register_form.is_valid():
             username = request.POST['username']
             password = request.POST['password']            
@@ -382,8 +350,6 @@ def register(request):
                 request.session['useremail'] = user.email
                 request.session.set_expiry(600)
                 return HttpResponseRedirect('/blogs')
-            # message = 'Registered Successfully!'
-            # return render_to_response("blogs/login.html")
         else:
             email_message = 'Invalid input!'
             return HttpResponseRedirect('/blogs/register/', {'form': RegisterForm(), 'email_message': email_message})
@@ -400,7 +366,7 @@ def logout_view(request):
         pass
     return HttpResponseRedirect('/blogs/login/')
 
-# Reset password
+# API: Reset password
 @login_required
 def reset(request):
     if (request.method == 'PUT'):
@@ -413,4 +379,3 @@ def reset(request):
         user.set_password(renewpassword)
         user.save()
         return HttpResponse('Done', status=200)
-
