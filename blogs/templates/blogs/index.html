@@ -179,6 +179,13 @@
                         document.getElementById(`upvote-${id}`).parentNode.classList.add('disabled');
                         document.getElementById(`downvote-${id}`).parentNode.classList.add('disabled');
                         document.getElementById(`score-${id}`).innerHTML = json.score;
+                        console.log(e.target.parentNode.parentNode.parentNode.parentNode.parentNode);
+                        e.target.parentNode.parentNode.parentNode.parentNode.parentNode.setAttribute('data-sort', json.score);
+                        $('.sortable-card').sort((a, b) => {
+                          const scoreA = parseInt($(a).attr('data-sort'));
+                          const scoreB = parseInt($(b).attr('data-sort'));
+                          return (scoreA < scoreB) ? 1 : -1;
+                        }).appendTo('#top-posts-container');
                     }
                 });
             }
@@ -192,6 +199,12 @@
                         document.getElementById(`upvote-${id}`).parentNode.classList.add('disabled');
                         document.getElementById(`downvote-${id}`).parentNode.classList.add('disabled');
                         document.getElementById(`score-${id}`).innerHTML = json.score;
+                        e.target.parentNode.parentNode.parentNode.parentNode.parentNode.setAttribute('data-sort', json.score);
+                        $('.sortable-card').sort((a, b) => {
+                          const scoreA = parseInt($(a).attr('data-sort'));
+                          const scoreB = parseInt($(b).attr('data-sort'));
+                          return (scoreA < scoreB) ? 1 : -1;
+                        }).appendTo('#top-posts-container');
                     }
                 });
             }

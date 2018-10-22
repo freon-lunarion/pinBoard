@@ -360,22 +360,22 @@
       });
 
       // handle pressing of upvote/downvote button
-      $('.btn-flat.vote').click(event => {
-        const postID = $(event.target).attr('post_id');
-        let scoreValue = $(`#score-${postID}`).text(); 
-        if (event.target.id.indexOf('upvote') > -1) {
-          $(`#score-${postID}`).text(++scoreValue);
-        } else if (event.target.id.indexOf('downvote') > -1) {
-          $(`#score-${postID}`).text(--scoreValue);
-        }
+      //$('.btn-flat.vote').click(event => {
+      //  const postID = $(event.target).attr('post_id');
+      //  let scoreValue = $(`#score-${postID}`).text();
+      //  if (event.target.id.indexOf('upvote') > -1) {
+      //    $(`#score-${postID}`).text(++scoreValue);
+      //  } else if (event.target.id.indexOf('downvote') > -1) {
+      //    $(`#score-${postID}`).text(--scoreValue);
+      //  }
 
         //secondary effect, sort all the cards if necessary
-        $('.sortable-card').sort((a, b) => {
-          const scoreA = parseInt($(a).attr('data-sort'));
-          const scoreB = parseInt($(b).attr('data-sort'));
-          return (scoreA < scoreB) ? 1 : -1;
-        }).appendTo('#top-posts-container');
-      });
+      //  $('.sortable-card').sort((a, b) => {
+      //    const scoreA = parseInt($(a).attr('data-sort'));
+      //    const scoreB = parseInt($(b).attr('data-sort'));
+      //    return (scoreA < scoreB) ? 1 : -1;
+      //  }).appendTo('#top-posts-container');
+      //});
 
       //toggle image post form
       $('#toggle-image-post-form').click(event => {
