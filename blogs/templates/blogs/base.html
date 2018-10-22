@@ -182,7 +182,7 @@
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">What type of post would you like to create?</h5>
           <div style="display:flex;justify-content: space-evenly">
             <a href="/blogs/create">
-              <div class="card-panel waves-light  waves-effect post-type amber" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
+              <div class="card-panel waves-light  waves-effect post-type amber changecolor" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">event_note</i>
                 <span class="white-text">&nbsp;Article</span>
               </div>
@@ -191,14 +191,14 @@
             <div class="image-or-video" style="display: flex; flex-direction: column;justify-content: space-evenly">
 
                 <a id="toggle-image-post-form">
-                  <div class="card-panel waves-light waves-effect post-type cyan lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:55px;margin-bottom: 5px">
+                  <div class="card-panel waves-light waves-effect post-type cyan lighten-1 changecolor" style="display:flex;align-items: center;justify-content: center;width:150px;height:55px;margin-bottom: 5px">
                       <i class="material-icons" style="color: white">insert_photo</i>
                     <span class="white-text">&nbsp;Image</span>
                   </div>
                 </a>
                 
                 <a id="toggle-youtube-post-form">
-                  <div class="card-panel waves-light waves-effect post-type red lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:55px;">
+                  <div class="card-panel waves-light waves-effect post-type red lighten-1 changecolor" style="display:flex;align-items: center;justify-content: center;width:150px;height:55px;">
                     <i class="fab fa-youtube" style="color:white; font-size: 25px;"></i>
                     <span class="white-text">&nbsp;Youtube</span>
                   </div>
@@ -207,7 +207,7 @@
             </div>
 
             <a href="/blogs/createQuestion">
-              <div class="card-panel waves-light waves-effect post-type light-green lighten-1" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
+              <div class="card-panel waves-light waves-effect post-type light-green lighten-1 changecolor" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">question_answer</i>
                 <span class="white-text">&nbsp;Question</span>
               </div>
@@ -413,6 +413,15 @@
         },30);
 
       })
+
+      $(".changecolor").mouseover(function(){
+        // $(this).addClass( "z-depth-3" );
+        $(this).css('box-shadow', '0 8px 15px 2px rgba(0,0,0,0.4)');
+      });
+      $(".changecolor").mouseout(function(){
+        // $(this).removeClass( "z-depth-3" );
+        $(this).css('box-shadow', '0 2px 2px 0 rgba(0,0,0,0.2)');
+      });
 
     </script>
 

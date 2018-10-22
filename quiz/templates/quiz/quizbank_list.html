@@ -9,7 +9,7 @@
 
     {% for rec in quizbank_list %}
     <div class="col s12 m6 l3">
-            <div class="card blue-grey darken-1 post">
+            <div class="card blue-grey darken-1 post changecolor">
                 <div class="card-content with-comments white-text post">
                     <div>
                         <span class="card-title">{{ rec.title }}</span>
@@ -29,6 +29,17 @@
                 </div>
             </div>
         </div>
+
+<script>
+    $(".changecolor").mouseover(function(){
+        // $(this).addClass( "z-depth-3" );
+        $(this).css('box-shadow', '0 8px 15px 2px rgba(0,0,0,0.4)');
+    });
+    $(".changecolor").mouseout(function(){
+        // $(this).removeClass( "z-depth-3" );
+        $(this).css('box-shadow', '0 2px 2px 0 rgba(0,0,0,0.2)');
+    });
+</script>
       <!-- <li>
         <a href="{{ rec.id }}">{{ rec.title }}</a> ({{rec.author}})
       </li> -->
