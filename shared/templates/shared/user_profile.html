@@ -9,9 +9,9 @@
         <div class="card horizontal" style="height: 210px;">
             <div class="card-image">
                 {% if profile.avatar %}
-                <img class="circle" src="{{ profile.avatar }}" style="width:180px;height:180px;">
+                <img class="circle upImage" src="{{ profile.avatar }}" style="width:180px;height:180px;">
                 {% else %}
-                <img class="circle" src="{% static '/images/empty-profile.png' %}" style="width:180px;height:180px;">
+                <img class="circle upImage" src="{% static '/images/empty-profile.png' %}" style="width:180px;height:180px;">
                 {% endif %}
             </div>
             <div class="card-content">
