@@ -83,9 +83,9 @@
                     {% for comment in comments %}
 
                         <div class="card horizontal" style="max-width: 450px;margin-bottom: 25px;">
-                            <div class="card-image" style="background: url('{{comment.author.userprofile.avatar}}');background-size:cover;width:150px;height:150px;">
+                            <div class="card-image" style="background-size:cover;width:150px;height:150px;">
                                 {% if comment.author.userprofile.avatar %}
-                                    <img src="{{comment.author.userprofile.avatar}}" style="max-width: 150px">
+                                    <img src="{{comment.author.userprofile.avatar}}" style="width:150px;height:150px;"">
                                 {% else %}
                                     <img src="/static/images/empty-profile.png" style="width:150px;height:150px;">
                                 {% endif %}
@@ -93,7 +93,7 @@
                                     <span class="award rank tooltipped" data-position="top" data-tooltip="Rank"> <i class="fas fa-hashtag"></i> {{ comment.author.userprofile.rank }} </span>
 
                                     <span class="award tooltipped" data-position="bottom" data-tooltip="Points"> <i class="fas fa-star"></i> {{ comment.author.userprofile.score }} </span>
-                                        
+
                                     <span class="award correct tooltipped" data-position="top" data-tooltip="Correct Answers"> <i class="fas fa-certificate"></i> {{ comment.author.userprofile.correct_answer_num}} </span>
                                 </div>
                                  <!--<img src="https://i.imgur.com/cMYa0BJ.png" style="max-width: 50px">-->
