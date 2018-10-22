@@ -718,15 +718,15 @@ img {
 }
 
 
-/*@media only screen and (max-width: 999px) {*/
-  /*#changepassword {*/
-    /*!*display: none;*!*/
-     /*visibility: hidden;*/
-  /*}*/
-  /*#profile{*/
-    /*margin-top: -9px;*/
-  /*}*/
-/*}*/
+@media only screen and (max-width: 999px) {
+  #changepassword {
+    /*display: none;*/
+     visibility: hidden;
+  }
+  #profile{
+    margin-top: -9px;
+  }
+}
 
 
 
