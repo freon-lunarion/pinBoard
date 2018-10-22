@@ -4,11 +4,8 @@
     <list default="true" id="bc9605c8-4e8a-4eb9-86cd-6703b364d7f8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/blogs/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/views.py" afterPath="$PROJECT_DIR$/blogs/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/livesession/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/livesession/migrations/0001_initial.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quiz/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/quiz/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quiz/views.py" afterPath="$PROJECT_DIR$/quiz/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/views.py" afterPath="$PROJECT_DIR$/shared/views.py" />
     </list>
     <ignored path="pinBoard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -575,7 +572,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540018090632</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Top ten users">
+      <created>1540198457372</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1540198457374</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -659,7 +663,8 @@
     <MESSAGE value="Image can be uploaded for image post" />
     <MESSAGE value="Made the size of login/register window fixed. So the input lines won't go out of the window when developer console is open." />
     <MESSAGE value="Roll back for post.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Roll back for post.html" />
+    <MESSAGE value="Top ten users" />
+    <option name="LAST_COMMIT_MESSAGE" value="Top ten users" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
