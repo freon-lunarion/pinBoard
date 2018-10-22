@@ -208,6 +208,131 @@
             "content": 4,
             "tag": 2
         }
+    },
+    {
+        "model": "quiz.QuizBank",
+        "pk": 1,
+        "fields":{
+            "title": "First Quiz Set",
+            "detail": "COMP9315 Quiz 1",
+            "creator": 10
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk": 10,
+        "fields":{
+            "detail": "Under the PGDATA directory are two subdirectories base and global. Under base are a further collection of subdirectories. The subdirectories under base and the global directory itself contain files which hold table data. What is the difference between the tables held under base and those held in global?",
+            "author": 10,
+            "published_date": "2018-10-07 12:30"
+        }
+    },
+
+    {
+        "model": "quiz.Question",
+        "pk": 10,
+        "fields":{
+            "quizBank": 1
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 1,
+        "fields":{
+            "question": 10,
+            "detail": "All user tables are located under base; all catalog tables are located in global.",
+            "isCorrect": "False"
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 2,
+        "fields":{
+            "question": 10,
+            "detail": "All catalog tables are located under base; all user tables are located under global.",
+            "isCorrect": "False"
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 3,
+        "fields":{
+            "question": 10,
+            "detail": "All user tables and catalog tables are located under base; global contains log tables.",
+            "isCorrect": "False"
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 4,
+        "fields":{
+            "question": 10,
+            "detail": "All user tables plus some catalog tables are located under base; global contains catalog tables shared by all databases.",
+            "isCorrect": "True"
+        }
+    },
+
+    {
+        "model": "shared.Content",
+        "pk": 11,
+        "fields":{
+            "detail": "Which of the following SQL queries will give a list of the file paths of the data files for all of the tables in the public schema? Names should be given relative to the PGDATA directory.",
+            "author": 10,
+            "published_date": "2018-10-07 12:31"
+        }
+    },
+
+    {
+        "model": "quiz.Question",
+        "pk": 11,
+        "fields":{
+            "quizBank": 1
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 5,
+        "fields":{
+            "question": 11,
+            "detail": "select c.relname, pg_relation_filepath(c.oid) as relfile from pg_class c join pg_namespace n on (c.relnamespace = n.oid) where c.relkind='r' and n.nspname = 'public';",
+            "isCorrect": "True"
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 6,
+        "fields":{
+            "question": 11,
+            "detail": "select c.relname, pg_relation_filepath(c.oid) as relfile from pg_class c join pg_namespace n on (c.relnamespace = n.oid) where c.relkind='t' and n.nspname = 'public';",
+            "isCorrect": "False"
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 7,
+        "fields":{
+            "question": 11,
+            "detail": "select c.relname, 'data/'||n.oid||'/'||c.oid as relfile from pg_class c join pg_namespace n on (c.relnamespace = n.oid) where c.relkind='t' and n.nspname = 'public';",
+            "isCorrect": "False"
+        }
+    },
+
+    {
+        "model": "quiz.Options",
+        "pk": 8,
+        "fields":{
+            "question": 11,
+            "detail": "select c.relname, 'data/'||c.oid||'/'||n.oid as relfile from pg_class c join pg_namespace n on (c.relnamespace = n.oid) where c.relkind='r' and n.nspname = 'public';",
+            "isCorrect": "False"
+        }
     }
     
 ]
