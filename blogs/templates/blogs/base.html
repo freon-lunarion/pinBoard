@@ -324,10 +324,14 @@
             'avatar': document.getElementById('uploaded-avatar').src
           })
         }).then(res => res.json()).then(json => {
-            if (json.message === 'Succeed') {
-                document.getElementById('user-avatar').src=document.getElementById('uploaded-avatar').src;
-                $('.modal').modal('close');
+          if (json.message === 'Succeed') {
+            document.getElementById('user-avatar').src=document.getElementById('uploaded-avatar').src;
+            let user_profile_avatar = document.getElementById('user-profile-avatar');
+            if (user_profile_avatar !== undefined) {
+              user_profile_avatar.setAttribute('src', document.getElementById('uploaded-avatar').src);
             }
+            $('.modal').modal('close');
+          }
         });
       });
 
