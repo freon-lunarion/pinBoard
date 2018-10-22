@@ -1,6 +1,6 @@
 # pinBoard
 
-App Deployment Instructions
+### App Deployment Instructions
 
 *Requirements:*  
   Python 3, pip3, virtualenv
@@ -22,6 +22,10 @@ App Deployment Instructions
 2. Open terminal, go to installed directory
 3. Run: python manage.py runserver
 4. Navigate to running server page (http://127.0.0.1:8000 port may be different based on configuration)
+
+### Feature Tryout Instructions
+
+
 
 
 # Reference Documents
