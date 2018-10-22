@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc9605c8-4e8a-4eb9-86cd-6703b364d7f8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/templates/blogs/index.html" afterPath="$PROJECT_DIR$/blogs/templates/blogs/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blogs/views.py" afterPath="$PROJECT_DIR$/blogs/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sample/contents.json" afterPath="$PROJECT_DIR$/sample/contents.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sample/users.json" afterPath="$PROJECT_DIR$/sample/users.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.sh" afterPath="$PROJECT_DIR$/setup.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html" afterPath="$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html" />
     </list>
     <ignored path="pinBoard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,35 +63,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogs/models.py">
+      <file leaf-file-name="quizbank_detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quiz/templates/quiz/quizbank_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-576">
-              <caret line="66" column="34" lean-forward="true" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shared/tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="1515">
+              <caret line="101" column="16" lean-forward="true" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shared/models.py">
+      <file leaf-file-name="quizbank_list.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-714">
-              <caret line="85" column="16" lean-forward="false" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
+            <state relative-caret-position="-28">
+              <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <marker date="1540223871000" expanded="true" signature="324:340" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_profile.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shared/templates/shared/user_profile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="378" column="4" lean-forward="false" selection-start-line="378" selection-start-column="4" selection-end-line="401" selection-end-column="10" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <marker date="1540215136000" expanded="true" signature="15439:15448" ph="..." />
               </folding>
             </state>
           </provider>
@@ -157,7 +157,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogs/templates/blogs/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2490">
@@ -217,8 +217,8 @@
       <find>save-btn</find>
       <find>shared</find>
       <find>kind</find>
-      <find>location</find>
       <find>pin</find>
+      <find>location</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -255,7 +255,6 @@
         <option value="$PROJECT_DIR$/pinBoard/urls.py" />
         <option value="$PROJECT_DIR$/blogs/static/css/styles.css" />
         <option value="$PROJECT_DIR$/shared/templates/shared/userprofile_list.html" />
-        <option value="$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html" />
         <option value="$PROJECT_DIR$/shared/urls.py" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/question_post_card.html" />
         <option value="$PROJECT_DIR$/blogs/templates/blogs/youtube_post_card.html" />
@@ -278,6 +277,7 @@
         <option value="$PROJECT_DIR$/blogs/templates/blogs/index.html" />
         <option value="$PROJECT_DIR$/../../pinBoard 6/pinBoard/blogs/templates/blogs/index.html" />
         <option value="$PROJECT_DIR$/blogs/views.py" />
+        <option value="$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html" />
       </list>
     </option>
   </component>
@@ -657,9 +657,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="829" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18168813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42915532" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -998,47 +997,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-          <folding>
-            <marker date="1540211863000" expanded="true" signature="324:340" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="433:1667" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="500:1652" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="573:986" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="599:881" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="739:854" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="1035:1633" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="1061:1532" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="1677:2016" ph="..." />
-            <marker date="1540211863000" expanded="true" signature="2028:2114" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quiz/templates/quiz/quizbank_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1400">
-          <caret line="101" column="16" lean-forward="true" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shared/templates/shared/user_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-124">
-          <caret line="378" column="1" lean-forward="true" selection-start-line="378" selection-start-column="1" selection-end-line="401" selection-end-column="10" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1540215136000" expanded="true" signature="15439:15448" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quiz/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -1234,6 +1192,38 @@
         <state relative-caret-position="2490">
           <caret line="166" column="25" lean-forward="false" selection-start-line="166" selection-start-column="25" selection-end-line="166" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quiz/templates/quiz/quizbank_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1515">
+          <caret line="101" column="16" lean-forward="true" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shared/templates/shared/user_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="378" column="4" lean-forward="false" selection-start-line="378" selection-start-column="4" selection-end-line="401" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#a#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1540215136000" expanded="true" signature="15439:15448" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quiz/templates/quiz/quizbank_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding>
+            <marker date="1540223871000" expanded="true" signature="324:340" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

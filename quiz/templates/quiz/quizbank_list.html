@@ -8,25 +8,28 @@
   </ul>
   {% if quizbank_list %}
 
-    {% for rec in quizbank_list %}
-    <div class="col s12 m6 l3">
-        <div class="card blue-grey darken-1 post changecolor">
+    {% for post in quizbank_list %}
+    <div class="col s12 m6 l4 sortable-card" data-sort="{{ post.score }}">
+        <div class="card blue-grey darken-1 question changecolor">
             <div class="card-content with-comments white-text post">
-                <div>
-                    <span class="card-title">{{ rec.title }}</span>
-                    <div class="card-description post-preview">
-                        <p>{{ rec.detail|striptags|safe|truncatechars:90 }}</p>
+                <div class="content-with-utility">
+                    <div class="card-utility">
+                        <i class="material-icons title">edit</i>
+                    </div>
+                    <div class="card-preview-content">
+                        <span class="card-title">{{ post.title }}</span>
+                        <div class="card-description post-preview">
+                            <p>{{ post.detail|striptags|safe|truncatechars:90 }}</p>
+                        </div>
                     </div>
                 </div>
-                <!-- <div class="card-comments">{{ post.comments }}</div> -->
+                <div class="card-comments">{{ post.question_count_string }}</div>
             </div>
             <div class="card-action voting">
-                <!-- <div class="score-container">
-                    <a class="btn-flat vote" style="padding-left: 0"><i id="downvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_downward</i></a>
+                <div class="score-container">
                     <span id="score-{{ post.id }}" class="score">{{ post.score }}</span>
-                    <a class="btn-flat vote"><i id="upvote-{{ post.id }}" post_id="{{ post.id }}" class="material-icons">arrow_upward</i></a>
-                </div> -->
-                <a class="card-open" href="/quiz/{{ rec.id }}">Open</a>
+                </div>
+                <a class="card-open waves-effect waves-light" href="/quiz/{{ post.id }}">Open</a>
             </div>
         </div>
     </div>
