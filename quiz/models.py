@@ -40,6 +40,22 @@ class QuizBank(models.Model):
         else:
             return False
 
+    @property
+    def score(self):
+        return sum([q.score for q in Question.objects.filter(quizBank=self)])
+
+    @property
+    def question_count_string(self):
+        count = Question.objects.filter(quizBank=self).count()
+        count_string = ''
+        if count == 0:
+            count_string = "No Questions"
+        if count == 1:
+            count_string = "1 Question"
+        if count > 1:
+            count_string = str(count) + ' Questions'
+        return count_string
+
 
     def __str__(self):
         """String for representing the QuizBank object."""
