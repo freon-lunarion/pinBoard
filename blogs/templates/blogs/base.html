@@ -134,7 +134,7 @@
 
                 <div class="leaderboard-avatar">
                   {% if user.avatar %}
-                  <img src="{{user.avatar}}" class="circle rounded float-left" style="max-height:80px;max-width: 80px;">
+                  <img src="{{user.avatar}}" class="circle rounded float-left" style="max-height:80px;max-width: 80px; padding: 10px;">
                   {% else %}
                   <img src="{% static '/images/empty-profile.png' %}" class="circle rounded float-left" style="max-height:80px;max-width: 80px;padding:10px;">
                   {% endif %}
