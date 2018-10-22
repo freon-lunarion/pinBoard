@@ -340,7 +340,7 @@ def login_view(request):
                 request.session['password'] = user.password
                 request.session['avatar'] = user.userprofile.avatar
                 print(user.userprofile.avatar)
-                request.session.set_expiry(600)
+                request.session.set_expiry(6000)
                 return HttpResponseRedirect('/blogs')
                 
             else:
