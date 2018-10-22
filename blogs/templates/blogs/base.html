@@ -117,29 +117,42 @@
       </div>
 
       <!--leaderboard modal-->
-      <div id="leaderboard-modal" class="modal modal-lg">
+      <div id="leaderboard-modal" class="modal modal-lg" stlye="max-width: 700px">
         <div class="modal-content">
-          <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">Leaderboard</h5>
-          <ul id="leaderboard-table">
+          <h5 style="font-weight:100;text-align: center;margin-top:5px">Leaderboard</h5>
+          <h6 style="font-weight:100;text-align: center;margin-bottom: 24px">Top 10 Contributors</h6>
+          <div class="leaderboard-grid" style="display: grid; grid-template: repeat(5, 1fr) / 1fr 1fr;grid-auto-flow: column;">
             {% for user in users %}
-            <li class="card touch-leaderboard" id="user-{{user.id}}">
-              <a href="{% url 'shared:user_profile' user.id %}">
-              <div class="row">
-                {% if user.avatar %}
-                <img src="{{user.avatar}}" class="circle rounded float-left" style="height:80px;vertical-align:middle;padding:10px">
-                {% else %}
-                <img src="{% static '/images/empty-profile.png' %}" class="circle rounded float-left" style="height:80px;vertical-align:middle;padding:10px">
-                {% endif %}
-                <span>{{user.user.username}}</span>
-                <span>correct answer / total answer: {{user.correct_answer_num}} / {{user.total_answer_num}}</span>
-                <span>percentage: {{user.correct_answer_percentage}}</span>
-                <span>score: {{user.score}}</span>
-                <span>rank: {{user.rank}}</span>
+              <div class="leaderboard-grid-row card s6 m6 l6" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
+
+                <div class="leaderboard-rank rank-{{ user.rank }}" style="display: flex;justify-content: center; align-items:center;">
+                  {{ user.rank }}
+                </div>
+
+                <div class="leaderboard-avatar">
+                  {% if user.avatar %}
+                  <img src="{{user.avatar}}" class="circle rounded float-left" style="max-height:80px;max-width: 80px;">
+                  {% else %}
+                  <img src="{% static '/images/empty-profile.png' %}" class="circle rounded float-left" style="max-height:80px;max-width: 80px;padding:10px;">
+                  {% endif %}
+                </div>
+
+                <div class="leaderboard-username" style="display: flex;justify-content: flex-start; align-items:center;">
+                  {{ user.user.username }}
+                </div>
+
+                <div class="leaderboard-username" style="display: flex;justify-content: space-evenly; align-items:center;flex-direction: column">
+                  <span class="new badge question-state points" data-badge-caption=" ">{{ user.score }} Points</span>
+                  <span class="new badge question-state correct tooltipped" data-badge-caption=" " data-position="top" data-tooltip="{{user.correct_answer_percentage}} Correct answer rate">{{ user.correct_answer_num }} Answers</span>
+                </div>
+
               </div>
-              </a>
-            </li>
             {% endfor %}
-          </ul>
+          </div>
+
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+          </div>
         </div>
       </div>
 
