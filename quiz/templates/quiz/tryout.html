@@ -1,7 +1,10 @@
 {% extends "blogs/base.html" %}
 {% block content %}
-<h1 class="white-text">{{ title }}</h1>
+<h1 class="white-text">Attempt {{ title }} Quiz Set</h1>
 <hr>
+<ul>
+  <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="#" onclick="history.go(-1)"><i class="material-icons left">arrow_back</i>Back to Quiz Set</a></li>
+</ul>
 {% for question in questions %}
     <div class="post-container">
         <div class="col sm12 m12">
