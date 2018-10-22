@@ -71,7 +71,7 @@ class UserProfile(models.Model):
     def top_five_posts(self):
         from blogs.models import Post, QnaQuestion
         contents = sorted([rec for rec in Content.objects.filter(author=self.user)],
-                          key=lambda x: (x.score, x.create_time.timestamp()), reverse=True)[:5]
+                          key=lambda x: (x.score, x.create_time.timestamp()), reverse=True)
         res = []
         for content in contents:
             post_que = Post.objects.filter(id=content.id)
@@ -81,6 +81,8 @@ class UserProfile(models.Model):
                 question_que = QnaQuestion.objects.filter(id=content.id)
                 if question_que.count() == 1:
                     res.append(QnaQuestion.objects.get(id=content.id))
+            if len(res) == 5:
+                break
         return res
 
     # Score rank

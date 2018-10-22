@@ -34,6 +34,7 @@ def user_profile(request, pk):
     profile = UserProfile.objects.get(pk=pk)
     article = Post.objects.filter(author=profile.user,kind='Post')
     images = Post.objects.filter(author=profile.user,kind='Image')
+    videos = Post.objects.filter(author=profile.user, kind='Youtube')
     qna = QnaQuestion.objects.filter(author=profile.user,kind='Question')
     quiz = QuizBank.objects.filter(creator=profile.user)
 
@@ -41,6 +42,7 @@ def user_profile(request, pk):
         'profile' : profile,
         'article' : article,
         'images' : images,
+        'videos': videos,
         'qna' : qna,
         'quiz' : quiz,
         'users' : sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
