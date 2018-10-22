@@ -150,8 +150,14 @@ def create_post(request):
                 else:
                     ContentTag.create(post.id, Tag.create(title.strip()).id)
             return HttpResponseRedirect(f'/blogs/{post.id}')
-        return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
-    return render(request, 'blogs/add_post.html', {'form': AddPostForm()})
+        return render(request, 'blogs/add_post.html', {
+            'form': AddPostForm(),
+            'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        })
+    return render(request, 'blogs/add_post.html', {
+        'form': AddPostForm(),
+        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+    })
 
 @login_required
 def create_image_post(request):
@@ -233,8 +239,14 @@ def create_question(request):
                 tag = Tag.create(title.strip())
                 ContentTag.create(question.id, tag.id)
             return HttpResponseRedirect(f'/blogs/{question.id}')
-        return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
-    return render(request, 'blogs/add_question.html', {'form': AddQuestionForm()})
+        return render(request, 'blogs/add_question.html', {
+            'form': AddQuestionForm(),
+            'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+        })
+    return render(request, 'blogs/add_question.html', {
+        'form': AddQuestionForm(),
+        'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))
+    })
 
 @login_required
 def pin(request, pk):

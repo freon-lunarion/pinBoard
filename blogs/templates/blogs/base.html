@@ -280,6 +280,20 @@
         reader.readAsDataURL(file);
       }
 
+      // Initializing leaderboard
+      //(function() {
+      //  let leaderboard = $('#leaderboard-table');
+
+      //  $.ajax({
+      //    url: "{% url 'shared:user' %}",
+      //    type: 'GET',
+      //    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
+      //    success: function(users){
+      //      console.log(users);
+      //    }
+      //  });
+      //}());
+
       $('#search').keypress((e) => {
         if (e.target.value === '') {
             return;
@@ -377,8 +391,6 @@
                 $(".msgforreset1").css("display","block");
                 $(".msgforreset2").css("display","none");
               }
-
-
           }
         })
       });

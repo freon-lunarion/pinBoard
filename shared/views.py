@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404,redirect, render,render_to_response
 import json
+from django.core.serializers import serialize
 # Create your views here.
 
 @login_required
@@ -65,4 +66,17 @@ def user_unlike(request, pk):
 @login_required
 def user(request):
     if request.method == 'GET':
-        return JsonResponse({'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))})
+        users = []
+        for user in sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username)):
+            user_json = {}
+            user_json['avatar'] = user.avatar
+            user_json['id'] = user.id
+            user_json['score'] = user.score
+            user_json['rank'] = user.rank
+            user_json['total_answer_num'] = user.total_answer_num
+            user_json['correct_answer_num'] = user.correct_answer_num
+            user_json['correct_answer_percentage'] = user.correct_answer_percentage
+            user_json['username'] = user.user.username
+            user_json['email'] = user.user.email
+            users.append(user_json)
+        return JsonResponse({'users': users})
