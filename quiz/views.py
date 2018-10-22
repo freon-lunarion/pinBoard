@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_protect
 from shared.models import *
 import random
 
+# listing the quiz set 
 class QuizBankListView(generic.ListView):
     model = QuizBank
 
@@ -24,7 +25,7 @@ class QuizBankListView(generic.ListView):
         context['users'] = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
         return context
 
-
+# the quiz set detail and listing question 
 class QuizBankDetailView(generic.DetailView):
     model = QuizBank
     
@@ -41,7 +42,7 @@ class QuizBankDetailView(generic.DetailView):
         
         return context
 
-    
+# create new quiz set    
 @login_required
 def room_create(request):
     if request.method == 'POST':
@@ -62,6 +63,7 @@ def room_create(request):
 
     return render(request, 'quiz/add_room.html', {'form':QuizBankForm(),'users':leaderboard})
 
+# update quiz set
 @login_required
 def room_update(request,pk):
     quizBank = get_object_or_404(QuizBank, pk=pk)
@@ -85,7 +87,7 @@ def room_update(request,pk):
     return render(request, 'quiz/add_room.html', {'form':form,'users':leaderboard})
     
 
-
+# tryout session 
 @login_required
 def tryout_view(request,pk):
     quizBank = QuizBank.objects.get(pk= pk)
@@ -109,6 +111,7 @@ def tryout_view(request,pk):
 
     return render(request, 'quiz/tryout.html', context=context)
 
+# question detail
 @login_required
 def question_view(request,pk):
     question = Question.objects.get(pk=pk)
@@ -125,6 +128,7 @@ def question_view(request,pk):
 
     return render(request, 'quiz/question_view.html', context=context)
 
+# creating new question
 @login_required
 def question_create(request,pk):
     quizBank = QuizBank.objects.get(pk= pk)
@@ -159,6 +163,7 @@ def question_create(request,pk):
     form = QuestionForm(initial={'quizBank': quizBank})
     return render(request, 'quiz/add_room.html', {'form':form,'users':leaderboard})
 
+# update a question detail
 @login_required
 def question_update(request,pk):
     question = Question.objects.get(pk=pk)
@@ -180,6 +185,7 @@ def question_update(request,pk):
     leaderboard = sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     return render(request, 'quiz/add_room.html', {'form':formParent,'users':leaderboard})
 
+# update a option detail
 @login_required
 def option_update(request,pk):
     options = Options.objects.get(pk=pk)
