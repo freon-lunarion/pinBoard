@@ -76,6 +76,7 @@
     </div>
 
     <script>
+
         //initialise tooltips
         $(document).ready(() => {
             $('.tooltipped').tooltip();
@@ -90,26 +91,10 @@
             {% endfor %}
         });
 
-        function vote (content_id, value) {
-            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-                body: JSON.stringify({
-                    'vote': value
-                })
-            });
-        }
-
-        function get_vote (content_id) {
-            return fetch("{% url 'shared:vote' 9999999 %}".replace('9999999', content_id), {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': "{{ csrf_token }}" },
-            });
-        }
-
         document.addEventListener('click', e => {
             console.log(e.target.id);
 
+            // Save the post as favorite
             if (/^like-btn-/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^like-btn-(\d+)$/)[1]);
                 if (e.target.classList.contains('far')) {
@@ -138,6 +123,7 @@
                 }
             }
 
+            // Pin a post (for moderators only)
             if (/^pin-btn-\d+$/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^pin-btn-(\d+)$/)[1]);
                 if (e.target.getAttribute('data-tooltip') === 'Click to Pin') {
@@ -162,6 +148,7 @@
                 }
             }
 
+            // Upvote a content
             if (/^upvote-\d+$/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^upvote-(\d+)$/)[1]);
                 vote(id, 1)
@@ -175,6 +162,7 @@
                 });
             }
 
+            // Downvote a content
             if (/^downvote-\d+$/.test(e.target.id)) {
                 let id = parseInt(e.target.id.match(/^downvote-(\d+)$/)[1]);
                 vote(id, -1)

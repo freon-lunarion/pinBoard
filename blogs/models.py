@@ -3,6 +3,7 @@ from livesession.models import LiveQuestionSession
 
 # Create your models here.
 
+# Post, with kinds of article post, image post and youtube post
 class Post(Content):
     title = models.CharField(max_length=150)
     kind = models.CharField(max_length=20, default='Post')
@@ -31,6 +32,7 @@ class Post(Content):
         """String for representing the Post object."""
         return f'{self.title}'
 
+    # Text description about number of comments for the post
     @property
     def comment_count_string(self):
         count = Comment.objects.filter(parent=self).count()
@@ -43,7 +45,7 @@ class Post(Content):
             count_string = str(count) + ' Comments'
         return count_string
 
-
+# Post comment
 class Comment(Content):
     parent = models.ForeignKey(Post, on_delete=models.CASCADE)
 
@@ -54,6 +56,7 @@ class Comment(Content):
         self.published_date = timezone.now()
         self.save()
 
+# Qna Question
 class QnaQuestion(Content):
     title = models.CharField(max_length=150)
     kind = models.CharField(max_length=20, default='Question')
@@ -71,20 +74,24 @@ class QnaQuestion(Content):
         self.published_date = timezone.now()
         self.save()
 
+    # Answers for the question
     @property
     def answers(self):
         return sorted(QnaAnswer.objects.filter(parent=self),
                         key=lambda x: (1 if x.is_correct else 0, x.score, -x.published_date.toordinal() if x.published_date
                         else 0), reverse=True)
 
+    # Boolean value about whether a question is solved
     @property
     def solved(self):
         return QnaAnswer.objects.filter(parent=self, is_correct=True).count() > 0
 
+    # Text description about whether a question is solved
     @property
     def question_status(self):
         return 'Solved' if self.solved else 'Unsolved'
 
+    # Text description about number of answers for the question
     @property
     def response_count_string(self):
         count = len(self.answers)
@@ -98,6 +105,7 @@ class QnaQuestion(Content):
         return count_string
 
 
+# Answer for Qna Question
 class QnaAnswer(Content):
     is_correct = models.BooleanField(default=False)
     parent = models.ForeignKey(QnaQuestion, on_delete=models.CASCADE)

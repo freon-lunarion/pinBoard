@@ -15,6 +15,5 @@ urlpatterns = [
     url(r'^login/$',views.login_view),
     url(r'^logout/$',views.logout_view),
     url(r'^register/$',views.register),
-    url(r'^manage/$',views.manage),
     url(r'^reset/$',views.reset),
 ]
