@@ -5,7 +5,6 @@
     <div class="username" style="display: none">{{request.session.username}}</div>
     <div class="post-container">
         {% if "Post" in post.kind %}
-            <!--<div id="post-id">{{post.id}}</div>-->
             <div class="col s12 m4 sidebar" id="sidebar">
                 <div class="card blue-grey darken-1" style="position:relative;top:1px;width: 360px;left: -59px;">
                     <div class="card-action voting sidebar">
@@ -533,6 +532,7 @@
                         document.getElementById("score-{{post.id}}").innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (e.target.id === "downvote-{{post.id}}") {
@@ -544,6 +544,7 @@
                         document.getElementById("score-{{post.id}}").innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (/^answer-correct-btn-/.test(e.target.id)) {
@@ -574,6 +575,7 @@
                         }
                     }
                 });
+                return;
             }
 
             if (/^comment-helpful-btn-/.test(e.target.id)) {
@@ -590,6 +592,7 @@
                         comment_score.innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (/^comment-unhelpful-btn-/.test(e.target.id)) {
@@ -605,6 +608,7 @@
                         comment_score.innerHTML = json.score;
                     }
                 });
+                return;
             }
 
             if (e.target.id === 'save-btn') {
@@ -628,6 +632,7 @@
                         }
                     }
                 });
+                return;
             }
 
         });
@@ -662,7 +667,6 @@
             $(".media").css("display","none");
         });
 
-
         $( "#make-comments" ).click(function() {
             if($(".comment-box").css("display") == 'block'){
                 $(".comment-box").css("display","none");
@@ -690,45 +694,6 @@
                 $(this).nextAll().removeClass('cs');
             })
         })
-
-
-        $('.likes').click(function() {
-
-
-            console.log(event.target.id);
-            var curcomid = event.target.id;
-
-            var isVote = 1;
-
-            console.log($('.username').text())
-            console.log($('.vote').val())
-            console.log($('.comment-id').val())
-            console.log('是多少？')
-            console.log(curcomid)
-           $.ajax({
-
-                url: "/blogs/vote/",
-                type: 'GET',
-                data: {
-                    'username': $('.username').text(),
-                    'vote': isVote,
-                    'commentid': curcomid,
-                    'postid': $('#post-id').text()
-                },
-                success: function (data) {
-//                    alert(data);
-                    if (data == "You have voted"){
-                        $('.checkvote-'+curcomid).css("display","block");
-                    }else if(data == 'Done'){
-                        $('#'+curcomid).css("display","none");
-                        $('.'+curcomid).css("display","block");
-                    }
-
-                }
-            })
-        })
-
-
 
     </script>
 {% endblock %}

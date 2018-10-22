@@ -2,10 +2,9 @@ from .models import *
 from blogs.models import Post,QnaQuestion
 from quiz.models import QuizBank
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404,redirect, render,render_to_response
+from django.http import JsonResponse
+from django.shortcuts import render
 import json
-from django.core.serializers import serialize
 # Create your views here.
 
 @login_required
@@ -16,11 +15,6 @@ def vote(request, pk):
         return JsonResponse({'score': Vote.vote(pk, request.user.id, vote)})
     if (request.method == 'GET'):
         return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
-
-@login_required
-def score(request):
-    if (request.method == 'GET'):
-        return JsonResponse({'score': sum([c.score for c in Content.objects.filter(author=request.user)])})
 
 @login_required
 def user_avatar(request):
@@ -63,6 +57,7 @@ def user_unlike(request, pk):
         UserFavorite.objects.get(content__id=pk, user=request.user).delete()
         return JsonResponse({'message': 'Succeed'})
 
+# Get user data for leaderboard
 @login_required
 def user(request):
     if request.method == 'GET':

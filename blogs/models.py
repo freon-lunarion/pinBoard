@@ -1,12 +1,5 @@
-from django import forms
-from django.contrib.auth.models import User
-from django.db import models
-from django.db.models import Sum
-from django.shortcuts import get_object_or_404
-from django.utils import timezone
 from shared.models import *
-from livesession.models import *
-import datetime
+from livesession.models import LiveQuestionSession
 
 # Create your models here.
 
@@ -48,7 +41,6 @@ class Post(Content):
             count_string = "1 Comment"
         if count > 1:
             count_string = str(count) + ' Comments'
-            # count_string = count.append(' Comments')
         return count_string
 
 
@@ -61,20 +53,6 @@ class Comment(Content):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
-
-
-# class LiveQuestionSession(Content):
-#     title = models.CharField(max_length=150)
-#     begin_time = models.DateTimeField()
-#     end_time = models.DateTimeField()
-#
-#     def __str__(self):
-#         return self.title
-#
-#     def publish(self):
-#         self.published_date = timezone.now()
-#         self.save()
-
 
 class QnaQuestion(Content):
     title = models.CharField(max_length=150)
