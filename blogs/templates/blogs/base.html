@@ -134,7 +134,7 @@
           <h6 style="font-weight:100;text-align: center;margin-bottom: 24px">Top 10 Contributors</h6>
           <div class="leaderboard-grid">
             {% for user in users %}
-              <a href="{% url 'shared:user_profile' user.id %}" class="leaderboard-grid-row card s6 m6 l6" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
+              <a href="{% url 'shared:user_profile' user.id %}" class="leaderboard-grid-row card s6 m6 l6 changecolor" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
 
                 <div class="leaderboard-rank rank-{{ user.rank }}" style="display: flex;justify-content: center; align-items:center;">
                   {{ user.rank }}
