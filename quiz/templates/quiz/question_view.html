@@ -44,7 +44,7 @@
                 <ul>
                     {% for option in options %}
                     {% if option.detail == question.correct_answer %}
-                    <li><strong><a href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a></strong></li>
+                    <li><strong><a class="text-orange text-lighten-4" href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a><i class="material-icons">check</i></strong></li>
                     {% else %}
                     <li><a href="/quiz/options/{{option.id}}/edit">{{option.detail}}</a></li>
                     {% endif %}
@@ -56,7 +56,7 @@
                 <ul>
                     {% for option in options %}
                     {% if option.detail == question.correct_answer %}
-                    <li><strong>{{option.detail}}</strong></li>
+                    <li><strong>{{option.detail}}<i class="material-icons">check</i></strong></li>
                     {% else %}
                     <li>{{option.detail}}</li>
                     {% endif %}
