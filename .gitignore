@@ -9,3 +9,5 @@ settings.json
 .idea*.sqlite3
 .idea/workspace.xml
 workspace.xml
+
+shared/migrations/
