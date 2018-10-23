@@ -116,7 +116,7 @@ pinBoard
 | ------------- | ------------- | ----- | ----- |
 | /blogs/      | GET | Render home page | - |
 | /blogs/      | GET      |   Search by tags |   tags(url) |
-| /blogs/ | GET      |    Search by title |    url argument: title |
+| /blogs/ | GET      |    Search by title |    title(url) |
 | /blogs/<post_id>/ | GET      |    Render post detail page |    - |
 | /blogs/<post_id>/ | POST      |    Create comment or question answer |  detail(body)   |
 | /blogs/<post_id>/ | PUT      |   Set question answer correct |  action(body)   |
@@ -132,6 +132,19 @@ pinBoard
 | /blogs/register/ | GET      |    Render log out page |   - |
 | /blogs/register/ | POST      |    User register |  username(body), email(body), name(body), password(body), repassword(body) |
 | /blogs/reset/ | PUT      |    Reset password |    newpassword(body), renewpassword(body) |
+
+*shared app (shared/view.py):*
+
+| endpoint      | method           | description  | arguments  |
+| ------------- | ------------- | ----- | ----- |
+| /vote/      | GET | Get the existence of voting for certain content from certain user | - |
+| /vote/      | PUT      |   Add value of 'vote' argument to the content score (insert a record to Vote model) |   vote(body) |
+| /user_avatar/ | PUT      |    Modify user avatar |    avatar(body) |
+| /user/<user_id> | GET      |    Render user profile page |    - |
+| /<post_id>/like/ | PUT      |    Add a post to a user's favorite list |  -   |
+| /<post_id>/unlike/ | PUT      |    Remove a post from a user's favorite list |  -   |
+| /user/ | GET      |  Get top ten user data for leaderboard |  -   |
+
 
 # Reference Documents
 *Python3 & pip*
