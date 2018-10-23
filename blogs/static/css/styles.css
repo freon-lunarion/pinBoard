@@ -50,8 +50,10 @@ html {
 
 /* ------------------------------------------ PINBOARD PAGE ------------------------------------------ */
 
+.pinned-card,
 .sortable-card {
   padding: 10px 35px !important;
+  max-height: 288.46px;
 }
 
 h2.content-separator {
@@ -104,6 +106,10 @@ h2.content-separator.middle {
   padding-bottom: 0;
   display: flex;
   justify-content: flex-end;
+}
+
+.card-content pre {
+  white-space: normal;
 }
 
 .card-content.with-comments {

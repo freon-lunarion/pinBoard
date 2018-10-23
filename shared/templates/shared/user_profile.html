@@ -17,7 +17,7 @@
                 {% endif %}
                 {% else %}
                 {% if profile.avatar %}
-                <span><img class="circle" style="width:200px;height:200px;padding:5px;" src='{{ request.session.avatar }}' id="user-profile-avatar"></span>
+                <span><img class="circle" style="width:200px;height:200px;padding:5px;" src='{{ profile.avatar }}' id="user-profile-avatar"></span>
                 <!--<img class="circle upImage" src="{{ profile.avatar }}" style="width:180px;height:180px;">-->
                 {% else %}
                 <span><img class="circle" style="width:200px;height:200px;padding:5px;" src="{% static '/images/empty-profile.png' %}" id="user-profile-avatar"></span>
