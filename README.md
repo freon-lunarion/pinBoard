@@ -123,8 +123,11 @@ for every app directory contain:
 
 
 __models.py__, contain the data layer describing tables, fields attribute and custom user query for data access layer
+
 __urls.py__, contain routing url to views.py fuctions or classes
+
 __views.py__, contain classes or function for backend bussiness logic layer
+
 __forms.py__, __static__ and __templates__, for presentation layer (frontend) to configure django generic forms, put external resources (css,js image) and html templating files respectively  
 
 ### Issues
