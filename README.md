@@ -89,6 +89,32 @@
 2. The user's favorite posts, top five posts with highest scores, all types of posts and quiz sets are displayed on the user profile page.
 3. User avatar can be uploaded by clicking the avatar image.
 
+### How To View Source Code
+
+pinBoard
+ - blogs (folder)
+ - quiz (folder)
+ - shared (folder)
+ - livesession (folder)
+ - pinBoard (folder)
+ - sample (folder)
+ - ... (files)
+ 
+1. Open the root pinBoard folder with PyCharm.
+2. There are three apps in this project: blogs, quiz and shared. The blogs app is for features dealing with posts, the quiz app is for quiz set feature, and the shared app is for handling shared models and pages such as the user profile model and the user profile page.
+3. Backend codes, including the methods to render pages and the api methods, are in blogs/views.py, quiz/views.py and shared/views.py.
+4. Frontend codes are under blogs/templates/, quiz/templates/ and shared/templates/.
+5. Note that data model is setup for livesession app, but this app is not implemented due to time limit. So it is not installed, and only for further development.
+
+### REST apis
+
+*blogs app:*
+
+| endpoint      | method           | description  | code location  | arguments  |
+| ------------- | ------------- | ----- | ----- | ----- |
+| /blogs/      | GET | Render home page | Render home page |    $1 |
+| col 2 is      | centered      |   $12 |   $12 |    $1 |
+| zebra stripes | are neat      |    $1 |    $1 |    $1 |
 
 # Reference Documents
 *Python3 & pip*
