@@ -134,7 +134,7 @@
           <h6 style="font-weight:100;text-align: center;margin-bottom: 24px">Top 10 Contributors</h6>
           <div class="leaderboard-grid">
             {% for user in users %}
-              <a href="{% url 'shared:user_profile' user.id %}" class="leaderboard-grid-row card s6 m6 l6" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
+              <a href="{% url 'shared:user_profile' user.id %}" class="leaderboard-grid-row card s6 m6 l6 changecolor" style="display:grid;grid-template: 1fr / 80px 80px 2fr 3fr;padding: 5px 8x;margin-left: 10px;margin-right: 10px;">
 
                 <div class="leaderboard-rank rank-{{ user.rank }}" style="display: flex;justify-content: center; align-items:center;">
                   {{ user.rank }}
@@ -176,9 +176,9 @@
           <ul class="right hide-on-med-and-down">
             {% if request.session.username %}
             <li><input id="search" type="search" required style="width: flex; width: 275px; color: white;" placeholder="Start with # to search tags"></li>
-            <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
-            <li><a class="waves-effect waves-light btn-small  orange lighten-1" href="/quiz/"><i class="material-icons right">edit</i>Quiz Sets</a></li>
-            <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger" data-target="leaderboard-modal" href="#leaderboard-modal"><i class="material-icons right">people</i>Leaderboard</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger changecolor" data-target="create-post-modal" href="#create-post-modal"><i class="material-icons right">add_box</i>Create Post</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1 changecolor" href="/quiz/"><i class="material-icons right">edit</i>Quiz Sets</a></li>
+            <li><a class="waves-effect waves-light btn-small  orange lighten-1 modal-trigger changecolor" data-target="leaderboard-modal" href="#leaderboard-modal"><i class="material-icons right">people</i>Leaderboard</a></li>
             {% endif %}
             {% if request.session.username and request.session.username.strip %}
               <li>
@@ -204,7 +204,7 @@
         <div class="modal-content" style="min-height: 200px;">
           <h5 style="font-weight:100;text-align: center;margin-bottom: 24px">What type of post would you like to create?</h5>
           <div class="post-type-container" style="display:flex;justify-content: space-evenly">
-            <a href="/blogs/createArticalPost">
+            <a href="/blogs/createArticlePost">
               <div class="card-panel waves-light  waves-effect post-type amber changecolor" style="display:flex;align-items: center;justify-content: center;width:150px;height:125px">
                 <i class="material-icons" style="color: white">event_note</i>
                 <span class="white-text">&nbsp;Article</span>

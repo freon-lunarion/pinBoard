@@ -74,7 +74,7 @@
         "pk":4,
         "fields":{
            
-           "title": "First Artical",
+           "title": "First Article",
            "kind": "Post"
         }
     },
@@ -115,7 +115,7 @@
         "content": 6,
         "pk":6,
         "fields":{
-           "title": "First Vedio",
+           "title": "First Video",
            "kind": "Youtube"
         }
     },

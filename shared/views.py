@@ -7,7 +7,7 @@ from django.shortcuts import render
 import json
 # Create your views here.
 
-# API: give score to a post
+# API: give score to a post. Url: /vote/
 @login_required
 def vote(request, pk):
     if (request.method == 'PUT'):
@@ -17,7 +17,7 @@ def vote(request, pk):
     if (request.method == 'GET'):
         return JsonResponse({'exist': Vote.exist(pk, request.user.id)})
 
-# API: modify user avatar
+# API: modify user avatar. Url: /user_avatar/
 @login_required
 def user_avatar(request):
     if request.method == 'PUT':
@@ -27,7 +27,7 @@ def user_avatar(request):
         request.session['avatar'] = data['avatar']
         return JsonResponse({'message': 'Succeed'})
 
-# Render user profile page
+# Render user profile page. Url: /user/<user_id>
 @login_required
 def user_profile(request, pk):
 
@@ -50,21 +50,21 @@ def user_profile(request, pk):
     
     return render(request,'shared/user_profile.html',context=context)
 
-# API: save post as favorite
+# API: save post as favorite. Url: /<post_id>/like/
 @login_required
 def user_like(request, pk):
     if request.method == 'PUT':
         UserFavorite.create(pk, request.user.id)
         return JsonResponse({'message': 'Succeed'})
 
-# API: remove post from favorite
+# API: remove post from favorite. Url: /<post_id>/unlike/
 @login_required
 def user_unlike(request, pk):
     if request.method == 'PUT':
         UserFavorite.objects.get(content__id=pk, user=request.user).delete()
         return JsonResponse({'message': 'Succeed'})
 
-# API: Get user data for leaderboard
+# API: Get user data for leaderboard. Url: /user/
 @login_required
 def user(request):
     if request.method == 'GET':
