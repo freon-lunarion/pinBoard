@@ -146,6 +146,9 @@ pinBoard
 | /<post_id>/unlike/ | PUT      |    Remove a post from a user's favorite list |  -   |
 | /user/ | GET      |  Get top ten user data for leaderboard |  -   |
 
+### Issues
+
+The project is rendered best on Chrome. Small displaying issues may occur on Safari or Firefox.
 
 # Reference Documents
 *Python3 & pip*
