@@ -109,43 +109,6 @@ pinBoard
 5. Frontend codes are under blogs/templates/, quiz/templates/ and shared/templates/.
 6. Note that data model is setup for livesession app, but this app is not implemented due to time limit. So it is not installed, and only for further development.
 
-### REST APIs (Most are login required except for log in, log out and register)
-
-*blogs app (blogs/view.py):*
-
-| endpoint      | method           | description  | arguments  |
-|:-------------:|:-------------:|:-----:|:-----:|
-| /blogs/      | GET | Render home page | - |
-| /blogs/      | GET      |   Search by tags |   tags(url) |
-| /blogs/ | GET      |    Search by title |    title(url) |
-| /blogs/<post_id>/ | GET      |    Render post detail page |    - |
-| /blogs/<post_id>/ | POST      |    Create comment or question answer |  detail(body)   |
-| /blogs/<post_id>/ | PUT      |   Set question answer correct |  action(body)   |
-| /blogs/createArticlePost/ | POST      |    Create article post |    title(body), detail(body), tags(body, optional) |
-| /blogs/createImagePost/ | POST      |    Create image post |    title(body), detail(body) |
-| /blogs/createYoutubePost/ | POST      |    Create video post |    title(body), detail(body) |
-| /blogs/createQuestion/ | POST      |    Create Qna Question |    title(body), detail(body), tags(body, optional) |
-| /blogs/<post_id>/pin/ | PUT      |    Pin a post or a question |    - |
-| /blogs/<post_id>/unpin/ | PUT      |    Unpin a post or a question |    - |
-| /blogs/login/ | GET      |    Render log in page |  - |
-| /blogs/login/ | POST      |    Log in |   username(body), password(body) |
-| /blogs/logout/ | GET      |    Log out |  - |
-| /blogs/register/ | GET      |    Render log out page |   - |
-| /blogs/register/ | POST      |    User register |  username(body), email(body), name(body), password(body), repassword(body) |
-| /blogs/reset/ | PUT      |    Reset password |    newpassword(body), renewpassword(body) |
-
-*shared app (shared/view.py):*
-
-| endpoint      | method           | description  | arguments  |
-|:-------------:|:-------------:|:-----:|:-----:|
-| /vote/      | GET | Get the existence of voting for certain content from certain user | - |
-| /vote/      | PUT      |   Add value of 'vote' argument to the content score |   vote(body) |
-| /user_avatar/ | PUT      |    Modify user avatar |    avatar(body) |
-| /user/<user_id> | GET      |    Render user profile page |    - |
-| /<post_id>/like/ | PUT      |    Add a post to a user's favorite list |  -   |
-| /<post_id>/unlike/ | PUT      |    Remove a post from a user's favorite list |  -   |
-| /user/ | GET      |  Get top ten user data for leaderboard |  -   |
-
 ### Issues
 
 The project is rendered best on Chrome. Small displaying issues may occur on Safari or Firefox.
