@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blogs/', include('blogs.urls')),
     path('quiz/', include('quiz.urls')),
-    path('livesession/', include('livesession.urls')),
+    # path('livesession/', include('livesession.urls')),
     path('', include('shared.urls', namespace="shared")),
 ]
