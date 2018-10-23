@@ -27,7 +27,40 @@
 
 ### Feature Tryout Instructions
 
+*Create Posts:*
+1. Click the 'Create Post' button on the navigation bar.
+2. Choose a type of post to create.
+3. For images and youtube videos, input title and url to the resource.
+4. For articles and questions, input title and detail of the post. Tags should be separated by comma.
+5. Submit the post.
 
+*Vote for Posts, Commments and Answers:*
+1. Posts can be voted on home page, with self-sorting feature.
+2. Click 'Open' button of a post, go to the post detail page.
+3. Posts, Commments and Answers can be voted on post detail page.
+4. Comments and Answers will be sorted by score after refreshing the page.
+
+*Save Posts:*
+1. Posts can be saved as favorite posts via the save button (heart shaped) on either home page or post detail page.
+2. Favorited posts are displayed on user profile page.
+
+*Pin Posts:*
+1. Moderators (superusers) can pin posts on home page via the pin button on the card of the post.
+2. Pinned posts are displayed on the top of home page.
+
+*Search Posts:*
+1. Input in the search bar on the navigation bar, type enter to start the search.
+2. Add 'post', 'image', 'youtube' or 'question' to the keywords for searching articles only, images only, videos only or questions only.
+3. Type '#' at the beginning to search tags. Tages should be separated by comma.
+
+*Leaderboard:*
+1. Click the 'Leaderboard' button on the navigation bar.
+2. Top ten users with highest scores are displayed.
+
+*User Profile:*
+1. Click the 'Hello, Username' button on the navigation bar.
+2. The user's favorite posts, top five posts with highest scores, all types of posts and quiz sets are displayed on the user profile page.
+3. User avatar can be uploaded by clicking the avatar image.
 
 
 # Reference Documents
