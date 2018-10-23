@@ -8,7 +8,7 @@ from django.views import generic
 import json, re
 from django.utils.decorators import method_decorator
 
-# Render content of posts
+# Render content of posts. Url: /blogs/<post_id>/
 class PostView(generic.DetailView):
     model = Content
     template_name = 'blogs/post.html'
@@ -82,6 +82,9 @@ class PostView(generic.DetailView):
         return HttpResponseRedirect(f'/blogs/{self.pk}')
 
 # Render index page, supporting search by tags and search by title
+# Url: /blogs/, / for index page
+# Url: /blogs/?tags=tag1,tag2 for searching by tags
+# Url: /blogs/?title=word1 word2 [post_type] for searching by title
 @login_required
 def index(request):
 
@@ -104,7 +107,7 @@ def index(request):
                     res.append(QnaQuestion.objects.get(id=content))
         latest_post_list = sorted(res, key=lambda x: (x.score, x.published_date.timestamp()), reverse=True)
 
-    # Search by title and kind
+    # Search by title and post type
     elif 'title' in request.GET:
         words = request.GET['title'].strip().split(' ')
         contents = [rec for rec in Post.objects.all()] + [rec for rec in QnaQuestion.objects.all()]
@@ -132,7 +135,7 @@ def index(request):
 
     return render(request, 'blogs/index.html', context=context)
 
-# Create article post
+# Create article post. Url: /createArticlePost/
 @login_required
 def create_article_post(request):
     if (request.method == 'POST'):
@@ -162,7 +165,7 @@ def create_article_post(request):
         'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     })
 
-# Create image post
+# Create image post. Url: /createImagePost/
 @login_required
 def create_image_post(request):
     if (request.method == 'POST'):
@@ -190,7 +193,7 @@ def create_image_post(request):
             return HttpResponseRedirect(f'/blogs/{post.id}')
     return HttpResponseRedirect(f'/blogs/')
 
-# Create youtube post
+# Create youtube post. Url: /createYoutubePost/
 @login_required
 def create_youtube_post(request):
     if (request.method == 'POST'):
@@ -222,7 +225,7 @@ def create_youtube_post(request):
             return HttpResponseRedirect(f'/blogs/{post.id}')
     return HttpResponseRedirect(f'/blogs/')
 
-# Create question
+# Create question. Url: /createQuestionPost/
 @login_required
 def create_question(request):
     if (request.method == 'POST'):
@@ -246,7 +249,7 @@ def create_question(request):
         'users': sorted(UserProfile.objects.all(), key=lambda x: (-x.score, x.user.username))[:10]
     })
 
-# API: Pin a post or a question
+# API: Pin a post or a question. Url: /<post_id>/pin/
 @login_required
 def pin(request, pk):
     if (request.method == 'PUT'):
@@ -269,7 +272,7 @@ def pin(request, pk):
             question.save()
         return HttpResponse(status=200)
 
-# API: Unpin a post or a question
+# API: Unpin a post or a question. Url: /<post_id>/unpin/
 @login_required
 def unpin(request, pk):
     if (request.method == 'PUT'):
@@ -292,7 +295,7 @@ def unpin(request, pk):
             question.save()
         return HttpResponse(status=200)
 
-# Log in
+# Log in. Url: /login/
 def login_view(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
@@ -321,7 +324,7 @@ def login_view(request):
     login_form = LoginForm() 
     return render(request, 'blogs/login.html', {'form': login_form, 'message': ''})
 
-# Register
+# Register. Url: /register/
 def register(request):
     if (request.method == 'POST'):
         register_form = RegisterForm(request.POST)
@@ -357,7 +360,7 @@ def register(request):
     register_form = RegisterForm()
     return render(request, 'blogs/register.html', {'form': register_form, 'message': ''})
 
-# Log out
+# Log out. Url: /logout/
 def logout_view(request):
     try:
         logout(request)
@@ -366,7 +369,7 @@ def logout_view(request):
         pass
     return HttpResponseRedirect('/blogs/login/')
 
-# API: Reset password
+# API: Reset password. Url: /reset/
 @login_required
 def reset(request):
     if (request.method == 'PUT'):
