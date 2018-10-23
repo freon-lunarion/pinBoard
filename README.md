@@ -113,7 +113,7 @@ pinBoard
 *blogs app (blogs/view.py):*
 
 | endpoint      | method           | description  | arguments  |
-| ------------- | ------------- | ----- | ----- |
+|: ------------- :|: ------------- :|: ----- :|: ----- :|
 | /blogs/      | GET | Render home page | - |
 | /blogs/      | GET      |   Search by tags |   tags(url) |
 | /blogs/ | GET      |    Search by title |    title(url) |
@@ -136,7 +136,7 @@ pinBoard
 *shared app (shared/view.py):*
 
 | endpoint      | method           | description  | arguments  |
-| ------------- | ------------- | ----- | ----- |
+|: ------------- :|: ------------- :|: ----- :|: ----- :|
 | /vote/      | GET | Get the existence of voting for certain content from certain user | - |
 | /vote/      | PUT      |   Add value of 'vote' argument to the content score (insert a record to Vote model) |   vote(body) |
 | /user_avatar/ | PUT      |    Modify user avatar |    avatar(body) |
