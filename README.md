@@ -104,9 +104,10 @@ pinBoard
  
 1. Open the root pinBoard folder with PyCharm.
 2. There are three apps in this project: blogs, quiz and shared. The blogs app is for features dealing with posts, the quiz app is for quiz set feature, and the shared app is for handling shared models and pages such as the user profile model and the user profile page.
-3. Backend codes, including the methods to render pages and the api methods, are in blogs/views.py, quiz/views.py and shared/views.py.
-4. Frontend codes are under blogs/templates/, quiz/templates/ and shared/templates/.
-5. Note that data model is setup for livesession app, but this app is not implemented due to time limit. So it is not installed, and only for further development.
+3. Backend codes of the methods to render pages and the api methods, are in blogs/views.py, quiz/views.py and shared/views.py.
+4. Backend codes of models are in blogs/models.py, quiz/models.py and shared/models.py.
+5. Frontend codes are under blogs/templates/, quiz/templates/ and shared/templates/.
+6. Note that data model is setup for livesession app, but this app is not implemented due to time limit. So it is not installed, and only for further development.
 
 ### REST APIs (Most are login required except for log in, log out and register)
 
