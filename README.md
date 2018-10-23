@@ -92,40 +92,40 @@
 ### How To View Source Code
 
 *File Structure:*
-pinBoard (based directory)
-  - blogs (app directory)
-  - livesession (app directory)
-  - quiz (app directory)
-  - shared (app directory)
-  - pinboard (project's directory)
-    - settings.py (project's setting)
-    - urls.py (project's routing)
+pinBoard 
+  - blogs 
+  - livesession 
+  - quiz 
+  - shared 
+  - pinboard 
+    - settings.py 
+    - urls.py 
     - wsgi.py
     
   - sample (sample data)
   - manage.py 
   - requirement.txt
   - setup.sh
+  
+There are three apps in this project: __blogs__, __quiz__ and __shared__. The __blogs__ app is for features dealing with posts, the __quiz__ app is for quiz set feature, and the __shared__ app is for handling shared models and pages such as the user profile model and the user profile page. The nested pinboard directory, contain the project setting (setting.py) and routing files (url.py). Note: that data model is setup for livesession app, but this app is not implemented due to time limit. So it is not installed, and only for further development.
 
 for every app directory contain:
-app_dir
   - migrations
-  - static (for external resorces)
-  - templates (for html template)
-  - admin.py (for register and customize model in dJango admin control panel)
-  - apps.py (for register the app to the project)
-  - forms.py (customize form template)
-  - test.py (unit testing script)
-  - urls.py (routing control file)
-  - models.py (data layer)
-  - views.py (business logic layer)
- 
-1. Open the root pinBoard folder with PyCharm.
-2. There are three apps in this project: blogs, quiz and shared. The blogs app is for features dealing with posts, the quiz app is for quiz set feature, and the shared app is for handling shared models and pages such as the user profile model and the user profile page.
-3. Backend codes of the methods to render pages and the api methods, are in blogs/views.py, quiz/views.py and shared/views.py.
-4. Backend codes of models are in blogs/models.py, quiz/models.py and shared/models.py.
-5. Frontend codes are under blogs/templates/, quiz/templates/ and shared/templates/.
-6. Note that data model is setup for livesession app, but this app is not implemented due to time limit. So it is not installed, and only for further development.
+  - static 
+  - templates 
+  - admin.py 
+  - apps.py 
+  - forms.py 
+  - test.py 
+  - urls.py 
+  - models.py 
+  - views.py 
+
+
+__models.py__, contain the data layer describing tables, fields attribute and custom user query for data access layer
+__urls.py__, contain routing url to views.py fuctions or classes
+__views.py__, contain classes or function for backend bussiness logic layer
+__forms.py__, __static__ and __templates__, for presentation layer (frontend) to configure django generic forms, put external resources (css,js image) and html templating files respectively  
 
 ### Issues
 
