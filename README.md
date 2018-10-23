@@ -92,15 +92,33 @@
 ### How To View Source Code
 
 *File Structure:*
+pinBoard (based directory)
+-> blogs (app directory)
+-> livesession (app directory)
+-> quiz (app directory)
+-> shared (app directory)
+-> pinboard (project's directory)
+|  -> settings.py (project's setting)
+|  -> urls.py (project's routing)
+|  -> 
+-> sample (sample data)
+-> manage.py 
+-> requirement.txt
+-> setup.sh
 
-pinBoard
- - blogs (folder)
- - quiz (folder)
- - shared (folder)
- - livesession (folder)
- - pinBoard (folder)
- - sample (folder)
- - ... (files)
+for every app directory:
+app_dir
+-> migrations
+   -> __init__.py
+-> static (for external resorces)
+-> templates (for html template)
+-> admin.py (for register and customize model in dJango admin control panel)
+-> apps.py (for register the app to the project)
+-> forms.py (customize form template)
+-> test.py (unit testing script)
+-> urls.py (routing control file)
+-> models.py (data layer)
+-> views.py (business logic layer)
  
 1. Open the root pinBoard folder with PyCharm.
 2. There are three apps in this project: blogs, quiz and shared. The blogs app is for features dealing with posts, the quiz app is for quiz set feature, and the shared app is for handling shared models and pages such as the user profile model and the user profile page.
