@@ -138,7 +138,7 @@ pinBoard
 | endpoint      | method           | description  | arguments  |
 |:-------------:|:-------------:|:-----:|:-----:|
 | /vote/      | GET | Get the existence of voting for certain content from certain user | - |
-| /vote/      | PUT      |   Add value of 'vote' argument to the content score (insert a record to Vote model) |   vote(body) |
+| /vote/      | PUT      |   Add value of 'vote' argument to the content score |   vote(body) |
 | /user_avatar/ | PUT      |    Modify user avatar |    avatar(body) |
 | /user/<user_id> | GET      |    Render user profile page |    - |
 | /<post_id>/like/ | PUT      |    Add a post to a user's favorite list |  -   |
